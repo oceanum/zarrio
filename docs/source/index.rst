@@ -359,16 +359,9 @@ Examples
    configuration
    cli
    chunking
+   packing
    parallel
    datamesh
-
-Additional Information
-----------------------
-
-.. toctree::
-   :maxdepth: 1
-
-   examples
 
 Additional Information
 ----------------------
