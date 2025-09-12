@@ -48,15 +48,48 @@ The `convert` command converts data to Zarr format.
 Options:
 ~~~~~~~~
 
-- ``--chunking TEXT``: Chunking specification (e.g., 'time:100,lat:50,lon:100')
-- ``--compression TEXT``: Compression specification (e.g., 'blosc:zstd:3')
-- ``--packing``: Enable data packing
-- ``--packing-bits INTEGER``: Number of bits for packing (8, 16, or 32)
-- ``--variables TEXT``: Comma-separated list of variables to include
-- ``--drop-variables TEXT``: Comma-separated list of variables to exclude
-- ``--attrs TEXT``: Additional global attributes as JSON string
-- ``--time-dim TEXT``: Name of time dimension (default: time)
-- ``--config PATH``: Configuration file (YAML or JSON)
+--chunking CHUNKING
+    Chunking specification (e.g., 'time:100,lat:50,lon:100')
+
+--compression COMPRESSION
+    Compression specification (e.g., 'blosc:zstd:3')
+
+--packing
+    Enable data packing
+
+--packing-bits {8,16,32}
+    Number of bits for packing (default: 16)
+
+--variables VARIABLES
+    Comma-separated list of variables to include
+
+--drop-variables DROP_VARIABLES
+    Comma-separated list of variables to exclude
+
+--attrs ATTRS
+    Additional global attributes as JSON string
+
+--time-dim TIME_DIM
+    Name of time dimension (default: time)
+
+--target-chunk-size-mb TARGET_CHUNK_SIZE_MB
+    Target chunk size in MB for intelligent chunking (default: 50)
+    Use this option to configure chunk sizes for different environments:
+    - Local development: 10-25 MB
+    - Production servers: 50-100 MB
+    - Cloud environments: 100-200 MB
+
+--datamesh-datasource DATAMESH_DATASOURCE
+    Datamesh datasource configuration as JSON string
+
+--datamesh-token DATAMESH_TOKEN
+    Datamesh token for authentication
+
+--datamesh-service DATAMESH_SERVICE
+    Datamesh service URL
+
+--config CONFIG
+    Configuration file (YAML or JSON)
 - ``--access-pattern TEXT``: Expected access pattern (temporal, spatial, balanced)
 - ``-v, --verbose``: Increase verbosity (use -v, -vv, or -vvv)
 

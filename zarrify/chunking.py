@@ -1,5 +1,25 @@
 """
 Chunking analysis and validation for zarrify.
+
+This module provides intelligent chunking recommendations based on:
+- Dataset dimensions
+- Data type size
+- Access patterns (temporal, spatial, balanced)
+- Configurable target chunk sizes for different environments
+
+The intelligent chunking system automatically recommends optimal chunk sizes
+to achieve the target chunk size (default 50 MB) while considering the 
+dataset dimensions and access patterns.
+
+Target chunk size can be configured in multiple ways:
+1. As a function argument: get_chunk_recommendation(..., target_chunk_size_mb=100)
+2. As an environment variable: ZARRIFY_TARGET_CHUNK_SIZE_MB=200
+3. In ZarrConverterConfig: ZarrConverterConfig(target_chunk_size_mb=50)
+
+Environment-specific recommendations:
+- Local development: 10-25 MB
+- Production servers: 50-100 MB  
+- Cloud environments: 100-200 MB
 """
 
 import logging
@@ -23,18 +43,37 @@ class ChunkRecommendation:
 class ChunkAnalyzer:
     """Analyzes and recommends chunking strategies for climate data."""
     
-    # Target chunk size ranges (MB)
-    MIN_CHUNK_SIZE_MB = 1
-    TARGET_CHUNK_SIZE_MB = 50
-    MAX_CHUNK_SIZE_MB = 100
+    # Default target chunk size ranges (MB)
+    DEFAULT_MIN_CHUNK_SIZE_MB = 1
+    DEFAULT_TARGET_CHUNK_SIZE_MB = 50
+    DEFAULT_MAX_CHUNK_SIZE_MB = 100
     
     # Warning thresholds
     SMALL_CHUNK_WARNING_MB = 1
     LARGE_CHUNK_WARNING_MB = 100
     
-    def __init__(self):
-        """Initialize chunk analyzer."""
-        pass
+    def __init__(self, target_chunk_size_mb: Optional[int] = None):
+        """Initialize chunk analyzer.
+        
+        Args:
+            target_chunk_size_mb: Target chunk size in MB. If None, uses DEFAULT_TARGET_CHUNK_SIZE_MB.
+        """
+        import os
+        # Allow environment variable to override target chunk size
+        env_target = os.environ.get('ZARRIFY_TARGET_CHUNK_SIZE_MB')
+        if env_target is not None:
+            try:
+                self.target_chunk_size_mb = int(env_target)
+            except ValueError:
+                self.target_chunk_size_mb = self.DEFAULT_TARGET_CHUNK_SIZE_MB
+        elif target_chunk_size_mb is not None:
+            self.target_chunk_size_mb = target_chunk_size_mb
+        else:
+            self.target_chunk_size_mb = self.DEFAULT_TARGET_CHUNK_SIZE_MB
+            
+        # Set min and max based on target
+        self.min_chunk_size_mb = max(1, self.target_chunk_size_mb // 50)  # At least 1 MB
+        self.max_chunk_size_mb = self.target_chunk_size_mb * 2  # Up to 2x target
     
     def analyze_chunking(
         self,
@@ -42,8 +81,7 @@ class ChunkAnalyzer:
         dtype_size_bytes: int = 4,  # float32 default
         access_pattern: str = "balanced"
     ) -> ChunkRecommendation:
-        """
-        Analyze dimensions and recommend chunking strategy.
+        """Analyze dimensions and recommend chunking strategy.
         
         Args:
             dimensions: Dictionary of dimension names and sizes
@@ -99,6 +137,7 @@ class ChunkAnalyzer:
         # Add general notes
         notes.append(f"Total dataset size: {total_size_mb:.1f} MB")
         notes.append(f"Recommended chunk size: {chunk_size_mb:.1f} MB")
+        notes.append(f"Target chunk size: {self.target_chunk_size_mb} MB")
         
         return ChunkRecommendation(
             chunks=chunks,
@@ -126,7 +165,7 @@ class ChunkAnalyzer:
             # Calculate spatial chunks to achieve target chunk size
             # For N spatial dimensions, we want: time_chunk * spatial_chunk^N * dtype_size_bytes ≈ target_elements
             target_elements = int(
-                self.TARGET_CHUNK_SIZE_MB * (1024**2) // dtype_size_bytes
+                self.target_chunk_size_mb * (1024**2) // dtype_size_bytes
             )
             
             # Count spatial dimensions
@@ -174,7 +213,7 @@ class ChunkAnalyzer:
             # Calculate spatial chunks to achieve target chunk size
             # For N spatial dimensions, we want: time_chunk * spatial_chunk^N * dtype_size_bytes ≈ target_elements
             target_elements = int(
-                self.TARGET_CHUNK_SIZE_MB * (1024**2) // dtype_size_bytes
+                self.target_chunk_size_mb * (1024**2) // dtype_size_bytes
             )
             
             # Count spatial dimensions
@@ -222,7 +261,7 @@ class ChunkAnalyzer:
             # Calculate spatial chunks to achieve target chunk size
             # For N spatial dimensions, we want: time_chunk * spatial_chunk^N * dtype_size_bytes ≈ target_elements
             target_elements = int(
-                self.TARGET_CHUNK_SIZE_MB * (1024**2) // dtype_size_bytes
+                self.target_chunk_size_mb * (1024**2) // dtype_size_bytes
             )
             
             # Count spatial dimensions
@@ -270,8 +309,8 @@ class ChunkAnalyzer:
         chunks = {}
         ndims = len(dimensions)
         
-        # Aim for chunks of ~50MB
-        target_elements = int(self.TARGET_CHUNK_SIZE_MB * (1024**2) // dtype_size_bytes)
+        # Aim for chunks of ~target size
+        target_elements = int(self.target_chunk_size_mb * (1024**2) // dtype_size_bytes)
         
         # Calculate chunk size per dimension
         elements_per_dim = int(target_elements ** (1/ndims))
@@ -338,16 +377,16 @@ class ChunkAnalyzer:
         validation_results["chunk_size_mb"] = chunk_size_mb
         
         # Check chunk size limits
-        if chunk_size_mb < self.MIN_CHUNK_SIZE_MB:
+        if chunk_size_mb < self.min_chunk_size_mb:
             validation_results["warnings"].append(
                 f"Chunk size ({chunk_size_mb:.1f} MB) is below minimum recommended size "
-                f"({self.MIN_CHUNK_SIZE_MB} MB). This may cause performance issues."
+                f"({self.min_chunk_size_mb} MB). This may cause performance issues."
             )
         
-        if chunk_size_mb > self.MAX_CHUNK_SIZE_MB:
+        if chunk_size_mb > self.max_chunk_size_mb:
             validation_results["warnings"].append(
                 f"Chunk size ({chunk_size_mb:.1f} MB) exceeds maximum recommended size "
-                f"({self.MAX_CHUNK_SIZE_MB} MB). This may cause memory issues."
+                f"({self.max_chunk_size_mb} MB). This may cause memory issues."
             )
         
         # Check if chunks are too small relative to dimensions
@@ -375,7 +414,8 @@ _analyzer = ChunkAnalyzer()
 def get_chunk_recommendation(
     dimensions: Dict[str, int],
     dtype_size_bytes: int = 4,
-    access_pattern: str = "balanced"
+    access_pattern: str = "balanced",
+    target_chunk_size_mb: Optional[int] = None
 ) -> ChunkRecommendation:
     """
     Get chunking recommendation for given dimensions.
@@ -384,17 +424,20 @@ def get_chunk_recommendation(
         dimensions: Dictionary of dimension names and sizes
         dtype_size_bytes: Size of data type in bytes (default: 4 for float32)
         access_pattern: Expected access pattern ("temporal", "spatial", "balanced")
+        target_chunk_size_mb: Target chunk size in MB. If None, uses default or environment variable.
         
     Returns:
         ChunkRecommendation with recommended strategy
     """
-    return _analyzer.analyze_chunking(dimensions, dtype_size_bytes, access_pattern)
+    analyzer = ChunkAnalyzer(target_chunk_size_mb=target_chunk_size_mb)
+    return analyzer.analyze_chunking(dimensions, dtype_size_bytes, access_pattern)
 
 
 def validate_chunking(
     user_chunks: Dict[str, int],
     dimensions: Dict[str, int],
-    dtype_size_bytes: int = 4
+    dtype_size_bytes: int = 4,
+    target_chunk_size_mb: Optional[int] = None
 ) -> Dict[str, Any]:
     """
     Validate user-provided chunking.
@@ -403,8 +446,10 @@ def validate_chunking(
         user_chunks: User-provided chunk sizes
         dimensions: Dataset dimensions
         dtype_size_bytes: Size of data type in bytes
+        target_chunk_size_mb: Target chunk size in MB. If None, uses default or environment variable.
         
     Returns:
         Dictionary with validation results
     """
-    return _analyzer.validate_user_chunking(user_chunks, dimensions, dtype_size_bytes)
+    analyzer = ChunkAnalyzer(target_chunk_size_mb=target_chunk_size_mb)
+    return analyzer.validate_user_chunking(user_chunks, dimensions, dtype_size_bytes)

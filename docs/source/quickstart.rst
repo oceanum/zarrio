@@ -31,11 +31,17 @@ For more control, you can use the class-based API:
         chunking={"time": 100, "lat": 50, "lon": 100},
         compression="blosc:zstd:3",
         packing=True,
-        packing_bits=16
+        packing_bits=16,
+        target_chunk_size_mb=100  # Configure target chunk size for your environment
     )
 
     # Convert data
     converter.convert("input.nc", "output.zarr")
+
+Environment-specific chunking:
+- Local development: 10-25 MB chunks
+- Production servers: 50-100 MB chunks  
+- Cloud environments: 100-200 MB chunks
 
 Command Line Interface
 ----------------------

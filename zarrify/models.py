@@ -140,6 +140,7 @@ class ZarrConverterConfig(BaseModel):
     missing_data: MissingDataConfig = Field(default_factory=MissingDataConfig, description="Missing data configuration")
     datamesh: Optional[DatameshConfig] = Field(None, description="Datamesh integration configuration")
     attrs: Dict[str, Any] = Field(default_factory=dict, description="Additional global attributes")
+    target_chunk_size_mb: Optional[int] = Field(None, description="Target chunk size in MB for intelligent chunking")
     
     # Backward compatibility fields
     retries_on_missing: int = Field(0, description="Number of retries if missing values are encountered", ge=0)

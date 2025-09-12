@@ -31,6 +31,44 @@ Recommended Chunk Sizes:
 - **Target**: 10-100 MB per chunk
 - **Maximum**: 100 MB per chunk
 
+Configurable Target Chunk Size
+-------------------------------
+
+zarrify allows you to configure the target chunk size for different environments:
+
+.. code-block:: python
+
+    from zarrify.chunking import get_chunk_recommendation
+
+    # Configure target chunk size (default is 50 MB)
+    recommendation = get_chunk_recommendation(
+        dimensions={"time": 1000, "lat": 500, "lon": 1000},
+        dtype_size_bytes=4,
+        access_pattern="balanced",
+        target_chunk_size_mb=100  # 100 MB target chunks
+    )
+
+Environment-specific recommendations:
+- **Local development**: 10-25 MB chunks
+- **Production servers**: 50-100 MB chunks
+- **Cloud environments**: 100-200 MB chunks
+
+Configuration Methods:
+~~~~~~~~~~~~~~~~~~~~~~
+
+1. **Function Arguments**:
+   ``get_chunk_recommendation(..., target_chunk_size_mb=100)``
+
+2. **Environment Variables**:
+   ``ZARRIFY_TARGET_CHUNK_SIZE_MB=200``
+
+3. **ZarrConverter Configuration**:
+   .. code-block:: python
+   
+       from zarrify.models import ZarrConverterConfig
+       
+       config = ZarrConverterConfig(target_chunk_size_mb=100)
+
 Intelligent Chunking Analysis
 -------------------------------
 

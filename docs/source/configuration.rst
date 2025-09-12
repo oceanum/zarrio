@@ -28,8 +28,23 @@ The main configuration class is `ZarrConverterConfig`:
         packing={"enabled": True, "bits": 16},
         time={"dim": "time", "append_dim": "time"},
         variables={"include": ["temperature"], "exclude": ["humidity"]},
+        target_chunk_size_mb=100,  # Configurable target chunk size
         attrs={"title": "Demo dataset", "source": "zarrify"}
     )
+
+The `ZarrConverterConfig` supports the following fields:
+
+- **chunking**: Chunking configuration (time, lat, lon, depth dimensions)
+- **compression**: Compression settings (method, cname, clevel, shuffle)
+- **packing**: Data packing configuration (enabled, bits)
+- **time**: Time dimension configuration (dim, append_dim, global_start, global_end, freq)
+- **variables**: Variable selection (include, exclude)
+- **missing_data**: Missing data handling (check_vars, retries_on_missing, missing_check_vars)
+- **datamesh**: Datamesh integration configuration
+- **attrs**: Global attributes to add to the dataset
+- **target_chunk_size_mb**: Target chunk size in MB for intelligent chunking (default: 50)
+- **retries_on_missing**: Number of retries for missing data (backward compatibility)
+- **missing_check_vars**: Variables to check for missing data (backward compatibility)
 
 Chunking Configuration
 -----------------------

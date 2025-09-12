@@ -68,6 +68,8 @@ def convert_command(args: argparse.Namespace) -> None:
         config_dict.setdefault('packing', {})['bits'] = args.packing_bits
     if args.time_dim:
         config_dict.setdefault('time', {})['dim'] = args.time_dim
+    if args.target_chunk_size_mb:
+        config_dict['target_chunk_size_mb'] = args.target_chunk_size_mb
     if args.attrs:
         config_dict['attrs'] = json.loads(args.attrs)
     
@@ -120,6 +122,8 @@ def append_command(args: argparse.Namespace) -> None:
         config_dict.setdefault('time', {})['append_dim'] = args.append_dim
     if args.time_dim:
         config_dict.setdefault('time', {})['dim'] = args.time_dim
+    if args.target_chunk_size_mb:
+        config_dict['target_chunk_size_mb'] = args.target_chunk_size_mb
     
     # Add datamesh config if provided
     if args.datamesh_datasource:
@@ -174,6 +178,8 @@ def create_template_command(args: argparse.Namespace) -> None:
         config_dict.setdefault('packing', {})['bits'] = args.packing_bits
     if args.time_dim:
         config_dict.setdefault('time', {})['dim'] = args.time_dim
+    if args.target_chunk_size_mb:
+        config_dict['target_chunk_size_mb'] = args.target_chunk_size_mb
     
     # Add datamesh config if provided
     if args.datamesh_datasource:
@@ -223,6 +229,8 @@ def write_region_command(args: argparse.Namespace) -> None:
         config_dict.setdefault('chunking', {}).update(chunking)
     if args.time_dim:
         config_dict.setdefault('time', {})['dim'] = args.time_dim
+    if args.target_chunk_size_mb:
+        config_dict['target_chunk_size_mb'] = args.target_chunk_size_mb
     
     # Add datamesh config if provided
     if args.datamesh_datasource:
@@ -365,8 +373,9 @@ examples:
         help="Datamesh service URL"
     )
     convert_parser.add_argument(
-        "--config",
-        help="Configuration file (YAML or JSON)"
+        "--target-chunk-size-mb",
+        type=int,
+        help="Target chunk size in MB for intelligent chunking (default: 50)"
     )
     convert_parser.set_defaults(func=convert_command)
     
@@ -408,6 +417,11 @@ examples:
         "--datamesh-service",
         default="https://datamesh-v1.oceanum.io",
         help="Datamesh service URL"
+    )
+    append_parser.add_argument(
+        "--target-chunk-size-mb",
+        type=int,
+        help="Target chunk size in MB for intelligent chunking (default: 50)"
     )
     append_parser.add_argument(
         "--config",
@@ -475,6 +489,11 @@ examples:
         help="Datamesh service URL"
     )
     template_parser.add_argument(
+        "--target-chunk-size-mb",
+        type=int,
+        help="Target chunk size in MB for intelligent chunking (default: 50)"
+    )
+    template_parser.add_argument(
         "--config",
         help="Configuration file (YAML or JSON)"
     )
@@ -517,6 +536,11 @@ examples:
         "--datamesh-service",
         default="https://datamesh-v1.oceanum.io",
         help="Datamesh service URL"
+    )
+    region_parser.add_argument(
+        "--target-chunk-size-mb",
+        type=int,
+        help="Target chunk size in MB for intelligent chunking (default: 50)"
     )
     region_parser.add_argument(
         "--config",
