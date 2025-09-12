@@ -62,6 +62,14 @@ zarrify also provides a powerful command-line interface:
     # Convert with data packing
     zarrify convert input.nc output.zarr --packing --packing-bits 16
 
+    # Convert with manual packing ranges
+    zarrify convert input.nc output.zarr --packing \
+        --packing-manual-ranges '{"temperature": {"min": -50, "max": 50}}'
+
+    # Convert with automatic range calculation
+    zarrify convert input.nc output.zarr --packing \
+        --packing-auto-buffer-factor 0.05
+
 Parallel Writing
 ----------------
 

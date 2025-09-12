@@ -66,6 +66,15 @@ def convert_command(args: argparse.Namespace) -> None:
         config_dict.setdefault('packing', {})['enabled'] = True
     if args.packing_bits:
         config_dict.setdefault('packing', {})['bits'] = args.packing_bits
+    if args.packing_manual_ranges:
+        import json
+        config_dict.setdefault('packing', {})['manual_ranges'] = json.loads(args.packing_manual_ranges)
+    if args.packing_auto_buffer_factor:
+        config_dict.setdefault('packing', {})['auto_buffer_factor'] = args.packing_auto_buffer_factor
+    if not args.packing_check_range_exceeded:
+        config_dict.setdefault('packing', {})['check_range_exceeded'] = False
+    if args.packing_range_exceeded_action:
+        config_dict.setdefault('packing', {})['range_exceeded_action'] = args.packing_range_exceeded_action
     if args.time_dim:
         config_dict.setdefault('time', {})['dim'] = args.time_dim
     if args.target_chunk_size_mb:
@@ -176,6 +185,15 @@ def create_template_command(args: argparse.Namespace) -> None:
         config_dict.setdefault('packing', {})['enabled'] = True
     if args.packing_bits:
         config_dict.setdefault('packing', {})['bits'] = args.packing_bits
+    if args.packing_manual_ranges:
+        import json
+        config_dict.setdefault('packing', {})['manual_ranges'] = json.loads(args.packing_manual_ranges)
+    if args.packing_auto_buffer_factor:
+        config_dict.setdefault('packing', {})['auto_buffer_factor'] = args.packing_auto_buffer_factor
+    if not args.packing_check_range_exceeded:
+        config_dict.setdefault('packing', {})['check_range_exceeded'] = False
+    if args.packing_range_exceeded_action:
+        config_dict.setdefault('packing', {})['range_exceeded_action'] = args.packing_range_exceeded_action
     if args.time_dim:
         config_dict.setdefault('time', {})['dim'] = args.time_dim
     if args.target_chunk_size_mb:
@@ -289,6 +307,9 @@ examples:
   # Convert with data packing
   zarrify convert input.nc output.zarr --packing --packing-bits 16
   
+  # Convert with manual packing ranges
+  zarrify convert input.nc output.zarr --packing --packing-manual-ranges '{"temperature": {"min": 0, "max": 100}}'
+  
   # Create template for parallel writing
   zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31
   
@@ -341,6 +362,28 @@ examples:
         default=16,
         choices=[8, 16, 32],
         help="Number of bits for packing (default: 16)"
+    )
+    convert_parser.add_argument(
+        "--packing-manual-ranges",
+        help="Manual min/max ranges as JSON string (e.g., '{\"temperature\": {\"min\": 0, \"max\": 100}}')"
+    )
+    convert_parser.add_argument(
+        "--packing-auto-buffer-factor",
+        type=float,
+        default=0.01,
+        help="Buffer factor for automatically calculated ranges (default: 0.01)"
+    )
+    convert_parser.add_argument(
+        "--packing-check-range-exceeded",
+        action="store_true",
+        default=True,
+        help="Check if data exceeds specified ranges (default: True)"
+    )
+    convert_parser.add_argument(
+        "--packing-range-exceeded-action",
+        choices=["warn", "error", "ignore"],
+        default="warn",
+        help="Action when data exceeds range (default: warn)"
     )
     convert_parser.add_argument(
         "--variables",
@@ -452,6 +495,28 @@ examples:
         default=16,
         choices=[8, 16, 32],
         help="Number of bits for packing (default: 16)"
+    )
+    template_parser.add_argument(
+        "--packing-manual-ranges",
+        help="Manual min/max ranges as JSON string (e.g., '{\"temperature\": {\"min\": 0, \"max\": 100}}')"
+    )
+    template_parser.add_argument(
+        "--packing-auto-buffer-factor",
+        type=float,
+        default=0.01,
+        help="Buffer factor for automatically calculated ranges (default: 0.01)"
+    )
+    template_parser.add_argument(
+        "--packing-check-range-exceeded",
+        action="store_true",
+        default=True,
+        help="Check if data exceeds specified ranges (default: True)"
+    )
+    template_parser.add_argument(
+        "--packing-range-exceeded-action",
+        choices=["warn", "error", "ignore"],
+        default="warn",
+        help="Action when data exceeds range (default: warn)"
     )
     template_parser.add_argument(
         "--global-start",

@@ -132,8 +132,123 @@ def test_setup_encoding_no_valid_range():
     packer = Packer(nbits=16)
     encoding = packer.setup_encoding(ds)
     
-    # Check that no encoding was created for variables without valid range
-    assert "temperature" not in encoding
+    # Check that encoding was created (auto-calculated)
+    assert "temperature" in encoding
+    assert "filters" in encoding["temperature"]
+    assert len(encoding["temperature"]["filters"]) == 1
+
+
+def test_setup_encoding_manual_ranges():
+    """Test encoding setup with manual ranges."""
+    # Create test dataset
+    data = np.random.random([5, 3]) * 100
+    ds = xr.Dataset(
+        {
+            "temperature": (("time", "lat"), data),
+        },
+        coords={
+            "time": pd.date_range("2000-01-01", periods=5),
+            "lat": [-10, 0, 10],
+        },
+    )
+    
+    # Setup encoding with manual ranges
+    manual_ranges = {"temperature": {"min": 0, "max": 200}}
+    packer = Packer(nbits=16)
+    encoding = packer.setup_encoding(ds, manual_ranges=manual_ranges)
+    
+    # Check that encoding was created
+    assert "temperature" in encoding
+    assert "filters" in encoding["temperature"]
+    assert len(encoding["temperature"]["filters"]) == 1
+
+
+def test_setup_encoding_priority_order():
+    """Test that manual ranges take priority over attributes."""
+    # Create test dataset with valid range attributes
+    data = np.random.random([5, 3]) * 100
+    ds = xr.Dataset(
+        {
+            "temperature": (("time", "lat"), data),
+        },
+        coords={
+            "time": pd.date_range("2000-01-01", periods=5),
+            "lat": [-10, 0, 10],
+        },
+    )
+    
+    # Add valid range attributes
+    ds["temperature"].attrs["valid_min"] = 0.0
+    ds["temperature"].attrs["valid_max"] = 100.0
+    
+    # Setup encoding with manual ranges (should take priority)
+    manual_ranges = {"temperature": {"min": -50, "max": 150}}
+    packer = Packer(nbits=16)
+    encoding = packer.setup_encoding(ds, manual_ranges=manual_ranges)
+    
+    # Check that encoding was created with manual ranges
+    assert "temperature" in encoding
+    assert "filters" in encoding["temperature"]
+    assert len(encoding["temperature"]["filters"]) == 1
+
+
+def test_setup_encoding_auto_calculation():
+    """Test automatic range calculation with buffer."""
+    # Create test dataset without valid range attributes
+    data = np.random.random([5, 3]) * 100
+    ds = xr.Dataset(
+        {
+            "temperature": (("time", "lat"), data),
+        },
+        coords={
+            "time": pd.date_range("2000-01-01", periods=5),
+            "lat": [-10, 0, 10],
+        },
+    )
+    
+    # Setup encoding with auto buffer factor
+    packer = Packer(nbits=16)
+    encoding = packer.setup_encoding(ds, auto_buffer_factor=0.05)
+    
+    # Check that encoding was created (auto-calculated)
+    assert "temperature" in encoding
+    assert "filters" in encoding["temperature"]
+    assert len(encoding["temperature"]["filters"]) == 1
+
+
+def test_range_exceeded_check():
+    """Test range exceeded checking."""
+    # Create test dataset with data exceeding specified range
+    data = np.array([[0, 50, 150]])  # 150 exceeds max of 100
+    ds = xr.Dataset(
+        {
+            "temperature": (("time", "lat"), data),
+        },
+        coords={
+            "time": pd.date_range("2000-01-01", periods=1),
+            "lat": [-10, 0, 10],
+        },
+    )
+    
+    # Setup encoding with range that will be exceeded
+    manual_ranges = {"temperature": {"min": 0, "max": 100}}
+    packer = Packer(nbits=16)
+    
+    # Should warn but not raise error
+    encoding = packer.setup_encoding(
+        ds, 
+        manual_ranges=manual_ranges, 
+        range_exceeded_action="warn"
+    )
+    assert "temperature" in encoding
+    
+    # Should raise error
+    with pytest.raises(ValueError):
+        packer.setup_encoding(
+            ds, 
+            manual_ranges=manual_ranges, 
+            range_exceeded_action="error"
+        )
 
 
 if __name__ == "__main__":

@@ -25,12 +25,36 @@ class PackingConfig(BaseModel):
     """Configuration for data packing."""
     enabled: bool = Field(False, description="Whether to enable data packing")
     bits: int = Field(16, description="Number of bits for packing", ge=8, le=32)
+    manual_ranges: Optional[Dict[str, Dict[str, float]]] = Field(
+        None, 
+        description="Manual min/max ranges for variables (e.g., {'temperature': {'min': 0, 'max': 100}})"
+    )
+    auto_buffer_factor: float = Field(
+        0.01, 
+        description="Buffer factor for automatically calculated ranges (e.g., 0.01 = 1% buffer)", 
+        ge=0.0
+    )
+    check_range_exceeded: bool = Field(
+        True, 
+        description="Whether to check if data exceeds specified ranges"
+    )
+    range_exceeded_action: str = Field(
+        "warn", 
+        description="Action when data exceeds range ('warn', 'error', 'ignore')"
+    )
     
     @field_validator("bits")
     @classmethod
     def validate_bits(cls, v: int) -> int:
         if v not in [8, 16, 32]:
             raise ValueError("bits must be one of 8, 16, or 32")
+        return v
+    
+    @field_validator("range_exceeded_action")
+    @classmethod
+    def validate_range_exceeded_action(cls, v: str) -> str:
+        if v not in ["warn", "error", "ignore"]:
+            raise ValueError("range_exceeded_action must be one of 'warn', 'error', 'ignore'")
         return v
 
 

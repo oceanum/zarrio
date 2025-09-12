@@ -75,6 +75,62 @@ Packing can be configured through the `PackingConfig` model:
         bits=16
     )
 
+Enhanced Packing Features
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The enhanced packing functionality provides several improvements over basic packing:
+
+Priority-Based Range Determination:
+    The enhanced packing system uses a clear priority order for determining the min/max values used for packing:
+    
+    1. **Manual ranges** (if provided)
+    2. **Variable attributes** (valid_min/valid_max)
+    3. **Automatic calculation** from data (with warnings)
+
+Manual Range Specification:
+    Users can explicitly specify min/max ranges for variables:
+
+    .. code-block:: python
+
+        from zarrify.models import PackingConfig
+
+        packing = PackingConfig(
+            enabled=True,
+            bits=16,
+            manual_ranges={
+                "temperature": {"min": -50, "max": 50},
+                "pressure": {"min": 90000, "max": 110000}
+            }
+        )
+
+Automatic Range Calculation with Buffer:
+    When no ranges are provided, the system automatically calculates them from the data:
+
+    .. code-block:: python
+
+        from zarrify.models import PackingConfig
+
+        packing = PackingConfig(
+            enabled=True,
+            bits=16,
+            auto_buffer_factor=0.05  # 5% buffer
+        )
+
+Range Exceeded Validation:
+    Optional checking to ensure data doesn't exceed specified ranges:
+
+    .. code-block:: python
+
+        from zarrify.models import PackingConfig
+
+        packing = PackingConfig(
+            enabled=True,
+            bits=16,
+            manual_ranges={"temperature": {"min": -50, "max": 50}},
+            check_range_exceeded=True,
+            range_exceeded_action="error"  # or "warn" or "ignore"
+        )
+
 Compression Configuration
 --------------------------
 

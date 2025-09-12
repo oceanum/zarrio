@@ -41,6 +41,14 @@ zarrify convert input.nc output.zarr --compression "blosc:zstd:3"
 # Convert with data packing
 zarrify convert input.nc output.zarr --packing --packing-bits 16
 
+# Convert with manual packing ranges
+zarrify convert input.nc output.zarr --packing \
+    --packing-manual-ranges '{"temperature": {"min": -50, "max": 50}}'
+
+# Convert with automatic range calculation
+zarrify convert input.nc output.zarr --packing \
+    --packing-auto-buffer-factor 0.05
+
 # Create template for parallel writing
 zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31
 
@@ -66,14 +74,21 @@ convert_to_zarr(
     chunking={"time": 100, "lat": 50, "lon": 100},
     compression="blosc:zstd:3",
     packing=True,
-    packing_bits=16
+    packing_bits=16,
+    packing_manual_ranges={
+        "temperature": {"min": -50, "max": 50}
+    },
+    packing_auto_buffer_factor=0.05
 )
 
 # Using the class-based interface
 converter = ZarrConverter(
     chunking={"time": 100, "lat": 50, "lon": 100},
     compression="blosc:zstd:3",
-    packing=True
+    packing=True,
+    packing_manual_ranges={
+        "temperature": {"min": -50, "max": 50}
+    }
 )
 converter.convert("input.nc", "output.zarr")
 
@@ -130,8 +145,14 @@ chunking:
   lat: 50
   lon: 100
 compression: "blosc:zstd:3"
-packing: true
-packing_bits: 16
+packing:
+  enabled: true
+  bits: 16
+  manual_ranges:
+    temperature:
+      min: -50
+      max: 50
+  auto_buffer_factor: 0.05
 variables:
   - temperature
   - pressure

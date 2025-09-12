@@ -60,6 +60,18 @@ Options:
 --packing-bits {8,16,32}
     Number of bits for packing (default: 16)
 
+--packing-manual-ranges PACKING_MANUAL_RANGES
+    Manual min/max ranges as JSON string (e.g., '{"temperature": {"min": 0, "max": 100}}')
+
+--packing-auto-buffer-factor PACKING_AUTO_BUFFER_FACTOR
+    Buffer factor for automatically calculated ranges (default: 0.01)
+
+--packing-check-range-exceeded
+    Check if data exceeds specified ranges (default: True)
+
+--packing-range-exceeded-action {warn,error,ignore}
+    Action when data exceeds range (default: warn)
+
 --variables VARIABLES
     Comma-separated list of variables to include
 
@@ -201,6 +213,10 @@ Options:
 - ``--compression TEXT``: Compression specification (e.g., 'blosc:zstd:3')
 - ``--packing``: Enable data packing
 - ``--packing-bits INTEGER``: Number of bits for packing (8, 16, or 32)
+- ``--packing-manual-ranges TEXT``: Manual min/max ranges as JSON string
+- ``--packing-auto-buffer-factor FLOAT``: Buffer factor for automatically calculated ranges
+- ``--packing-check-range-exceeded``: Check if data exceeds specified ranges
+- ``--packing-range-exceeded-action [warn|error|ignore]``: Action when data exceeds range
 - ``--global-start TEXT``: Start time for full archive (e.g., '2020-01-01')
 - ``--global-end TEXT``: End time for full archive (e.g., '2023-12-31')
 - ``--freq TEXT``: Time frequency (e.g., '1D', '1H', inferred if not provided)
@@ -246,6 +262,24 @@ Create template with data packing:
         --global-start 2020-01-01 \
         --global-end 2023-12-31 \
         --packing --packing-bits 16
+
+Create template with manual packing ranges:
+
+.. code-block:: bash
+
+    zarrify create-template template.nc archive.zarr \
+        --global-start 2020-01-01 \
+        --global-end 2023-12-31 \
+        --packing --packing-manual-ranges '{"temperature": {"min": -50, "max": 50}}'
+
+Create template with automatic range calculation:
+
+.. code-block:: bash
+
+    zarrify create-template template.nc archive.zarr \
+        --global-start 2020-01-01 \
+        --global-end 2023-12-31 \
+        --packing --packing-auto-buffer-factor 0.05
 
 Write-Region Command
 --------------------

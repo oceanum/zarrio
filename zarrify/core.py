@@ -988,7 +988,13 @@ class ZarrConverter:
         
         # Setup packing
         if self.config.packing.enabled and self.packer:
-            packing_encoding = self.packer.setup_encoding(ds)
+            packing_encoding = self.packer.setup_encoding(
+                ds,
+                manual_ranges=self.config.packing.manual_ranges,
+                auto_buffer_factor=self.config.packing.auto_buffer_factor,
+                check_range_exceeded=self.config.packing.check_range_exceeded,
+                range_exceeded_action=self.config.packing.range_exceeded_action
+            )
             encoding.update(packing_encoding)
             
         # Setup coordinate chunking
@@ -1029,6 +1035,10 @@ def convert_to_zarr(
     compression: Optional[str] = None,
     packing: bool = False,
     packing_bits: int = 16,
+    packing_manual_ranges: Optional[Dict[str, Dict[str, float]]] = None,
+    packing_auto_buffer_factor: float = 0.01,
+    packing_check_range_exceeded: bool = True,
+    packing_range_exceeded_action: str = "warn",
     variables: Optional[list] = None,
     drop_variables: Optional[list] = None,
     attrs: Optional[Dict[str, Any]] = None,
@@ -1049,6 +1059,10 @@ def convert_to_zarr(
         compression: Compression specification
         packing: Whether to enable data packing
         packing_bits: Number of bits for packing
+        packing_manual_ranges: Manual min/max ranges for variables
+        packing_auto_buffer_factor: Buffer factor for automatically calculated ranges
+        packing_check_range_exceeded: Whether to check if data exceeds specified ranges
+        packing_range_exceeded_action: Action when data exceeds range ("warn", "error", "ignore")
         variables: List of variables to include
         drop_variables: List of variables to exclude
         attrs: Additional global attributes
@@ -1065,8 +1079,15 @@ def convert_to_zarr(
         config_dict['chunking'] = chunking
     if compression:
         config_dict['compression'] = {'method': compression}
-    if packing or packing_bits:
-        config_dict['packing'] = {'enabled': packing, 'bits': packing_bits}
+    if packing or packing_bits or packing_manual_ranges:
+        config_dict['packing'] = {
+            'enabled': packing, 
+            'bits': packing_bits,
+            'manual_ranges': packing_manual_ranges,
+            'auto_buffer_factor': packing_auto_buffer_factor,
+            'check_range_exceeded': packing_check_range_exceeded,
+            'range_exceeded_action': packing_range_exceeded_action
+        }
     if time_dim:
         config_dict['time'] = {'dim': time_dim}
     if retries_on_missing or missing_check_vars:
