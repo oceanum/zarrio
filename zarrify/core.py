@@ -557,7 +557,7 @@ class ZarrConverter:
                     ds = ds.chunk(chunking_dict)
                 
                 # Write to region
-                ds.to_zarr(str(zarr_path), region=region, encoding=encoding, safe_chunks=False)
+                ds.to_zarr(zarr_path, region=region, encoding=encoding, safe_chunks=False)
                 
                 logger.info(f"Successfully wrote region {region} from {input_path} to {zarr_path}")
                 
@@ -615,7 +615,7 @@ class ZarrConverter:
         
         try:
             # Open existing Zarr store
-            with xr.open_zarr(str(zarr_path), consolidated=True) as store_dset:
+            with xr.open_zarr(zarr_path, consolidated=True) as store_dset:
                 # Determine variables to check
                 missing_check_vars = self.config.missing_data.missing_check_vars
                 if missing_check_vars == "all":
@@ -672,7 +672,7 @@ class ZarrConverter:
             Dictionary specifying the region to write to
         """
         # Open existing Zarr store
-        existing_ds = xr.open_zarr(str(zarr_path))
+        existing_ds = xr.open_zarr(zarr_path)
         
         # Get time ranges
         ds_start = ds[self.config.time.dim].to_index()[0]
@@ -879,7 +879,7 @@ class ZarrConverter:
             try:
                 # Open datasets
                 new_ds = self._open_dataset(input_path)
-                existing_ds = xr.open_zarr(str(zarr_path))
+                existing_ds = xr.open_zarr(zarr_path)
                 
                 # Process new dataset
                 new_ds = self._process_dataset(new_ds, variables, drop_variables)
@@ -899,7 +899,7 @@ class ZarrConverter:
                     new_ds = new_ds.chunk(chunking_dict)
                 
                 # Append to Zarr
-                new_ds.to_zarr(str(zarr_path), append_dim=self.config.time.append_dim, encoding=encoding)
+                new_ds.to_zarr(zarr_path, append_dim=self.config.time.append_dim, encoding=encoding)
                 
                 logger.info(f"Successfully appended {input_path} to {zarr_path}")
                 
