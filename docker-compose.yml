@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  zarrify:
+    build: .
+    image: zarrify:dev
+    volumes:
+      # Mount the current directory to /app for development
+      - .:/app
+      # Mount data directory (create this on your host for data persistence)
+      - ./data:/data
+    # For development, override the command to run bash
+    command: bash
+    # For production, use the default entrypoint
+    # command: ["convert", "/data/input.nc", "/data/output.zarr"]
+    
+  zarrify-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: zarrify:latest
+    volumes:
+      # Mount data directory
+      - ./data:/data
+    # For production, use the default entrypoint
+    # command: ["convert", "/data/input.nc", "/data/output.zarr"]
+    
+  zarrify-dev:
+    build: .
+    image: zarrify:dev-full
+    volumes:
+      # Mount the current directory to /app for development
+      - .:/app
+      # Mount data directory
+      - ./data:/data
+    # Install development dependencies and run bash
+    command: bash -c "pip install -e '.[dev]' && bash"
