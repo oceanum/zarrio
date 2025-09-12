@@ -1,85 +1,85 @@
-onzarr2 package
+zarrify package
 ===============
 
 Submodules
 ----------
 
-onzarr2.api module
+zarrify.api module
 ------------------
 
-.. automodule:: onzarr2.api
+.. automodule:: zarrify.api
    :members:
    :show-inheritance:
    :undoc-members:
 
-onzarr2.chunking module
+zarrify.chunking module
 -----------------------
 
-.. automodule:: onzarr2.chunking
+.. automodule:: zarrify.chunking
    :members:
    :show-inheritance:
    :undoc-members:
 
-onzarr2.cli module
+zarrify.cli module
 ------------------
 
-.. automodule:: onzarr2.cli
+.. automodule:: zarrify.cli
    :members:
    :show-inheritance:
    :undoc-members:
 
-onzarr2.config module
+zarrify.config module
 ---------------------
 
-.. automodule:: onzarr2.config
+.. automodule:: zarrify.config
    :members:
    :show-inheritance:
    :undoc-members:
 
-onzarr2.core module
+zarrify.core module
 -------------------
 
-.. automodule:: onzarr2.core
+.. automodule:: zarrify.core
    :members:
    :show-inheritance:
    :undoc-members:
 
-onzarr2.exceptions module
+zarrify.exceptions module
 -------------------------
 
-.. automodule:: onzarr2.exceptions
+.. automodule:: zarrify.exceptions
    :members:
    :show-inheritance:
    :undoc-members:
 
-onzarr2.missing module
+zarrify.missing module
 ----------------------
 
-.. automodule:: onzarr2.missing
+.. automodule:: zarrify.missing
    :members:
    :show-inheritance:
    :undoc-members:
 
-onzarr2.models module
+zarrify.models module
 ---------------------
 
-.. automodule:: onzarr2.models
+.. automodule:: zarrify.models
    :members:
    :show-inheritance:
    :undoc-members:
 
-onzarr2.packing module
+zarrify.packing module
 ----------------------
 
-.. automodule:: onzarr2.packing
+.. automodule:: zarrify.packing
    :members:
    :show-inheritance:
    :undoc-members:
 
-onzarr2.time module
+zarrify.time module
 -------------------
 
-.. automodule:: onzarr2.time
+.. automodule:: zarrify.time
    :members:
    :show-inheritance:
    :undoc-members:
@@ -87,7 +87,7 @@ onzarr2.time module
 Module contents
 ---------------
 
-.. automodule:: onzarr2
+.. automodule:: zarrify
    :members:
    :show-inheritance:
    :undoc-members:

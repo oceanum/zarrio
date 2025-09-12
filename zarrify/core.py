@@ -1,11 +1,12 @@
 """
-Enhanced core functionality for zarrify with retry logic for missing data.
+Enhanced core functionality for zarrify with retry logic for missing data and datamesh support.
 """
 
 import logging
 import time
 from typing import Dict, Optional, Union, Any, List
 from pathlib import Path
+from functools import cached_property
 
 import xarray as xr
 import numpy as np
@@ -21,10 +22,25 @@ from .models import (
     CompressionConfig,
     TimeConfig,
     VariableConfig,
-    MissingDataConfig
+    MissingDataConfig,
+    DatameshDatasource
 )
 
 logger = logging.getLogger(__name__)
+
+# Try to import datamesh components, but make them optional
+try:
+    from oceanum.datamesh import Connector
+    from oceanum.datamesh.zarr import ZarrClient
+    from oceanum.datamesh.session import Session
+    from oceanum.datamesh.exceptions import DatameshConnectError
+    DATAMESH_AVAILABLE = True
+except ImportError:
+    DATAMESH_AVAILABLE = False
+    Connector = None
+    ZarrClient = None
+    Session = None
+    DatameshConnectError = Exception
 
 
 class ZarrConverter:
@@ -86,6 +102,11 @@ class ZarrConverter:
         # Internal state
         self._current_dataset = None
         self._region = None
+        
+        # Datamesh session state
+        self._session = None
+        self._store = None
+        self._cycle = None
     
     @classmethod
     def from_config_file(cls, config_path: Union[str, Path]) -> "ZarrConverter":
@@ -102,6 +123,173 @@ class ZarrConverter:
         config = load_config_from_file(config_path)
         return cls(config=config)
     
+    @cached_property
+    def conn(self) -> Optional[Connector]:
+        """Datamesh connector."""
+        if not DATAMESH_AVAILABLE or not self.config.datamesh:
+            return None
+        return Connector(
+            token=self.config.datamesh.token, 
+            service=self.config.datamesh.service
+        )
+    
+    @property
+    def use_datamesh_zarr_client(self) -> bool:
+        """Whether to use the datamesh zarr client."""
+        if not DATAMESH_AVAILABLE or not self.config.datamesh:
+            return False
+        return (
+            self.config.datamesh.datasource is not None and 
+            self.config.datamesh.use_zarr_client
+        )
+    
+    def _get_store(self, cycle: Optional[Any] = None) -> Union[str, Path, Any]:
+        """Get the store path or datamesh zarr client."""
+        if self.use_datamesh_zarr_client and self.config.datamesh:
+            logger.info(f"Writing to the {self.config.datamesh.datasource.id} datamesh store")
+            # Set the group to the cycle if provided
+            if cycle is not None:
+                logger.info(f"Writing to cycle group {cycle}")
+                self._cycle = cycle
+            # Avoid opening a new session if already open
+            if self._session is not None:
+                return self._store
+            # Start the session
+            self._session = Session.acquire(self.conn)
+            # Create the store
+            self._store = ZarrClient(
+                self.conn,
+                self.config.datamesh.datasource.id,
+                self._session,
+                api="zarr",
+                nocache=True,
+            )
+            return self._store
+        else:
+            # For regular file-based stores, we would return a path
+            # This would be set by the calling method
+            return self._store
+    
+    def _close_session(self) -> None:
+        """Close the datamesh session if open."""
+        if self._session is not None:
+            logger.info("Closing datamesh session")
+            self._session.close(finalise_write=True)
+            self._session = None
+        else:
+            logger.info("No datamesh session to close")
+    
+    def _update_datamesh_datasource(self, dset: xr.Dataset) -> None:
+        """Update metadata in datamesh that is different."""
+        if not DATAMESH_AVAILABLE or not self.config.datamesh or not self.config.datamesh.datasource:
+            return
+            
+        try:
+            # Get the datasource
+            datasource = self.config.datamesh.datasource
+            if isinstance(datasource, dict):
+                datasource = DatameshDatasource(**datasource)
+            
+            # Update the metadata explicitly set
+            metadata = datasource.model_dump(exclude_unset=True)
+            datasource_id = metadata.pop("id")
+            
+            # Add schema if not explicitly set
+            if "dataschema" not in metadata:
+                metadata["dataschema"] = self._get_schema(dset)
+            
+            logger.info(f"Updating metadata {metadata} in datamesh for {datasource_id}")
+            self.conn.update_metadata(datasource_id=datasource_id, **metadata)
+            
+            # Update geometry from the dataset if not explicitly set
+            if "geometry" not in metadata and "geom" not in metadata:
+                geom = self._get_geom(dset, datasource)
+                if geom:
+                    logger.debug(f"Updating geometry {geom} in datamesh for {datasource_id}")
+                    self.conn.update_metadata(datasource_id=datasource_id, geom=geom)
+            
+            # Update time range from the dataset if not explicitly set
+            tstart, tend = self._get_time_range(dset, datasource)
+            if "tstart" not in metadata and tstart:
+                logger.debug(f"Updating start time {tstart} in datamesh for {datasource_id}")
+                self.conn.update_metadata(datasource_id=datasource_id, tstart=tstart)
+            if "tend" not in metadata and tend:
+                logger.debug(f"Updating end time {tend} in datamesh for {datasource_id}")
+                self.conn.update_metadata(datasource_id=datasource_id, tend=tend)
+                
+        except Exception as e:
+            logger.warning(f"Failed to update datamesh datasource metadata: {e}")
+    
+    def _get_schema(self, dset: xr.Dataset) -> Dict[str, Any]:
+        """Get schema of datamesh datasource."""
+        return dset.to_dict(data=False)
+    
+    def _get_geom(self, dset: xr.Dataset, datasource: DatameshDatasource) -> Optional[Dict[str, Any]]:
+        """Get geometry of datamesh datasource as a bbox around the coordinates."""
+        try:
+            coords = datasource.coordinates or {}
+            x_coord = coords.get("x")
+            y_coord = coords.get("y")
+            
+            if not x_coord or not y_coord:
+                logger.warning("Coordinates not properly defined for geometry calculation")
+                return None
+            
+            if x_coord not in dset.coords or y_coord not in dset.coords:
+                logger.warning(f"Coordinates {x_coord} or {y_coord} not found in dataset")
+                return None
+            
+            x_data = dset[x_coord]
+            y_data = dset[y_coord]
+            
+            if x_data.size == 1 and y_data.size == 1:
+                return {"type": "Point", "coordinates": [float(x_data), float(y_data)]}
+            else:
+                xmin = float(x_data.min())
+                xmax = float(x_data.max())
+                ymin = float(y_data.min())
+                ymax = float(y_data.max())
+                dx = float(x_data[1] - x_data[0]) if x_data.size > 1 else 0
+                dy = float(y_data[1] - y_data[0]) if y_data.size > 1 else 0
+                buffer = 0.0001
+                
+                if dx < buffer and dy < buffer:
+                    return {"type": "Point", "coordinates": [xmin, ymin]}
+                if (xmin + 360 - xmax - buffer) <= dx:
+                    xmax += dx
+                    
+                geom = {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [xmin, ymin],
+                            [xmax, ymin],
+                            [xmax, ymax],
+                            [xmin, ymax],
+                            [xmin, ymin],
+                        ]
+                    ],
+                }
+                return geom
+        except Exception as e:
+            logger.warning(f"Failed to calculate geometry: {e}")
+            return None
+    
+    def _get_time_range(self, dset: xr.Dataset, datasource: DatameshDatasource) -> tuple:
+        """Get time range from dataset."""
+        try:
+            coords = datasource.coordinates or {}
+            t_coord = coords.get("t")
+            
+            if not t_coord or t_coord not in dset.coords:
+                return None, None
+            
+            times = dset[t_coord].to_index().to_pydatetime()
+            return min(times), max(times)
+        except Exception as e:
+            logger.warning(f"Failed to get time range: {e}")
+            return None, None
+    
     def create_template(
         self,
         template_dataset: xr.Dataset,
@@ -109,7 +297,8 @@ class ZarrConverter:
         global_start: Optional[Any] = None,
         global_end: Optional[Any] = None,
         freq: Optional[str] = None,
-        compute: bool = False
+        compute: bool = False,
+        cycle: Optional[Any] = None
     ) -> None:
         """
         Create a template Zarr archive for parallel writing.
@@ -121,6 +310,7 @@ class ZarrConverter:
             global_end: End time for the full archive
             freq: Frequency for time coordinate (inferred from template if not provided)
             compute: Whether to compute immediately (False for template only)
+            cycle: Cycle information for datamesh
         """
         try:
             # Use config values if not provided
@@ -144,9 +334,12 @@ class ZarrConverter:
             if chunking_dict:
                 archive_ds = archive_ds.chunk(chunking_dict)
             
+            # Get store (could be file path or datamesh client)
+            store = self._get_store(cycle) if self.use_datamesh_zarr_client else output_path
+            
             # Write template (compute=False means metadata only)
             archive_ds.to_zarr(
-                str(output_path), 
+                store, 
                 mode="w", 
                 encoding=encoding, 
                 compute=compute
@@ -154,8 +347,17 @@ class ZarrConverter:
             
             logger.info(f"Created template Zarr archive at {output_path}")
             
+            # Close datamesh session if used
+            self._close_session()
+            
+            # Update datamesh datasource metadata if used
+            if self.use_datamesh_zarr_client:
+                self._update_datamesh_datasource(archive_ds)
+            
         except Exception as e:
             logger.error(f"Template creation failed: {e}")
+            # Close datamesh session if used
+            self._close_session()
             raise ConversionError(f"Failed to create template: {e}") from e
     
     def _chunking_config_to_dict(self) -> Dict[str, int]:
@@ -269,7 +471,8 @@ class ZarrConverter:
         zarr_path: Union[str, Path],
         region: Optional[Dict[str, slice]] = None,
         variables: Optional[list] = None,
-        drop_variables: Optional[list] = None
+        drop_variables: Optional[list] = None,
+        cycle: Optional[Any] = None
     ) -> None:
         """
         Write data to a specific region of an existing Zarr store with retry logic.
@@ -280,18 +483,31 @@ class ZarrConverter:
             region: Dictionary specifying the region to write to
             variables: List of variables to include (None for all)
             drop_variables: List of variables to exclude
+            cycle: Cycle information for datamesh
         """
         try:
             # Reset retry counter for new operation
             self.retried_on_missing = 0
             
+            # Get store (could be file path or datamesh client)
+            store = self._get_store(cycle) if self.use_datamesh_zarr_client else zarr_path
+            
             # Perform the actual write operation with retry logic
             self._write_region_with_retry(
-                input_path, zarr_path, region, variables, drop_variables
+                input_path, store, region, variables, drop_variables
             )
+            
+            # Close datamesh session if used
+            self._close_session()
+            
+            # Update datamesh datasource metadata if used
+            if self.use_datamesh_zarr_client and self._current_dataset is not None:
+                self._update_datamesh_datasource(self._current_dataset)
             
         except Exception as e:
             logger.error(f"Region writing failed: {e}")
+            # Close datamesh session if used
+            self._close_session()
             raise ConversionError(f"Failed to write region: {e}") from e
     
     def _write_region_with_retry(
@@ -480,38 +696,52 @@ class ZarrConverter:
     def convert(
         self,
         input_path: Union[str, Path],
-        output_path: Union[str, Path],
+        output_path: Optional[Union[str, Path]] = None,
         variables: Optional[list] = None,
         drop_variables: Optional[list] = None,
-        attrs: Optional[Dict[str, Any]] = None
+        attrs: Optional[Dict[str, Any]] = None,
+        cycle: Optional[Any] = None
     ) -> None:
         """
         Convert input data to Zarr format with retry logic.
         
         Args:
             input_path: Path to input file
-            output_path: Path to output Zarr store
+            output_path: Path to output Zarr store (optional if using datamesh)
             variables: List of variables to include (None for all)
             drop_variables: List of variables to exclude
             attrs: Additional global attributes to add
+            cycle: Cycle information for datamesh
         """
         try:
             # Reset retry counter for new operation
             self.retried_on_missing = 0
             
+            # Get store (could be file path or datamesh client)
+            store = self._get_store(cycle) if self.use_datamesh_zarr_client else output_path
+            
             # Perform conversion with retry logic
             self._convert_with_retry(
-                input_path, output_path, variables, drop_variables, attrs
+                input_path, store, variables, drop_variables, attrs
             )
+            
+            # Close datamesh session if used
+            self._close_session()
+            
+            # Update datamesh datasource metadata if used
+            if self.use_datamesh_zarr_client and self._current_dataset is not None:
+                self._update_datamesh_datasource(self._current_dataset)
             
         except Exception as e:
             logger.error(f"Conversion failed: {e}")
+            # Close datamesh session if used
+            self._close_session()
             raise ConversionError(f"Failed to convert {input_path} to Zarr: {e}") from e
     
     def _convert_with_retry(
         self,
         input_path: Union[str, Path],
-        output_path: Union[str, Path],
+        store: Union[str, Path, Any],
         variables: Optional[list] = None,
         drop_variables: Optional[list] = None,
         attrs: Optional[Dict[str, Any]] = None
@@ -521,7 +751,7 @@ class ZarrConverter:
         
         Args:
             input_path: Path to input file
-            output_path: Path to output Zarr store
+            store: Path to output Zarr store or datamesh client
             variables: List of variables to include (None for all)
             drop_variables: List of variables to exclude
             attrs: Additional global attributes to add
@@ -548,27 +778,33 @@ class ZarrConverter:
                     ds = ds.chunk(chunking_dict)
                 
                 # Write to Zarr
-                ds.to_zarr(str(output_path), mode="w", encoding=encoding)
+                ds.to_zarr(store, mode="w", encoding=encoding)
                 
-                logger.info(f"Successfully converted {input_path} to {output_path}")
+                logger.info(f"Successfully converted {input_path} to store")
                 
                 # Check for missing data if configured
-                if self.config.missing_data.missing_check_vars and self._has_missing(output_path, ds):
-                    logger.info("Missing data detected - rewriting")
-                    if self.retried_on_missing < max_retries:
-                        self.retried_on_missing += 1
-                        logger.info(f"Retry {self.retried_on_missing}/{max_retries}")
-                        # Wait a bit before retry to allow system to stabilize
-                        time.sleep(0.1 * self.retried_on_missing)
-                        continue
-                    else:
-                        raise RetryLimitExceededError(
-                            f"Missing data present, retry limit exceeded after "
-                            f"{self.retried_on_missing} retries"
-                        )
-                else:
-                    # Success - no missing data or missing data check disabled
-                    break
+                # For datamesh, we need to check differently
+                if self.config.missing_data.missing_check_vars:
+                    if self.use_datamesh_zarr_client:
+                        # For datamesh, we'll skip the missing data check for now
+                        # A more sophisticated implementation would check the written data
+                        logger.info("Skipping missing data check for datamesh store")
+                    elif self._has_missing(store, ds):
+                        logger.info("Missing data detected - rewriting")
+                        if self.retried_on_missing < max_retries:
+                            self.retried_on_missing += 1
+                            logger.info(f"Retry {self.retried_on_missing}/{max_retries}")
+                            # Wait a bit before retry to allow system to stabilize
+                            time.sleep(0.1 * self.retried_on_missing)
+                            continue
+                        else:
+                            raise RetryLimitExceededError(
+                                f"Missing data present, retry limit exceeded after "
+                                f"{self.retried_on_missing} retries"
+                            )
+                
+                # Success - no missing data or missing data check disabled
+                break
                     
             except RetryLimitExceededError:
                 raise
@@ -608,8 +844,17 @@ class ZarrConverter:
                 input_path, zarr_path, variables, drop_variables
             )
             
+            # Close datamesh session if used
+            self._close_session()
+            
+            # Update datamesh datasource metadata if used
+            if self.use_datamesh_zarr_client and self._current_dataset is not None:
+                self._update_datamesh_datasource(self._current_dataset)
+            
         except Exception as e:
             logger.error(f"Append failed: {e}")
+            # Close datamesh session if used
+            self._close_session()
             raise ConversionError(f"Failed to append {input_path} to {zarr_path}: {e}") from e
     
     def _append_with_retry(
@@ -779,7 +1024,7 @@ class ZarrConverter:
 # Convenience functions
 def convert_to_zarr(
     input_path: Union[str, Path],
-    output_path: Union[str, Path],
+    output_path: Optional[Union[str, Path]] = None,
     chunking: Optional[Dict[str, int]] = None,
     compression: Optional[str] = None,
     packing: bool = False,
@@ -789,14 +1034,17 @@ def convert_to_zarr(
     attrs: Optional[Dict[str, Any]] = None,
     time_dim: str = "time",
     retries_on_missing: int = 0,
-    missing_check_vars: Optional[Union[str, List[str]]] = "all"
+    missing_check_vars: Optional[Union[str, List[str]]] = "all",
+    datamesh_datasource: Optional[Dict[str, Any]] = None,
+    datamesh_token: Optional[str] = None,
+    datamesh_service: str = "https://datamesh-v1.oceanum.io"
 ) -> None:
     """
     Convert data to Zarr format using default settings with retry logic.
     
     Args:
         input_path: Path to input file
-        output_path: Path to output Zarr store
+        output_path: Path to output Zarr store (optional if using datamesh)
         chunking: Dictionary specifying chunk sizes for dimensions
         compression: Compression specification
         packing: Whether to enable data packing
@@ -807,6 +1055,9 @@ def convert_to_zarr(
         time_dim: Name of the time dimension
         retries_on_missing: Number of retries if missing values are encountered
         missing_check_vars: Data variables to check for missing values
+        datamesh_datasource: Datamesh datasource configuration
+        datamesh_token: Datamesh token for authentication
+        datamesh_service: Datamesh service URL
     """
     # Create config from parameters
     config_dict = {}
@@ -823,6 +1074,12 @@ def convert_to_zarr(
             'retries_on_missing': retries_on_missing,
             'missing_check_vars': missing_check_vars
         }
+    if datamesh_datasource:
+        config_dict['datamesh'] = {
+            'datasource': datamesh_datasource,
+            'token': datamesh_token,
+            'service': datamesh_service
+        }
     
     config = ZarrConverterConfig(**config_dict)
     converter = ZarrConverter(config=config)
@@ -838,7 +1095,10 @@ def append_to_zarr(
     append_dim: str = "time",
     time_dim: str = "time",
     retries_on_missing: int = 0,
-    missing_check_vars: Optional[Union[str, List[str]]] = "all"
+    missing_check_vars: Optional[Union[str, List[str]]] = "all",
+    datamesh_datasource: Optional[Dict[str, Any]] = None,
+    datamesh_token: Optional[str] = None,
+    datamesh_service: str = "https://datamesh-v1.oceanum.io"
 ) -> None:
     """
     Append data to an existing Zarr store with retry logic.
@@ -853,6 +1113,9 @@ def append_to_zarr(
         time_dim: Name of the time dimension
         retries_on_missing: Number of retries if missing values are encountered
         missing_check_vars: Data variables to check for missing values
+        datamesh_datasource: Datamesh datasource configuration
+        datamesh_token: Datamesh token for authentication
+        datamesh_service: Datamesh service URL
     """
     # Create config from parameters
     config_dict = {}
@@ -864,6 +1127,12 @@ def append_to_zarr(
         config_dict['missing_data'] = {
             'retries_on_missing': retries_on_missing,
             'missing_check_vars': missing_check_vars
+        }
+    if datamesh_datasource:
+        config_dict['datamesh'] = {
+            'datasource': datamesh_datasource,
+            'token': datamesh_token,
+            'service': datamesh_service
         }
     
     config = ZarrConverterConfig(**config_dict)

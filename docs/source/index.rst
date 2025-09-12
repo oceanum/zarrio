@@ -360,6 +360,7 @@ Examples
    cli
    chunking
    parallel
+   datamesh
 
 Additional Information
 ----------------------

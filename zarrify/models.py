@@ -92,6 +92,44 @@ class MissingDataConfig(BaseModel):
         return v
 
 
+class DatameshDatasource(BaseModel):
+    """Configuration for datamesh datasource.
+    
+    Note:
+    - When writing using the zarr client, the driver should remain "vzarr".
+    - When writing using the xarray API, the driver should be "zarr".
+    - All the Datasource fields that are set will be updated in datamesh, even if None.
+    - The schema, geometry and the time range will be updated from the dataset if not
+      set. In order to avoid this, set them explicitly.
+    """
+    id: str = Field(..., description="Datamesh datasource ID")
+    name: Optional[str] = Field(None, description="Human-readable name for the datasource")
+    description: Optional[str] = Field(None, description="Description of the datasource")
+    coordinates: Optional[Dict[str, str]] = Field(None, description="Coordinate mapping (e.g., {'x': 'longitude', 'y': 'latitude', 't': 'time'})")
+    details: Optional[str] = Field(None, description="URL with more details about the datasource")
+    tags: Optional[List[str]] = Field(None, description="Tags associated with the datasource")
+    driver: str = Field(
+        default="vzarr",
+        description="Driver to use for datamesh datasource",
+    )
+    
+    # Additional fields that can be set explicitly to override auto-detection
+    dataschema: Optional[Dict[str, Any]] = Field(None, description="Explicit schema for the datasource")
+    geometry: Optional[Dict[str, Any]] = Field(None, description="Explicit geometry for the datasource")
+    tstart: Optional[Union[str, datetime]] = Field(None, description="Explicit start time for the datasource")
+    tend: Optional[Union[str, datetime]] = Field(None, description="Explicit end time for the datasource")
+    
+    model_config = ConfigDict(extra="allow")
+
+
+class DatameshConfig(BaseModel):
+    """Configuration for datamesh integration."""
+    datasource: Optional[Union[DatameshDatasource, Dict[str, Any]]] = Field(None, description="Datamesh datasource configuration")
+    token: Optional[str] = Field(None, description="Datamesh token for authentication")
+    service: str = Field("https://datamesh-v1.oceanum.io", description="Datamesh service URL")
+    use_zarr_client: bool = Field(True, description="Whether to use the datamesh zarr client for writing")
+
+
 class ZarrConverterConfig(BaseModel):
     """Main configuration for ZarrConverter."""
     chunking: ChunkingConfig = Field(default_factory=ChunkingConfig, description="Chunking configuration")
@@ -100,6 +138,7 @@ class ZarrConverterConfig(BaseModel):
     time: TimeConfig = Field(default_factory=TimeConfig, description="Time configuration")
     variables: VariableConfig = Field(default_factory=VariableConfig, description="Variable configuration")
     missing_data: MissingDataConfig = Field(default_factory=MissingDataConfig, description="Missing data configuration")
+    datamesh: Optional[DatameshConfig] = Field(None, description="Datamesh integration configuration")
     attrs: Dict[str, Any] = Field(default_factory=dict, description="Additional global attributes")
     
     # Backward compatibility fields
@@ -123,6 +162,13 @@ class ZarrConverterConfig(BaseModel):
             raise ValueError("`missing_check_vars` must be one of 'all', None or a list of data vars")
         if isinstance(v, str) and v != "all":
             raise ValueError("`missing_check_vars` as string must be 'all'")
+        return v
+    
+    @field_validator('datamesh')
+    @classmethod
+    def validate_datamesh(cls, v: Optional[DatameshConfig]) -> Optional[DatameshConfig]:
+        if v is not None and isinstance(v.datasource, dict):
+            v.datasource = DatameshDatasource(**v.datasource)
         return v
     
     @classmethod

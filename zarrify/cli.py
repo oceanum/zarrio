@@ -71,6 +71,15 @@ def convert_command(args: argparse.Namespace) -> None:
     if args.attrs:
         config_dict['attrs'] = json.loads(args.attrs)
     
+    # Add datamesh config if provided
+    if args.datamesh_datasource:
+        config_dict.setdefault('datamesh', {})
+        config_dict['datamesh']['datasource'] = json.loads(args.datamesh_datasource)
+        if args.datamesh_token:
+            config_dict['datamesh']['token'] = args.datamesh_token
+        if args.datamesh_service:
+            config_dict['datamesh']['service'] = args.datamesh_service
+    
     # Create converter with config
     converter_config = ZarrConverterConfig(**config_dict)
     converter = ZarrConverter(config=converter_config)
@@ -111,6 +120,15 @@ def append_command(args: argparse.Namespace) -> None:
         config_dict.setdefault('time', {})['append_dim'] = args.append_dim
     if args.time_dim:
         config_dict.setdefault('time', {})['dim'] = args.time_dim
+    
+    # Add datamesh config if provided
+    if args.datamesh_datasource:
+        config_dict.setdefault('datamesh', {})
+        config_dict['datamesh']['datasource'] = json.loads(args.datamesh_datasource)
+        if args.datamesh_token:
+            config_dict['datamesh']['token'] = args.datamesh_token
+        if args.datamesh_service:
+            config_dict['datamesh']['service'] = args.datamesh_service
     
     # Create converter with config
     converter_config = ZarrConverterConfig(**config_dict)
@@ -157,6 +175,15 @@ def create_template_command(args: argparse.Namespace) -> None:
     if args.time_dim:
         config_dict.setdefault('time', {})['dim'] = args.time_dim
     
+    # Add datamesh config if provided
+    if args.datamesh_datasource:
+        config_dict.setdefault('datamesh', {})
+        config_dict['datamesh']['datasource'] = json.loads(args.datamesh_datasource)
+        if args.datamesh_token:
+            config_dict['datamesh']['token'] = args.datamesh_token
+        if args.datamesh_service:
+            config_dict['datamesh']['service'] = args.datamesh_service
+    
     # Create converter with config
     converter_config = ZarrConverterConfig(**config_dict)
     converter = ZarrConverter(config=converter_config)
@@ -196,6 +223,15 @@ def write_region_command(args: argparse.Namespace) -> None:
         config_dict.setdefault('chunking', {}).update(chunking)
     if args.time_dim:
         config_dict.setdefault('time', {})['dim'] = args.time_dim
+    
+    # Add datamesh config if provided
+    if args.datamesh_datasource:
+        config_dict.setdefault('datamesh', {})
+        config_dict['datamesh']['datasource'] = json.loads(args.datamesh_datasource)
+        if args.datamesh_token:
+            config_dict['datamesh']['token'] = args.datamesh_token
+        if args.datamesh_service:
+            config_dict['datamesh']['service'] = args.datamesh_service
     
     # Create converter with config
     converter_config = ZarrConverterConfig(**config_dict)
@@ -253,6 +289,9 @@ examples:
   
   # Append to existing Zarr store
   zarrify append new_data.nc existing.zarr
+  
+  # Convert to datamesh datasource
+  zarrify convert input.nc --datamesh-datasource '{"id":"my_datasource","name":"My Data","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' --datamesh-token $DATAMESH_TOKEN
         """
     )
     
@@ -313,6 +352,19 @@ examples:
         help="Name of time dimension (default: time)"
     )
     convert_parser.add_argument(
+        "--datamesh-datasource",
+        help="Datamesh datasource configuration as JSON string"
+    )
+    convert_parser.add_argument(
+        "--datamesh-token",
+        help="Datamesh token for authentication"
+    )
+    convert_parser.add_argument(
+        "--datamesh-service",
+        default="https://datamesh-v1.oceanum.io",
+        help="Datamesh service URL"
+    )
+    convert_parser.add_argument(
         "--config",
         help="Configuration file (YAML or JSON)"
     )
@@ -343,6 +395,19 @@ examples:
         "--time-dim",
         default="time",
         help="Name of time dimension (default: time)"
+    )
+    append_parser.add_argument(
+        "--datamesh-datasource",
+        help="Datamesh datasource configuration as JSON string"
+    )
+    append_parser.add_argument(
+        "--datamesh-token",
+        help="Datamesh token for authentication"
+    )
+    append_parser.add_argument(
+        "--datamesh-service",
+        default="https://datamesh-v1.oceanum.io",
+        help="Datamesh service URL"
     )
     append_parser.add_argument(
         "--config",
@@ -397,6 +462,19 @@ examples:
         help="Name of time dimension (default: time)"
     )
     template_parser.add_argument(
+        "--datamesh-datasource",
+        help="Datamesh datasource configuration as JSON string"
+    )
+    template_parser.add_argument(
+        "--datamesh-token",
+        help="Datamesh token for authentication"
+    )
+    template_parser.add_argument(
+        "--datamesh-service",
+        default="https://datamesh-v1.oceanum.io",
+        help="Datamesh service URL"
+    )
+    template_parser.add_argument(
         "--config",
         help="Configuration file (YAML or JSON)"
     )
@@ -426,6 +504,19 @@ examples:
         "--time-dim",
         default="time",
         help="Name of time dimension (default: time)"
+    )
+    region_parser.add_argument(
+        "--datamesh-datasource",
+        help="Datamesh datasource configuration as JSON string"
+    )
+    region_parser.add_argument(
+        "--datamesh-token",
+        help="Datamesh token for authentication"
+    )
+    region_parser.add_argument(
+        "--datamesh-service",
+        default="https://datamesh-v1.oceanum.io",
+        help="Datamesh service URL"
     )
     region_parser.add_argument(
         "--config",

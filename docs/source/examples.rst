@@ -543,3 +543,102 @@ The logs will show:
 - I/O operations
 - Performance metrics
 - Error details
+
+Datamesh Integration
+--------------------
+
+zarrify supports integration with Oceanum's Datamesh platform:
+
+.. code-block:: python
+
+    from zarrify import ZarrConverter, ZarrConverterConfig
+
+    # Configure for datamesh
+    config = ZarrConverterConfig(
+        datamesh={
+            "datasource": {
+                "id": "my_climate_data",
+                "name": "My Climate Data",
+                "description": "Climate data converted with zarrify",
+                "coordinates": {"x": "lon", "y": "lat", "t": "time"},
+                "details": "https://example.com",
+                "tags": ["climate", "zarrify", "datamesh"],
+            },
+            "token": "your_datamesh_token",
+            "service": "https://datamesh-v1.oceanum.io",
+        },
+        chunking={"time": 100, "lat": 50, "lon": 100},
+        compression={"method": "blosc:zstd:3"},
+    )
+
+    # Create converter
+    converter = ZarrConverter(config=config)
+
+    # Convert data directly to datamesh (no output_path needed)
+    converter.convert("input.nc")
+
+CLI Datamesh Integration
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the CLI with datamesh:
+
+.. code-block:: bash
+
+    # Convert to datamesh datasource
+    zarrify convert input.nc \
+      --datamesh-datasource '{"id":"my_climate_data","name":"My Climate Data","coordinates":{"x":"lon","y":"lat","t":"time"}}' \
+      --datamesh-token $DATAMESH_TOKEN
+
+    # Create template for parallel writing
+    zarrify create-template template.nc \
+      --datamesh-datasource '{"id":"my_climate_data","name":"My Climate Data","coordinates":{"x":"lon","y":"lat","t":"time"}}' \
+      --datamesh-token $DATAMESH_TOKEN \
+      --global-start 2023-01-01 \
+      --global-end 2023-12-31
+
+    # Write region to datamesh datasource
+    zarrify write-region data.nc \
+      --datamesh-datasource '{"id":"my_climate_data","name":"My Climate Data","coordinates":{"x":"lon","y":"lat","t":"time"}}' \
+      --datamesh-token $DATAMESH_TOKEN
+
+Configuration File with Datamesh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use YAML configuration with datamesh:
+
+.. code-block:: yaml
+
+    # config.yaml
+    chunking:
+      time: 100
+      lat: 50
+      lon: 100
+    compression:
+      method: blosc:zstd:3
+    datamesh:
+      datasource:
+        id: my_climate_data
+        name: My Climate Data
+        description: Climate data converted with zarrify
+        coordinates:
+          x: lon
+          y: lat
+          t: time
+        details: https://example.com
+        tags:
+          - climate
+          - zarrify
+          - datamesh
+      token: your_datamesh_token
+      service: https://datamesh-v1.oceanum.io
+
+.. code-block:: python
+
+    # Load from YAML file
+    converter = ZarrConverter.from_config_file("config.yaml")
+    converter.convert("input.nc")
+
+.. code-block:: bash
+
+    # Use with CLI
+    zarrify convert input.nc --config config.yaml
