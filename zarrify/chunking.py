@@ -123,15 +123,32 @@ class ChunkAnalyzer:
             time_chunk = min(100, max(10, time_size // 10))  # 10% of time steps
             chunks[time_dim] = time_chunk
             
-            # Smaller spatial chunks
-            for dim, size in dimensions.items():
-                if dim != time_dim:
-                    # Aim for chunks of ~50MB
-                    target_elements = int(
-                        self.TARGET_CHUNK_SIZE_MB * (1024**2) // dtype_size_bytes
-                    )
-                    spatial_chunk = min(50, max(10, int(math.sqrt(target_elements / time_chunk))))
-                    chunks[dim] = min(spatial_chunk, size)
+            # Calculate spatial chunks to achieve target chunk size
+            # For N spatial dimensions, we want: time_chunk * spatial_chunk^N * dtype_size_bytes ≈ target_elements
+            target_elements = int(
+                self.TARGET_CHUNK_SIZE_MB * (1024**2) // dtype_size_bytes
+            )
+            
+            # Count spatial dimensions
+            spatial_dims = [dim for dim in dimensions.keys() if dim != time_dim]
+            num_spatial_dims = len(spatial_dims)
+            
+            if num_spatial_dims > 0:
+                # Calculate spatial chunk size to achieve target
+                spatial_elements_per_dim = target_elements / time_chunk
+                spatial_chunk_per_dim = int(spatial_elements_per_dim ** (1/num_spatial_dims))
+                
+                # Apply spatial chunks, but respect dimension limits
+                for dim in spatial_dims:
+                    size = dimensions[dim]
+                    # Use the smaller of calculated chunk or dimension size
+                    spatial_chunk = min(spatial_chunk_per_dim, size)
+                    # Ensure minimum chunk size
+                    spatial_chunk = max(10, spatial_chunk)
+                    chunks[dim] = spatial_chunk
+            else:
+                # No spatial dimensions
+                pass
         else:
             # No time dimension, distribute evenly
             chunks = self._even_chunk_distribution(dimensions, dtype_size_bytes)
@@ -154,15 +171,32 @@ class ChunkAnalyzer:
             time_chunk = min(20, max(5, time_size // 50))  # 2% of time steps
             chunks[time_dim] = time_chunk
             
-            # Larger spatial chunks
-            for dim, size in dimensions.items():
-                if dim != time_dim:
-                    # Aim for chunks of ~50MB
-                    target_elements = int(
-                        self.TARGET_CHUNK_SIZE_MB * (1024**2) // dtype_size_bytes
-                    )
-                    spatial_chunk = min(100, max(20, int(math.sqrt(target_elements / time_chunk))))
-                    chunks[dim] = min(spatial_chunk, size)
+            # Calculate spatial chunks to achieve target chunk size
+            # For N spatial dimensions, we want: time_chunk * spatial_chunk^N * dtype_size_bytes ≈ target_elements
+            target_elements = int(
+                self.TARGET_CHUNK_SIZE_MB * (1024**2) // dtype_size_bytes
+            )
+            
+            # Count spatial dimensions
+            spatial_dims = [dim for dim in dimensions.keys() if dim != time_dim]
+            num_spatial_dims = len(spatial_dims)
+            
+            if num_spatial_dims > 0:
+                # Calculate spatial chunk size to achieve target
+                spatial_elements_per_dim = target_elements / time_chunk
+                spatial_chunk_per_dim = int(spatial_elements_per_dim ** (1/num_spatial_dims))
+                
+                # Apply spatial chunks with larger minimum sizes for spatial access
+                for dim in spatial_dims:
+                    size = dimensions[dim]
+                    # Use the smaller of calculated chunk or dimension size
+                    spatial_chunk = min(spatial_chunk_per_dim, size)
+                    # Ensure larger minimum chunk size for spatial access
+                    spatial_chunk = max(50, spatial_chunk)
+                    chunks[dim] = spatial_chunk
+            else:
+                # No spatial dimensions
+                pass
         else:
             # No time dimension, favor larger spatial chunks
             chunks = self._even_chunk_distribution(dimensions, dtype_size_bytes, large_chunks=True)
@@ -185,15 +219,32 @@ class ChunkAnalyzer:
             time_chunk = min(50, max(10, time_size // 20))  # 5% of time steps
             chunks[time_dim] = time_chunk
             
-            # Moderate spatial chunks
-            for dim, size in dimensions.items():
-                if dim != time_dim:
-                    # Aim for chunks of ~50MB
-                    target_elements = int(
-                        self.TARGET_CHUNK_SIZE_MB * (1024**2) // dtype_size_bytes
-                    )
-                    spatial_chunk = min(50, max(20, int(math.sqrt(target_elements / time_chunk))))
-                    chunks[dim] = min(spatial_chunk, size)
+            # Calculate spatial chunks to achieve target chunk size
+            # For N spatial dimensions, we want: time_chunk * spatial_chunk^N * dtype_size_bytes ≈ target_elements
+            target_elements = int(
+                self.TARGET_CHUNK_SIZE_MB * (1024**2) // dtype_size_bytes
+            )
+            
+            # Count spatial dimensions
+            spatial_dims = [dim for dim in dimensions.keys() if dim != time_dim]
+            num_spatial_dims = len(spatial_dims)
+            
+            if num_spatial_dims > 0:
+                # Calculate spatial chunk size to achieve target
+                spatial_elements_per_dim = target_elements / time_chunk
+                spatial_chunk_per_dim = int(spatial_elements_per_dim ** (1/num_spatial_dims))
+                
+                # Apply spatial chunks with moderate minimum sizes for balanced access
+                for dim in spatial_dims:
+                    size = dimensions[dim]
+                    # Use the smaller of calculated chunk or dimension size
+                    spatial_chunk = min(spatial_chunk_per_dim, size)
+                    # Ensure moderate minimum chunk size for balanced access
+                    spatial_chunk = max(30, spatial_chunk)
+                    chunks[dim] = spatial_chunk
+            else:
+                # No spatial dimensions
+                pass
         else:
             # No time dimension, moderate chunk sizes
             chunks = self._even_chunk_distribution(dimensions, dtype_size_bytes)
