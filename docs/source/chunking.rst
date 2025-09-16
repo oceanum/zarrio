@@ -1,7 +1,7 @@
 Chunking Strategies
 ====================
 
-zarrify provides intelligent chunking analysis and recommendations to optimize performance for different access patterns.
+zarrify provides intelligent chunking analysis and recommendations to optimize performance for different access patterns. This document explains both the conceptual approach and detailed mathematical calculations used for each access pattern.
 
 Understanding Chunking
 ------------------------
@@ -72,18 +72,7 @@ Configuration Methods:
 Intelligent Chunking Analysis
 -------------------------------
 
-zarrify automatically analyzes your dataset and provides chunking recommendations based on expected access patterns:
-
-.. code-block:: python
-
-    from zarrify import convert_to_zarr
-
-    # No chunking specified - automatic analysis
-    convert_to_zarr(
-        "climate_data.nc",
-        "climate_data.zarr",
-        access_pattern="balanced"  # Optimize for mixed workloads
-    )
+zarrify automatically analyzes your dataset and provides chunking recommendations based on expected access patterns. The system performs detailed mathematical calculations to optimize chunk sizes for your specific data characteristics.
 
 The system analyzes:
 - Dataset dimensions and sizes
@@ -91,10 +80,12 @@ The system analyzes:
 - Expected access patterns
 - Storage characteristics
 
+Detailed calculations for each access pattern are explained in the Access Pattern Optimization section below.
+
 Access Pattern Optimization
 ----------------------------
 
-Different access patterns require different chunking strategies:
+Different access patterns require different chunking strategies. The calculations for each pattern are detailed below:
 
 Temporal Analysis
 ~~~~~~~~~~~~~~~~~~
@@ -121,6 +112,33 @@ Benefits:
 - Efficient access to temporal data
 - Good compression for time-aligned data
 
+How it works:
+- Calculates large time chunks (~10% of total time steps, capped at 100)
+- Distributes remaining space across spatial dimensions with a minimum of 10 elements per dimension
+- Optimizes for extracting long time series at specific locations
+
+Detailed Calculation:
+The temporal focus algorithm uses the following mathematical approach:
+
+1. **Time Chunk Calculation**:
+   ``time_chunk = min(100, max(10, time_dimension_size // 10))``
+
+2. **Spatial Chunk Calculation**:
+   ``target_elements = (target_chunk_size_mb * 1024²) / dtype_size_bytes``
+   ``spatial_elements_per_dim = target_elements / time_chunk``
+   ``spatial_chunk_per_dim = (spatial_elements_per_dim)^(1/num_spatial_dims)``
+   ``spatial_chunk = max(10, min(spatial_chunk_per_dim, spatial_dimension_size))``
+
+Example:
+For a dataset with 1000 time steps, 180 lat points, 360 lon points:
+- time_chunk = min(100, max(10, 1000//10)) = 100
+- spatial_elements_per_dim = (50 * 1024² / 4) / 100 = 131,072
+- spatial_chunk_per_dim = √131,072 ≈ 362
+- lat_chunk = min(362, 180) = 180
+- lon_chunk = min(362, 360) = 360
+
+Result: time=100, lat=180, lon=360 chunks
+
 Spatial Analysis
 ~~~~~~~~~~~~~~~~~~~
 
@@ -146,6 +164,33 @@ Benefits:
 - Better cache locality for spatial operations
 - Optimized for map generation
 
+How it works:
+- Calculates small time chunks (~2% of total time steps, capped at 20)
+- Distributes remaining space across spatial dimensions with a minimum of 50 elements per dimension
+- Optimizes for extracting spatial maps at specific time steps
+
+Detailed Calculation:
+The spatial focus algorithm uses the following mathematical approach:
+
+1. **Time Chunk Calculation**:
+   ``time_chunk = min(20, max(5, time_dimension_size // 50))``
+
+2. **Spatial Chunk Calculation**:
+   ``target_elements = (target_chunk_size_mb * 1024²) / dtype_size_bytes``
+   ``spatial_elements_per_dim = target_elements / time_chunk``
+   ``spatial_chunk_per_dim = (spatial_elements_per_dim)^(1/num_spatial_dims)``
+   ``spatial_chunk = max(50, min(spatial_chunk_per_dim, spatial_dimension_size))``
+
+Example:
+For a dataset with 365 time steps, 720 lat points, 1440 lon points:
+- time_chunk = min(20, max(5, 365//50)) = min(20, 7) = 7
+- spatial_elements_per_dim = (50 * 1024² / 4) / 7 = 1,872,457
+- spatial_chunk_per_dim = √1,872,457 ≈ 1,368
+- lat_chunk = min(1,368, 720) = 720
+- lon_chunk = min(1,368, 1440) = 1,368
+
+Result: time=7, lat=720, lon=1368 chunks
+
 Balanced Approach
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -170,6 +215,78 @@ Benefits:
 - Reasonable performance for diverse access patterns
 - Good compromise between temporal and spatial access
 - Suitable for exploratory analysis
+
+How it works:
+- Calculates moderate time chunks (~5% of total time steps, capped at 50)
+- Distributes remaining space across spatial dimensions with a minimum of 30 elements per dimension
+- Provides a balanced approach for mixed access patterns
+
+Detailed Calculation:
+The balanced approach algorithm uses the following mathematical approach:
+
+1. **Time Chunk Calculation**:
+   ``time_chunk = min(50, max(10, time_dimension_size // 20))``
+
+2. **Spatial Chunk Calculation**:
+   ``target_elements = (target_chunk_size_mb * 1024²) / dtype_size_bytes``
+   ``spatial_elements_per_dim = target_elements / time_chunk``
+   ``spatial_chunk_per_dim = (spatial_elements_per_dim)^(1/num_spatial_dims)``
+   ``spatial_chunk = max(30, min(spatial_chunk_per_dim, spatial_dimension_size))``
+
+Example:
+For a dataset with 1825 time steps, 360 lat points, 720 lon points:
+- time_chunk = min(50, max(10, 1825//20)) = min(50, 91) = 50
+- spatial_elements_per_dim = (50 * 1024² / 4) / 50 = 262,144
+- spatial_chunk_per_dim = √262,144 ≈ 512
+- lat_chunk = min(512, 360) = 360
+- lon_chunk = min(512, 720) = 512
+
+Result: time=50, lat=360, lon=512 chunks
+
+Special Cases
+~~~~~~~~~~~~~
+
+No Time Dimension:
+When no time dimension is detected, the system distributes chunks evenly across all dimensions:
+``elements_per_dim = (target_elements)^(1/num_dimensions)``
+``chunk_size = min(50, max(10, elements_per_dim))`` for balanced/normal access
+``chunk_size = min(100, max(30, elements_per_dim))`` for spatial focus
+
+Single Dimension:
+For single-dimensional datasets, the system creates chunks of approximately the target size:
+``chunk_size = min(target_elements, dimension_size)``
+
+Validation Rules
+~~~~~~~~~~~~~~~~
+
+The system validates all chunking recommendations and flags issues:
+
+1. **Small Chunk Warning**: Chunks < 1 MB may cause metadata overhead
+2. **Large Chunk Warning**: Chunks > 100 MB may cause memory issues
+3. **Dimension Mismatch**: Chunk sizes larger than dimensions are clipped
+4. **Inefficient Chunking**: Very small chunks in large dimensions trigger recommendations
+
+Configuration Options
+~~~~~~~~~~~~~~~~~~~~~
+
+Target Chunk Size:
+You can configure the target chunk size in multiple ways:
+
+1. **Function Parameter**:
+   ``get_chunk_recommendation(..., target_chunk_size_mb=100)``
+
+2. **Environment Variable**:
+   ``ZARRIFY_TARGET_CHUNK_SIZE_MB=200``
+
+3. **ZarrConverter Configuration**:
+   .. code-block:: python
+   
+       config = ZarrConverterConfig(target_chunk_size_mb=100)
+
+Environment-Specific Recommendations:
+- **Local development**: 10-25 MB chunks
+- **Production servers**: 50-100 MB chunks
+- **Cloud environments**: 100-200 MB chunks
 
 Chunking Recommendations by Resolution
 ---------------------------------------
@@ -425,3 +542,35 @@ This will provide detailed information about:
 - Memory usage estimates
 - Compression effectiveness
 - Performance recommendations
+
+Practical Examples by Resolution
+--------------------------------
+
+The following examples show how the chunking calculations work with different data resolutions:
+
+Low Resolution (1° or coarser)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For a global daily dataset with 10 years of data at 1° resolution:
+- Dimensions: time=3650, lat=180, lon=360
+- Temporal focus: time=365, lat=180, lon=360
+- Spatial focus: time=73, lat=180, lon=360
+- Balanced: time=183, lat=180, lon=360
+
+Medium Resolution (0.25° to 1°)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For a regional daily dataset with 5 years of data at 0.25° resolution:
+- Dimensions: time=1825, lat=720, lon=1440
+- Temporal focus: time=182, lat=360, lon=720
+- Spatial focus: time=37, lat=720, lon=1440
+- Balanced: time=91, lat=540, lon=1080
+
+High Resolution (0.1° or finer)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For a local hourly dataset with 1 year of data at 0.1° resolution:
+- Dimensions: time=8760, lat=1800, lon=3600
+- Temporal focus: time=100, lat=300, lon=600
+- Spatial focus: time=20, lat=900, lon=1800
+- Balanced: time=50, lat=600, lon=1200

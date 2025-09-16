@@ -301,16 +301,132 @@ Pydantic models automatically validate configurations:
 
 .. code-block:: python
 
-    from zarrify.models import PackingConfig
+    from zarrify.models import ZarrConverterConfig
 
-    # This will raise a validation error
     try:
-        packing = PackingConfig(bits=12)  # Invalid bits value
-    except Exception as e:
-        print(f"Validation error: {e}")
+        config = ZarrConverterConfig(
+            chunking={"time": 1000, "lat": 1, "lon": 1}  # Will generate warnings
+        )
+    except ValidationError as e:
+        print(f"Configuration error: {e}")
 
-    # This is valid
-    packing = PackingConfig(bits=16)  # Valid bits value
+Missing Data Handling Configuration
+-----------------------------------
+
+zarrify provides robust missing data handling through the ``MissingDataConfig`` model:
+
+.. code-block:: python
+
+    from zarrify.models import ZarrConverterConfig, MissingDataConfig
+
+    config = ZarrConverterConfig(
+        missing_data=MissingDataConfig(
+            missing_check_vars="all",      # Check all variables for missing data
+            retries_on_missing=3           # Retry up to 3 times if missing data is detected
+        )
+    )
+
+The ``MissingDataConfig`` supports the following fields:
+
+- **missing_check_vars**: Variables to check for missing values ("all", None, or list of variable names) (default: "all")
+- **retries_on_missing**: Number of retries if missing values are encountered (default: 0, range: 0-10)
+
+Missing Data Detection
+^^^^^^^^^^^^^^^^^^^^^^
+
+The missing data detection system automatically checks for missing data after writing operations by comparing the source dataset with the written Zarr archive. This is particularly useful for detecting transient failures during parallel processing.
+
+Retry Logic
+^^^^^^^^^^^
+
+When missing data is detected and retries are enabled, zarrify automatically retries the operation with exponential backoff:
+
+1. First retry: 0.1 second delay
+2. Second retry: 0.2 second delay
+3. Third retry: 0.3 second delay
+4. And so on...
+
+This approach allows the system to recover from transient issues such as network instability, file system contention, or memory pressure.
+
+Configuration Examples
+^^^^^^^^^^^^^^^^^^^^^^
+
+Check all variables with 2 retries:
+
+.. code-block:: python
+
+    config = ZarrConverterConfig(
+        missing_data=MissingDataConfig(
+            missing_check_vars="all",
+            retries_on_missing=2
+        )
+    )
+
+Check specific variables with 3 retries:
+
+.. code-block:: python
+
+    config = ZarrConverterConfig(
+        missing_data=MissingDataConfig(
+            missing_check_vars=["temperature", "pressure"],
+            retries_on_missing=3
+        )
+    )
+
+Disable missing data checking:
+
+.. code-block:: python
+
+    config = ZarrConverterConfig(
+        missing_data=MissingDataConfig(
+            missing_check_vars=None,
+            retries_on_missing=0
+        )
+    )
+
+YAML Configuration
+^^^^^^^^^^^^^^^^^^
+
+Missing data handling can also be configured in YAML files:
+
+.. code-block:: yaml
+
+    # config.yaml
+    missing_data:
+      missing_check_vars: "all"
+      retries_on_missing: 3
+    chunking:
+      time: 100
+      lat: 50
+      lon: 100
+
+CLI Usage
+^^^^^^^^^
+
+Missing data handling options are available through the CLI:
+
+.. code-block:: bash
+
+    # Convert with retry logic
+    zarrify convert input.nc output.zarr --retries-on-missing 3
+
+    # Append with retry logic
+    zarrify append new_data.nc existing.zarr --retries-on-missing 2
+
+    # Create template with retry logic
+    zarrify create-template template.nc archive.zarr --retries-on-missing 1
+
+    # Write region with retry logic
+    zarrify write-region data.nc archive.zarr --retries-on-missing 2
+
+Best Practices
+^^^^^^^^^^^^^^
+
+1. **Moderate Retries**: Use 2-3 retries for most use cases
+2. **Aggressive Retries**: Increase for very large or unstable environments
+3. **Variable Selection**: Specify ``missing_check_vars`` to focus on critical variables
+4. **Monitoring**: Watch logs for frequent retries which might indicate underlying issues
+5. **Disabled Retries**: Set to 0 for deterministic environments where failures should be immediate errors
 
 Configuration with ZarrConverter
 ---------------------------------

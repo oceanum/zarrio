@@ -241,131 +241,6 @@ def create_template_command(args: argparse.Namespace) -> None:
     logger.info("Template creation completed successfully")
 
 
-def append_command(args: argparse.Namespace) -> None:
-    """Handle append command."""
-    # Parse chunking
-    chunking = parse_chunking(args.chunking)
-
-    # Load config if provided
-    config = None
-    if args.config:
-        config = load_config_from_file(args.config)
-
-    # Override config with command line arguments
-    config_dict = {}
-    if config:
-        config_dict = config.model_dump()
-
-    if chunking:
-        config_dict.setdefault("chunking", {}).update(chunking)
-    if args.append_dim:
-        config_dict.setdefault("time", {})["append_dim"] = args.append_dim
-    if args.time_dim:
-        config_dict.setdefault("time", {})["dim"] = args.time_dim
-    if args.target_chunk_size_mb:
-        config_dict["target_chunk_size_mb"] = args.target_chunk_size_mb
-
-    # Add datamesh config if provided
-    if args.datamesh_datasource:
-        config_dict.setdefault("datamesh", {})
-        config_dict["datamesh"]["datasource"] = json.loads(args.datamesh_datasource)
-        if args.datamesh_token:
-            config_dict["datamesh"]["token"] = args.datamesh_token
-        if args.datamesh_service:
-            config_dict["datamesh"]["service"] = args.datamesh_service
-
-    # Create converter with config
-    converter_config = ZarrConverterConfig(**config_dict)
-    converter = ZarrConverter(config=converter_config)
-
-    # Parse variables
-    variables = args.variables.split(",") if args.variables else None
-    drop_variables = args.drop_variables.split(",") if args.drop_variables else None
-
-    # Perform append
-    converter.append(
-        input_path=args.input,
-        zarr_path=args.zarr,
-        variables=variables,
-        drop_variables=drop_variables,
-    )
-
-    logger.info("Append completed successfully")
-
-
-def create_template_command(args: argparse.Namespace) -> None:
-    """Handle create-template command."""
-    # Parse chunking
-    chunking = parse_chunking(args.chunking)
-
-    # Load config if provided
-    config = None
-    if args.config:
-        config = load_config_from_file(args.config)
-
-    # Override config with command line arguments
-    config_dict = {}
-    if config:
-        config_dict = config.model_dump()
-
-    if chunking:
-        config_dict.setdefault("chunking", {}).update(chunking)
-    if args.compression:
-        config_dict.setdefault("compression", {})["method"] = args.compression
-    if args.packing:
-        config_dict.setdefault("packing", {})["enabled"] = True
-    if args.packing_bits:
-        config_dict.setdefault("packing", {})["bits"] = args.packing_bits
-    if args.packing_manual_ranges:
-        import json
-
-        config_dict.setdefault("packing", {})["manual_ranges"] = json.loads(
-            args.packing_manual_ranges
-        )
-    if args.packing_auto_buffer_factor:
-        config_dict.setdefault("packing", {})[
-            "auto_buffer_factor"
-        ] = args.packing_auto_buffer_factor
-    if not args.packing_check_range_exceeded:
-        config_dict.setdefault("packing", {})["check_range_exceeded"] = False
-    if args.packing_range_exceeded_action:
-        config_dict.setdefault("packing", {})[
-            "range_exceeded_action"
-        ] = args.packing_range_exceeded_action
-    if args.time_dim:
-        config_dict.setdefault("time", {})["dim"] = args.time_dim
-    if args.target_chunk_size_mb:
-        config_dict["target_chunk_size_mb"] = args.target_chunk_size_mb
-
-    # Add datamesh config if provided
-    if args.datamesh_datasource:
-        config_dict.setdefault("datamesh", {})
-        config_dict["datamesh"]["datasource"] = json.loads(args.datamesh_datasource)
-        if args.datamesh_token:
-            config_dict["datamesh"]["token"] = args.datamesh_token
-        if args.datamesh_service:
-            config_dict["datamesh"]["service"] = args.datamesh_service
-
-    # Create converter with config
-    converter_config = ZarrConverterConfig(**config_dict)
-    converter = ZarrConverter(config=converter_config)
-
-    # Open template dataset
-    template_ds = xr.open_dataset(args.template)
-
-    # Create template
-    converter.create_template(
-        template_dataset=template_ds,
-        output_path=args.output,
-        global_start=args.global_start,
-        global_end=args.global_end,
-        freq=args.freq,
-        compute=not args.metadata_only,
-    )
-
-    logger.info("Template creation completed successfully")
-
-
 def write_region_command(args: argparse.Namespace) -> None:
     """Handle write-region command."""
     # Parse chunking
@@ -1095,6 +970,7 @@ examples:
         type=int,
         help="Target chunk size in MB for intelligent chunking (default: 50)",
     )
+    convert_parser.add_argument("--config", help="Configuration file (YAML or JSON)")
     convert_parser.set_defaults(func=convert_command)
 
     # Append command

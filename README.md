@@ -11,7 +11,7 @@ zarrify is a complete rewrite of the original onzarr library with a focus on sim
 - **Simple API**: Clean, intuitive interfaces for common operations
 - **Efficient Conversion**: Fast conversion of NetCDF to Zarr format
 - **Data Packing**: Compress data using fixed-scale offset encoding
-- **Flexible Chunking**: Configurable chunking strategies for optimal performance
+- **Intelligent Chunking**: Automatic chunking recommendations based on access patterns (temporal, spatial, balanced)
 - **Compression**: Support for various compression algorithms
 - **Time Series Handling**: Efficient handling of time-series data
 - **Data Appending**: Append new data to existing Zarr archives

@@ -390,6 +390,18 @@ Usage:
 
     zarrify convert input.nc output.zarr --config config.json
 
+Compression Expectations
+------------------------
+
+When working with scientific datasets, it's important to understand what to expect from compression:
+
+- Compression ratios of 1.0-1.1x are normal for scientific datasets
+- Speed improvements (20-40% faster) are often more valuable than size reductions
+- The primary benefit of compression is reduced I/O time, not file size reduction
+- For significant size reductions, consider using data packing in combination with compression
+
+For more detailed information about compression expectations, see the main documentation.
+
 Analyze Command
 ---------------
 

@@ -338,6 +338,46 @@ Configuration File Support
     converter = ZarrConverter.from_config_file("config.yaml")
     converter.convert("input.nc", "output.zarr")
 
+Compression Expectations for Scientific Data
+--------------------------------------------
+
+When working with scientific datasets like climate or oceanographic data, it's important to understand what to expect from compression:
+
+Why Compression Ratios Are Typically Low
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Scientific data characteristics that affect compression:
+
+1. **High entropy**: Ocean/wave data contains complex, seemingly random patterns
+2. **High precision**: Float32/Float64 values with many significant digits
+3. **Natural variability**: Physical processes create inherently diverse data
+4. **Limited redundancy**: Unlike text or images, scientific data has little repetitive structure
+
+What This Means for Your Data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Compression ratios of 1.0-1.1x are normal for scientific datasets
+- Speed improvements (20-40% faster) are often more valuable than size reductions
+- Focus on selective application rather than blanket compression
+- Real-world testing with your actual workflows provides the best guidance
+
+Best Strategies for Your Data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. **Use 8-bit packing** for size reduction (if precision loss is acceptable)
+2. **Use Blosc compression** for speed improvement
+3. **Combination approaches** for balanced benefits (Packing + Blosc)
+4. **Apply selectively** - pack only certain variables rather than entire dataset
+
+Performance vs. Size Trade-offs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Often, the most valuable benefit is **processing speed improvements** rather than dramatic size reductions. Consider:
+
+- Reduced disk I/O often matters more than file size for performance
+- Compression algorithms speed up I/O operations
+- Focus on chunking strategy - often more impactful than compression
+
 API Reference
 -------------
 
