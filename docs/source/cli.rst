@@ -276,57 +276,11 @@ Create template with automatic range calculation:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr \
-        --global-start 2020-01-01 \
-        --global-end 2023-12-31 \
-        --packing --packing-auto-buffer-factor 0.05
-
-Write-Region Command
---------------------
-
-The `write-region` command writes data to a specific region of an existing Zarr store.
+    zarrify create-template template.nc archive.zarr\n        --global-start 2020-01-01\n        --global-end 2023-12-31\n        --packing --packing-auto-buffer-factor 0.05
 
 .. code-block:: bash
 
-    zarrify write-region [OPTIONS] INPUT ZARR
-
-Options:
-~~~~~~~~
-
-- ``--chunking TEXT``: Chunking specification (e.g., 'time:100,lat:50,lon:100')
-- ``--region TEXT``: Region specification (e.g., 'time=0:100,lat=0:50')
-- ``--variables TEXT``: Comma-separated list of variables to include
-- ``--drop-variables TEXT``: Comma-separated list of variables to exclude
-- ``--time-dim TEXT``: Name of time dimension (default: time)
-- ``--config PATH``: Configuration file (YAML or JSON)
-- ``-v, --verbose``: Increase verbosity (use -v, -vv, or -vvv)
-
-Examples:
-~~~~~~~~~
-
-Write region to existing archive:
-
-.. code-block:: bash
-
-    zarrify write-region data.nc archive.zarr
-
-Write region with variable selection:
-
-.. code-block:: bash
-
-    zarrify write-region data.nc archive.zarr --variables "temperature,pressure"
-
-Write region with chunking:
-
-.. code-block:: bash
-
-    zarrify write-region data.nc archive.zarr --chunking "time:50,lat:25,lon:50"
-
-Write region to specific region:
-
-.. code-block:: bash
-
-    zarrify write-region data.nc archive.zarr --region "time=0:100,lat=0:50"
+    zarrify analyze input.nc --interactive
 
 Parallel Processing Example
 ---------------------------
@@ -435,3 +389,58 @@ Usage:
 .. code-block:: bash
 
     zarrify convert input.nc output.zarr --config config.json
+
+Analyze Command
+---------------
+
+The `analyze` command analyzes NetCDF files and provides optimization recommendations.
+
+.. code-block:: bash
+
+    zarrify analyze [OPTIONS] INPUT
+
+Options:
+~~~~~~~~
+
+- ``--target-chunk-size-mb INTEGER``: Target chunk size in MB for analysis (default: 50)
+- ``--test-performance``: Show theoretical performance benefits
+- ``--run-tests``: Run actual performance tests to measure real-world benefits
+- ``-i, --interactive``: Interactive mode to guide configuration setup
+- ``-v, --verbose``: Increase verbosity (use -v, -vv, or -vvv)
+
+Examples:
+~~~~~~~~~
+
+Analyze a NetCDF file:
+
+.. code-block:: bash
+
+    zarrify analyze input.nc
+
+Analyze with theoretical performance testing:
+
+.. code-block:: bash
+
+    zarrify analyze input.nc --test-performance
+
+Analyze with actual performance testing:
+
+.. code-block:: bash
+
+    zarrify analyze input.nc --run-tests
+
+Analyze with custom target chunk size:
+
+.. code-block:: bash
+
+    zarrify analyze input.nc --target-chunk-size-mb 100
+
+Analyze with interactive configuration setup:
+
+.. code-block:: bash
+
+    zarrify analyze input.nc --interactive
+
+.. code-block:: bash
+
+    zarrify analyze input.nc --interactive

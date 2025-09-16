@@ -45,9 +45,17 @@ zarrify convert input.nc output.zarr --packing --packing-bits 16
 zarrify convert input.nc output.zarr --packing \
     --packing-manual-ranges '{"temperature": {"min": -50, "max": 50}}'
 
-# Convert with automatic range calculation
-zarrify convert input.nc output.zarr --packing \
-    --packing-auto-buffer-factor 0.05
+# Analyze NetCDF file for optimization recommendations
+zarrify analyze input.nc
+
+# Analyze with theoretical performance testing
+zarrify analyze input.nc --test-performance
+
+# Analyze with actual performance testing
+zarrify analyze input.nc --run-tests
+
+# Analyze with interactive configuration setup
+zarrify analyze input.nc --interactive
 
 # Create template for parallel writing
 zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31

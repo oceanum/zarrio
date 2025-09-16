@@ -1,34 +1,10 @@
-# Example configuration file for zarrify
-
-# Chunking strategy
 chunking:
+  dir: 24
+  freq: 31
+  point: 10
   time: 100
-  lat: 50
-  lon: 100
-
-# Compression settings
-compression: "blosc:zstd:3"
-
-# Data packing
-packing: true
-packing_bits: 16
-
-# Variable selection
-variables:
-  - temperature
-  - pressure
-  - humidity
-
-drop_variables:
-  - unused_var1
-  - unused_var2
-
-# Time dimension
-time_dim: "time"
-append_dim: "time"
-
-# Additional attributes to add
-attrs:
-  institution: "Oceanum"
-  source: "zarrify conversion"
-  history: "Converted from NetCDF to Zarr using zarrify"
+compression:
+  method: blosc:zstd:1
+packing:
+  bits: 16
+  enabled: true

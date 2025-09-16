@@ -360,6 +360,7 @@ Examples
    cli
    chunking
    packing
+   analysis
    parallel
    datamesh
 
