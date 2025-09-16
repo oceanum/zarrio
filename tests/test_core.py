@@ -221,17 +221,36 @@ def test_append_to_zarr():
 def test_converter_with_packing():
     """Test ZarrConverter with data packing."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        # Create test data
+        # Create test data with valid range attributes for packing
         ncfile = os.path.join(tmpdir, "test.nc")
         zarrfile = os.path.join(tmpdir, "test.zarr")
-        create_test_dataset(ncfile)
+        
+        # Create test data directly with valid range attributes
+        import numpy as np
+        import pandas as pd
+        import xarray as xr
+        
+        # Create test data
+        data = np.random.random([5, 3, 4])
+        ds = xr.Dataset(
+            {
+                "temperature": (("time", "lat", "lon"), data),
+                "pressure": (("time", "lat", "lon"), data * 1000),
+            },
+            coords={
+                "time": pd.date_range("2000-01-01", periods=5),
+                "lat": [-10, 0, 10],
+                "lon": [20, 30, 40, 50],
+            },
+        )
         
         # Add valid range attributes for packing
-        ds = xr.open_dataset(ncfile)
         ds["temperature"].attrs["valid_min"] = 0.0
         ds["temperature"].attrs["valid_max"] = 1.0
         ds["pressure"].attrs["valid_min"] = 0.0
         ds["pressure"].attrs["valid_max"] = 1000.0
+        
+        # Save to NetCDF
         ds.to_netcdf(ncfile)
         
         # Convert with packing
