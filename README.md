@@ -11,11 +11,11 @@ zarrify is a complete rewrite of the original onzarr library with a focus on sim
 - **Simple API**: Clean, intuitive interfaces for common operations
 - **Efficient Conversion**: Fast conversion of NetCDF to Zarr format
 - **Data Packing**: Compress data using fixed-scale offset encoding
-- **Intelligent Chunking**: Automatic chunking recommendations based on access patterns (temporal, spatial, balanced)
+- **Intelligent Chunking**: Automatic chunking recommendations based on access patterns (temporal, spatial, balanced) with intelligent chunking for parallel archives
 - **Compression**: Support for various compression algorithms
 - **Time Series Handling**: Efficient handling of time-series data
 - **Data Appending**: Append new data to existing Zarr archives
-- **Parallel Writing**: Create template archives and write regions in parallel
+- **Parallel Writing**: Create template archives and write regions in parallel with intelligent chunking
 - **Metadata Preservation**: Maintain dataset metadata during conversion
 
 ## Installation
@@ -59,6 +59,9 @@ zarrify analyze input.nc --interactive
 
 # Create template for parallel writing
 zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31
+
+# Create template with intelligent chunking
+zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31 --intelligent-chunking --access-pattern temporal
 
 # Write region to existing archive
 zarrify write-region data.nc archive.zarr
@@ -124,14 +127,19 @@ append_to_zarr("new_data.nc", "existing.zarr")
 One of the key features of zarrify is support for parallel writing of large datasets:
 
 ```python
-# Step 1: Create template archive
-converter = ZarrConverter(chunking={"time": 100, "lat": 50, "lon": 100})
+# Step 1: Create template archive with intelligent chunking
+converter = ZarrConverter(
+    chunking={"time": 100, "lat": 50, "lon": 100},
+    access_pattern="temporal"  # Optimize for time series analysis
+)
 converter.create_template(
     template_dataset=template_dataset,
     output_path="large_archive.zarr",
     global_start="2020-01-01",
     global_end="2023-12-31",
-    compute=False  # Metadata only, no data computation
+    compute=False,  # Metadata only, no data computation
+    intelligent_chunking=True,  # Enable intelligent chunking based on full archive dimensions
+    access_pattern="temporal"   # Optimize for time series analysis
 )
 
 # Step 2: Write regions in parallel processes
@@ -140,7 +148,7 @@ converter.create_template(
 # Process 3: converter.write_region("file3.nc", "large_archive.zarr")
 ```
 
-This approach is ideal for converting large numbers of NetCDF files to a single Zarr archive in parallel.
+This approach is ideal for converting large numbers of NetCDF files to a single Zarr archive in parallel. The intelligent chunking feature ensures optimal chunking based on the full archive dimensions rather than just the template dataset.
 
 ## Configuration
 
