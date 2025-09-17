@@ -48,7 +48,10 @@ Parameters:
 - **output_path**: Path to output Zarr store
 - **global_start**: Start time for the full archive
 - **global_end**: End time for the full archive
+- **freq**: Frequency for time coordinate (inferred from template if not provided)
 - **compute**: Whether to compute immediately (False for template only)
+- **intelligent_chunking**: Whether to perform intelligent chunking based on full archive dimensions
+- **access_pattern**: Access pattern for chunking optimization ("temporal", "spatial", "balanced")
 
 Region Writing
 -------------
@@ -101,6 +104,16 @@ Template Creation:
     zarrify create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31
+
+Create template with intelligent chunking:
+
+.. code-block:: bash
+
+    zarrify create-template template.nc archive.zarr \\
+        --global-start 2020-01-01 \\
+        --global-end 2023-12-31 \\
+        --intelligent-chunking \\
+        --access-pattern temporal
 
 Region Writing:
 ~~~~~~~~~~~~~~~

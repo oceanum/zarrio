@@ -298,7 +298,9 @@ class ZarrConverter:
         global_end: Optional[Any] = None,
         freq: Optional[str] = None,
         compute: bool = False,
-        cycle: Optional[Any] = None
+        cycle: Optional[Any] = None,
+        intelligent_chunking: bool = False,
+        access_pattern: str = "balanced"
     ) -> None:
         """
         Create a template Zarr archive for parallel writing.
@@ -311,6 +313,8 @@ class ZarrConverter:
             freq: Frequency for time coordinate (inferred from template if not provided)
             compute: Whether to compute immediately (False for template only)
             cycle: Cycle information for datamesh
+            intelligent_chunking: Whether to perform intelligent chunking based on full archive dimensions
+            access_pattern: Access pattern for chunking optimization ("temporal", "spatial", "balanced")
         """
         try:
             # Use config values if not provided
@@ -331,6 +335,56 @@ class ZarrConverter:
             
             # Apply chunking
             chunking_dict = self._chunking_config_to_dict()
+            
+            # If intelligent chunking is requested and we have global time range info,
+            # calculate optimal chunking based on the full archive dimensions
+            if intelligent_chunking and global_start is not None and global_end is not None:
+                logger.info("Performing intelligent chunking based on full archive dimensions")
+                
+                # Create full time coordinate to get actual size
+                import pandas as pd
+                full_time = pd.date_range(start=global_start, end=global_end, freq=freq)
+                full_time_size = len(full_time)
+                
+                # Get dimensions from template dataset and replace time dimension with full size
+                dimensions = dict(template_dataset.sizes)
+                time_dim = self.config.time.dim
+                if time_dim in dimensions:
+                    dimensions[time_dim] = full_time_size
+                
+                # Get data type size (assume float32 if not specified)
+                dtype_size_bytes = 4
+                if template_dataset.data_vars:
+                    # Get dtype of first variable
+                    first_var = next(iter(template_dataset.data_vars.values()))
+                    dtype_size_bytes = first_var.dtype.itemsize
+                
+                # Get target chunk size from config or default to 50 MB
+                target_chunk_size_mb = self.config.target_chunk_size_mb or 50
+                
+                # Perform chunking analysis based on full archive dimensions
+                from .chunking import get_chunk_recommendation
+                recommendation = get_chunk_recommendation(
+                    dimensions=dimensions,
+                    dtype_size_bytes=dtype_size_bytes,
+                    access_pattern=access_pattern,
+                    target_chunk_size_mb=target_chunk_size_mb
+                )
+                
+                # Use recommended chunking
+                chunking_dict = recommendation.chunks
+                logger.info(f"Applied intelligent chunking: {chunking_dict}")
+                logger.info(f"Estimated chunk size: {recommendation.estimated_chunk_size_mb:.2f} MB")
+                
+                if recommendation.warnings:
+                    for warning in recommendation.warnings:
+                        logger.warning(warning)
+            else:
+                # Use existing chunking configuration
+                if chunking_dict:
+                    archive_ds = archive_ds.chunk(chunking_dict)
+            
+            # Apply chunking if we have chunking configuration
             if chunking_dict:
                 archive_ds = archive_ds.chunk(chunking_dict)
             

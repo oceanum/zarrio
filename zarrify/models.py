@@ -165,6 +165,7 @@ class ZarrConverterConfig(BaseModel):
     datamesh: Optional[DatameshConfig] = Field(None, description="Datamesh integration configuration")
     attrs: Dict[str, Any] = Field(default_factory=dict, description="Additional global attributes")
     target_chunk_size_mb: Optional[int] = Field(None, description="Target chunk size in MB for intelligent chunking")
+    access_pattern: str = Field("balanced", description="Access pattern for chunking optimization ('temporal', 'spatial', 'balanced')")
     
     # Backward compatibility fields
     retries_on_missing: int = Field(0, description="Number of retries if missing values are encountered", ge=0)
@@ -172,6 +173,13 @@ class ZarrConverterConfig(BaseModel):
         "all", 
         description="Data variables to check and ensure there are not missing values in region writing"
     )
+    
+    @field_validator("access_pattern")
+    @classmethod
+    def validate_access_pattern(cls, v: str) -> str:
+        if v not in ["temporal", "spatial", "balanced"]:
+            raise ValueError("access_pattern must be one of 'temporal', 'spatial', or 'balanced'")
+        return v
     
     @field_validator("retries_on_missing")
     @classmethod

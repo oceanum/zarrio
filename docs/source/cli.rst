@@ -222,6 +222,8 @@ Options:
 - ``--freq TEXT``: Time frequency (e.g., '1D', '1H', inferred if not provided)
 - ``--metadata-only``: Create metadata only (compute=False)
 - ``--time-dim TEXT``: Name of time dimension (default: time)
+- ``--intelligent-chunking``: Enable intelligent chunking based on full archive dimensions
+- ``--access-pattern [temporal|spatial|balanced]``: Access pattern for chunking optimization (default: balanced)
 - ``--config PATH``: Configuration file (YAML or JSON)
 - ``-v, --verbose``: Increase verbosity (use -v, -vv, or -vvv)
 
@@ -235,6 +237,16 @@ Create template for parallel writing:
     zarrify create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31
+
+Create template with intelligent chunking:
+
+.. code-block:: bash
+
+    zarrify create-template template.nc archive.zarr \\
+        --global-start 2020-01-01 \\
+        --global-end 2023-12-31 \\
+        --intelligent-chunking \\
+        --access-pattern temporal
 
 Create template with chunking:
 

@@ -236,6 +236,8 @@ def create_template_command(args: argparse.Namespace) -> None:
         global_end=args.global_end,
         freq=args.freq,
         compute=not args.metadata_only,
+        intelligent_chunking=args.intelligent_chunking,
+        access_pattern=args.access_pattern
     )
 
     logger.info("Template creation completed successfully")
@@ -875,6 +877,9 @@ examples:
   # Create template for parallel writing
   zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31
 
+  # Create template with intelligent chunking
+  zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31 --intelligent-chunking --access-pattern temporal
+
   # Write region to existing archive
   zarrify write-region data.nc archive.zarr
 
@@ -1089,6 +1094,17 @@ examples:
         "--target-chunk-size-mb",
         type=int,
         help="Target chunk size in MB for intelligent chunking (default: 50)",
+    )
+    template_parser.add_argument(
+        "--intelligent-chunking",
+        action="store_true",
+        help="Enable intelligent chunking based on full archive dimensions",
+    )
+    template_parser.add_argument(
+        "--access-pattern",
+        choices=["temporal", "spatial", "balanced"],
+        default="balanced",
+        help="Access pattern for chunking optimization (default: balanced)",
     )
     template_parser.add_argument("--config", help="Configuration file (YAML or JSON)")
     template_parser.set_defaults(func=create_template_command)

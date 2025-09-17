@@ -74,6 +74,8 @@ Intelligent Chunking Analysis
 
 zarrify automatically analyzes your dataset and provides chunking recommendations based on expected access patterns. The system performs detailed mathematical calculations to optimize chunk sizes for your specific data characteristics.
 
+When creating templates for parallel processing with global start and end times, zarrify can perform intelligent chunking based on the full archive dimensions rather than just the template dataset. This ensures optimal chunking for the entire archive.
+
 The system analyzes:
 - Dataset dimensions and sizes
 - Data type and element size

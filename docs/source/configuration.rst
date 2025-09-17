@@ -32,7 +32,7 @@ The main configuration class is `ZarrConverterConfig`:
         attrs={"title": "Demo dataset", "source": "zarrify"}
     )
 
-The `ZarrConverterConfig` supports the following fields:
+The ``ZarrConverterConfig`` supports the following fields:
 
 - **chunking**: Chunking configuration (time, lat, lon, depth dimensions)
 - **compression**: Compression settings (method, cname, clevel, shuffle)
@@ -43,6 +43,7 @@ The `ZarrConverterConfig` supports the following fields:
 - **datamesh**: Datamesh integration configuration
 - **attrs**: Global attributes to add to the dataset
 - **target_chunk_size_mb**: Target chunk size in MB for intelligent chunking (default: 50)
+- **access_pattern**: Access pattern for chunking optimization ('temporal', 'spatial', 'balanced')
 - **retries_on_missing**: Number of retries for missing data (backward compatibility)
 - **missing_check_vars**: Variables to check for missing data (backward compatibility)
 
@@ -164,8 +165,48 @@ Time handling can be configured through the `TimeConfig` model:
         freq="1D"
     )
 
-Variable Configuration
------------------------
+Access Pattern Configuration
+-----------------------------
+
+The ``access_pattern`` field controls how intelligent chunking optimizes the data layout:
+
+- **temporal**: Optimized for time series analysis (large time chunks, smaller spatial chunks)
+- **spatial**: Optimized for spatial analysis (smaller time chunks, larger spatial chunks)
+- **balanced**: Good performance for mixed workloads (moderate chunking across all dimensions)
+
+Programmatic Configuration:
+
+.. code-block:: python
+
+    from zarrify.models import ZarrConverterConfig
+
+    config = ZarrConverterConfig(
+        access_pattern="temporal"  # Optimize for time series analysis
+    )
+
+YAML Configuration:
+
+.. code-block:: yaml
+
+    # config.yaml
+    access_pattern: temporal
+    chunking:
+      time: 100
+      lat: 50
+      lon: 100
+
+JSON Configuration:
+
+.. code-block:: json
+
+    {
+      "access_pattern": "temporal",
+      "chunking": {
+        "time": 100,
+        "lat": 50,
+        "lon": 100
+      }
+    }
 
 Variable handling can be configured through the `VariableConfig` model:
 
@@ -418,6 +459,76 @@ Missing data handling options are available through the CLI:
 
     # Write region with retry logic
     zarrify write-region data.nc archive.zarr --retries-on-missing 2
+
+Access Pattern Configuration
+----------------------------
+
+The ``access_pattern`` field controls how intelligent chunking optimizes the data layout for different access patterns:
+
+- **temporal**: Optimized for time series analysis (large time chunks, smaller spatial chunks)
+- **spatial**: Optimized for spatial analysis (smaller time chunks, larger spatial chunks)
+- **balanced**: Good performance for mixed workloads (moderate chunking across all dimensions)
+
+When ``intelligent_chunking`` is enabled in the ``create-template`` command, the access pattern determines how the chunking is calculated based on the full archive dimensions.
+
+Programmatic Configuration:
+
+.. code-block:: python
+
+    from zarrify.models import ZarrConverterConfig
+
+    config = ZarrConverterConfig(
+        access_pattern="temporal"  # Optimize for time series analysis
+    )
+
+YAML Configuration:
+
+.. code-block:: yaml
+
+    # config.yaml
+    access_pattern: temporal
+    chunking:
+      time: 100
+      lat: 50
+      lon: 100
+
+JSON Configuration:
+
+.. code-block:: json
+
+    {
+      "access_pattern": "temporal",
+      "chunking": {
+        "time": 100,
+        "lat": 50,
+        "lon": 100
+      }
+    }
+
+CLI Usage:
+
+.. code-block:: bash
+
+    # Create template with intelligent chunking for temporal analysis
+    zarrify create-template template.nc archive.zarr \\
+        --global-start 2020-01-01 \\
+        --global-end 2023-12-31 \\
+        --intelligent-chunking \\
+        --access-pattern temporal
+
+    # Create template with intelligent chunking for spatial analysis
+    zarrify create-template template.nc archive.zarr \\
+        --global-start 2020-01-01 \\
+        --global-end 2023-12-31 \\
+        --intelligent-chunking \\
+        --access-pattern spatial
+
+    # Create template with intelligent chunking for balanced access
+    zarrify create-template template.nc archive.zarr \\
+        --global-start 2020-01-01 \\
+        --global-end 2023-12-31 \\
+        --intelligent-chunking \\
+        --access-pattern balanced
 
 Best Practices
 ^^^^^^^^^^^^^^

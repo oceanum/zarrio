@@ -112,55 +112,14 @@ Command-line interface:
     # Convert with data packing
     zarrify convert input.nc output.zarr --packing --packing-bits 16
 
-Parallel Writing
-----------------
+Parallel Processing
+-------------------
 
-One of the key features of zarrify is parallel writing support:
+One of the key features of zarrify is its support for parallel processing of large datasets through template creation and region writing.
 
-Template Creation
-^^^^^^^^^^^^^^^^^
+**Intelligent Chunking**: When creating templates, zarrify can now perform intelligent chunking based on the full archive dimensions rather than just the template dataset. This ensures optimal chunking for the entire archive.
 
-Create Zarr archives with full time range but no data (``compute=False``):
-
-.. code-block:: python
-
-    # Create template covering full time range
-    converter.create_template(
-        template_dataset=template_ds,
-        output_path="archive.zarr",
-        global_start="2020-01-01",
-        global_end="2023-12-31",
-        compute=False  # Metadata only, no data computation
-    )
-
-Region Writing
-^^^^^^^^^^^^^^
-
-Write data from individual NetCDF files to specific regions:
-
-.. code-block:: python
-
-    # Write regions in parallel processes
-    converter.write_region("data_2020.nc", "archive.zarr")  # Process 1
-    converter.write_region("data_2021.nc", "archive.zarr")  # Process 2
-    converter.write_region("data_2022.nc", "archive.zarr")  # Process 3
-    converter.write_region("data_2023.nc", "archive.zarr")  # Process 4
-
-CLI Support
-^^^^^^^^^^^
-
-.. code-block:: bash
-
-    # Create template for parallel writing
-    zarrify create-template template.nc archive.zarr \\
-        --global-start 2020-01-01 \\
-        --global-end 2023-12-31
-
-    # Write regions in parallel processes
-    zarrify write-region data1.nc archive.zarr  # Process 1
-    zarrify write-region data2.nc archive.zarr  # Process 2
-
-This enables processing thousands of NetCDF files in parallel, which is essential for large-scale data conversion workflows.
+For detailed information, see the :doc:`parallel` documentation.
 
 Pydantic Configuration
 ----------------------
