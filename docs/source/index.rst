@@ -4,7 +4,7 @@ Welcome to zarrio's documentation!
 Overview
 --------
 
-zarrio is a modern, clean library for converting scientific data formats (primarily NetCDF) to Zarr format. It was created as a complete rewrite of the original onzarr library to address maintainability issues while preserving all essential functionality and adding crucial parallel writing capabilities.
+zarrio is a modern, clean library for converting scientific data formats (primarily NetCDF) to Zarr format. It was created as rewrite of the original onzarr library to address maintainability issues while preserving all essential functionality.
 
 Key Features
 ------------
@@ -194,7 +194,7 @@ When no chunking is specified, zarrio automatically analyzes the dataset and pro
 
     # No chunking specified - automatic analysis
     convert_to_zarr(
-        "climate_data.nc", 
+        "climate_data.nc",
         "climate_data.zarr",
         access_pattern="balanced"  # Optimize for mixed workloads
     )
@@ -287,7 +287,7 @@ Configuration File Support
     missing_data:
       check_vars: "all"
       retries_on_missing: 3
-      missing_check_vars: 
+      missing_check_vars:
         - temperature
         - pressure
 

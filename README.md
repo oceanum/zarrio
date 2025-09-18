@@ -4,7 +4,7 @@ A modern, clean library for converting scientific data formats to Zarr format.
 
 ## Overview
 
-zarrio is a complete rewrite of the original onzarr library with a focus on simplicity, performance, and maintainability. It leverages modern xarray and zarr capabilities to provide efficient conversion of NetCDF and other scientific data formats to Zarr format.
+zarrio is a rewrite of the original onzarr library with a focus on simplicity, performance, and maintainability. It leverages modern xarray and zarr capabilities to provide efficient conversion of NetCDF and other scientific data formats to Zarr format.
 
 ## Features
 
@@ -80,7 +80,7 @@ convert_to_zarr("input.nc", "output.zarr")
 
 # Conversion with options
 convert_to_zarr(
-    "input.nc", 
+    "input.nc",
     "output.zarr",
     chunking={"time": 100, "lat": 50, "lon": 100},
     compression="blosc:zstd:3",
