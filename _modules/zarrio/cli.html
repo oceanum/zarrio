@@ -1,0 +1,1787 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zarrio.cli &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/zarrio/cli';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">zarrio.cli</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for zarrio.cli</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Command-line interface for zarrio with Pydantic configuration support.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.__init__</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span><span class="p">,</span> <span class="n">load_config_from_file</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.packing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Packer</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="setup_logging">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.cli.setup_logging">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_logging</span><span class="p">(</span><span class="n">verbosity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Setup logging based on verbosity level.&quot;&quot;&quot;</span>
+    <span class="n">levels</span> <span class="o">=</span> <span class="p">[</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">]</span>
+    <span class="n">level</span> <span class="o">=</span> <span class="n">levels</span><span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">verbosity</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">levels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="si">%(name)s</span><span class="s2"> - </span><span class="si">%(levelname)s</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="parse_chunking">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.cli.parse_chunking">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_chunking</span><span class="p">(</span><span class="n">chunking_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse chunking string to dictionary.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">chunking_str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="n">chunking</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">chunking_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+            <span class="n">dim</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+            <span class="n">chunking</span><span class="p">[</span><span class="n">dim</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">chunking</span></div>
+
+
+
+<div class="viewcode-block" id="convert_command">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.cli.convert_command">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_command</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle convert command.&quot;&quot;&quot;</span>
+    <span class="c1"># Parse chunking</span>
+    <span class="n">chunking</span> <span class="o">=</span> <span class="n">parse_chunking</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">chunking</span><span class="p">)</span>
+
+    <span class="c1"># Load config if provided</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">load_config_from_file</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="c1"># Override config with command line arguments</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+        <span class="n">config_dict</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">chunking</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;chunking&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunking</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">compression</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">compression</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;enabled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_bits</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;bits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_bits</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_manual_ranges</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;manual_ranges&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">packing_manual_ranges</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_auto_buffer_factor</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span>
+            <span class="s2">&quot;auto_buffer_factor&quot;</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_auto_buffer_factor</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_check_range_exceeded</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;check_range_exceeded&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_range_exceeded_action</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span>
+            <span class="s2">&quot;range_exceeded_action&quot;</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_range_exceeded_action</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;target_chunk_size_mb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+
+    <span class="c1"># Add datamesh config if provided</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;datamesh&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;datasource&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_token</span><span class="p">:</span>
+            <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_token</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_service</span><span class="p">:</span>
+            <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;service&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_service</span>
+
+    <span class="c1"># Create converter with config</span>
+    <span class="n">converter_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span><span class="o">**</span><span class="n">config_dict</span><span class="p">)</span>
+    <span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">converter_config</span><span class="p">)</span>
+
+    <span class="c1"># Parse variables</span>
+    <span class="n">variables</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">variables</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">drop_variables</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">drop_variables</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">drop_variables</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="c1"># Perform conversion</span>
+    <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span>
+        <span class="n">input_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">,</span>
+        <span class="n">output_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+        <span class="n">variables</span><span class="o">=</span><span class="n">variables</span><span class="p">,</span>
+        <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Conversion completed successfully&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="append_command">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.cli.append_command">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">append_command</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle append command.&quot;&quot;&quot;</span>
+    <span class="c1"># Parse chunking</span>
+    <span class="n">chunking</span> <span class="o">=</span> <span class="n">parse_chunking</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">chunking</span><span class="p">)</span>
+
+    <span class="c1"># Load config if provided</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">load_config_from_file</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="c1"># Override config with command line arguments</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+        <span class="n">config_dict</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">chunking</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;chunking&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunking</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">append_dim</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;append_dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">append_dim</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;target_chunk_size_mb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span>
+
+    <span class="c1"># Add datamesh config if provided</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;datamesh&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;datasource&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_token</span><span class="p">:</span>
+            <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_token</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_service</span><span class="p">:</span>
+            <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;service&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_service</span>
+
+    <span class="c1"># Create converter with config</span>
+    <span class="n">converter_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span><span class="o">**</span><span class="n">config_dict</span><span class="p">)</span>
+    <span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">converter_config</span><span class="p">)</span>
+
+    <span class="c1"># Parse variables</span>
+    <span class="n">variables</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">variables</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">drop_variables</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">drop_variables</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">drop_variables</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="c1"># Perform append</span>
+    <span class="n">converter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">input_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">,</span>
+        <span class="n">zarr_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">zarr</span><span class="p">,</span>
+        <span class="n">variables</span><span class="o">=</span><span class="n">variables</span><span class="p">,</span>
+        <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Append completed successfully&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_template_command">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.cli.create_template_command">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_template_command</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle create-template command.&quot;&quot;&quot;</span>
+    <span class="c1"># Parse chunking</span>
+    <span class="n">chunking</span> <span class="o">=</span> <span class="n">parse_chunking</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">chunking</span><span class="p">)</span>
+
+    <span class="c1"># Load config if provided</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">load_config_from_file</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="c1"># Override config with command line arguments</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+        <span class="n">config_dict</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">chunking</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;chunking&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunking</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">compression</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">compression</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;enabled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_bits</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;bits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_bits</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_manual_ranges</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;manual_ranges&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">packing_manual_ranges</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_auto_buffer_factor</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span>
+            <span class="s2">&quot;auto_buffer_factor&quot;</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_auto_buffer_factor</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_check_range_exceeded</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;check_range_exceeded&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_range_exceeded_action</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span>
+            <span class="s2">&quot;range_exceeded_action&quot;</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_range_exceeded_action</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;target_chunk_size_mb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span>
+
+    <span class="c1"># Add datamesh config if provided</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;datamesh&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;datasource&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_token</span><span class="p">:</span>
+            <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_token</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_service</span><span class="p">:</span>
+            <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;service&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_service</span>
+
+    <span class="c1"># Create converter with config</span>
+    <span class="n">converter_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span><span class="o">**</span><span class="n">config_dict</span><span class="p">)</span>
+    <span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">converter_config</span><span class="p">)</span>
+
+    <span class="c1"># Open template dataset</span>
+    <span class="n">template_ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
+
+    <span class="c1"># Create template</span>
+    <span class="n">converter</span><span class="o">.</span><span class="n">create_template</span><span class="p">(</span>
+        <span class="n">template_dataset</span><span class="o">=</span><span class="n">template_ds</span><span class="p">,</span>
+        <span class="n">output_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+        <span class="n">global_start</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">global_start</span><span class="p">,</span>
+        <span class="n">global_end</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">global_end</span><span class="p">,</span>
+        <span class="n">freq</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span>
+        <span class="n">compute</span><span class="o">=</span><span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">metadata_only</span><span class="p">,</span>
+        <span class="n">intelligent_chunking</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">intelligent_chunking</span><span class="p">,</span>
+        <span class="n">access_pattern</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">access_pattern</span>
+    <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Template creation completed successfully&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="write_region_command">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.cli.write_region_command">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_region_command</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle write-region command.&quot;&quot;&quot;</span>
+    <span class="c1"># Parse chunking</span>
+    <span class="n">chunking</span> <span class="o">=</span> <span class="n">parse_chunking</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">chunking</span><span class="p">)</span>
+
+    <span class="c1"># Load config if provided</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">load_config_from_file</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="c1"># Override config with command line arguments</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+        <span class="n">config_dict</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">chunking</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;chunking&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunking</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;target_chunk_size_mb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span>
+
+    <span class="c1"># Add datamesh config if provided</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">:</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;datamesh&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;datasource&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_token</span><span class="p">:</span>
+            <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_token</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_service</span><span class="p">:</span>
+            <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;service&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_service</span>
+
+    <span class="c1"># Create converter with config</span>
+    <span class="n">converter_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span><span class="o">**</span><span class="n">config_dict</span><span class="p">)</span>
+    <span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">converter_config</span><span class="p">)</span>
+
+    <span class="c1"># Parse region if provided</span>
+    <span class="n">region</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">region</span><span class="p">:</span>
+        <span class="n">region</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">):</span>
+            <span class="n">dim</span><span class="p">,</span> <span class="n">slice_str</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+            <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">slice_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+            <span class="n">region</span><span class="p">[</span><span class="n">dim</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">start</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">end</span><span class="p">))</span>
+
+    <span class="c1"># Parse variables</span>
+    <span class="n">variables</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">variables</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">drop_variables</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">drop_variables</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">drop_variables</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="c1"># Write region</span>
+    <span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span>
+        <span class="n">input_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">,</span>
+        <span class="n">zarr_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">zarr</span><span class="p">,</span>
+        <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span>
+        <span class="n">variables</span><span class="o">=</span><span class="n">variables</span><span class="p">,</span>
+        <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Region writing completed successfully&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="analyze_command">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.cli.analyze_command">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_command</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle analyze command.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Import required modules</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+        <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.chunking</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_chunk_recommendation</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">CompressionConfig</span><span class="p">,</span> <span class="n">PackingConfig</span><span class="p">,</span>
+                             <span class="n">ZarrConverterConfig</span><span class="p">)</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.packing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Packer</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zarrio Analysis Tool&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analyzing file: </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># Open dataset</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading dataset...&quot;</span><span class="p">)</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dataset loaded successfully!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># Display basic dataset information</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dataset Information:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dimensions: </span><span class="si">{</span><span class="nb">dict</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variables: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coordinates: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># Get data type information</span>
+        <span class="n">dtype_info</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">total_size_estimate</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">dtype_size</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">itemsize</span>
+            <span class="n">dtype_info</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="n">var</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+                <span class="s2">&quot;dtype_size&quot;</span><span class="p">:</span> <span class="n">dtype_size</span><span class="p">,</span>
+                <span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                <span class="s2">&quot;size_elements&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span>
+            <span class="p">}</span>
+            <span class="n">total_size_estimate</span> <span class="o">+=</span> <span class="n">dtype_size</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data Type Information:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">dtype_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;dtype&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;dtype_size&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> bytes/element)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Shape: </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">size_mb</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;size_elements&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;dtype_size&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Size estimate: </span><span class="si">{</span><span class="n">size_mb</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total dataset size estimate: </span><span class="si">{</span><span class="n">total_size_estimate</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># Analyze chunking options</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chunking Analysis:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">16</span><span class="p">)</span>
+
+        <span class="c1"># Get dimensions for chunking analysis</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+
+        <span class="c1"># Test different access patterns</span>
+        <span class="n">access_patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;temporal&quot;</span><span class="p">,</span> <span class="s2">&quot;spatial&quot;</span><span class="p">,</span> <span class="s2">&quot;balanced&quot;</span><span class="p">]</span>
+        <span class="n">chunk_recommendations</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">access_patterns</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">recommendation</span> <span class="o">=</span> <span class="n">get_chunk_recommendation</span><span class="p">(</span>
+                    <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                    <span class="n">dtype_size_bytes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="c1"># Assume float32 for analysis</span>
+                    <span class="n">access_pattern</span><span class="o">=</span><span class="n">pattern</span><span class="p">,</span>
+                    <span class="n">target_chunk_size_mb</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="ow">or</span> <span class="mi">50</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">chunk_recommendations</span><span class="p">[</span><span class="n">pattern</span><span class="p">]</span> <span class="o">=</span> <span class="n">recommendation</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pattern</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Access Pattern:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Recommended chunks: </span><span class="si">{</span><span class="n">recommendation</span><span class="o">.</span><span class="n">chunks</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;  Estimated chunk size: </span><span class="si">{</span><span class="n">recommendation</span><span class="o">.</span><span class="n">estimated_chunk_size_mb</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">recommendation</span><span class="o">.</span><span class="n">warnings</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Warnings: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">recommendation</span><span class="o">.</span><span class="n">warnings</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">recommendation</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Notes: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">recommendation</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error analyzing </span><span class="si">{</span><span class="n">pattern</span><span class="si">}</span><span class="s2"> pattern: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># Analyze packing options</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Packing Analysis:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">16</span><span class="p">)</span>
+
+        <span class="c1"># Check for existing valid_min/valid_max attributes</span>
+        <span class="n">variables_with_ranges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">variables_without_ranges</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span>
+            <span class="n">has_min</span> <span class="o">=</span> <span class="s2">&quot;valid_min&quot;</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">attrs</span>
+            <span class="n">has_max</span> <span class="o">=</span> <span class="s2">&quot;valid_max&quot;</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">attrs</span>
+            <span class="k">if</span> <span class="n">has_min</span> <span class="ow">and</span> <span class="n">has_max</span><span class="p">:</span>
+                <span class="n">variables_with_ranges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">variables_without_ranges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var_name</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variables with valid range attributes: </span><span class="si">{</span><span class="n">variables_with_ranges</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variables without valid range attributes: </span><span class="si">{</span><span class="n">variables_without_ranges</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">variables_without_ranges</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Recommendation: Consider adding valid_min/valid_max attributes to variables&quot;</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;for optimal packing. You can either:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Use automatic range calculation (with buffer)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Specify manual ranges based on your domain knowledge&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># Analyze compression options</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compression Analysis:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Common compression options:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. blosc:zstd:1 - Fast compression, good balance&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. blosc:zstd:3 - Higher compression, slower&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. blosc:lz4:1 - Very fast compression&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. blosc:lz4:3 - Higher compression, slower&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># Theoretical performance testing if requested</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">test_performance</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Performance Analysis (Theoretical):&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">37</span><span class="p">)</span>
+
+            <span class="c1"># Select a representative variable for testing</span>
+            <span class="n">test_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">test_var</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analyzing compression and packing for variable: </span><span class="si">{</span><span class="n">test_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Get variable data characteristics</span>
+                <span class="n">var_data</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">test_var</span><span class="p">]</span>
+                <span class="n">original_dtype</span> <span class="o">=</span> <span class="n">var_data</span><span class="o">.</span><span class="n">dtype</span>
+                <span class="n">original_size</span> <span class="o">=</span> <span class="n">var_data</span><span class="o">.</span><span class="n">nbytes</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Size in MB</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Original data: </span><span class="si">{</span><span class="n">original_size</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB (</span><span class="si">{</span><span class="n">original_dtype</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Theoretical packing benefits</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Theoretical Benefits:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">19</span><span class="p">)</span>
+
+                <span class="c1"># 16-bit packing</span>
+                <span class="k">if</span> <span class="n">original_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">:</span>
+                    <span class="n">packed_16_size</span> <span class="o">=</span> <span class="n">original_size</span> <span class="o">*</span> <span class="mf">0.5</span>  <span class="c1"># 50% reduction</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  16-bit packing: </span><span class="si">{</span><span class="n">packed_16_size</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB (2.0x smaller)&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">original_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
+                    <span class="n">packed_16_size</span> <span class="o">=</span> <span class="n">original_size</span>  <span class="c1"># Same size</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  16-bit packing: </span><span class="si">{</span><span class="n">packed_16_size</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB (1.0x smaller)&quot;</span><span class="p">)</span>
+
+                <span class="c1"># 8-bit packing</span>
+                <span class="k">if</span> <span class="n">original_dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]:</span>
+                    <span class="n">packed_8_size</span> <span class="o">=</span> <span class="n">original_size</span> <span class="o">*</span> <span class="mf">0.25</span>  <span class="c1"># 75% reduction</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  8-bit packing: </span><span class="si">{</span><span class="n">packed_8_size</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB (4.0x smaller)&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Typical compression ratios (based on empirical data)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Typical Compression Ratios:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">26</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Blosc Zstd Level 1: 2-3x smaller (fast)&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Blosc Zstd Level 3: 3-5x smaller (slower)&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Blosc LZ4 Level 1: 2-2.5x smaller (very fast)&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Blosc LZ4 Level 3: 2.5-3.5x smaller (fast)&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Packing + Blosc Zstd: 5-10x smaller (combined benefits)&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Performance considerations</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Performance Considerations:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">27</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Packing adds CPU overhead during conversion&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Compression adds CPU overhead during read/write&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Higher compression levels = more CPU overhead&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Smaller chunks = more metadata overhead&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Larger chunks = more memory usage during processing&quot;</span><span class="p">)</span>
+
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Recommendation: Use --run-tests to measure real-world performance&quot;</span>
+                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;for your specific data and use case.&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No variables found for analysis.&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># Actual performance testing if requested</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">run_tests</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Performance Testing (Actual):&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">26</span><span class="p">)</span>
+
+            <span class="c1"># Select a representative variable for testing</span>
+            <span class="n">test_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">test_var</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Testing compression and packing on variable: </span><span class="si">{</span><span class="n">test_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Create a small subset for testing to save time</span>
+                <span class="n">test_ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="k">if</span> <span class="s2">&quot;time&quot;</span> <span class="ow">in</span> <span class="n">test_ds</span><span class="o">.</span><span class="n">sizes</span> <span class="ow">and</span> <span class="n">test_ds</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+                    <span class="n">test_ds</span> <span class="o">=</span> <span class="n">test_ds</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+                <span class="c1"># Test configurations</span>
+                <span class="n">test_configs</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="p">(</span><span class="s2">&quot;No compression, no packing&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{}),</span>
+                    <span class="p">(</span><span class="s2">&quot;Packing 16-bit&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span><span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">}),</span>
+                    <span class="p">(</span><span class="s2">&quot;Packing 8-bit&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span><span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">}),</span>
+                    <span class="p">(</span><span class="s2">&quot;Blosc Zstd Level 1&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:zstd:1&quot;</span><span class="p">},</span> <span class="p">{}),</span>
+                    <span class="p">(</span><span class="s2">&quot;Blosc Zstd Level 3&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">},</span> <span class="p">{}),</span>
+                    <span class="p">(</span><span class="s2">&quot;Blosc LZ4 Level 1&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:lz4:1&quot;</span><span class="p">},</span> <span class="p">{}),</span>
+                    <span class="p">(</span>
+                        <span class="s2">&quot;Packing + Blosc Zstd&quot;</span><span class="p">,</span>
+                        <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:zstd:1&quot;</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">},</span>
+                    <span class="p">),</span>
+                <span class="p">]</span>
+
+                <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">compression_config</span><span class="p">,</span> <span class="n">packing_config</span> <span class="ow">in</span> <span class="n">test_configs</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="c1"># Create temporary files</span>
+                        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmp_dir</span><span class="p">:</span>
+                            <span class="n">output_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="s2">&quot;test.zarr&quot;</span><span class="p">)</span>
+
+                            <span class="c1"># Time the conversion</span>
+                            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+                            <span class="c1"># Create a copy of the test dataset for this test</span>
+                            <span class="n">ds_copy</span> <span class="o">=</span> <span class="n">test_ds</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+                            <span class="c1"># Setup encoding</span>
+                            <span class="n">encoding</span> <span class="o">=</span> <span class="p">{}</span>
+
+                            <span class="c1"># Apply packing if configured</span>
+                            <span class="k">if</span> <span class="n">packing_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;enabled&quot;</span><span class="p">):</span>
+                                <span class="kn">from</span><span class="w"> </span><span class="nn">.packing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Packer</span>
+
+                                <span class="n">packer</span> <span class="o">=</span> <span class="n">Packer</span><span class="p">(</span><span class="n">nbits</span><span class="o">=</span><span class="n">packing_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bits&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+
+                                <span class="c1"># Add valid range attributes if not present</span>
+                                <span class="n">ds_copy</span> <span class="o">=</span> <span class="n">packer</span><span class="o">.</span><span class="n">add_valid_range_attributes</span><span class="p">(</span>
+                                    <span class="n">ds_copy</span><span class="p">,</span>
+                                    <span class="n">buffer_factor</span><span class="o">=</span><span class="n">packing_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                                        <span class="s2">&quot;auto_buffer_factor&quot;</span><span class="p">,</span> <span class="mf">0.01</span>
+                                    <span class="p">),</span>
+                                <span class="p">)</span>
+
+                                <span class="c1"># Setup encoding</span>
+                                <span class="n">packing_encoding</span> <span class="o">=</span> <span class="n">packer</span><span class="o">.</span><span class="n">setup_encoding</span><span class="p">(</span><span class="n">ds_copy</span><span class="p">)</span>
+                                <span class="n">encoding</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">packing_encoding</span><span class="p">)</span>
+
+                            <span class="c1"># Apply compression if configured</span>
+                            <span class="k">if</span> <span class="n">compression_config</span><span class="p">:</span>
+                                <span class="k">try</span><span class="p">:</span>
+                                    <span class="kn">import</span><span class="w"> </span><span class="nn">zarr</span>
+                                    <span class="kn">from</span><span class="w"> </span><span class="nn">numcodecs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blosc</span>
+
+                                    <span class="n">method</span> <span class="o">=</span> <span class="n">compression_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                                    <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;blosc:&quot;</span><span class="p">):</span>
+                                        <span class="n">parts</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                                        <span class="n">cname</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;zstd&quot;</span>
+                                        <span class="n">clevel</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">1</span>
+
+                                        <span class="n">compressor</span> <span class="o">=</span> <span class="n">Blosc</span><span class="p">(</span>
+                                            <span class="n">cname</span><span class="o">=</span><span class="n">cname</span><span class="p">,</span>
+                                            <span class="n">clevel</span><span class="o">=</span><span class="n">clevel</span><span class="p">,</span>
+                                            <span class="n">shuffle</span><span class="o">=</span><span class="n">Blosc</span><span class="o">.</span><span class="n">SHUFFLE</span><span class="p">,</span>
+                                        <span class="p">)</span>
+
+                                        <span class="c1"># Apply compressor to all variables</span>
+                                        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ds_copy</span><span class="o">.</span><span class="n">data_vars</span><span class="p">:</span>
+                                            <span class="n">encoding</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="p">{})[</span>
+                                                <span class="s2">&quot;compressor&quot;</span>
+                                            <span class="p">]</span> <span class="o">=</span> <span class="n">compressor</span>
+                                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                                    <span class="nb">print</span><span class="p">(</span>
+                                        <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: Warning - zarr/numcodecs not available, compression disabled&quot;</span>
+                                    <span class="p">)</span>
+                                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: Warning - compression error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                            <span class="c1"># Debug: Print encoding info</span>
+                            <span class="c1"># print(f&quot;  Debug - Encoding keys: {list(encoding.keys())}&quot;)</span>
+
+                            <span class="c1"># Apply chunking based on actual dimensions</span>
+                            <span class="n">chunking_dict</span> <span class="o">=</span> <span class="p">{}</span>
+                            <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">ds_copy</span><span class="o">.</span><span class="n">sizes</span><span class="p">:</span>
+                                <span class="c1"># Use a reasonable chunk size for each dimension</span>
+                                <span class="k">if</span> <span class="n">dim</span> <span class="o">==</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span>
+                                    <span class="n">chunking_dict</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">ds_copy</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="n">dim</span><span class="p">])</span>
+                                <span class="k">elif</span> <span class="n">dim</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">,</span> <span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">]:</span>
+                                    <span class="n">chunking_dict</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">ds_copy</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="n">dim</span><span class="p">])</span>
+                                <span class="k">elif</span> <span class="n">dim</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;dir&quot;</span><span class="p">,</span> <span class="s2">&quot;freq&quot;</span><span class="p">]:</span>
+                                    <span class="n">chunking_dict</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">ds_copy</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="n">dim</span><span class="p">])</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="c1"># For other dimensions, use a moderate chunk size</span>
+                                    <span class="n">chunking_dict</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">ds_copy</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="n">dim</span><span class="p">])</span>
+
+                            <span class="n">ds_copy</span> <span class="o">=</span> <span class="n">ds_copy</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="n">chunking_dict</span><span class="p">)</span>
+
+                            <span class="c1"># Perform conversion using xarray directly</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="n">ds_copy</span><span class="o">.</span><span class="n">to_zarr</span><span class="p">(</span>
+                                    <span class="n">output_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span>
+                                <span class="p">)</span>
+
+                                <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+                                <span class="c1"># Check output size</span>
+                                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_path</span><span class="p">):</span>
+                                    <span class="c1"># Use a simple approach to get directory size</span>
+                                    <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+
+                                    <span class="k">try</span><span class="p">:</span>
+                                        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                                            <span class="p">[</span><span class="s2">&quot;du&quot;</span><span class="p">,</span> <span class="s2">&quot;-sb&quot;</span><span class="p">,</span> <span class="n">output_path</span><span class="p">],</span>
+                                            <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                            <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                            <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                        <span class="p">)</span>
+                                        <span class="n">size_bytes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+                                        <span class="n">size_mb</span> <span class="o">=</span> <span class="n">size_bytes</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                                    <span class="k">except</span><span class="p">:</span>
+                                        <span class="c1"># Fallback method</span>
+                                        <span class="n">size_mb</span> <span class="o">=</span> <span class="mi">0</span>
+                                        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span>
+                                            <span class="n">output_path</span>
+                                        <span class="p">):</span>
+                                            <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+                                                <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                                                    <span class="n">dirpath</span><span class="p">,</span> <span class="n">filename</span>
+                                                <span class="p">)</span>
+                                                <span class="k">try</span><span class="p">:</span>
+                                                    <span class="n">size_mb</span> <span class="o">+=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span>
+                                                        <span class="n">filepath</span>
+                                                    <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                                                <span class="k">except</span><span class="p">:</span>
+                                                    <span class="k">pass</span>
+
+                                    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                                        <span class="p">{</span>
+                                            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                                            <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span>
+                                            <span class="s2">&quot;size_mb&quot;</span><span class="p">:</span> <span class="n">size_mb</span><span class="p">,</span>
+                                        <span class="p">}</span>
+                                    <span class="p">)</span>
+                                    <span class="nb">print</span><span class="p">(</span>
+                                        <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">size_mb</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB in </span><span class="si">{</span><span class="n">end_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span>
+                                    <span class="p">)</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: Failed to create output&quot;</span><span class="p">)</span>
+                            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: Error - </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: Error - </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Show comparison</span>
+                <span class="k">if</span> <span class="n">results</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Performance Comparison:&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">22</span><span class="p">)</span>
+                    <span class="n">base_result</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># No compression, no packing</span>
+                    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+                        <span class="n">size_ratio</span> <span class="o">=</span> <span class="p">(</span>
+                            <span class="n">base_result</span><span class="p">[</span><span class="s2">&quot;size_mb&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;size_mb&quot;</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;size_mb&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+                            <span class="k">else</span> <span class="mi">0</span>
+                        <span class="p">)</span>
+                        <span class="n">time_ratio</span> <span class="o">=</span> <span class="p">(</span>
+                            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">base_result</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">base_result</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+                            <span class="k">else</span> <span class="mi">0</span>
+                        <span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;    Size: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;size_mb&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB (</span><span class="si">{</span><span class="n">size_ratio</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x smaller)&quot;</span>
+                        <span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;    Time: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s (</span><span class="si">{</span><span class="n">time_ratio</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x slower)&quot;</span>
+                        <span class="p">)</span>
+                    <span class="nb">print</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No variables found for testing.&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># Interactive configuration setup</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Interactive Configuration Setup:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">32</span><span class="p">)</span>
+
+            <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="c1"># Chunking selection</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Chunking Configuration:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available access patterns:&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">access_patterns</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">rec</span> <span class="o">=</span> <span class="n">chunk_recommendations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">rec</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">pattern</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">rec</span><span class="o">.</span><span class="n">chunks</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">rec</span><span class="o">.</span><span class="n">estimated_chunk_size_mb</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB)&quot;</span>
+                    <span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">choice</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Select access pattern (1-3) or 0 for custom: &quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;3&quot;</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">choice</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">selected_pattern</span> <span class="o">=</span> <span class="n">access_patterns</span><span class="p">[</span><span class="n">choice</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                    <span class="n">config</span><span class="p">[</span><span class="s2">&quot;chunking&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">chunk_recommendations</span><span class="p">[</span><span class="n">selected_pattern</span><span class="p">]</span><span class="o">.</span><span class="n">chunks</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Selected </span><span class="si">{</span><span class="n">selected_pattern</span><span class="si">}</span><span class="s2"> chunking: </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;chunking&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">custom_chunks</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">size</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;Enter chunk size for </span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s2"> (default </span><span class="si">{</span><span class="n">dimensions</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span><span class="si">}</span><span class="s2">): &quot;</span>
+                        <span class="p">)</span>
+                        <span class="k">if</span> <span class="n">size</span><span class="p">:</span>
+                            <span class="n">custom_chunks</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">custom_chunks</span><span class="p">:</span>
+                        <span class="n">config</span><span class="p">[</span><span class="s2">&quot;chunking&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">custom_chunks</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Custom chunking: </span><span class="si">{</span><span class="n">custom_chunks</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using balanced chunking as default&quot;</span><span class="p">)</span>
+                <span class="n">config</span><span class="p">[</span><span class="s2">&quot;chunking&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">chunk_recommendations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">chunks</span> <span class="ow">or</span> <span class="p">{}</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Packing selection</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Packing Configuration:&quot;</span><span class="p">)</span>
+            <span class="n">pack_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enable data packing? (y/N): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">pack_choice</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+                <span class="n">config</span><span class="p">[</span><span class="s2">&quot;packing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+                <span class="n">bits_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Bits for packing (8/16/32, default 16): &quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;16&quot;</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">config</span><span class="p">[</span><span class="s2">&quot;packing&quot;</span><span class="p">][</span><span class="s2">&quot;bits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bits_choice</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="n">config</span><span class="p">[</span><span class="s2">&quot;packing&quot;</span><span class="p">][</span><span class="s2">&quot;bits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using default 16 bits&quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">variables_without_ranges</span><span class="p">:</span>
+                    <span class="n">range_choice</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="nb">input</span><span class="p">(</span>
+                            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How to handle variables without valid ranges?</span><span class="se">\n</span><span class="s2">1. Automatic calculation with buffer</span><span class="se">\n</span><span class="s2">2. Specify manual ranges</span><span class="se">\n</span><span class="s2">3. Skip packing for these variables</span><span class="se">\n</span><span class="s2">Choose (1-3, default 1): &quot;</span>
+                        <span class="p">)</span>
+                        <span class="ow">or</span> <span class="s2">&quot;1&quot;</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="n">range_choice</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+                        <span class="n">manual_ranges</span> <span class="o">=</span> <span class="p">{}</span>
+                        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables_without_ranges</span><span class="p">:</span>
+                            <span class="n">min_val</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enter min value for </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2"> (or skip): &quot;</span><span class="p">)</span>
+                            <span class="n">max_val</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enter max value for </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2"> (or skip): &quot;</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">min_val</span> <span class="ow">and</span> <span class="n">max_val</span><span class="p">:</span>
+                                <span class="k">try</span><span class="p">:</span>
+                                    <span class="n">manual_ranges</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                                        <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">min_val</span><span class="p">),</span>
+                                        <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">max_val</span><span class="p">),</span>
+                                    <span class="p">}</span>
+                                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                                    <span class="nb">print</span><span class="p">(</span>
+                                        <span class="sa">f</span><span class="s2">&quot;Skipping manual range for </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2"> due to invalid input&quot;</span>
+                                    <span class="p">)</span>
+                        <span class="k">if</span> <span class="n">manual_ranges</span><span class="p">:</span>
+                            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;packing&quot;</span><span class="p">][</span><span class="s2">&quot;manual_ranges&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">manual_ranges</span>
+                    <span class="k">elif</span> <span class="n">range_choice</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+                        <span class="n">buffer_choice</span> <span class="o">=</span> <span class="p">(</span>
+                            <span class="nb">input</span><span class="p">(</span>
+                                <span class="s2">&quot;Buffer factor for automatic calculation (default 0.01): &quot;</span>
+                            <span class="p">)</span>
+                            <span class="ow">or</span> <span class="s2">&quot;0.01&quot;</span>
+                        <span class="p">)</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;packing&quot;</span><span class="p">][</span><span class="s2">&quot;auto_buffer_factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                                <span class="n">buffer_choice</span>
+                            <span class="p">)</span>
+                        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;packing&quot;</span><span class="p">][</span><span class="s2">&quot;auto_buffer_factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.01</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using default buffer factor&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Compression selection</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Compression Configuration:&quot;</span><span class="p">)</span>
+            <span class="n">compress_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enable compression? (y/N): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">compress_choice</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compression options:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. blosc:zstd:1 - Fast compression, good balance&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. blosc:zstd:3 - Higher compression, slower&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. blosc:lz4:1 - Very fast compression&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. blosc:lz4:3 - Higher compression, slower&quot;</span><span class="p">)</span>
+                <span class="n">comp_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Choose compression (1-4, default 1): &quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;1&quot;</span>
+                <span class="n">compression_methods</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:zstd:1&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:lz4:1&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:lz4:3&quot;</span><span class="p">,</span>
+                <span class="p">}</span>
+                <span class="n">config</span><span class="p">[</span><span class="s2">&quot;compression&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">compression_methods</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">comp_choice</span><span class="p">,</span> <span class="s2">&quot;blosc:zstd:1&quot;</span><span class="p">)</span>
+                <span class="p">}</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Selected compression: </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;compression&#39;</span><span class="p">][</span><span class="s1">&#39;method&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Save configuration</span>
+            <span class="n">save_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Save configuration to file? (y/N): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">save_choice</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+                <span class="n">config_filename</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Configuration filename (default config.yaml): &quot;</span><span class="p">)</span>
+                    <span class="ow">or</span> <span class="s2">&quot;config.yaml&quot;</span>
+                <span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration saved to </span><span class="si">{</span><span class="n">config_filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving configuration: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Configuration Summary:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Close dataset</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Analysis complete!&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analysis failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span></div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.cli.main">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main entry point for CLI.&quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;zarrio - Convert scientific data to Zarr format&quot;</span><span class="p">,</span>
+        <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
+        <span class="n">epilog</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">examples:</span>
+<span class="s2">  # Convert NetCDF to Zarr</span>
+<span class="s2">  zarrio convert input.nc output.zarr</span>
+
+<span class="s2">  # Convert with chunking</span>
+<span class="s2">  zarrio convert input.nc output.zarr --chunking &quot;time:100,lat:50,lon:100&quot;</span>
+
+<span class="s2">  # Convert with compression</span>
+<span class="s2">  zarrio convert input.nc output.zarr --compression &quot;blosc:zstd:3&quot;</span>
+
+<span class="s2">  # Convert with data packing</span>
+<span class="s2">  zarrio convert input.nc output.zarr --packing --packing-bits 16</span>
+
+<span class="s2">  # Convert with manual packing ranges</span>
+<span class="s2">  zarrio convert input.nc output.zarr --packing</span>
+<span class="s2">      --packing-manual-ranges &#39;{&quot;temperature&quot;: {&quot;min&quot;: 0, &quot;max&quot;: 100}}&#39;</span>
+
+<span class="s2">  # Analyze NetCDF file for optimization recommendations</span>
+<span class="s2">  zarrio analyze input.nc</span>
+
+<span class="s2">  # Analyze with theoretical performance benefits</span>
+<span class="s2">  zarrio analyze input.nc --test-performance</span>
+
+<span class="s2">  # Analyze with actual performance tests</span>
+<span class="s2">  zarrio analyze input.nc --run-tests</span>
+
+<span class="s2">  # Analyze with interactive configuration setup</span>
+<span class="s2">  zarrio analyze input.nc --interactive</span>
+
+<span class="s2">  # Create template for parallel writing</span>
+<span class="s2">  zarrio create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31</span>
+
+<span class="s2">  # Create template with intelligent chunking</span>
+<span class="s2">  zarrio create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31 --intelligent-chunking --access-pattern temporal</span>
+
+<span class="s2">  # Write region to existing archive</span>
+<span class="s2">  zarrio write-region data.nc archive.zarr</span>
+
+<span class="s2">  # Append to existing Zarr store</span>
+<span class="s2">  zarrio append new_data.nc existing.zarr</span>
+
+<span class="s2">  # Convert to datamesh datasource</span>
+<span class="s2">  zarrio convert input.nc --datamesh-datasource &#39;{&quot;id&quot;:&quot;my_datasource&quot;,&quot;name&quot;:&quot;My Data&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;longitude&quot;,&quot;y&quot;:&quot;latitude&quot;,&quot;t&quot;:&quot;time&quot;}}&#39; --datamesh-token $DATAMESH_TOKEN</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--version&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;zarrio </span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-v&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--verbose&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Increase verbosity (use -v, -vv, or -vvv)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">subparsers</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span><span class="n">dest</span><span class="o">=</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Available commands&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Convert command</span>
+    <span class="n">convert_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;convert&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Convert data to Zarr format&quot;</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input file path&quot;</span><span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output Zarr store path&quot;</span><span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--chunking&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Chunking specification (e.g., &#39;time:100,lat:50,lon:100&#39;)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--compression&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Compression specification (e.g., &#39;blosc:zstd:3&#39;)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Enable data packing&quot;</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing-bits&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of bits for packing (default: 16)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing-manual-ranges&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Manual min/max ranges as JSON string (e.g., </span><span class="se">\&#39;</span><span class="s1">{&quot;temperature&quot;: {&quot;min&quot;: 0, &quot;max&quot;: 100}}</span><span class="se">\&#39;</span><span class="s1">)&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing-auto-buffer-factor&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Buffer factor for automatically calculated ranges (default: 0.01)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing-check-range-exceeded&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Check if data exceeds specified ranges (default: True)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing-range-exceeded-action&quot;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore&quot;</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Action when data exceeds range (default: warn)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--variables&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of variables to include&quot;</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--drop-variables&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of variables to exclude&quot;</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--attrs&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Additional global attributes as JSON string&quot;</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--time-dim&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Name of time dimension (default: time)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-datasource&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh datasource configuration as JSON string&quot;</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-token&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh token for authentication&quot;</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-service&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;https://datamesh-v1.oceanum.io&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh service URL&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--target-chunk-size-mb&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Target chunk size in MB for intelligent chunking (default: 50)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--config&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Configuration file (YAML or JSON)&quot;</span><span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">convert_command</span><span class="p">)</span>
+
+    <span class="c1"># Append command</span>
+    <span class="n">append_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;append&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Append data to existing Zarr store&quot;</span>
+    <span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input file path&quot;</span><span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;zarr&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Existing Zarr store path&quot;</span><span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--chunking&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Chunking specification (e.g., &#39;time:100,lat:50,lon:100&#39;)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--variables&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of variables to include&quot;</span>
+    <span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--drop-variables&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of variables to exclude&quot;</span>
+    <span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--append-dim&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Dimension to append along (default: time)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--time-dim&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Name of time dimension (default: time)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-datasource&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh datasource configuration as JSON string&quot;</span>
+    <span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-token&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh token for authentication&quot;</span>
+    <span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-service&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;https://datamesh-v1.oceanum.io&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh service URL&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--target-chunk-size-mb&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Target chunk size in MB for intelligent chunking (default: 50)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--config&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Configuration file (YAML or JSON)&quot;</span><span class="p">)</span>
+    <span class="n">append_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">append_command</span><span class="p">)</span>
+
+    <span class="c1"># Create template command</span>
+    <span class="n">template_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;create-template&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Create template Zarr archive for parallel writing&quot;</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;template&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Template NetCDF file&quot;</span><span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output Zarr store path&quot;</span><span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--chunking&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Chunking specification (e.g., &#39;time:100,lat:50,lon:100&#39;)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--compression&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Compression specification (e.g., &#39;blosc:zstd:3&#39;)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Enable data packing&quot;</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing-bits&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of bits for packing (default: 16)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing-manual-ranges&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Manual min/max ranges as JSON string (e.g., </span><span class="se">\&#39;</span><span class="s1">{&quot;temperature&quot;: {&quot;min&quot;: 0, &quot;max&quot;: 100}}</span><span class="se">\&#39;</span><span class="s1">)&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing-auto-buffer-factor&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Buffer factor for automatically calculated ranges (default: 0.01)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing-check-range-exceeded&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Check if data exceeds specified ranges (default: True)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--packing-range-exceeded-action&quot;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore&quot;</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Action when data exceeds range (default: warn)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--global-start&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Start time for full archive (e.g., &#39;2023-01-01&#39;)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--global-end&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;End time for full archive (e.g., &#39;2023-12-31&#39;)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--freq&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Time frequency (e.g., &#39;1D&#39;, &#39;1H&#39;, inferred if not provided)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--metadata-only&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Create metadata only (compute=False)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--time-dim&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Name of time dimension (default: time)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-datasource&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh datasource configuration as JSON string&quot;</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-token&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh token for authentication&quot;</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-service&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;https://datamesh-v1.oceanum.io&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh service URL&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--target-chunk-size-mb&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Target chunk size in MB for intelligent chunking (default: 50)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--intelligent-chunking&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Enable intelligent chunking based on full archive dimensions&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--access-pattern&quot;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;temporal&quot;</span><span class="p">,</span> <span class="s2">&quot;spatial&quot;</span><span class="p">,</span> <span class="s2">&quot;balanced&quot;</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Access pattern for chunking optimization (default: balanced)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--config&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Configuration file (YAML or JSON)&quot;</span><span class="p">)</span>
+    <span class="n">template_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">create_template_command</span><span class="p">)</span>
+
+    <span class="c1"># Write region command</span>
+    <span class="n">region_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;write-region&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Write data to specific region of Zarr archive&quot;</span>
+    <span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input file path&quot;</span><span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;zarr&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Existing Zarr store path&quot;</span><span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--chunking&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Chunking specification (e.g., &#39;time:100,lat:50,lon:100&#39;)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--region&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Region specification (e.g., &#39;time=0:100,lat=0:50&#39;)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--variables&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of variables to include&quot;</span>
+    <span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--drop-variables&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of variables to exclude&quot;</span>
+    <span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--time-dim&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Name of time dimension (default: time)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-datasource&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh datasource configuration as JSON string&quot;</span>
+    <span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-token&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh token for authentication&quot;</span>
+    <span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--datamesh-service&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;https://datamesh-v1.oceanum.io&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh service URL&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--target-chunk-size-mb&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Target chunk size in MB for intelligent chunking (default: 50)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--config&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Configuration file (YAML or JSON)&quot;</span><span class="p">)</span>
+    <span class="n">region_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">write_region_command</span><span class="p">)</span>
+
+    <span class="c1"># Analyze command</span>
+    <span class="n">analyze_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;analyze&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Analyze NetCDF file and recommend optimization options&quot;</span>
+    <span class="p">)</span>
+    <span class="n">analyze_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input NetCDF file path&quot;</span><span class="p">)</span>
+    <span class="n">analyze_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--target-chunk-size-mb&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Target chunk size in MB for analysis (default: 50)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">analyze_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--test-performance&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show theoretical performance benefits&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">analyze_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--run-tests&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run actual performance tests to measure real-world benefits&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">analyze_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-i&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--interactive&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Interactive mode to guide configuration setup&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">analyze_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">analyze_command</span><span class="p">)</span>
+
+    <span class="c1"># Parse arguments</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="c1"># Setup logging</span>
+    <span class="n">setup_logging</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+
+    <span class="c1"># Execute command</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s2">&quot;func&quot;</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Command failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

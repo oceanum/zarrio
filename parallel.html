@@ -1,0 +1,1071 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Parallel Processing &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'parallel';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Datamesh Integration" href="datamesh.html" />
+    <link rel="prev" title="Analysis Tool" href="analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Parallel Processing</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="parallel-processing">
+<h1>Parallel Processing<a class="headerlink" href="#parallel-processing" title="Link to this heading">#</a></h1>
+<p>One of the key features of zarrio is its support for parallel processing of large datasets through template creation and region writing.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>When dealing with thousands of NetCDF files, it’s often more efficient to process them in parallel rather than sequentially. zarrio provides a robust framework for this:</p>
+<ol class="arabic simple">
+<li><p><strong>Template Creation</strong>: Create a Zarr archive with full time range but no data (<cite>compute=False</cite>)</p></li>
+<li><p><strong>Region Writing</strong>: Write data from individual NetCDF files to specific regions</p></li>
+<li><p><strong>Parallel Execution</strong>: Multiple processes can write to different regions simultaneously</p></li>
+</ol>
+<p>This approach enables processing thousands of NetCDF files in parallel, which is essential for large-scale data conversion workflows.</p>
+</section>
+<section id="template-creation">
+<h2>Template Creation<a class="headerlink" href="#template-creation" title="Link to this heading">#</a></h2>
+<p>The first step is to create a template Zarr archive that covers the full time range but contains no data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
+
+<span class="c1"># Create converter</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span>
+    <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">,</span>
+    <span class="n">packing</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Create template covering full time range</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">create_template</span><span class="p">(</span>
+    <span class="n">template_dataset</span><span class="o">=</span><span class="n">template_ds</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;archive.zarr&quot;</span><span class="p">,</span>
+    <span class="n">global_start</span><span class="o">=</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span>
+    <span class="n">global_end</span><span class="o">=</span><span class="s2">&quot;2023-12-31&quot;</span><span class="p">,</span>
+    <span class="n">compute</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># Metadata only, no data computation</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The <cite>compute=False</cite> parameter is crucial - it creates the metadata and structure of the Zarr archive without computing or storing any actual data.</p>
+<section id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>template_dataset</strong>: Dataset to use as template for structure and metadata</p></li>
+<li><p><strong>output_path</strong>: Path to output Zarr store</p></li>
+<li><p><strong>global_start</strong>: Start time for the full archive</p></li>
+<li><p><strong>global_end</strong>: End time for the full archive</p></li>
+<li><p><strong>freq</strong>: Frequency for time coordinate (inferred from template if not provided)</p></li>
+<li><p><strong>compute</strong>: Whether to compute immediately (False for template only)</p></li>
+<li><p><strong>intelligent_chunking</strong>: Whether to perform intelligent chunking based on full archive dimensions</p></li>
+<li><p><strong>access_pattern</strong>: Access pattern for chunking optimization (“temporal”, “spatial”, “balanced”)</p></li>
+</ul>
+</section>
+</section>
+<section id="region-writing">
+<h2>Region Writing<a class="headerlink" href="#region-writing" title="Link to this heading">#</a></h2>
+<p>After creating the template, you can write data from individual NetCDF files to specific regions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write regions in parallel processes</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data_2020.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;archive.zarr&quot;</span><span class="p">)</span>  <span class="c1"># Process 1</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data_2021.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;archive.zarr&quot;</span><span class="p">)</span>  <span class="c1"># Process 2</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data_2022.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;archive.zarr&quot;</span><span class="p">)</span>  <span class="c1"># Process 3</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data_2023.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;archive.zarr&quot;</span><span class="p">)</span>  <span class="c1"># Process 4</span>
+</pre></div>
+</div>
+<p>Each process works independently on different files, writing to different regions of the same Zarr archive.</p>
+</section>
+<section id="automatic-region-determination">
+<h2>Automatic Region Determination<a class="headerlink" href="#automatic-region-determination" title="Link to this heading">#</a></h2>
+<p>zarrio can automatically determine the region for writing based on the time coordinates in the source file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># No region specified - automatically determined</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data_2020.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;archive.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The system compares the time range in the source file with the time coordinates in the existing Zarr archive and determines where the data should be written.</p>
+</section>
+<section id="manual-region-specification">
+<h2>Manual Region Specification<a class="headerlink" href="#manual-region-specification" title="Link to this heading">#</a></h2>
+<p>You can also specify regions manually:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Manual region specification</span>
+<span class="n">region</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)}</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;archive.zarr&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="cli-support">
+<h2>CLI Support<a class="headerlink" href="#cli-support" title="Link to this heading">#</a></h2>
+<p>The parallel processing workflow is also supported through the CLI:</p>
+<section id="id1">
+<h3>Template Creation:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31
+</pre></div>
+</div>
+<p>Create template with intelligent chunking:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--intelligent-chunking<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--access-pattern<span class="w"> </span>temporal
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Region Writing:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write regions in parallel processes</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2020.nc<span class="w"> </span>archive.zarr<span class="w">  </span><span class="c1"># Process 1</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2021.nc<span class="w"> </span>archive.zarr<span class="w">  </span><span class="c1"># Process 2</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2022.nc<span class="w"> </span>archive.zarr<span class="w">  </span><span class="c1"># Process 3</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2023.nc<span class="w"> </span>archive.zarr<span class="w">  </span><span class="c1"># Process 4</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="complete-parallel-workflow">
+<h2>Complete Parallel Workflow<a class="headerlink" href="#complete-parallel-workflow" title="Link to this heading">#</a></h2>
+<p>Here’s a complete example of processing thousands of NetCDF files in parallel:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zarrio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_file</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process a single NetCDF file.&quot;&quot;&quot;</span>
+    <span class="n">input_file</span><span class="p">,</span> <span class="n">zarr_path</span> <span class="o">=</span> <span class="n">args</span>
+
+    <span class="c1"># Create converter for this process</span>
+    <span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span>
+        <span class="n">chunking</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span>
+        <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">,</span>
+        <span class="n">packing</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Write region</span>
+    <span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">zarr_path</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Processed </span><span class="si">{</span><span class="n">input_file</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">parallel_processing_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example of parallel processing workflow.&quot;&quot;&quot;</span>
+    <span class="c1"># 1. Create template</span>
+    <span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">()</span>
+    <span class="n">converter</span><span class="o">.</span><span class="n">create_template</span><span class="p">(</span>
+        <span class="n">template_dataset</span><span class="o">=</span><span class="n">template_ds</span><span class="p">,</span>
+        <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;large_archive.zarr&quot;</span><span class="p">,</span>
+        <span class="n">global_start</span><span class="o">=</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span>
+        <span class="n">global_end</span><span class="o">=</span><span class="s2">&quot;2023-12-31&quot;</span><span class="p">,</span>
+        <span class="n">compute</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+
+    <span class="c1"># 2. Prepare file list</span>
+    <span class="n">netcdf_files</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;data_2020_001.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;data_2020_002.nc&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s2">&quot;data_2023_365.nc&quot;</span>
+    <span class="p">]</span>
+    <span class="n">zarr_path</span> <span class="o">=</span> <span class="s2">&quot;large_archive.zarr&quot;</span>
+
+    <span class="c1"># 3. Process files in parallel</span>
+    <span class="k">with</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+        <span class="n">args_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">nc_file</span><span class="p">,</span> <span class="n">zarr_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">nc_file</span> <span class="ow">in</span> <span class="n">netcdf_files</span><span class="p">]</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">process_file</span><span class="p">,</span> <span class="n">args_list</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All files processed successfully!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="containerized-parallel-processing">
+<h2>Containerized Parallel Processing<a class="headerlink" href="#containerized-parallel-processing" title="Link to this heading">#</a></h2>
+<p>For even easier deployment and management, you can also run parallel processing workflows using Docker containers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create template using Docker</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/data<span class="w"> </span>zarrio:latest<span class="w"> </span>create-template<span class="w"> </span>/data/template.nc<span class="w"> </span>/data/archive.zarr<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31
+
+<span class="c1"># Process multiple files in parallel containers</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/data<span class="w"> </span>zarrio:latest<span class="w"> </span>write-region<span class="w"> </span>/data/data_2020.nc<span class="w"> </span>/data/archive.zarr<span class="w"> </span><span class="p">&amp;</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/data<span class="w"> </span>zarrio:latest<span class="w"> </span>write-region<span class="w"> </span>/data/data_2021.nc<span class="w"> </span>/data/archive.zarr<span class="w"> </span><span class="p">&amp;</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/data<span class="w"> </span>zarrio:latest<span class="w"> </span>write-region<span class="w"> </span>/data/data_2022.nc<span class="w"> </span>/data/archive.zarr<span class="w"> </span><span class="p">&amp;</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/data<span class="w"> </span>zarrio:latest<span class="w"> </span>write-region<span class="w"> </span>/data/data_2023.nc<span class="w"> </span>/data/archive.zarr<span class="w"> </span><span class="p">&amp;</span>
+
+<span class="c1"># Wait for all processes to complete</span>
+<span class="nb">wait</span>
+</pre></div>
+</div>
+<p>This approach provides additional benefits such as:</p>
+<ol class="arabic simple">
+<li><p><strong>Environment Consistency</strong>: Ensures identical environments across all processes</p></li>
+<li><p><strong>Dependency Isolation</strong>: No conflicts with host system dependencies</p></li>
+<li><p><strong>Easy Deployment</strong>: Simplifies deployment to cloud or cluster environments</p></li>
+<li><p><strong>Resource Management</strong>: Better control over resource allocation</p></li>
+<li><p><strong>Security</strong>: Process isolation for added security</p></li>
+</ol>
+<p>See <a class="reference internal" href="docker.html"><span class="doc">Docker Support</span></a> for more details on Docker usage.</p>
+</section>
+<section id="benefits">
+<h2>Benefits<a class="headerlink" href="#benefits" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Scalability</strong>: Process thousands of NetCDF files in parallel</p></li>
+<li><p><strong>Efficiency</strong>: No need to load all data into memory at once</p></li>
+<li><p><strong>Reliability</strong>: Independent processes reduce risk of total failure</p></li>
+<li><p><strong>Flexibility</strong>: Each process can work on different files simultaneously</p></li>
+<li><p><strong>Performance</strong>: Dramatic speedup for large datasets</p></li>
+</ol>
+</section>
+<section id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h2>
+<p>zarrio includes robust error handling for parallel processing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span><span class="p">,</span> <span class="n">ChunkingConfig</span><span class="p">,</span> <span class="n">CompressionConfig</span><span class="p">,</span> <span class="n">PackingConfig</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">robust_process_file</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process a single NetCDF file with error handling.&quot;&quot;&quot;</span>
+    <span class="n">input_file</span><span class="p">,</span> <span class="n">zarr_path</span> <span class="o">=</span> <span class="n">args</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Create converter with retry logic</span>
+        <span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span>
+            <span class="n">config</span><span class="o">=</span><span class="n">ZarrConverterConfig</span><span class="p">(</span>
+                <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+                <span class="n">compression</span><span class="o">=</span><span class="n">CompressionConfig</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">),</span>
+                <span class="n">packing</span><span class="o">=</span><span class="n">PackingConfig</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="mi">16</span><span class="p">),</span>
+                <span class="n">retries_on_missing</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># Retry up to 3 times</span>
+                <span class="n">missing_check_vars</span><span class="o">=</span><span class="s2">&quot;all&quot;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Write region with retry logic</span>
+        <span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">zarr_path</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Successfully processed </span><span class="si">{</span><span class="n">input_file</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">except</span> <span class="n">RetryLimitExceededError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Failed after retries: </span><span class="si">{</span><span class="n">input_file</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">except</span> <span class="n">ConversionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Conversion failed: </span><span class="si">{</span><span class="n">input_file</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Unexpected error: </span><span class="si">{</span><span class="n">input_file</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="monitoring-and-logging">
+<h2>Monitoring and Logging<a class="headerlink" href="#monitoring-and-logging" title="Link to this heading">#</a></h2>
+<p>zarrio provides comprehensive logging for parallel processing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="c1"># Setup logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="si">%(name)s</span><span class="s2"> - </span><span class="si">%(levelname)s</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Each process will log its activities</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">()</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;archive.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The logs will show:
+- Process startup and completion
+- Region determination
+- Data writing progress
+- Error conditions and retries
+- Performance metrics</p>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Template First</strong>: Always create the template before starting parallel processes</p></li>
+<li><p><strong>Consistent Chunking</strong>: Use the same chunking strategy across all processes</p></li>
+<li><p><strong>Error Handling</strong>: Implement robust error handling with retries</p></li>
+<li><p><strong>Logging</strong>: Enable logging to monitor progress and debug issues</p></li>
+<li><p><strong>Resource Management</strong>: Monitor memory and CPU usage in parallel processes</p></li>
+<li><p><strong>Validation</strong>: Verify the final archive after all processes complete</p></li>
+</ol>
+<section id="example-with-validation">
+<h3>Example with Validation:<a class="headerlink" href="#example-with-validation" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_final_archive</span><span class="p">(</span><span class="n">zarr_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate the final archive after parallel processing.&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Open final archive</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">zarr_path</span><span class="p">)</span>
+
+        <span class="c1"># Check time range</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">to_index</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">end_time</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">to_index</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Archive time range: </span><span class="si">{</span><span class="n">start_time</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">end_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check data completeness</span>
+        <span class="n">total_time_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total time steps: </span><span class="si">{</span><span class="n">total_time_steps</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check variables</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variables: </span><span class="si">{</span><span class="n">variables</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check data integrity (basic checks)</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+            <span class="n">data_min</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+            <span class="n">data_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">: min=</span><span class="si">{</span><span class="n">data_min</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, max=</span><span class="si">{</span><span class="n">data_max</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Archive validation completed successfully!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Archive validation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="c1"># After parallel processing</span>
+<span class="k">if</span> <span class="n">validate_final_archive</span><span class="p">(</span><span class="s2">&quot;large_archive.zarr&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parallel processing completed successfully!&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parallel processing completed with issues!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-considerations">
+<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Chunking Strategy</strong>: Choose chunking that aligns with your access patterns</p></li>
+<li><p><strong>Compression</strong>: Use appropriate compression for your data characteristics</p></li>
+<li><p><strong>Memory Usage</strong>: Monitor memory usage in parallel processes</p></li>
+<li><p><strong>I/O Patterns</strong>: Consider storage system characteristics (local vs cloud)</p></li>
+<li><p><strong>Process Count</strong>: Optimize the number of parallel processes for your system</p></li>
+</ol>
+<section id="example-performance-tuning">
+<h3>Example Performance Tuning:<a class="headerlink" href="#example-performance-tuning" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimize for your system</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">ZarrConverterConfig</span><span class="p">(</span>
+        <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+            <span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>    <span class="c1"># Balance between I/O and memory</span>
+            <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>      <span class="c1"># Consider spatial access patterns</span>
+            <span class="n">lon</span><span class="o">=</span><span class="mi">100</span>      <span class="c1"># Consider spatial access patterns</span>
+        <span class="p">),</span>
+        <span class="n">compression</span><span class="o">=</span><span class="n">CompressionConfig</span><span class="p">(</span>
+            <span class="n">method</span><span class="o">=</span><span class="s2">&quot;blosc:zstd:2&quot;</span><span class="p">,</span>  <span class="c1"># Balance between speed and compression</span>
+            <span class="n">clevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">shuffle</span><span class="o">=</span><span class="s2">&quot;shuffle&quot;</span>
+        <span class="p">),</span>
+        <span class="n">packing</span><span class="o">=</span><span class="n">PackingConfig</span><span class="p">(</span>
+            <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">bits</span><span class="o">=</span><span class="mi">16</span>      <span class="c1"># 16-bit packing for good compression</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="cloud-storage-considerations">
+<h2>Cloud Storage Considerations<a class="headerlink" href="#cloud-storage-considerations" title="Link to this heading">#</a></h2>
+<p>When using cloud storage (S3, GCS, etc.):</p>
+<ol class="arabic simple">
+<li><p><strong>Network I/O</strong>: Minimize network round trips</p></li>
+<li><p><strong>Chunk Size</strong>: Larger chunks for cloud storage to reduce request overhead</p></li>
+<li><p><strong>Concurrency</strong>: Limit concurrent processes to avoid overwhelming the service</p></li>
+<li><p><strong>Error Handling</strong>: Implement robust retry logic for network failures</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cloud-optimized configuration</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">ZarrConverterConfig</span><span class="p">(</span>
+        <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+            <span class="n">time</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>    <span class="c1"># Larger chunks for cloud storage</span>
+            <span class="n">lat</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>     <span class="c1"># Larger spatial chunks</span>
+            <span class="n">lon</span><span class="o">=</span><span class="mi">200</span>      <span class="c1"># Larger spatial chunks</span>
+        <span class="p">),</span>
+        <span class="n">compression</span><span class="o">=</span><span class="n">CompressionConfig</span><span class="p">(</span>
+            <span class="n">method</span><span class="o">=</span><span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">,</span>  <span class="c1"># Higher compression for network transfer</span>
+            <span class="n">clevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">shuffle</span><span class="o">=</span><span class="s2">&quot;shuffle&quot;</span>
+        <span class="p">),</span>
+        <span class="n">packing</span><span class="o">=</span><span class="n">PackingConfig</span><span class="p">(</span>
+            <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">bits</span><span class="o">=</span><span class="mi">16</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<p>Common issues and solutions:</p>
+<ol class="arabic simple">
+<li><p><strong>Region Conflicts</strong>: Ensure processes write to different regions</p></li>
+<li><p><strong>Memory Issues</strong>: Monitor memory usage and adjust chunking</p></li>
+<li><p><strong>Network Errors</strong>: Implement retry logic for cloud storage</p></li>
+<li><p><strong>Data Integrity</strong>: Use validation to check final archive</p></li>
+<li><p><strong>Performance</strong>: Profile and optimize chunking strategy</p></li>
+</ol>
+<section id="example-troubleshooting">
+<h3>Example Troubleshooting:<a class="headerlink" href="#example-troubleshooting" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add detailed logging for troubleshooting</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="c1"># Enable debug logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="si">%(name)s</span><span class="s2"> - </span><span class="si">%(levelname)s</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Create converter with detailed logging</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">ZarrConverterConfig</span><span class="p">(</span>
+        <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+        <span class="n">compression</span><span class="o">=</span><span class="n">CompressionConfig</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">),</span>
+        <span class="n">packing</span><span class="o">=</span><span class="n">PackingConfig</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="mi">16</span><span class="p">),</span>
+        <span class="n">retries_on_missing</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">missing_check_vars</span><span class="o">=</span><span class="s2">&quot;all&quot;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Write region with verbose logging</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;archive.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will provide detailed information about:
+- Region determination
+- Data processing steps
+- Compression and packing
+- Retry attempts
+- Error conditions</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analysis Tool</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="datamesh.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Datamesh Integration</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#template-creation">Template Creation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-writing">Region Writing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-region-determination">Automatic Region Determination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-region-specification">Manual Region Specification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-support">CLI Support</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Template Creation:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Region Writing:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-parallel-workflow">Complete Parallel Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#containerized-parallel-processing">Containerized Parallel Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits">Benefits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">Error Handling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-and-logging">Monitoring and Logging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-validation">Example with Validation:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-considerations">Performance Considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-performance-tuning">Example Performance Tuning:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cloud-storage-considerations">Cloud Storage Considerations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-troubleshooting">Example Troubleshooting:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/parallel.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

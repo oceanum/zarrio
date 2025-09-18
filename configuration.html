@@ -1,0 +1,1236 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Configuration Management &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'configuration';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Command-Line Interface" href="cli.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Configuration Management</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="configuration-management">
+<h1>Configuration Management<a class="headerlink" href="#configuration-management" title="Link to this heading">#</a></h1>
+<p>zarrio provides flexible configuration management using Pydantic models for type safety and validation.</p>
+<section id="pydantic-models">
+<h2>Pydantic Models<a class="headerlink" href="#pydantic-models" title="Link to this heading">#</a></h2>
+<p>All configuration in zarrio is managed through Pydantic models, which provide:</p>
+<ul class="simple">
+<li><p>Type safety with automatic validation</p></li>
+<li><p>Clear error messages for invalid configurations</p></li>
+<li><p>Support for nested configurations</p></li>
+<li><p>Serialization to/from YAML and JSON</p></li>
+</ul>
+</section>
+<section id="zarrconverterconfig">
+<h2>ZarrConverterConfig<a class="headerlink" href="#zarrconverterconfig" title="Link to this heading">#</a></h2>
+<p>The main configuration class is <cite>ZarrConverterConfig</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span>
+    <span class="n">compression</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">},</span>
+    <span class="n">packing</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">},</span>
+    <span class="n">time</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dim&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;append_dim&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">},</span>
+    <span class="n">variables</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;include&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span> <span class="s2">&quot;exclude&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;humidity&quot;</span><span class="p">]},</span>
+    <span class="n">target_chunk_size_mb</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>  <span class="c1"># Configurable target chunk size</span>
+    <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Demo dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;zarrio&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ZarrConverterConfig</span></code> supports the following fields:</p>
+<ul class="simple">
+<li><p><strong>chunking</strong>: Chunking configuration (time, lat, lon, depth dimensions)</p></li>
+<li><p><strong>compression</strong>: Compression settings (method, cname, clevel, shuffle)</p></li>
+<li><p><strong>packing</strong>: Data packing configuration (enabled, bits)</p></li>
+<li><p><strong>time</strong>: Time dimension configuration (dim, append_dim, global_start, global_end, freq)</p></li>
+<li><p><strong>variables</strong>: Variable selection (include, exclude)</p></li>
+<li><p><strong>missing_data</strong>: Missing data handling (check_vars, retries_on_missing, missing_check_vars)</p></li>
+<li><p><strong>datamesh</strong>: Datamesh integration configuration</p></li>
+<li><p><strong>attrs</strong>: Global attributes to add to the dataset</p></li>
+<li><p><strong>target_chunk_size_mb</strong>: Target chunk size in MB for intelligent chunking (default: 50)</p></li>
+<li><p><strong>access_pattern</strong>: Access pattern for chunking optimization (‘temporal’, ‘spatial’, ‘balanced’)</p></li>
+<li><p><strong>retries_on_missing</strong>: Number of retries for missing data (backward compatibility)</p></li>
+<li><p><strong>missing_check_vars</strong>: Variables to check for missing data (backward compatibility)</p></li>
+</ul>
+</section>
+<section id="chunking-configuration">
+<h2>Chunking Configuration<a class="headerlink" href="#chunking-configuration" title="Link to this heading">#</a></h2>
+<p>Chunking can be configured through the <cite>ChunkingConfig</cite> model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChunkingConfig</span>
+
+<span class="n">chunking</span> <span class="o">=</span> <span class="n">ChunkingConfig</span><span class="p">(</span>
+    <span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">lon</span><span class="o">=</span><span class="mi">100</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="packing-configuration">
+<h2>Packing Configuration<a class="headerlink" href="#packing-configuration" title="Link to this heading">#</a></h2>
+<p>Packing can be configured through the <cite>PackingConfig</cite> model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PackingConfig</span>
+
+<span class="n">packing</span> <span class="o">=</span> <span class="n">PackingConfig</span><span class="p">(</span>
+    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">bits</span><span class="o">=</span><span class="mi">16</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="enhanced-packing-features">
+<h3>Enhanced Packing Features<a class="headerlink" href="#enhanced-packing-features" title="Link to this heading">#</a></h3>
+<p>The enhanced packing functionality provides several improvements over basic packing:</p>
+<dl>
+<dt>Priority-Based Range Determination:</dt><dd><p>The enhanced packing system uses a clear priority order for determining the min/max values used for packing:</p>
+<ol class="arabic simple">
+<li><p><strong>Manual ranges</strong> (if provided)</p></li>
+<li><p><strong>Variable attributes</strong> (valid_min/valid_max)</p></li>
+<li><p><strong>Automatic calculation</strong> from data (with warnings)</p></li>
+</ol>
+</dd>
+<dt>Manual Range Specification:</dt><dd><p>Users can explicitly specify min/max ranges for variables:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PackingConfig</span>
+
+<span class="n">packing</span> <span class="o">=</span> <span class="n">PackingConfig</span><span class="p">(</span>
+    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">bits</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">manual_ranges</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span>
+        <span class="s2">&quot;pressure&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mi">90000</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">110000</span><span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>Automatic Range Calculation with Buffer:</dt><dd><p>When no ranges are provided, the system automatically calculates them from the data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PackingConfig</span>
+
+<span class="n">packing</span> <span class="o">=</span> <span class="n">PackingConfig</span><span class="p">(</span>
+    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">bits</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">auto_buffer_factor</span><span class="o">=</span><span class="mf">0.05</span>  <span class="c1"># 5% buffer</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>Range Exceeded Validation:</dt><dd><p>Optional checking to ensure data doesn’t exceed specified ranges:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PackingConfig</span>
+
+<span class="n">packing</span> <span class="o">=</span> <span class="n">PackingConfig</span><span class="p">(</span>
+    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">bits</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">manual_ranges</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}},</span>
+    <span class="n">check_range_exceeded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">range_exceeded_action</span><span class="o">=</span><span class="s2">&quot;error&quot;</span>  <span class="c1"># or &quot;warn&quot; or &quot;ignore&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</section>
+</section>
+<section id="compression-configuration">
+<h2>Compression Configuration<a class="headerlink" href="#compression-configuration" title="Link to this heading">#</a></h2>
+<p>Compression can be configured through the <cite>CompressionConfig</cite> model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompressionConfig</span>
+
+<span class="n">compression</span> <span class="o">=</span> <span class="n">CompressionConfig</span><span class="p">(</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">,</span>
+    <span class="n">cname</span><span class="o">=</span><span class="s2">&quot;zstd&quot;</span><span class="p">,</span>
+    <span class="n">clevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="s2">&quot;shuffle&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="time-configuration">
+<h2>Time Configuration<a class="headerlink" href="#time-configuration" title="Link to this heading">#</a></h2>
+<p>Time handling can be configured through the <cite>TimeConfig</cite> model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeConfig</span>
+
+<span class="n">time_config</span> <span class="o">=</span> <span class="n">TimeConfig</span><span class="p">(</span>
+    <span class="n">dim</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">append_dim</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">global_start</span><span class="o">=</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span>
+    <span class="n">global_end</span><span class="o">=</span><span class="s2">&quot;2023-12-31&quot;</span><span class="p">,</span>
+    <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;1D&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="access-pattern-configuration">
+<h2>Access Pattern Configuration<a class="headerlink" href="#access-pattern-configuration" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">access_pattern</span></code> field controls how intelligent chunking optimizes the data layout:</p>
+<ul class="simple">
+<li><p><strong>temporal</strong>: Optimized for time series analysis (large time chunks, smaller spatial chunks)</p></li>
+<li><p><strong>spatial</strong>: Optimized for spatial analysis (smaller time chunks, larger spatial chunks)</p></li>
+<li><p><strong>balanced</strong>: Good performance for mixed workloads (moderate chunking across all dimensions)</p></li>
+</ul>
+<p>Programmatic Configuration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">access_pattern</span><span class="o">=</span><span class="s2">&quot;temporal&quot;</span>  <span class="c1"># Optimize for time series analysis</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>YAML Configuration:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml</span>
+<span class="nt">access_pattern</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temporal</span>
+<span class="nt">chunking</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">  </span><span class="nt">lat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="w">  </span><span class="nt">lon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+</pre></div>
+</div>
+<p>JSON Configuration:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;access_pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temporal&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;chunking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lon&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Variable handling can be configured through the <cite>VariableConfig</cite> model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VariableConfig</span>
+
+<span class="n">variables</span> <span class="o">=</span> <span class="n">VariableConfig</span><span class="p">(</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;pressure&quot;</span><span class="p">],</span>
+    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;humidity&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="loading-from-files">
+<h2>Loading from Files<a class="headerlink" href="#loading-from-files" title="Link to this heading">#</a></h2>
+<p>Configuration can be loaded from YAML or JSON files:</p>
+<section id="yaml-example">
+<h3>YAML Example:<a class="headerlink" href="#yaml-example" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml</span>
+<span class="nt">chunking</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span>
+<span class="w">  </span><span class="nt">lat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<span class="w">  </span><span class="nt">lon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
+<span class="nt">compression</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">blosc:zstd:2</span>
+<span class="w">  </span><span class="nt">clevel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">packing</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">bits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+<span class="nt">time</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<span class="w">  </span><span class="nt">append_dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<span class="w">  </span><span class="nt">global_start</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2020-01-01&quot;</span>
+<span class="w">  </span><span class="nt">global_end</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2023-12-31&quot;</span>
+<span class="w">  </span><span class="nt">freq</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1D&quot;</span>
+<span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">include</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temperature</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pressure</span>
+<span class="w">  </span><span class="nt">exclude</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">humidity</span>
+<span class="nt">attrs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YAML Config Demo</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+</pre></div>
+</div>
+</section>
+<section id="loading">
+<h3>Loading:<a class="headerlink" href="#loading" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="o">.</span><span class="n">from_yaml_file</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="json-example">
+<h3>JSON Example:<a class="headerlink" href="#json-example" title="Link to this heading">#</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;chunking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">125</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lon&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">110</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;blosc:lz4:1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;clevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;packing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;bits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;dim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;append_dim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;global_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;global_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2023-12-31&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;freq&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1D&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;include&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pressure&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;humidity&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;attrs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JSON Config Demo&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Loading:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="o">.</span><span class="n">from_json_file</span><span class="p">(</span><span class="s2">&quot;config.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="programmatic-configuration">
+<h2>Programmatic Configuration<a class="headerlink" href="#programmatic-configuration" title="Link to this heading">#</a></h2>
+<p>Configuration can also be created programmatically:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ZarrConverterConfig</span><span class="p">,</span>
+    <span class="n">ChunkingConfig</span><span class="p">,</span>
+    <span class="n">PackingConfig</span><span class="p">,</span>
+    <span class="n">CompressionConfig</span><span class="p">,</span>
+    <span class="n">TimeConfig</span><span class="p">,</span>
+    <span class="n">VariableConfig</span>
+<span class="p">)</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+    <span class="n">compression</span><span class="o">=</span><span class="n">CompressionConfig</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">),</span>
+    <span class="n">packing</span><span class="o">=</span><span class="n">PackingConfig</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="mi">16</span><span class="p">),</span>
+    <span class="n">time</span><span class="o">=</span><span class="n">TimeConfig</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">append_dim</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">),</span>
+    <span class="n">variables</span><span class="o">=</span><span class="n">VariableConfig</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;humidity&quot;</span><span class="p">]),</span>
+    <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Programmatic Config Demo&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;zarrio&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="validation">
+<h2>Validation<a class="headerlink" href="#validation" title="Link to this heading">#</a></h2>
+<p>Pydantic models automatically validate configurations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+        <span class="n">chunking</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>  <span class="c1"># Will generate warnings</span>
+    <span class="p">)</span>
+<span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="missing-data-handling-configuration">
+<h2>Missing Data Handling Configuration<a class="headerlink" href="#missing-data-handling-configuration" title="Link to this heading">#</a></h2>
+<p>zarrio provides robust missing data handling through the <code class="docutils literal notranslate"><span class="pre">MissingDataConfig</span></code> model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span><span class="p">,</span> <span class="n">MissingDataConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">missing_data</span><span class="o">=</span><span class="n">MissingDataConfig</span><span class="p">(</span>
+        <span class="n">missing_check_vars</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>      <span class="c1"># Check all variables for missing data</span>
+        <span class="n">retries_on_missing</span><span class="o">=</span><span class="mi">3</span>           <span class="c1"># Retry up to 3 times if missing data is detected</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">MissingDataConfig</span></code> supports the following fields:</p>
+<ul class="simple">
+<li><p><strong>missing_check_vars</strong>: Variables to check for missing values (“all”, None, or list of variable names) (default: “all”)</p></li>
+<li><p><strong>retries_on_missing</strong>: Number of retries if missing values are encountered (default: 0, range: 0-10)</p></li>
+</ul>
+<p>The missing data detection system automatically checks for missing data after writing operations by comparing the source dataset with the written Zarr archive. This is particularly useful for detecting transient failures during parallel processing.</p>
+<p>When missing data is detected and retries are enabled, zarrio automatically retries the operation with exponential backoff:</p>
+<ol class="arabic simple">
+<li><p>First retry: 0.1 second delay</p></li>
+<li><p>Second retry: 0.2 second delay</p></li>
+<li><p>Third retry: 0.3 second delay</p></li>
+<li><p>And so on…</p></li>
+</ol>
+<p>This approach allows the system to recover from transient issues such as network instability, file system contention, or memory pressure.</p>
+<p>Check all variables with 2 retries:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">missing_data</span><span class="o">=</span><span class="n">MissingDataConfig</span><span class="p">(</span>
+        <span class="n">missing_check_vars</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+        <span class="n">retries_on_missing</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Check specific variables with 3 retries:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">missing_data</span><span class="o">=</span><span class="n">MissingDataConfig</span><span class="p">(</span>
+        <span class="n">missing_check_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;pressure&quot;</span><span class="p">],</span>
+        <span class="n">retries_on_missing</span><span class="o">=</span><span class="mi">3</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Disable missing data checking:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">missing_data</span><span class="o">=</span><span class="n">MissingDataConfig</span><span class="p">(</span>
+        <span class="n">missing_check_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">retries_on_missing</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Missing data handling can also be configured in YAML files:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml</span>
+<span class="nt">missing_data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">missing_check_vars</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;all&quot;</span>
+<span class="w">  </span><span class="nt">retries_on_missing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">chunking</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">  </span><span class="nt">lat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="w">  </span><span class="nt">lon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+</pre></div>
+</div>
+<p>Missing data handling options are available through the CLI:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert with retry logic</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--retries-on-missing<span class="w"> </span><span class="m">3</span>
+
+<span class="c1"># Append with retry logic</span>
+zarrio<span class="w"> </span>append<span class="w"> </span>new_data.nc<span class="w"> </span>existing.zarr<span class="w"> </span>--retries-on-missing<span class="w"> </span><span class="m">2</span>
+
+<span class="c1"># Create template with retry logic</span>
+zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span>--retries-on-missing<span class="w"> </span><span class="m">1</span>
+
+<span class="c1"># Write region with retry logic</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data.nc<span class="w"> </span>archive.zarr<span class="w"> </span>--retries-on-missing<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h2>Access Pattern Configuration<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">access_pattern</span></code> field controls how intelligent chunking optimizes the data layout for different access patterns:</p>
+<ul class="simple">
+<li><p><strong>temporal</strong>: Optimized for time series analysis (large time chunks, smaller spatial chunks)</p></li>
+<li><p><strong>spatial</strong>: Optimized for spatial analysis (smaller time chunks, larger spatial chunks)</p></li>
+<li><p><strong>balanced</strong>: Good performance for mixed workloads (moderate chunking across all dimensions)</p></li>
+</ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">intelligent_chunking</span></code> is enabled in the <code class="docutils literal notranslate"><span class="pre">create-template</span></code> command, the access pattern determines how the chunking is calculated based on the full archive dimensions.</p>
+<p>Programmatic Configuration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">access_pattern</span><span class="o">=</span><span class="s2">&quot;temporal&quot;</span>  <span class="c1"># Optimize for time series analysis</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>YAML Configuration:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml</span>
+<span class="nt">access_pattern</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temporal</span>
+<span class="nt">chunking</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">  </span><span class="nt">lat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="w">  </span><span class="nt">lon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+</pre></div>
+</div>
+<p>JSON Configuration:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;access_pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temporal&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;chunking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lon&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>CLI Usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create template with intelligent chunking for temporal analysis</span>
+zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--intelligent-chunking<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--access-pattern<span class="w"> </span>temporal
+
+<span class="c1"># Create template with intelligent chunking for spatial analysis</span>
+zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--intelligent-chunking<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--access-pattern<span class="w"> </span>spatial
+
+<span class="c1"># Create template with intelligent chunking for balanced access</span>
+zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--intelligent-chunking<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--access-pattern<span class="w"> </span>balanced
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p><strong>Moderate Retries</strong>: Use 2-3 retries for most use cases</p></li>
+<li><p><strong>Aggressive Retries</strong>: Increase for very large or unstable environments</p></li>
+<li><p><strong>Variable Selection</strong>: Specify <code class="docutils literal notranslate"><span class="pre">missing_check_vars</span></code> to focus on critical variables</p></li>
+<li><p><strong>Monitoring</strong>: Watch logs for frequent retries which might indicate underlying issues</p></li>
+<li><p><strong>Disabled Retries</strong>: Set to 0 for deterministic environments where failures should be immediate errors</p></li>
+</ol>
+</section>
+<section id="configuration-with-zarrconverter">
+<h2>Configuration with ZarrConverter<a class="headerlink" href="#configuration-with-zarrconverter" title="Link to this heading">#</a></h2>
+<p>Once you have a configuration, you can use it with ZarrConverter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span>
+    <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">,</span>
+    <span class="n">packing</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;input.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;output.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="cli-configuration">
+<h2>CLI Configuration<a class="headerlink" href="#cli-configuration" title="Link to this heading">#</a></h2>
+<p>Configuration files can also be used with the CLI:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--config<span class="w"> </span>config.yaml
+</pre></div>
+</div>
+</section>
+<section id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading">#</a></h2>
+<p>Some configuration can also be set through environment variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ONZARR2_LOG_LEVEL</span><span class="o">=</span>DEBUG
+<span class="nb">export</span><span class="w"> </span><span class="nv">ONZARR2_CHUNK_SIZE_TIME</span><span class="o">=</span><span class="m">100</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">ONZARR2_COMPRESSION</span><span class="o">=</span>blosc:zstd:3
+</pre></div>
+</div>
+</section>
+<section id="default-configuration">
+<h2>Default Configuration<a class="headerlink" href="#default-configuration" title="Link to this heading">#</a></h2>
+<p>zarrio provides sensible defaults for all configuration options:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span>
+
+<span class="c1"># Default config</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">()</span>
+
+<span class="c1"># Shows default values:</span>
+<span class="c1"># - chunking: {}</span>
+<span class="c1"># - compression: None</span>
+<span class="c1"># - packing: {&quot;enabled&quot;: False, &quot;bits&quot;: 16}</span>
+<span class="c1"># - time: {&quot;dim&quot;: &quot;time&quot;, &quot;append_dim&quot;: &quot;time&quot;}</span>
+<span class="c1"># - variables: {&quot;include&quot;: None, &quot;exclude&quot;: None}</span>
+<span class="c1"># - attrs: {}</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Use Configuration Files</strong>: For complex setups, use YAML or JSON configuration files</p></li>
+<li><p><strong>Validate Early</strong>: Let Pydantic validate your configurations before using them</p></li>
+<li><p><strong>Type Safety</strong>: Take advantage of type hints for better development experience</p></li>
+<li><p><strong>Environment Overrides</strong>: Use environment variables for deployment-specific settings</p></li>
+<li><p><strong>Documentation</strong>: Document your configuration files with comments</p></li>
+</ol>
+<section id="example-configuration-file-with-comments">
+<h3>Example Configuration File with Comments:<a class="headerlink" href="#example-configuration-file-with-comments" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml - Production configuration for zarrio</span>
+<span class="c1">#</span>
+<span class="c1"># This configuration is optimized for:</span>
+<span class="c1"># - Large climate datasets (1° global daily data)</span>
+<span class="c1"># - Balanced access patterns (time series and spatial analysis)</span>
+<span class="c1"># - High compression ratio</span>
+<span class="c1"># - Efficient storage</span>
+
+<span class="c1"># Chunking strategy optimized for balanced access patterns</span>
+<span class="nt">chunking</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">    </span><span class="c1"># 100 time steps per chunk (about 3-4 months)</span>
+<span class="w">  </span><span class="nt">lat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span><span class="w">      </span><span class="c1"># 50 latitude points per chunk (about 50°)</span>
+<span class="w">  </span><span class="nt">lon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">     </span><span class="c1"># 100 longitude points per chunk (about 100°)</span>
+
+<span class="c1"># Compression settings (Blosc with Zstd level 3)</span>
+<span class="nt">compression</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">blosc:zstd:3</span>
+<span class="w">  </span><span class="nt">cname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zstd</span>
+<span class="w">  </span><span class="nt">clevel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">shuffle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shuffle</span>
+
+<span class="c1"># Data packing (16-bit packing for float32 data)</span>
+<span class="nt">packing</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">bits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+
+<span class="c1"># Time dimension configuration</span>
+<span class="nt">time</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<span class="w">  </span><span class="nt">append_dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<span class="w">  </span><span class="c1"># global_start: &quot;2020-01-01&quot;  # Set at runtime</span>
+<span class="w">  </span><span class="c1"># global_end: &quot;2023-12-31&quot;    # Set at runtime</span>
+<span class="w">  </span><span class="nt">freq</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1D&quot;</span>
+
+<span class="c1"># Variable selection</span>
+<span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">include</span><span class="p">:</span><span class="w">       </span><span class="c1"># Only include these variables</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temperature</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pressure</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">humidity</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wind_speed</span>
+<span class="w">  </span><span class="nt">exclude</span><span class="p">:</span><span class="w">       </span><span class="c1"># Exclude these variables (takes precedence)</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unused_var</span>
+
+<span class="c1"># Global attributes to add</span>
+<span class="nt">attrs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Production</span><span class="nv"> </span><span class="s">Climate</span><span class="nv"> </span><span class="s">Dataset&quot;</span>
+<span class="w">  </span><span class="nt">institution</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Oceanum&quot;</span>
+<span class="w">  </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;zarrio&quot;</span>
+<span class="w">  </span><span class="nt">processing_date</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2023-01-01&quot;</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0&quot;</span>
+
+<span class="c1"># Retry configuration for missing data</span>
+<span class="nt">retries_on_missing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">missing_check_vars</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="installation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Installation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cli.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Command-Line Interface</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic-models">Pydantic Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zarrconverterconfig">ZarrConverterConfig</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chunking-configuration">Chunking Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packing-configuration">Packing Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enhanced-packing-features">Enhanced Packing Features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-configuration">Compression Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-configuration">Time Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#access-pattern-configuration">Access Pattern Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-from-files">Loading from Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yaml-example">YAML Example:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading">Loading:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-example">JSON Example:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Loading:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programmatic-configuration">Programmatic Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation">Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data-handling-configuration">Missing Data Handling Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Access Pattern Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-with-zarrconverter">Configuration with ZarrConverter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-configuration">CLI Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables">Environment Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-configuration">Default Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-configuration-file-with-comments">Example Configuration File with Comments:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/configuration.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

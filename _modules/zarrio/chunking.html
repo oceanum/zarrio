@@ -1,0 +1,1040 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zarrio.chunking &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/zarrio/chunking';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">zarrio.chunking</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for zarrio.chunking</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Chunking analysis and validation for zarrio.</span>
+
+<span class="sd">This module provides intelligent chunking recommendations based on:</span>
+<span class="sd">- Dataset dimensions</span>
+<span class="sd">- Data type size</span>
+<span class="sd">- Access patterns (temporal, spatial, balanced)</span>
+<span class="sd">- Configurable target chunk sizes for different environments</span>
+
+<span class="sd">The intelligent chunking system automatically recommends optimal chunk sizes</span>
+<span class="sd">to achieve the target chunk size (default 50 MB) while considering the </span>
+<span class="sd">dataset dimensions and access patterns.</span>
+
+<span class="sd">Target chunk size can be configured in multiple ways:</span>
+<span class="sd">1. As a function argument: get_chunk_recommendation(..., target_chunk_size_mb=100)</span>
+<span class="sd">2. As an environment variable: ZARRIFY_TARGET_CHUNK_SIZE_MB=200</span>
+<span class="sd">3. In ZarrConverterConfig: ZarrConverterConfig(target_chunk_size_mb=50)</span>
+
+<span class="sd">Environment-specific recommendations:</span>
+<span class="sd">- Local development: 10-25 MB</span>
+<span class="sd">- Production servers: 50-100 MB  </span>
+<span class="sd">- Cloud environments: 100-200 MB</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ChunkRecommendation">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.chunking.ChunkRecommendation">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChunkRecommendation</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Recommendation for chunking strategy.&quot;&quot;&quot;</span>
+    <span class="n">chunks</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">estimated_chunk_size_mb</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">warnings</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="n">notes</span><span class="p">:</span> <span class="nb">list</span></div>
+
+
+
+<div class="viewcode-block" id="ChunkAnalyzer">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.chunking.ChunkAnalyzer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChunkAnalyzer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyzes and recommends chunking strategies for climate data.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Default target chunk size ranges (MB)</span>
+    <span class="n">DEFAULT_MIN_CHUNK_SIZE_MB</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">DEFAULT_TARGET_CHUNK_SIZE_MB</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="n">DEFAULT_MAX_CHUNK_SIZE_MB</span> <span class="o">=</span> <span class="mi">100</span>
+    
+    <span class="c1"># Warning thresholds</span>
+    <span class="n">SMALL_CHUNK_WARNING_MB</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">LARGE_CHUNK_WARNING_MB</span> <span class="o">=</span> <span class="mi">100</span>
+    
+<div class="viewcode-block" id="ChunkAnalyzer.__init__">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.chunking.ChunkAnalyzer.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_chunk_size_mb</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize chunk analyzer.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            target_chunk_size_mb: Target chunk size in MB. If None, uses DEFAULT_TARGET_CHUNK_SIZE_MB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+        <span class="c1"># Allow environment variable to override target chunk size</span>
+        <span class="n">env_target</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ZARRIFY_TARGET_CHUNK_SIZE_MB&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">env_target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">env_target</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_TARGET_CHUNK_SIZE_MB</span>
+        <span class="k">elif</span> <span class="n">target_chunk_size_mb</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="o">=</span> <span class="n">target_chunk_size_mb</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_TARGET_CHUNK_SIZE_MB</span>
+            
+        <span class="c1"># Set min and max based on target</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_chunk_size_mb</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="o">//</span> <span class="mi">50</span><span class="p">)</span>  <span class="c1"># At least 1 MB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_chunk_size_mb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># Up to 2x target</span></div>
+
+    
+<div class="viewcode-block" id="ChunkAnalyzer.analyze_chunking">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.chunking.ChunkAnalyzer.analyze_chunking">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_chunking</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dimensions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">dtype_size_bytes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>  <span class="c1"># float32 default</span>
+        <span class="n">access_pattern</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;balanced&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ChunkRecommendation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze dimensions and recommend chunking strategy.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            dimensions: Dictionary of dimension names and sizes</span>
+<span class="sd">            dtype_size_bytes: Size of data type in bytes (default: 4 for float32)</span>
+<span class="sd">            access_pattern: Expected access pattern (&quot;temporal&quot;, &quot;spatial&quot;, &quot;balanced&quot;)</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            ChunkRecommendation with recommended strategy</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1"># Calculate total data size</span>
+        <span class="n">total_elements</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">total_elements</span> <span class="o">*=</span> <span class="n">size</span>
+        
+        <span class="n">total_size_mb</span> <span class="o">=</span> <span class="n">total_elements</span> <span class="o">*</span> <span class="n">dtype_size_bytes</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        
+        <span class="c1"># Recommend chunking strategy</span>
+        <span class="k">if</span> <span class="n">access_pattern</span> <span class="o">==</span> <span class="s2">&quot;temporal&quot;</span><span class="p">:</span>
+            <span class="n">chunks</span><span class="p">,</span> <span class="n">chunk_size_mb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recommend_temporal_chunking</span><span class="p">(</span>
+                <span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span>
+            <span class="p">)</span>
+            <span class="n">strategy</span> <span class="o">=</span> <span class="s2">&quot;temporal_focus&quot;</span>
+            <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Optimized for time series analysis&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">access_pattern</span> <span class="o">==</span> <span class="s2">&quot;spatial&quot;</span><span class="p">:</span>
+            <span class="n">chunks</span><span class="p">,</span> <span class="n">chunk_size_mb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recommend_spatial_chunking</span><span class="p">(</span>
+                <span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span>
+            <span class="p">)</span>
+            <span class="n">strategy</span> <span class="o">=</span> <span class="s2">&quot;spatial_focus&quot;</span>
+            <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Optimized for spatial analysis&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># balanced</span>
+            <span class="n">chunks</span><span class="p">,</span> <span class="n">chunk_size_mb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recommend_balanced_chunking</span><span class="p">(</span>
+                <span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span>
+            <span class="p">)</span>
+            <span class="n">strategy</span> <span class="o">=</span> <span class="s2">&quot;balanced&quot;</span>
+            <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Balanced for mixed access patterns&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Check for warnings</span>
+        <span class="k">if</span> <span class="n">chunk_size_mb</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">SMALL_CHUNK_WARNING_MB</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Chunk size (</span><span class="si">{</span><span class="n">chunk_size_mb</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB) is very small. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Consider increasing for better I/O performance.&quot;</span>
+            <span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">chunk_size_mb</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">LARGE_CHUNK_WARNING_MB</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Chunk size (</span><span class="si">{</span><span class="n">chunk_size_mb</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB) is large. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;This may cause memory issues with limited systems.&quot;</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># Add general notes</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total dataset size: </span><span class="si">{</span><span class="n">total_size_mb</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended chunk size: </span><span class="si">{</span><span class="n">chunk_size_mb</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target chunk size: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">ChunkRecommendation</span><span class="p">(</span>
+            <span class="n">chunks</span><span class="o">=</span><span class="n">chunks</span><span class="p">,</span>
+            <span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span>
+            <span class="n">estimated_chunk_size_mb</span><span class="o">=</span><span class="n">chunk_size_mb</span><span class="p">,</span>
+            <span class="n">warnings</span><span class="o">=</span><span class="n">warnings</span><span class="p">,</span>
+            <span class="n">notes</span><span class="o">=</span><span class="n">notes</span>
+        <span class="p">)</span></div>
+
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_recommend_temporal_chunking</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dimensions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">dtype_size_bytes</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Recommend chunking optimized for temporal access.&quot;&quot;&quot;</span>
+        <span class="n">chunks</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">time_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_time_dimension</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">time_dim</span><span class="p">:</span>
+            <span class="c1"># Favor larger time chunks for temporal analysis</span>
+            <span class="n">time_size</span> <span class="o">=</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">time_dim</span><span class="p">]</span>
+            <span class="n">time_chunk</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">time_size</span> <span class="o">//</span> <span class="mi">10</span><span class="p">))</span>  <span class="c1"># 10% of time steps</span>
+            <span class="n">chunks</span><span class="p">[</span><span class="n">time_dim</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_chunk</span>
+            
+            <span class="c1"># Calculate spatial chunks to achieve target chunk size</span>
+            <span class="c1"># For N spatial dimensions, we want: time_chunk * spatial_chunk^N * dtype_size_bytes ≈ target_elements</span>
+            <span class="n">target_elements</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="n">dtype_size_bytes</span>
+            <span class="p">)</span>
+            
+            <span class="c1"># Count spatial dimensions</span>
+            <span class="n">spatial_dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">dim</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">dim</span> <span class="o">!=</span> <span class="n">time_dim</span><span class="p">]</span>
+            <span class="n">num_spatial_dims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">num_spatial_dims</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Calculate spatial chunk size to achieve target</span>
+                <span class="n">spatial_elements_per_dim</span> <span class="o">=</span> <span class="n">target_elements</span> <span class="o">/</span> <span class="n">time_chunk</span>
+                <span class="n">spatial_chunk_per_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">spatial_elements_per_dim</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">num_spatial_dims</span><span class="p">))</span>
+                
+                <span class="c1"># Apply spatial chunks, but respect dimension limits</span>
+                <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">spatial_dims</span><span class="p">:</span>
+                    <span class="n">size</span> <span class="o">=</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span>
+                    <span class="c1"># Use the smaller of calculated chunk or dimension size</span>
+                    <span class="n">spatial_chunk</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">spatial_chunk_per_dim</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+                    <span class="c1"># Ensure minimum chunk size</span>
+                    <span class="n">spatial_chunk</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">spatial_chunk</span><span class="p">)</span>
+                    <span class="n">chunks</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="n">spatial_chunk</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># No spatial dimensions</span>
+                <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># No time dimension, distribute evenly</span>
+            <span class="n">chunks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_even_chunk_distribution</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span><span class="p">)</span>
+        
+        <span class="n">chunk_size_mb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_chunk_size_mb</span><span class="p">(</span><span class="n">chunks</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">chunk_size_mb</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_recommend_spatial_chunking</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dimensions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">dtype_size_bytes</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Recommend chunking optimized for spatial access.&quot;&quot;&quot;</span>
+        <span class="n">chunks</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">time_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_time_dimension</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">time_dim</span><span class="p">:</span>
+            <span class="c1"># Smaller time chunks for spatial analysis</span>
+            <span class="n">time_size</span> <span class="o">=</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">time_dim</span><span class="p">]</span>
+            <span class="n">time_chunk</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">time_size</span> <span class="o">//</span> <span class="mi">50</span><span class="p">))</span>  <span class="c1"># 2% of time steps</span>
+            <span class="n">chunks</span><span class="p">[</span><span class="n">time_dim</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_chunk</span>
+            
+            <span class="c1"># Calculate spatial chunks to achieve target chunk size</span>
+            <span class="c1"># For N spatial dimensions, we want: time_chunk * spatial_chunk^N * dtype_size_bytes ≈ target_elements</span>
+            <span class="n">target_elements</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="n">dtype_size_bytes</span>
+            <span class="p">)</span>
+            
+            <span class="c1"># Count spatial dimensions</span>
+            <span class="n">spatial_dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">dim</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">dim</span> <span class="o">!=</span> <span class="n">time_dim</span><span class="p">]</span>
+            <span class="n">num_spatial_dims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">num_spatial_dims</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Calculate spatial chunk size to achieve target</span>
+                <span class="n">spatial_elements_per_dim</span> <span class="o">=</span> <span class="n">target_elements</span> <span class="o">/</span> <span class="n">time_chunk</span>
+                <span class="n">spatial_chunk_per_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">spatial_elements_per_dim</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">num_spatial_dims</span><span class="p">))</span>
+                
+                <span class="c1"># Apply spatial chunks with larger minimum sizes for spatial access</span>
+                <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">spatial_dims</span><span class="p">:</span>
+                    <span class="n">size</span> <span class="o">=</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span>
+                    <span class="c1"># Use the smaller of calculated chunk or dimension size</span>
+                    <span class="n">spatial_chunk</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">spatial_chunk_per_dim</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+                    <span class="c1"># Ensure larger minimum chunk size for spatial access</span>
+                    <span class="n">spatial_chunk</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">spatial_chunk</span><span class="p">)</span>
+                    <span class="n">chunks</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="n">spatial_chunk</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># No spatial dimensions</span>
+                <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># No time dimension, favor larger spatial chunks</span>
+            <span class="n">chunks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_even_chunk_distribution</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span><span class="p">,</span> <span class="n">large_chunks</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">chunk_size_mb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_chunk_size_mb</span><span class="p">(</span><span class="n">chunks</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">chunk_size_mb</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_recommend_balanced_chunking</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dimensions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">dtype_size_bytes</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Recommend balanced chunking strategy.&quot;&quot;&quot;</span>
+        <span class="n">chunks</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">time_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_time_dimension</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">time_dim</span><span class="p">:</span>
+            <span class="c1"># Balanced approach</span>
+            <span class="n">time_size</span> <span class="o">=</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">time_dim</span><span class="p">]</span>
+            <span class="n">time_chunk</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">time_size</span> <span class="o">//</span> <span class="mi">20</span><span class="p">))</span>  <span class="c1"># 5% of time steps</span>
+            <span class="n">chunks</span><span class="p">[</span><span class="n">time_dim</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_chunk</span>
+            
+            <span class="c1"># Calculate spatial chunks to achieve target chunk size</span>
+            <span class="c1"># For N spatial dimensions, we want: time_chunk * spatial_chunk^N * dtype_size_bytes ≈ target_elements</span>
+            <span class="n">target_elements</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="n">dtype_size_bytes</span>
+            <span class="p">)</span>
+            
+            <span class="c1"># Count spatial dimensions</span>
+            <span class="n">spatial_dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">dim</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">dim</span> <span class="o">!=</span> <span class="n">time_dim</span><span class="p">]</span>
+            <span class="n">num_spatial_dims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">num_spatial_dims</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Calculate spatial chunk size to achieve target</span>
+                <span class="n">spatial_elements_per_dim</span> <span class="o">=</span> <span class="n">target_elements</span> <span class="o">/</span> <span class="n">time_chunk</span>
+                <span class="n">spatial_chunk_per_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">spatial_elements_per_dim</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">num_spatial_dims</span><span class="p">))</span>
+                
+                <span class="c1"># Apply spatial chunks with moderate minimum sizes for balanced access</span>
+                <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">spatial_dims</span><span class="p">:</span>
+                    <span class="n">size</span> <span class="o">=</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span>
+                    <span class="c1"># Use the smaller of calculated chunk or dimension size</span>
+                    <span class="n">spatial_chunk</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">spatial_chunk_per_dim</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+                    <span class="c1"># Ensure moderate minimum chunk size for balanced access</span>
+                    <span class="n">spatial_chunk</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">spatial_chunk</span><span class="p">)</span>
+                    <span class="n">chunks</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="n">spatial_chunk</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># No spatial dimensions</span>
+                <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># No time dimension, moderate chunk sizes</span>
+            <span class="n">chunks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_even_chunk_distribution</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span><span class="p">)</span>
+        
+        <span class="n">chunk_size_mb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_chunk_size_mb</span><span class="p">(</span><span class="n">chunks</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">chunk_size_mb</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_find_time_dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find the time dimension based on common names.&quot;&quot;&quot;</span>
+        <span class="n">time_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;time_counter&quot;</span><span class="p">,</span> <span class="s2">&quot;forecast_time&quot;</span><span class="p">,</span> <span class="s2">&quot;datetime&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">dim</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">time_names</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">dim</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_even_chunk_distribution</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dimensions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">dtype_size_bytes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">large_chunks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Distribute chunks evenly across all dimensions.&quot;&quot;&quot;</span>
+        <span class="n">chunks</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ndims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
+        
+        <span class="c1"># Aim for chunks of ~target size</span>
+        <span class="n">target_elements</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="n">dtype_size_bytes</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate chunk size per dimension</span>
+        <span class="n">elements_per_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">target_elements</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">ndims</span><span class="p">))</span>
+        
+        <span class="k">for</span> <span class="n">dim</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">large_chunks</span><span class="p">:</span>
+                <span class="n">chunk_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">elements_per_dim</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">chunk_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">elements_per_dim</span><span class="p">))</span>
+            <span class="n">chunks</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">chunks</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_chunk_size_mb</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chunks</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">dimensions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">dtype_size_bytes</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the actual chunk size in MB.&quot;&quot;&quot;</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">dim</span><span class="p">,</span> <span class="n">chunk_size</span> <span class="ow">in</span> <span class="n">chunks</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">:</span>
+                <span class="n">elements</span> <span class="o">*=</span> <span class="nb">min</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">dim</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="n">elements</span> <span class="o">*</span> <span class="n">dtype_size_bytes</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="ChunkAnalyzer.validate_user_chunking">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.chunking.ChunkAnalyzer.validate_user_chunking">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_user_chunking</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">user_chunks</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">dimensions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">dtype_size_bytes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validate user-provided chunking and provide feedback.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            user_chunks: User-provided chunk sizes</span>
+<span class="sd">            dimensions: Dataset dimensions</span>
+<span class="sd">            dtype_size_bytes: Size of data type in bytes</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary with validation results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">validation_results</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;valid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;warnings&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;recommendations&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;chunk_size_mb&quot;</span><span class="p">:</span> <span class="mf">0.0</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># Calculate chunk size</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">dim</span><span class="p">,</span> <span class="n">chunk_size</span> <span class="ow">in</span> <span class="n">user_chunks</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">:</span>
+                <span class="n">elements</span> <span class="o">*=</span> <span class="nb">min</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">dim</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">validation_results</span><span class="p">[</span><span class="s2">&quot;warnings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Dimension &#39;</span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s2">&#39; not found in dataset&quot;</span>
+                <span class="p">)</span>
+                <span class="n">validation_results</span><span class="p">[</span><span class="s2">&quot;valid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        
+        <span class="n">chunk_size_mb</span> <span class="o">=</span> <span class="n">elements</span> <span class="o">*</span> <span class="n">dtype_size_bytes</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">validation_results</span><span class="p">[</span><span class="s2">&quot;chunk_size_mb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">chunk_size_mb</span>
+        
+        <span class="c1"># Check chunk size limits</span>
+        <span class="k">if</span> <span class="n">chunk_size_mb</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_chunk_size_mb</span><span class="p">:</span>
+            <span class="n">validation_results</span><span class="p">[</span><span class="s2">&quot;warnings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Chunk size (</span><span class="si">{</span><span class="n">chunk_size_mb</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB) is below minimum recommended size &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">min_chunk_size_mb</span><span class="si">}</span><span class="s2"> MB). This may cause performance issues.&quot;</span>
+            <span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">chunk_size_mb</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_chunk_size_mb</span><span class="p">:</span>
+            <span class="n">validation_results</span><span class="p">[</span><span class="s2">&quot;warnings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Chunk size (</span><span class="si">{</span><span class="n">chunk_size_mb</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB) exceeds maximum recommended size &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_chunk_size_mb</span><span class="si">}</span><span class="s2"> MB). This may cause memory issues.&quot;</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># Check if chunks are too small relative to dimensions</span>
+        <span class="k">for</span> <span class="n">dim</span><span class="p">,</span> <span class="n">chunk_size</span> <span class="ow">in</span> <span class="n">user_chunks</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">:</span>
+                <span class="n">dim_size</span> <span class="o">=</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">chunk_size</span> <span class="o">&gt;</span> <span class="n">dim_size</span><span class="p">:</span>
+                    <span class="n">validation_results</span><span class="p">[</span><span class="s2">&quot;warnings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Chunk size (</span><span class="si">{</span><span class="n">chunk_size</span><span class="si">}</span><span class="s2">) for dimension &#39;</span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;exceeds dimension size (</span><span class="si">{</span><span class="n">dim_size</span><span class="si">}</span><span class="s2">). Will be clipped.&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">elif</span> <span class="n">chunk_size</span> <span class="o">&lt;</span> <span class="n">dim_size</span> <span class="o">/</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">dim_size</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+                    <span class="n">validation_results</span><span class="p">[</span><span class="s2">&quot;recommendations&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Consider increasing chunk size for dimension &#39;</span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;for better performance with large dimensions.&quot;</span>
+                    <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">validation_results</span></div>
+</div>
+
+
+
+<span class="c1"># Global analyzer instance</span>
+<span class="n">_analyzer</span> <span class="o">=</span> <span class="n">ChunkAnalyzer</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="get_chunk_recommendation">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.chunking.get_chunk_recommendation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_chunk_recommendation</span><span class="p">(</span>
+    <span class="n">dimensions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">dtype_size_bytes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="n">access_pattern</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
+    <span class="n">target_chunk_size_mb</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ChunkRecommendation</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get chunking recommendation for given dimensions.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        dimensions: Dictionary of dimension names and sizes</span>
+<span class="sd">        dtype_size_bytes: Size of data type in bytes (default: 4 for float32)</span>
+<span class="sd">        access_pattern: Expected access pattern (&quot;temporal&quot;, &quot;spatial&quot;, &quot;balanced&quot;)</span>
+<span class="sd">        target_chunk_size_mb: Target chunk size in MB. If None, uses default or environment variable.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        ChunkRecommendation with recommended strategy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">analyzer</span> <span class="o">=</span> <span class="n">ChunkAnalyzer</span><span class="p">(</span><span class="n">target_chunk_size_mb</span><span class="o">=</span><span class="n">target_chunk_size_mb</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">analyze_chunking</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span><span class="p">,</span> <span class="n">access_pattern</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="validate_chunking">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.chunking.validate_chunking">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_chunking</span><span class="p">(</span>
+    <span class="n">user_chunks</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">dimensions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">dtype_size_bytes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="n">target_chunk_size_mb</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate user-provided chunking.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        user_chunks: User-provided chunk sizes</span>
+<span class="sd">        dimensions: Dataset dimensions</span>
+<span class="sd">        dtype_size_bytes: Size of data type in bytes</span>
+<span class="sd">        target_chunk_size_mb: Target chunk size in MB. If None, uses default or environment variable.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary with validation results</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">analyzer</span> <span class="o">=</span> <span class="n">ChunkAnalyzer</span><span class="p">(</span><span class="n">target_chunk_size_mb</span><span class="o">=</span><span class="n">target_chunk_size_mb</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">validate_user_chunking</span><span class="p">(</span><span class="n">user_chunks</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">dtype_size_bytes</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

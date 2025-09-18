@@ -1,0 +1,1051 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to zarrio’s documentation! &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="welcome-to-zarrio-s-documentation">
+<h1>Welcome to zarrio’s documentation!<a class="headerlink" href="#welcome-to-zarrio-s-documentation" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>zarrio is a modern, clean library for converting scientific data formats (primarily NetCDF) to Zarr format. It was created as a complete rewrite of the original onzarr library to address maintainability issues while preserving all essential functionality and adding crucial parallel writing capabilities.</p>
+</section>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h2>
+<section id="clean-architecture">
+<h3>Clean Architecture<a class="headerlink" href="#clean-architecture" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Fresh Start</strong>: Completely new codebase without legacy constraints</p></li>
+<li><p><strong>Modular Design</strong>: Clear separation of concerns with dedicated modules</p></li>
+<li><p><strong>Modern Python</strong>: Full type hints, proper error handling, clean APIs</p></li>
+<li><p><strong>No Circular Imports</strong>: Fixed all import issues from the original design</p></li>
+</ul>
+</section>
+<section id="core-functionality">
+<h3>Core Functionality<a class="headerlink" href="#core-functionality" title="Link to this heading">#</a></h3>
+<p>All essential features have been implemented:</p>
+<ul class="simple">
+<li><ul>
+<li><p>NetCDF to Zarr conversion</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Data packing with fixed-scale offset encoding</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Flexible chunking strategies</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Compression support</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Time series handling</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Data appending to existing archives</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p><strong>Parallel writing with template creation and region writing</strong></p></li>
+</ul>
+</li>
+<li><ul>
+<li><p><strong>Pydantic configuration management and validation</strong></p></li>
+</ul>
+</li>
+<li><ul>
+<li><p><strong>Intelligent chunking analysis and recommendations</strong></p></li>
+</ul>
+</li>
+<li><ul>
+<li><p><strong>Retry logic for handling missing data</strong></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="user-interfaces">
+<h3>User Interfaces<a class="headerlink" href="#user-interfaces" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><ul>
+<li><p>Simple functional API (<code class="docutils literal notranslate"><span class="pre">convert_to_zarr</span></code>, <code class="docutils literal notranslate"><span class="pre">append_to_zarr</span></code>)</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Advanced class-based API (<code class="docutils literal notranslate"><span class="pre">ZarrConverter</span></code>)</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Command-line interface with comprehensive options</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p><strong>Pydantic configuration file support (YAML/JSON)</strong></p></li>
+</ul>
+</li>
+<li><ul>
+<li><p><strong>Intelligent chunking recommendations</strong></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="quality-assurance">
+<h3>Quality Assurance<a class="headerlink" href="#quality-assurance" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><ul>
+<li><p>Comprehensive test suite (46/46 core tests passing)</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Proper error handling with custom exceptions</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Logging for debugging and monitoring</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Documentation with examples</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<p>Install zarrio using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>zarrio
+</pre></div>
+</div>
+<p>Or install from source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/oceanum/zarrio.git
+<span class="nb">cd</span><span class="w"> </span>zarrio
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="quick-start">
+<h3>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h3>
+<p>Simple conversion:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_to_zarr</span>
+
+<span class="c1"># Convert NetCDF to Zarr</span>
+<span class="n">convert_to_zarr</span><span class="p">(</span><span class="s2">&quot;input.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;output.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Advanced conversion with configuration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span><span class="p">,</span> <span class="n">ChunkingConfig</span><span class="p">,</span> <span class="n">PackingConfig</span>
+
+<span class="c1"># Create converter with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+    <span class="n">packing</span><span class="o">=</span><span class="n">PackingConfig</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="mi">16</span><span class="p">),</span>
+    <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Demo dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;zarrio&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;input.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;output.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Command-line interface:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert NetCDF to Zarr</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr
+
+<span class="c1"># Convert with chunking</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--chunking<span class="w"> </span><span class="s2">&quot;time:100,lat:50,lon:100&quot;</span>
+
+<span class="c1"># Convert with data packing</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--packing<span class="w"> </span>--packing-bits<span class="w"> </span><span class="m">16</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="parallel-processing">
+<h2>Parallel Processing<a class="headerlink" href="#parallel-processing" title="Link to this heading">#</a></h2>
+<p>One of the key features of zarrio is its support for parallel processing of large datasets through template creation and region writing.</p>
+<p><strong>Intelligent Chunking</strong>: When creating templates, zarrio can now perform intelligent chunking based on the full archive dimensions rather than just the template dataset. This ensures optimal chunking for the entire archive.</p>
+<p>For detailed information, see the <a class="reference internal" href="parallel.html"><span class="doc">Parallel Processing</span></a> documentation.</p>
+</section>
+<section id="pydantic-configuration">
+<h2>Pydantic Configuration<a class="headerlink" href="#pydantic-configuration" title="Link to this heading">#</a></h2>
+<p>zarrio uses Pydantic for type-safe configuration management:</p>
+<section id="programmatic-configuration">
+<h3>Programmatic Configuration<a class="headerlink" href="#programmatic-configuration" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ZarrConverterConfig</span><span class="p">,</span>
+    <span class="n">ChunkingConfig</span><span class="p">,</span>
+    <span class="n">PackingConfig</span><span class="p">,</span>
+    <span class="n">CompressionConfig</span>
+<span class="p">)</span>
+
+<span class="c1"># Programmatic configuration with validation</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+    <span class="n">compression</span><span class="o">=</span><span class="n">CompressionConfig</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">),</span>
+    <span class="n">packing</span><span class="o">=</span><span class="n">PackingConfig</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="mi">16</span><span class="p">),</span>
+    <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Demo dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;zarrio&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-file-support">
+<h3>Configuration File Support<a class="headerlink" href="#configuration-file-support" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml</span>
+<span class="nt">chunking</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span>
+<span class="w">  </span><span class="nt">lat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<span class="w">  </span><span class="nt">lon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
+<span class="nt">compression</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">blosc:zstd:2</span>
+<span class="w">  </span><span class="nt">clevel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">packing</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">bits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+<span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">include</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temperature</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pressure</span>
+<span class="w">  </span><span class="nt">exclude</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">humidity</span>
+<span class="nt">attrs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YAML Config Demo</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load from YAML file</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="o">.</span><span class="n">from_config_file</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;input.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;output.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="intelligent-chunking-analysis">
+<h2>Intelligent Chunking Analysis<a class="headerlink" href="#intelligent-chunking-analysis" title="Link to this heading">#</a></h2>
+<p>zarrio provides intelligent chunking analysis:</p>
+<section id="automatic-recommendations">
+<h3>Automatic Recommendations<a class="headerlink" href="#automatic-recommendations" title="Link to this heading">#</a></h3>
+<p>When no chunking is specified, zarrio automatically analyzes the dataset and provides recommendations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># No chunking specified - automatic analysis</span>
+<span class="n">convert_to_zarr</span><span class="p">(</span>
+    <span class="s2">&quot;climate_data.nc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;climate_data.zarr&quot;</span><span class="p">,</span>
+    <span class="n">access_pattern</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span>  <span class="c1"># Optimize for mixed workloads</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="access-pattern-optimization">
+<h3>Access Pattern Optimization<a class="headerlink" href="#access-pattern-optimization" title="Link to this heading">#</a></h3>
+<p>Different strategies for different access patterns:</p>
+<ul class="simple">
+<li><p><strong>Temporal Focus</strong>: Optimized for time series analysis</p></li>
+<li><p><strong>Spatial Focus</strong>: Optimized for spatial analysis</p></li>
+<li><p><strong>Balanced</strong>: Good performance for mixed workloads</p></li>
+</ul>
+</section>
+<section id="validation-and-warnings">
+<h3>Validation and Warnings<a class="headerlink" href="#validation-and-warnings" title="Link to this heading">#</a></h3>
+<p>Validates user-provided chunking and provides actionable feedback:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuration will be validated with warnings</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>  <span class="c1"># Will generate warnings</span>
+<span class="p">)</span>
+
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+<span class="c1"># Logs warnings about suboptimal chunking</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="retry-logic-for-missing-data">
+<h2>Retry Logic for Missing Data<a class="headerlink" href="#retry-logic-for-missing-data" title="Link to this heading">#</a></h2>
+<p>zarrio implements intelligent retry logic for handling missing data:</p>
+<section id="missing-data-detection">
+<h3>Missing Data Detection<a class="headerlink" href="#missing-data-detection" title="Link to this heading">#</a></h3>
+<p>Automatically detect missing data after writing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.missing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MissingDataHandler</span>
+
+<span class="n">handler</span> <span class="o">=</span> <span class="n">MissingDataHandler</span><span class="p">(</span>
+    <span class="n">missing_check_vars</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>  <span class="c1"># Check all variables</span>
+    <span class="n">retries_on_missing</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>     <span class="c1"># Enable 3 retries</span>
+    <span class="n">time_dim</span><span class="o">=</span><span class="s2">&quot;time&quot;</span>
+<span class="p">)</span>
+
+<span class="n">has_missing</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">has_missing</span><span class="p">(</span><span class="s2">&quot;archive.zarr&quot;</span><span class="p">,</span> <span class="n">input_dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="automatic-retry-mechanism">
+<h3>Automatic Retry Mechanism<a class="headerlink" href="#automatic-retry-mechanism" title="Link to this heading">#</a></h3>
+<p>When missing data is detected, automatically retry with exponential backoff:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Handle missing data with retry logic</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">handle_missing_data</span><span class="p">(</span>
+    <span class="n">zarr_path</span><span class="o">=</span><span class="s2">&quot;archive.zarr&quot;</span><span class="p">,</span>
+    <span class="n">input_dataset</span><span class="o">=</span><span class="n">input_dataset</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">write_func</span><span class="o">=</span><span class="n">write_function</span><span class="p">,</span>  <span class="c1"># Function to retry</span>
+    <span class="o">**</span><span class="n">kwargs</span>                   <span class="c1"># Arguments for write_function</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="cli-support">
+<h3>CLI Support<a class="headerlink" href="#cli-support" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert with retry logic</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--retries-on-missing<span class="w"> </span><span class="m">3</span>
+
+<span class="c1"># Append with retry logic</span>
+zarrio<span class="w"> </span>append<span class="w"> </span>new_data.nc<span class="w"> </span>existing.zarr<span class="w"> </span>--retries-on-missing<span class="w"> </span><span class="m">2</span>
+
+<span class="c1"># Create template with retry logic</span>
+zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span>--retries-on-missing<span class="w"> </span><span class="m">1</span>
+
+<span class="c1"># Write region with retry logic</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data.nc<span class="w"> </span>archive.zarr<span class="w"> </span>--retries-on-missing<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Configuration File Support<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml with retry logic</span>
+<span class="nt">missing_data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">check_vars</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;all&quot;</span>
+<span class="w">  </span><span class="nt">retries_on_missing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">missing_check_vars</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temperature</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pressure</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load from YAML file</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="o">.</span><span class="n">from_config_file</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;input.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;output.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="compression-expectations-for-scientific-data">
+<h2>Compression Expectations for Scientific Data<a class="headerlink" href="#compression-expectations-for-scientific-data" title="Link to this heading">#</a></h2>
+<p>When working with scientific datasets like climate or oceanographic data, it’s important to understand what to expect from compression:</p>
+<section id="why-compression-ratios-are-typically-low">
+<h3>Why Compression Ratios Are Typically Low<a class="headerlink" href="#why-compression-ratios-are-typically-low" title="Link to this heading">#</a></h3>
+<p>Scientific data characteristics that affect compression:</p>
+<ol class="arabic simple">
+<li><p><strong>High entropy</strong>: Ocean/wave data contains complex, seemingly random patterns</p></li>
+<li><p><strong>High precision</strong>: Float32/Float64 values with many significant digits</p></li>
+<li><p><strong>Natural variability</strong>: Physical processes create inherently diverse data</p></li>
+<li><p><strong>Limited redundancy</strong>: Unlike text or images, scientific data has little repetitive structure</p></li>
+</ol>
+</section>
+<section id="what-this-means-for-your-data">
+<h3>What This Means for Your Data<a class="headerlink" href="#what-this-means-for-your-data" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Compression ratios of 1.0-1.1x are normal for scientific datasets</p></li>
+<li><p>Speed improvements (20-40% faster) are often more valuable than size reductions</p></li>
+<li><p>Focus on selective application rather than blanket compression</p></li>
+<li><p>Real-world testing with your actual workflows provides the best guidance</p></li>
+</ul>
+</section>
+<section id="best-strategies-for-your-data">
+<h3>Best Strategies for Your Data<a class="headerlink" href="#best-strategies-for-your-data" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Use 8-bit packing</strong> for size reduction (if precision loss is acceptable)</p></li>
+<li><p><strong>Use Blosc compression</strong> for speed improvement</p></li>
+<li><p><strong>Combination approaches</strong> for balanced benefits (Packing + Blosc)</p></li>
+<li><p><strong>Apply selectively</strong> - pack only certain variables rather than entire dataset</p></li>
+</ol>
+</section>
+<section id="performance-vs-size-trade-offs">
+<h3>Performance vs. Size Trade-offs<a class="headerlink" href="#performance-vs-size-trade-offs" title="Link to this heading">#</a></h3>
+<p>Often, the most valuable benefit is <strong>processing speed improvements</strong> rather than dramatic size reductions. Consider:</p>
+<ul class="simple">
+<li><p>Reduced disk I/O often matters more than file size for performance</p></li>
+<li><p>Compression algorithms speed up I/O operations</p></li>
+<li><p>Focus on chunking strategy - often more impactful than compression</p></li>
+</ul>
+</section>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-zarrio.core">Core Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-zarrio.models">Models Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-zarrio.packing">Packing Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-zarrio.time">Time Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-zarrio.chunking">Chunking Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-zarrio.missing">Missing Data Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-zarrio.cli">CLI Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-zarrio.config">Configuration Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-zarrio.exceptions">Exceptions Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">zarrio</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Usage Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chunking.html">Chunking Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packing.html">Data Packing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel.html">Parallel Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datamesh.html">Datamesh Integration</a></li>
+</ul>
+</div>
+</section>
+<section id="additional-information">
+<h2>Additional Information<a class="headerlink" href="#additional-information" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to zarrio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Support</a></li>
+</ul>
+</div>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<p>MIT License</p>
+</section>
+<section id="indices-and-tables">
+<h2>Indices and Tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="api.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-architecture">Clean Architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-functionality">Core Functionality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#user-interfaces">User Interfaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-assurance">Quality Assurance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-processing">Parallel Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic-configuration">Pydantic Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#programmatic-configuration">Programmatic Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-file-support">Configuration File Support</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intelligent-chunking-analysis">Intelligent Chunking Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-recommendations">Automatic Recommendations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-pattern-optimization">Access Pattern Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-and-warnings">Validation and Warnings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retry-logic-for-missing-data">Retry Logic for Missing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data-detection">Missing Data Detection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-retry-mechanism">Automatic Retry Mechanism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-support">CLI Support</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Configuration File Support</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-expectations-for-scientific-data">Compression Expectations for Scientific Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-compression-ratios-are-typically-low">Why Compression Ratios Are Typically Low</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-this-means-for-your-data">What This Means for Your Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-strategies-for-your-data">Best Strategies for Your Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-vs-size-trade-offs">Performance vs. Size Trade-offs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API Reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">Additional Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indices-and-tables">Indices and Tables</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

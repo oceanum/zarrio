@@ -1,0 +1,996 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Contributing to zarrio &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'contributing';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Datamesh Integration" href="datamesh.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Contributing to zarrio</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="contributing-to-zarrio">
+<h1>Contributing to zarrio<a class="headerlink" href="#contributing-to-zarrio" title="Link to this heading">#</a></h1>
+<p>Thank you for considering contributing to zarrio! We welcome contributions from everyone.</p>
+<section id="types-of-contributions">
+<h2>Types of Contributions<a class="headerlink" href="#types-of-contributions" title="Link to this heading">#</a></h2>
+<section id="bug-reports">
+<h3>Bug Reports<a class="headerlink" href="#bug-reports" title="Link to this heading">#</a></h3>
+<p>If you find a bug, please report it by creating an issue on GitHub with:</p>
+<ul class="simple">
+<li><p>A clear, descriptive title</p></li>
+<li><p>Steps to reproduce the bug</p></li>
+<li><p>Expected vs actual behavior</p></li>
+<li><p>Environment information (Python version, OS, etc.)</p></li>
+</ul>
+</section>
+<section id="feature-requests">
+<h3>Feature Requests<a class="headerlink" href="#feature-requests" title="Link to this heading">#</a></h3>
+<p>We welcome suggestions for new features. Please create an issue with:</p>
+<ul class="simple">
+<li><p>A clear description of the feature</p></li>
+<li><p>Use cases and benefits</p></li>
+<li><p>Any implementation ideas</p></li>
+</ul>
+</section>
+<section id="code-contributions">
+<h3>Code Contributions<a class="headerlink" href="#code-contributions" title="Link to this heading">#</a></h3>
+<p>We welcome code contributions including:</p>
+<ul class="simple">
+<li><p>Bug fixes</p></li>
+<li><p>New features</p></li>
+<li><p>Performance improvements</p></li>
+<li><p>Documentation improvements</p></li>
+<li><p>Test enhancements</p></li>
+</ul>
+</section>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<section id="setting-up-development-environment">
+<h3>Setting Up Development Environment<a class="headerlink" href="#setting-up-development-environment" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Fork the repository on GitHub</p></li>
+<li><p>Clone your fork locally:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-username/zarrio.git
+<span class="nb">cd</span><span class="w"> </span>zarrio
+</pre></div>
+</div>
+</li>
+<li><p>Create a virtual environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># On Windows: venv\Scripts\activate</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install development dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install pre-commit hooks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="running-tests">
+<h3>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading">#</a></h3>
+<p>Run the test suite:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+<p>Run tests with coverage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>--cov<span class="o">=</span>zarrio
+</pre></div>
+</div>
+</section>
+<section id="code-style">
+<h3>Code Style<a class="headerlink" href="#code-style" title="Link to this heading">#</a></h3>
+<p>We follow these style guidelines:</p>
+<ul class="simple">
+<li><p><strong>Black</strong>: Code formatting</p></li>
+<li><p><strong>Flake8</strong>: Code style checking</p></li>
+<li><p><strong>Mypy</strong>: Type checking</p></li>
+<li><p><strong>PEP 8</strong>: Python style guide</p></li>
+</ul>
+<p>Run code formatting:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>black<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Run style checking:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>flake8
+</pre></div>
+</div>
+<p>Run type checking:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mypy<span class="w"> </span>zarrio
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pull-request-process">
+<h2>Pull Request Process<a class="headerlink" href="#pull-request-process" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Create a new branch for your feature or bugfix:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/my-new-feature
+</pre></div>
+</div>
+</li>
+<li><p>Make your changes</p></li>
+<li><p>Add tests for your changes</p></li>
+<li><p>Ensure all tests pass:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+</li>
+<li><p>Format your code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>black<span class="w"> </span>.
+</pre></div>
+</div>
+</li>
+<li><p>Check code style:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>flake8
+</pre></div>
+</div>
+</li>
+<li><p>Check types:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mypy<span class="w"> </span>zarrio
+</pre></div>
+</div>
+</li>
+<li><p>Commit your changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s2">&quot;Add my new feature&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Push to your fork:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature/my-new-feature
+</pre></div>
+</div>
+</li>
+<li><p>Create a Pull Request on GitHub</p></li>
+</ol>
+</section>
+<section id="pull-request-guidelines">
+<h2>Pull Request Guidelines<a class="headerlink" href="#pull-request-guidelines" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Clear Description</strong>: Explain what your changes do and why</p></li>
+<li><p><strong>Related Issues</strong>: Reference any related issues</p></li>
+<li><p><strong>Tests</strong>: Include tests for your changes</p></li>
+<li><p><strong>Documentation</strong>: Update documentation as needed</p></li>
+<li><p><strong>Small Changes</strong>: Keep PRs focused on a single feature or bugfix</p></li>
+</ul>
+</section>
+<section id="code-review-process">
+<h2>Code Review Process<a class="headerlink" href="#code-review-process" title="Link to this heading">#</a></h2>
+<p>All pull requests are reviewed by maintainers. Reviews focus on:</p>
+<ul class="simple">
+<li><p>Code quality and maintainability</p></li>
+<li><p>Correctness and performance</p></li>
+<li><p>Test coverage</p></li>
+<li><p>Documentation</p></li>
+<li><p>Following project conventions</p></li>
+</ul>
+<p>We aim to review PRs within 48 hours.</p>
+</section>
+<section id="development-workflow">
+<h2>Development Workflow<a class="headerlink" href="#development-workflow" title="Link to this heading">#</a></h2>
+<section id="branch-naming">
+<h3>Branch Naming<a class="headerlink" href="#branch-naming" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">feature/feature-name</span></code> for new features</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bugfix/bug-description</span></code> for bug fixes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/documentation-topic</span></code> for documentation changes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">perf/performance-improvement</span></code> for performance improvements</p></li>
+</ul>
+</section>
+<section id="commit-messages">
+<h3>Commit Messages<a class="headerlink" href="#commit-messages" title="Link to this heading">#</a></h3>
+<p>Follow conventional commit format:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">feat:</span> <span class="pre">Add</span> <span class="pre">new</span> <span class="pre">feature</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fix:</span> <span class="pre">Resolve</span> <span class="pre">bug</span> <span class="pre">issue</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs:</span> <span class="pre">Update</span> <span class="pre">documentation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test:</span> <span class="pre">Add</span> <span class="pre">test</span> <span class="pre">coverage</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refactor:</span> <span class="pre">Improve</span> <span class="pre">code</span> <span class="pre">structure</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">perf:</span> <span class="pre">Optimize</span> <span class="pre">performance</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chore:</span> <span class="pre">Maintenance</span> <span class="pre">tasks</span></code></p></li>
+</ul>
+</section>
+<section id="versioning">
+<h3>Versioning<a class="headerlink" href="#versioning" title="Link to this heading">#</a></h3>
+<p>We follow semantic versioning (SemVer):</p>
+<ul class="simple">
+<li><p>MAJOR version for incompatible API changes</p></li>
+<li><p>MINOR version for new functionality</p></li>
+<li><p>PATCH version for bug fixes</p></li>
+</ul>
+</section>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
+<section id="writing-documentation">
+<h3>Writing Documentation<a class="headerlink" href="#writing-documentation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use clear, concise language</p></li>
+<li><p>Provide examples for complex concepts</p></li>
+<li><p>Keep documentation up to date with code changes</p></li>
+<li><p>Use proper formatting and structure</p></li>
+</ul>
+</section>
+<section id="building-documentation">
+<h3>Building Documentation<a class="headerlink" href="#building-documentation" title="Link to this heading">#</a></h3>
+<p>Build the documentation locally:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docs
+make<span class="w"> </span>html
+</pre></div>
+</div>
+<p>The built documentation will be in <code class="docutils literal notranslate"><span class="pre">docs/_build/html/</span></code>.</p>
+</section>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h2>
+<section id="test-structure">
+<h3>Test Structure<a class="headerlink" href="#test-structure" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Unit tests for individual functions and classes</p></li>
+<li><p>Integration tests for combined functionality</p></li>
+<li><p>CLI tests for command-line interface</p></li>
+<li><p>Performance tests for critical paths</p></li>
+</ul>
+</section>
+<section id="test-guidelines">
+<h3>Test Guidelines<a class="headerlink" href="#test-guidelines" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use descriptive test names</p></li>
+<li><p>Test edge cases and error conditions</p></li>
+<li><p>Mock external dependencies when appropriate</p></li>
+<li><p>Keep tests fast and isolated</p></li>
+<li><p>Use fixtures for common setup</p></li>
+</ul>
+</section>
+<section id="running-specific-tests">
+<h3>Running Specific Tests<a class="headerlink" href="#running-specific-tests" title="Link to this heading">#</a></h3>
+<p>Run a specific test file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/test_core.py
+</pre></div>
+</div>
+<p>Run a specific test:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/test_core.py::test_zarr_converter_basic
+</pre></div>
+</div>
+<p>Run tests with verbose output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>-v
+</pre></div>
+</div>
+</section>
+</section>
+<section id="code-quality">
+<h2>Code Quality<a class="headerlink" href="#code-quality" title="Link to this heading">#</a></h2>
+<section id="type-hints">
+<h3>Type Hints<a class="headerlink" href="#type-hints" title="Link to this heading">#</a></h3>
+<p>All new code should include type hints. Use:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">typing</span></code> module for complex types</p></li>
+<li><p>Generic types when appropriate</p></li>
+<li><p>Type aliases for complex type expressions</p></li>
+</ul>
+</section>
+<section id="error-handling">
+<h3>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use custom exceptions for domain-specific errors</p></li>
+<li><p>Provide clear error messages</p></li>
+<li><p>Handle edge cases gracefully</p></li>
+<li><p>Log errors appropriately</p></li>
+</ul>
+</section>
+<section id="performance">
+<h3>Performance<a class="headerlink" href="#performance" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Profile performance-critical code</p></li>
+<li><p>Avoid unnecessary computations</p></li>
+<li><p>Use efficient algorithms and data structures</p></li>
+<li><p>Consider memory usage</p></li>
+</ul>
+</section>
+<section id="security">
+<h3>Security<a class="headerlink" href="#security" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Validate all inputs</p></li>
+<li><p>Handle file paths securely</p></li>
+<li><p>Avoid injection vulnerabilities</p></li>
+<li><p>Follow security best practices</p></li>
+</ul>
+</section>
+</section>
+<section id="community">
+<h2>Community<a class="headerlink" href="#community" title="Link to this heading">#</a></h2>
+<section id="communication">
+<h3>Communication<a class="headerlink" href="#communication" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Be respectful and inclusive</p></li>
+<li><p>Provide constructive feedback</p></li>
+<li><p>Help others learn and grow</p></li>
+<li><p>Share knowledge and experience</p></li>
+</ul>
+</section>
+<section id="code-of-conduct">
+<h3>Code of Conduct<a class="headerlink" href="#code-of-conduct" title="Link to this heading">#</a></h3>
+<p>We follow a code of conduct that promotes:</p>
+<ul class="simple">
+<li><p>Respect and inclusivity</p></li>
+<li><p>Professionalism</p></li>
+<li><p>Constructive feedback</p></li>
+<li><p>Collaborative spirit</p></li>
+</ul>
+</section>
+</section>
+<section id="reporting-issues">
+<h2>Reporting Issues<a class="headerlink" href="#reporting-issues" title="Link to this heading">#</a></h2>
+<p>If you encounter issues with the contribution process:</p>
+<ol class="arabic simple">
+<li><p>Check existing issues and documentation</p></li>
+<li><p>Ask questions in issues or discussions</p></li>
+<li><p>Contact maintainers directly if needed</p></li>
+</ol>
+</section>
+<section id="thank-you">
+<h2>Thank You!<a class="headerlink" href="#thank-you" title="Link to this heading">#</a></h2>
+<p>Thank you for contributing to zarrio! Your contributions help make this project better for everyone.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="datamesh.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Datamesh Integration</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="changelog.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Changelog</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-contributions">Types of Contributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bug-reports">Bug Reports</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-requests">Feature Requests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-contributions">Code Contributions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-development-environment">Setting Up Development Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-tests">Running Tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-style">Code Style</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pull-request-process">Pull Request Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-review-process">Code Review Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-workflow">Development Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#branch-naming">Branch Naming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-messages">Commit Messages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning">Versioning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-documentation">Writing Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-documentation">Building Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-structure">Test Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-guidelines">Test Guidelines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-specific-tests">Running Specific Tests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-quality">Code Quality</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-hints">Type Hints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">Error Handling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance">Performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#security">Security</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community">Community</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#communication">Communication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-of-conduct">Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-issues">Reporting Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thank-you">Thank You!</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/contributing.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

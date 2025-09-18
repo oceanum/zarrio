@@ -1,0 +1,799 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Changelog &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'changelog';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Docker Support" href="docker.html" />
+    <link rel="prev" title="Contributing to zarrio" href="contributing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Changelog</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>0.1.0 (2025-01-01)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="features">
+<h3>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Complete Rewrite</strong>: Fresh, clean codebase without legacy constraints</p></li>
+<li><p><strong>Modern Architecture</strong>: Modular design with clear separation of concerns</p></li>
+<li><p><strong>Full Type Safety</strong>: Comprehensive type hints throughout the codebase</p></li>
+<li><p><strong>Pydantic Configuration</strong>: Type-safe configuration management with validation</p></li>
+<li><p><strong>Intelligent Chunking</strong>: Automatic chunking analysis and recommendations</p></li>
+<li><p><strong>Parallel Writing</strong>: Template creation and region writing for parallel processing</p></li>
+<li><p><strong>Command-Line Interface</strong>: Comprehensive CLI with intuitive options</p></li>
+<li><p><strong>Configuration Files</strong>: YAML and JSON configuration file support</p></li>
+<li><p><strong>Data Packing</strong>: Fixed-scale offset encoding for compression</p></li>
+<li><p><strong>Compression Support</strong>: Blosc and other compression algorithms</p></li>
+<li><p><strong>Time Series Handling</strong>: Efficient handling of time-series data</p></li>
+<li><p><strong>Data Appending</strong>: Append new data to existing Zarr archives</p></li>
+<li><p><strong>Retry Logic</strong>: Automatic retries for handling missing data</p></li>
+<li><p><strong>Error Handling</strong>: Custom exceptions with clear error messages</p></li>
+<li><p><strong>Logging</strong>: Comprehensive logging for debugging and monitoring</p></li>
+</ul>
+</section>
+<section id="api-changes">
+<h3>API Changes<a class="headerlink" href="#api-changes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Simplified Interface</strong>: Cleaner, more intuitive APIs</p></li>
+<li><p><strong>Functional API</strong>: <code class="docutils literal notranslate"><span class="pre">convert_to_zarr</span></code>, <code class="docutils literal notranslate"><span class="pre">append_to_zarr</span></code> functions</p></li>
+<li><p><strong>Class-Based API</strong>: <code class="docutils literal notranslate"><span class="pre">ZarrConverter</span></code> class for advanced usage</p></li>
+<li><p><strong>CLI Interface</strong>: <code class="docutils literal notranslate"><span class="pre">zarrio</span></code> command with comprehensive options</p></li>
+<li><p><strong>Configuration API</strong>: Pydantic models for type-safe configuration</p></li>
+</ul>
+</section>
+<section id="breaking-changes">
+<h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Complete Rewrite</strong>: No backward compatibility with onzarr 1.x</p></li>
+<li><p><strong>New Package Name</strong>: <code class="docutils literal notranslate"><span class="pre">zarrio</span></code> instead of <code class="docutils literal notranslate"><span class="pre">onzarr</span></code></p></li>
+<li><p><strong>New Module Structure</strong>: Clean, modular organization</p></li>
+<li><p><strong>New API</strong>: Simplified, more intuitive interfaces</p></li>
+<li><p><strong>New Configuration</strong>: Pydantic-based configuration management</p></li>
+</ul>
+</section>
+<section id="improvements">
+<h3>Improvements<a class="headerlink" href="#improvements" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Maintainability</strong>: Clean, focused modules that are easy to understand and modify</p></li>
+<li><p><strong>Reliability</strong>: Proper error handling with custom exceptions</p></li>
+<li><p><strong>Performance</strong>: Optimized for modern xarray and zarr capabilities</p></li>
+<li><p><strong>Documentation</strong>: Comprehensive documentation with examples</p></li>
+<li><p><strong>Testing</strong>: Comprehensive test suite with good coverage</p></li>
+<li><p><strong>Developer Experience</strong>: Better IDE support with type hints</p></li>
+<li><p><strong>User Experience</strong>: Intuitive APIs and CLI with helpful documentation</p></li>
+</ul>
+</section>
+<section id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Circular Imports</strong>: Fixed all import issues from the original design</p></li>
+<li><p><strong>Complex Inheritance</strong>: Eliminated complex inheritance hierarchies</p></li>
+<li><p><strong>Redundant Code</strong>: Removed redundant custom implementations now available in xarray</p></li>
+<li><p><strong>Parameter Handling</strong>: Simplified parameter handling with clear validation</p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Python</strong>: 3.8+</p></li>
+<li><p><strong>xarray</strong>: 0.18.0+</p></li>
+<li><p><strong>zarr</strong>: 2.10.0+</p></li>
+<li><p><strong>numpy</strong>: 1.20.0+</p></li>
+<li><p><strong>pandas</strong>: 1.3.0+</p></li>
+<li><p><strong>click</strong>: 8.0.0+</p></li>
+<li><p><strong>pyyaml</strong>: 5.4.0+</p></li>
+<li><p><strong>dask</strong>: 2021.0.0+</p></li>
+<li><p><strong>netCDF4</strong>: 1.5.0+</p></li>
+</ul>
+</section>
+<section id="development">
+<h3>Development<a class="headerlink" href="#development" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Continuous Integration</strong>: GitHub Actions for testing and linting</p></li>
+<li><p><strong>Pre-commit Hooks</strong>: Automated code formatting and linting</p></li>
+<li><p><strong>Documentation</strong>: Sphinx documentation with ReadTheDocs theme</p></li>
+<li><p><strong>Testing</strong>: Pytest with comprehensive coverage</p></li>
+<li><p><strong>Type Checking</strong>: MyPy for static type checking</p></li>
+<li><p><strong>Code Formatting</strong>: Black for consistent code style</p></li>
+<li><p><strong>Linting</strong>: Flake8 for code quality</p></li>
+</ul>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Basic Usage</strong>: Simple conversion examples</p></li>
+<li><p><strong>Advanced Usage</strong>: Complex configuration examples</p></li>
+<li><p><strong>CLI Usage</strong>: Command-line interface examples</p></li>
+<li><p><strong>Configuration Files</strong>: YAML and JSON configuration examples</p></li>
+<li><p><strong>Parallel Processing</strong>: Template creation and region writing examples</p></li>
+<li><p><strong>Intelligent Chunking</strong>: Automatic chunking analysis examples</p></li>
+<li><p><strong>Data Packing</strong>: Compression examples with packing</p></li>
+<li><p><strong>Error Handling</strong>: Exception handling examples</p></li>
+</ul>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Installation Guide</strong>: Complete installation instructions</p></li>
+<li><p><strong>Quickstart Guide</strong>: Getting started quickly</p></li>
+<li><p><strong>API Reference</strong>: Comprehensive API documentation</p></li>
+<li><p><strong>CLI Documentation</strong>: Command-line interface reference</p></li>
+<li><p><strong>Configuration Guide</strong>: Pydantic configuration management</p></li>
+<li><p><strong>Parallel Processing</strong>: Template creation and region writing guide</p></li>
+<li><p><strong>Chunking Guide</strong>: Intelligent chunking analysis and recommendations</p></li>
+<li><p><strong>Examples</strong>: Practical usage examples</p></li>
+<li><p><strong>Contributing Guide</strong>: Developer contribution guidelines</p></li>
+<li><p><strong>Changelog</strong>: Version history and changes</p></li>
+</ul>
+</section>
+</section>
+<section id="initial-release-notes">
+<h2>Initial Release Notes<a class="headerlink" href="#initial-release-notes" title="Link to this heading">#</a></h2>
+<p>zarrio represents a complete rewrite of the original onzarr library with a focus on:</p>
+<ol class="arabic simple">
+<li><p><strong>Clean Architecture</strong>: Fresh start without legacy constraints</p></li>
+<li><p><strong>Modern Design</strong>: Full type hints, proper error handling, clean APIs</p></li>
+<li><p><strong>Enhanced Functionality</strong>: Parallel writing, Pydantic configuration, intelligent chunking</p></li>
+<li><p><strong>Better Maintainability</strong>: Easy to understand and modify</p></li>
+<li><p><strong>Improved Usability</strong>: Intuitive APIs and comprehensive documentation</p></li>
+<li><p><strong>Robust Implementation</strong>: Proper error handling and testing</p></li>
+<li><p><strong>Performance Optimization</strong>: Leveraging modern xarray and zarr capabilities</p></li>
+</ol>
+<p>Key Features in Initial Release:</p>
+<ul class="simple">
+<li><p>NetCDF to Zarr conversion with data packing</p></li>
+<li><p>Flexible chunking strategies with intelligent analysis</p></li>
+<li><p>Compression support with Blosc and other algorithms</p></li>
+<li><p>Time series handling with duplicate removal</p></li>
+<li><p>Data appending to existing archives</p></li>
+<li><p><strong>Parallel writing with template creation and region writing</strong></p></li>
+<li><p><strong>Pydantic configuration management and validation</strong></p></li>
+<li><p><strong>Intelligent chunking analysis and recommendations</strong></p></li>
+<li><p><strong>Retry logic for handling missing data</strong></p></li>
+<li><p>Comprehensive CLI with configuration file support</p></li>
+<li><p>Full test suite with excellent coverage</p></li>
+<li><p>Detailed documentation with practical examples</p></li>
+</ul>
+<p>Migration from onzarr 1.x:</p>
+<ul class="simple">
+<li><p><strong>Breaking Changes</strong>: Complete rewrite with no backward compatibility</p></li>
+<li><p><strong>New Package</strong>: <code class="docutils literal notranslate"><span class="pre">zarrio</span></code> instead of <code class="docutils literal notranslate"><span class="pre">onzarr</span></code></p></li>
+<li><p><strong>New API</strong>: Simplified, more intuitive interfaces</p></li>
+<li><p><strong>New Configuration</strong>: Pydantic-based configuration management</p></li>
+<li><p><strong>Enhanced Features</strong>: Parallel writing, intelligent chunking, retry logic</p></li>
+</ul>
+<p>Future Roadmap:</p>
+<ul class="simple">
+<li><p>Performance optimization for large datasets</p></li>
+<li><p>Additional compression algorithms</p></li>
+<li><p>Cloud storage integration</p></li>
+<li><p>Advanced parallel processing features</p></li>
+<li><p>Machine learning-based chunking recommendations</p></li>
+<li><p>Benchmarking and optimization tools</p></li>
+<li><p>Extended documentation and tutorials</p></li>
+<li><p>Community feedback and feature requests</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="contributing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Contributing to zarrio</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="docker.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Docker Support</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">0.1.0 (2025-01-01)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-changes">API Changes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#breaking-changes">Breaking Changes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improvements">Improvements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bug-fixes">Bug Fixes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#development">Development</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-release-notes">Initial Release Notes</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/changelog.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

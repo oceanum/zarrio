@@ -1,0 +1,891 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zarrio.packing &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/zarrio/packing';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">zarrio.packing</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for zarrio.packing</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Data packing functionality for zarrio.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">zarr.codecs</span><span class="w"> </span><span class="kn">import</span> <span class="n">FixedScaleOffset</span>
+    <span class="n">ZARR_AVAILABLE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">ZARR_AVAILABLE</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">FixedScaleOffset</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Packer">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.packing.Packer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Packer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles data packing using fixed-scale offset encoding.&quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="Packer.__init__">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.packing.Packer.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nbits</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the Packer.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            nbits: Number of bits for packing (8, 16, 32)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">nbits</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;nbits must be one of 8, 16, or 32&quot;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">nbits</span> <span class="o">=</span> <span class="n">nbits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;int8&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span> <span class="s2">&quot;int16&quot;</span><span class="p">,</span> <span class="mi">32</span><span class="p">:</span> <span class="s2">&quot;int32&quot;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">float_dtype</span> <span class="o">=</span> <span class="s2">&quot;float32&quot;</span></div>
+
+    
+<div class="viewcode-block" id="Packer.compute_scale_and_offset">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.packing.Packer.compute_scale_and_offset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_scale_and_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vmin</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">vmax</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute scale and offset for fixed-scale offset encoding.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            vmin: Minimum value</span>
+<span class="sd">            vmax: Maximum value</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple of (scale_factor, offset)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">vmax</span> <span class="o">==</span> <span class="n">vmin</span><span class="p">:</span>
+            <span class="n">scale_factor</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">scale_factor</span> <span class="o">=</span> <span class="p">(</span><span class="n">vmax</span> <span class="o">-</span> <span class="n">vmin</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">nbits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">vmin</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nbits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">scale_factor</span>
+        <span class="k">return</span> <span class="n">scale_factor</span><span class="p">,</span> <span class="n">offset</span></div>
+
+    
+<div class="viewcode-block" id="Packer.setup_encoding">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.packing.Packer.setup_encoding">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_encoding</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">ds</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> 
+        <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">manual_ranges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">auto_buffer_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">check_range_exceeded</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">range_exceeded_action</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;warn&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Setup encoding for dataset variables with enhanced packing options.</span>
+<span class="sd">        </span>
+<span class="sd">        Priority order for determining min/max values:</span>
+<span class="sd">        1. Manual ranges (if provided)</span>
+<span class="sd">        2. Variable attributes (valid_min/valid_max)</span>
+<span class="sd">        3. Automatic calculation from data</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            ds: Dataset to setup encoding for</span>
+<span class="sd">            variables: List of variables to pack (None for all numeric variables)</span>
+<span class="sd">            manual_ranges: Dictionary specifying manual min/max values </span>
+<span class="sd">                          e.g., {&quot;temperature&quot;: {&quot;min&quot;: 0, &quot;max&quot;: 100}}</span>
+<span class="sd">            auto_buffer_factor: Buffer factor for automatically calculated ranges</span>
+<span class="sd">            check_range_exceeded: Whether to check if data exceeds specified ranges</span>
+<span class="sd">            range_exceeded_action: Action when data exceeds range (&quot;warn&quot;, &quot;error&quot;, &quot;ignore&quot;)</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary of encoding specifications</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ZARR_AVAILABLE</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;zarr not available, packing disabled&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{}</span>
+        
+        <span class="n">encoding</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">manual_ranges</span> <span class="o">=</span> <span class="n">manual_ranges</span> <span class="ow">or</span> <span class="p">{}</span>
+        
+        <span class="c1"># Determine which variables to pack</span>
+        <span class="k">if</span> <span class="n">variables</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Pack all numeric variables</span>
+            <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span> 
+                        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)]</span>
+        
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">:</span>
+                <span class="c1"># Determine min/max values based on priority order</span>
+                <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_variable_range</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">manual_ranges</span><span class="p">,</span> <span class="n">auto_buffer_factor</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="n">vmin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">vmax</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="c1"># Check if data exceeds specified range</span>
+                    <span class="k">if</span> <span class="n">check_range_exceeded</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_check_range_exceeded</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">range_exceeded_action</span><span class="p">)</span>
+                    
+                    <span class="c1"># Compute scale and offset</span>
+                    <span class="n">scale_factor</span><span class="p">,</span> <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_scale_and_offset</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">)</span>
+                    
+                    <span class="c1"># Create FixedScaleOffset filter</span>
+                    <span class="n">filt</span> <span class="o">=</span> <span class="n">FixedScaleOffset</span><span class="p">(</span>
+                        <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span>
+                        <span class="n">scale</span><span class="o">=</span><span class="mi">1</span> <span class="o">/</span> <span class="n">scale_factor</span><span class="p">,</span>
+                        <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">float_dtype</span><span class="p">,</span>
+                        <span class="n">astype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype_map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">nbits</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    
+                    <span class="n">encoding</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">filt</span><span class="p">],</span>
+                        <span class="s2">&quot;_FillValue&quot;</span><span class="p">:</span> <span class="n">vmax</span><span class="p">,</span>
+                        <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">float_dtype</span>
+                    <span class="p">}</span>
+                    
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Setup packing for variable </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2"> with scale=</span><span class="si">{</span><span class="n">scale_factor</span><span class="si">}</span><span class="s2">, offset=</span><span class="si">{</span><span class="n">offset</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not determine valid range for variable </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">, skipping packing&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">encoding</span></div>
+
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_variable_range</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">ds</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> 
+        <span class="n">var</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+        <span class="n">manual_ranges</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span> 
+        <span class="n">auto_buffer_factor</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determine min/max values for a variable based on priority order.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            ds: Dataset containing the variable</span>
+<span class="sd">            var: Variable name</span>
+<span class="sd">            manual_ranges: Manual ranges dictionary</span>
+<span class="sd">            auto_buffer_factor: Buffer factor for automatic calculation</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple of (vmin, vmax) or (None, None) if unable to determine</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 1. Check for manual ranges</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">manual_ranges</span><span class="p">:</span>
+            <span class="n">manual_min</span> <span class="o">=</span> <span class="n">manual_ranges</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min&quot;</span><span class="p">)</span>
+            <span class="n">manual_max</span> <span class="o">=</span> <span class="n">manual_ranges</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max&quot;</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">manual_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">manual_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># Warn if manual ranges override existing attributes</span>
+                <span class="n">attr_min</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;valid_min&quot;</span><span class="p">)</span>
+                <span class="n">attr_max</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;valid_max&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">attr_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">attr_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Using manually specified range [</span><span class="si">{</span><span class="n">manual_min</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">manual_max</span><span class="si">}</span><span class="s2">] for variable </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2"> &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;instead of attributes [</span><span class="si">{</span><span class="n">attr_min</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">attr_max</span><span class="si">}</span><span class="s2">]&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">manual_min</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">manual_max</span><span class="p">)</span>
+        
+        <span class="c1"># 2. Check for variable attributes</span>
+        <span class="n">vmin</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;valid_min&quot;</span><span class="p">)</span>
+        <span class="n">vmax</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;valid_max&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">vmin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">vmax</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Add small buffer to vmax to avoid masking valid data</span>
+            <span class="n">vmax</span> <span class="o">=</span> <span class="n">vmax</span> <span class="o">+</span> <span class="p">(</span><span class="n">vmax</span> <span class="o">-</span> <span class="n">vmin</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.001</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">vmin</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">vmax</span><span class="p">)</span>
+        
+        <span class="c1"># 3. Automatically calculate from data with warning</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Variable </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2"> missing valid_min/valid_max attributes. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Automatically calculating range from data. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Note: These values may be inaccurate for archives written a region at a time.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_range_from_data</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">auto_buffer_factor</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_range_from_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">ds</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> 
+        <span class="n">var</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+        <span class="n">buffer_factor</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate min/max values from data with buffer.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            ds: Dataset containing the variable</span>
+<span class="sd">            var: Variable name</span>
+<span class="sd">            buffer_factor: Buffer factor to extend range</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple of (vmin, vmax)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Compute min and max values</span>
+        <span class="n">vmin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">vmax</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        
+        <span class="c1"># Apply buffer</span>
+        <span class="k">if</span> <span class="n">vmin</span> <span class="o">!=</span> <span class="n">vmax</span><span class="p">:</span>
+            <span class="n">range_size</span> <span class="o">=</span> <span class="n">vmax</span> <span class="o">-</span> <span class="n">vmin</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="n">range_size</span> <span class="o">*</span> <span class="n">buffer_factor</span>
+            <span class="n">vmin</span> <span class="o">-=</span> <span class="n">buffer</span>
+            <span class="n">vmax</span> <span class="o">+=</span> <span class="n">buffer</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># For constant fields, add a small buffer</span>
+            <span class="k">if</span> <span class="n">vmin</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">vmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.01</span>
+                <span class="n">vmax</span> <span class="o">=</span> <span class="mf">0.01</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">buffer</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">vmin</span><span class="p">)</span> <span class="o">*</span> <span class="n">buffer_factor</span>
+                <span class="n">vmin</span> <span class="o">-=</span> <span class="n">buffer</span>
+                <span class="n">vmax</span> <span class="o">+=</span> <span class="n">buffer</span>
+        
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated range for </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">: [</span><span class="si">{</span><span class="n">vmin</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">vmax</span><span class="si">}</span><span class="s2">] with buffer factor </span><span class="si">{</span><span class="n">buffer_factor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_range_exceeded</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">ds</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> 
+        <span class="n">var</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+        <span class="n">vmin</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
+        <span class="n">vmax</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
+        <span class="n">action</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if data exceeds specified range and take appropriate action.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            ds: Dataset containing the variable</span>
+<span class="sd">            var: Variable name</span>
+<span class="sd">            vmin: Specified minimum value</span>
+<span class="sd">            vmax: Specified maximum value</span>
+<span class="sd">            action: Action to take (&quot;warn&quot;, &quot;error&quot;, &quot;ignore&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;ignore&quot;</span><span class="p">:</span>
+            <span class="k">return</span>
+            
+        <span class="c1"># Compute actual min/max from data</span>
+        <span class="n">data_min</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">data_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        
+        <span class="c1"># Check if data exceeds range</span>
+        <span class="k">if</span> <span class="n">data_min</span> <span class="o">&lt;</span> <span class="n">vmin</span> <span class="ow">or</span> <span class="n">data_max</span> <span class="o">&gt;</span> <span class="n">vmax</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Data for variable </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2"> exceeds specified range [</span><span class="si">{</span><span class="n">vmin</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">vmax</span><span class="si">}</span><span class="s2">]. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Actual range is [</span><span class="si">{</span><span class="n">data_min</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">data_max</span><span class="si">}</span><span class="s2">].&quot;</span>
+            <span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;warn&quot;</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="Packer.add_valid_range_attributes">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.packing.Packer.add_valid_range_attributes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_valid_range_attributes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">ds</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> 
+        <span class="n">buffer_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add valid_min and valid_max attributes to variables based on their data range.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            ds: Dataset to add attributes to</span>
+<span class="sd">            buffer_factor: Factor to extend range by (e.g., 0.01 = 1% buffer)</span>
+<span class="sd">            variables: List of variables to process (None for all numeric variables)</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Dataset with added attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        
+        <span class="c1"># Determine which variables to process</span>
+        <span class="k">if</span> <span class="n">variables</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Process all numeric variables</span>
+            <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span> 
+                        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)]</span>
+        
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">):</span>
+                <span class="c1"># Compute min and max values</span>
+                <span class="n">vmin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+                <span class="n">vmax</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+                
+                <span class="c1"># Apply buffer</span>
+                <span class="k">if</span> <span class="n">vmin</span> <span class="o">!=</span> <span class="n">vmax</span><span class="p">:</span>
+                    <span class="n">range_size</span> <span class="o">=</span> <span class="n">vmax</span> <span class="o">-</span> <span class="n">vmin</span>
+                    <span class="n">buffer</span> <span class="o">=</span> <span class="n">range_size</span> <span class="o">*</span> <span class="n">buffer_factor</span>
+                    <span class="n">vmin</span> <span class="o">-=</span> <span class="n">buffer</span>
+                    <span class="n">vmax</span> <span class="o">+=</span> <span class="n">buffer</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># For constant fields, add a small buffer</span>
+                    <span class="k">if</span> <span class="n">vmin</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">vmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.01</span>
+                        <span class="n">vmax</span> <span class="o">=</span> <span class="mf">0.01</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">buffer</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">vmin</span><span class="p">)</span> <span class="o">*</span> <span class="n">buffer_factor</span>
+                        <span class="n">vmin</span> <span class="o">-=</span> <span class="n">buffer</span>
+                        <span class="n">vmax</span> <span class="o">+=</span> <span class="n">buffer</span>
+                
+                <span class="c1"># Add attributes</span>
+                <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;valid_min&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vmin</span>
+                <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;valid_max&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vmax</span>
+                
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added valid range for </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">: [</span><span class="si">{</span><span class="n">vmin</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">vmax</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">ds</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1062 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Command-Line Interface &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cli';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chunking Strategies" href="chunking.html" />
+    <link rel="prev" title="Configuration Management" href="configuration.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Command-Line Interface</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="command-line-interface">
+<h1>Command-Line Interface<a class="headerlink" href="#command-line-interface" title="Link to this heading">#</a></h1>
+<p>zarrio provides a comprehensive command-line interface for converting data to Zarr format.</p>
+<section id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">#</a></h2>
+<p>The basic syntax for the CLI is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+</pre></div>
+</div>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h2>
+<p>To get help on the available commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>To get help on a specific command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>COMMAND<span class="w"> </span>--help
+</pre></div>
+</div>
+</section>
+<section id="version-information">
+<h2>Version Information<a class="headerlink" href="#version-information" title="Link to this heading">#</a></h2>
+<p>To check the version of zarrio:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>--version
+</pre></div>
+</div>
+</section>
+<section id="convert-command">
+<h2>Convert Command<a class="headerlink" href="#convert-command" title="Link to this heading">#</a></h2>
+<p>The <cite>convert</cite> command converts data to Zarr format.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>INPUT<span class="w"> </span>OUTPUT
+</pre></div>
+</div>
+<section id="options">
+<h3>Options:<a class="headerlink" href="#options" title="Link to this heading">#</a></h3>
+<dl class="option-list">
+<dt><kbd><span class="option">--chunking <var>CHUNKING</var></span></kbd></dt>
+<dd><p>Chunking specification (e.g., ‘time:100,lat:50,lon:100’)</p>
+</dd>
+<dt><kbd><span class="option">--compression <var>COMPRESSION</var></span></kbd></dt>
+<dd><p>Compression specification (e.g., ‘blosc:zstd:3’)</p>
+</dd>
+<dt><kbd><span class="option">--packing</span></kbd></dt>
+<dd><p>Enable data packing</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>–packing-bits {8,16,32}</dt><dd><p>Number of bits for packing (default: 16)</p>
+</dd>
+</dl>
+<dl class="option-list">
+<dt><kbd><span class="option">--packing-manual-ranges <var>PACKING_MANUAL_RANGES</var></span></kbd></dt>
+<dd><p>Manual min/max ranges as JSON string (e.g., ‘{“temperature”: {“min”: 0, “max”: 100}}’)</p>
+</dd>
+<dt><kbd><span class="option">--packing-auto-buffer-factor <var>PACKING_AUTO_BUFFER_FACTOR</var></span></kbd></dt>
+<dd><p>Buffer factor for automatically calculated ranges (default: 0.01)</p>
+</dd>
+<dt><kbd><span class="option">--packing-check-range-exceeded</span></kbd></dt>
+<dd><p>Check if data exceeds specified ranges (default: True)</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>–packing-range-exceeded-action {warn,error,ignore}</dt><dd><p>Action when data exceeds range (default: warn)</p>
+</dd>
+</dl>
+<dl class="option-list">
+<dt><kbd><span class="option">--variables <var>VARIABLES</var></span></kbd></dt>
+<dd><p>Comma-separated list of variables to include</p>
+</dd>
+<dt><kbd><span class="option">--drop-variables <var>DROP_VARIABLES</var></span></kbd></dt>
+<dd><p>Comma-separated list of variables to exclude</p>
+</dd>
+<dt><kbd><span class="option">--attrs <var>ATTRS</var></span></kbd></dt>
+<dd><p>Additional global attributes as JSON string</p>
+</dd>
+<dt><kbd><span class="option">--time-dim <var>TIME_DIM</var></span></kbd></dt>
+<dd><p>Name of time dimension (default: time)</p>
+</dd>
+<dt><kbd><span class="option">--target-chunk-size-mb <var>TARGET_CHUNK_SIZE_MB</var></span></kbd></dt>
+<dd><p>Target chunk size in MB for intelligent chunking (default: 50)
+Use this option to configure chunk sizes for different environments:
+- Local development: 10-25 MB
+- Production servers: 50-100 MB
+- Cloud environments: 100-200 MB</p>
+</dd>
+<dt><kbd><span class="option">--datamesh-datasource <var>DATAMESH_DATASOURCE</var></span></kbd></dt>
+<dd><p>Datamesh datasource configuration as JSON string</p>
+</dd>
+<dt><kbd><span class="option">--datamesh-token <var>DATAMESH_TOKEN</var></span></kbd></dt>
+<dd><p>Datamesh token for authentication</p>
+</dd>
+<dt><kbd><span class="option">--datamesh-service <var>DATAMESH_SERVICE</var></span></kbd></dt>
+<dd><p>Datamesh service URL</p>
+</dd>
+<dt><kbd><span class="option">--config <var>CONFIG</var></span></kbd></dt>
+<dd><p>Configuration file (YAML or JSON)</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--access-pattern</span> <span class="pre">TEXT</span></code>: Expected access pattern (temporal, spatial, balanced)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v,</span> <span class="pre">--verbose</span></code>: Increase verbosity (use -v, -vv, or -vvv)</p></li>
+</ul>
+</section>
+<section id="examples">
+<h3>Examples:<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
+<p>Convert a single NetCDF file to Zarr:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr
+</pre></div>
+</div>
+<p>Convert with chunking:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--chunking<span class="w"> </span><span class="s2">&quot;time:100,lat:50,lon:100&quot;</span>
+</pre></div>
+</div>
+<p>Convert with compression:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--compression<span class="w"> </span><span class="s2">&quot;blosc:zstd:3&quot;</span>
+</pre></div>
+</div>
+<p>Convert with data packing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--packing<span class="w"> </span>--packing-bits<span class="w"> </span><span class="m">16</span>
+</pre></div>
+</div>
+<p>Convert with variable selection:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--variables<span class="w"> </span><span class="s2">&quot;temperature,pressure&quot;</span>
+</pre></div>
+</div>
+<p>Convert with variable exclusion:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--drop-variables<span class="w"> </span><span class="s2">&quot;humidity&quot;</span>
+</pre></div>
+</div>
+<p>Convert with additional attributes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--attrs<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Demo dataset&quot;, &quot;source&quot;: &quot;zarrio&quot;}&#39;</span>
+</pre></div>
+</div>
+<p>Convert with configuration file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--config<span class="w"> </span>config.yaml
+</pre></div>
+</div>
+</section>
+</section>
+<section id="append-command">
+<h2>Append Command<a class="headerlink" href="#append-command" title="Link to this heading">#</a></h2>
+<p>The <cite>append</cite> command appends data to an existing Zarr store.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>append<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>INPUT<span class="w"> </span>ZARR
+</pre></div>
+</div>
+<section id="id1">
+<h3>Options:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--chunking</span> <span class="pre">TEXT</span></code>: Chunking specification (e.g., ‘time:100,lat:50,lon:100’)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--variables</span> <span class="pre">TEXT</span></code>: Comma-separated list of variables to include</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--drop-variables</span> <span class="pre">TEXT</span></code>: Comma-separated list of variables to exclude</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--append-dim</span> <span class="pre">TEXT</span></code>: Dimension to append along (default: time)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--time-dim</span> <span class="pre">TEXT</span></code>: Name of time dimension (default: time)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">PATH</span></code>: Configuration file (YAML or JSON)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v,</span> <span class="pre">--verbose</span></code>: Increase verbosity (use -v, -vv, or -vvv)</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Examples:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Append data to an existing Zarr store:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>append<span class="w"> </span>new_data.nc<span class="w"> </span>existing.zarr
+</pre></div>
+</div>
+<p>Append with variable selection:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>append<span class="w"> </span>new_data.nc<span class="w"> </span>existing.zarr<span class="w"> </span>--variables<span class="w"> </span><span class="s2">&quot;temperature,pressure&quot;</span>
+</pre></div>
+</div>
+<p>Append with chunking:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>append<span class="w"> </span>new_data.nc<span class="w"> </span>existing.zarr<span class="w"> </span>--chunking<span class="w"> </span><span class="s2">&quot;time:50,lat:25,lon:50&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="create-template-command">
+<h2>Create-Template Command<a class="headerlink" href="#create-template-command" title="Link to this heading">#</a></h2>
+<p>The <cite>create-template</cite> command creates a template Zarr archive for parallel writing.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>TEMPLATE<span class="w"> </span>OUTPUT
+</pre></div>
+</div>
+<section id="id3">
+<h3>Options:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--chunking</span> <span class="pre">TEXT</span></code>: Chunking specification (e.g., ‘time:100,lat:50,lon:100’)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--compression</span> <span class="pre">TEXT</span></code>: Compression specification (e.g., ‘blosc:zstd:3’)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--packing</span></code>: Enable data packing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--packing-bits</span> <span class="pre">INTEGER</span></code>: Number of bits for packing (8, 16, or 32)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--packing-manual-ranges</span> <span class="pre">TEXT</span></code>: Manual min/max ranges as JSON string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--packing-auto-buffer-factor</span> <span class="pre">FLOAT</span></code>: Buffer factor for automatically calculated ranges</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--packing-check-range-exceeded</span></code>: Check if data exceeds specified ranges</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--packing-range-exceeded-action</span> <span class="pre">[warn|error|ignore]</span></code>: Action when data exceeds range</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--global-start</span> <span class="pre">TEXT</span></code>: Start time for full archive (e.g., ‘2020-01-01’)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--global-end</span> <span class="pre">TEXT</span></code>: End time for full archive (e.g., ‘2023-12-31’)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--freq</span> <span class="pre">TEXT</span></code>: Time frequency (e.g., ‘1D’, ‘1H’, inferred if not provided)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--metadata-only</span></code>: Create metadata only (compute=False)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--time-dim</span> <span class="pre">TEXT</span></code>: Name of time dimension (default: time)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--intelligent-chunking</span></code>: Enable intelligent chunking based on full archive dimensions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--access-pattern</span> <span class="pre">[temporal|spatial|balanced]</span></code>: Access pattern for chunking optimization (default: balanced)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">PATH</span></code>: Configuration file (YAML or JSON)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v,</span> <span class="pre">--verbose</span></code>: Increase verbosity (use -v, -vv, or -vvv)</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Examples:<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Create template for parallel writing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31
+</pre></div>
+</div>
+<p>Create template with intelligent chunking:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--intelligent-chunking<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--access-pattern<span class="w"> </span>temporal
+</pre></div>
+</div>
+<p>Create template with chunking:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--chunking<span class="w"> </span><span class="s2">&quot;time:100,lat:50,lon:100&quot;</span>
+</pre></div>
+</div>
+<p>Create template with compression:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--compression<span class="w"> </span><span class="s2">&quot;blosc:zstd:3&quot;</span>
+</pre></div>
+</div>
+<p>Create template with data packing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--packing<span class="w"> </span>--packing-bits<span class="w"> </span><span class="m">16</span>
+</pre></div>
+</div>
+<p>Create template with manual packing ranges:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--packing<span class="w"> </span>--packing-manual-ranges<span class="w"> </span><span class="s1">&#39;{&quot;temperature&quot;: {&quot;min&quot;: -50, &quot;max&quot;: 50}}&#39;</span>
+</pre></div>
+</div>
+<p>Create template with automatic range calculation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="se">\n</span><span class="w">        </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="se">\n</span><span class="w">        </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31<span class="se">\n</span><span class="w">        </span>--packing<span class="w"> </span>--packing-auto-buffer-factor<span class="w"> </span><span class="m">0</span>.05
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>analyze<span class="w"> </span>input.nc<span class="w"> </span>--interactive
+</pre></div>
+</div>
+</section>
+</section>
+<section id="parallel-processing-example">
+<h2>Parallel Processing Example<a class="headerlink" href="#parallel-processing-example" title="Link to this heading">#</a></h2>
+<p>To process thousands of NetCDF files in parallel:</p>
+<ol class="arabic simple">
+<li><p>Create template:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span>archive.zarr<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">    </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Write regions in parallel processes:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process 1</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2020.nc<span class="w"> </span>archive.zarr
+
+<span class="c1"># Process 2</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2021.nc<span class="w"> </span>archive.zarr
+
+<span class="c1"># Process 3</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2022.nc<span class="w"> </span>archive.zarr
+
+<span class="c1"># Process 4</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2023.nc<span class="w"> </span>archive.zarr
+</pre></div>
+</div>
+</section>
+<section id="configuration-file-support">
+<h2>Configuration File Support<a class="headerlink" href="#configuration-file-support" title="Link to this heading">#</a></h2>
+<p>zarrio supports configuration files in YAML or JSON format:</p>
+<section id="yaml-example">
+<h3>YAML Example:<a class="headerlink" href="#yaml-example" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml</span>
+<span class="nt">chunking</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span>
+<span class="w">  </span><span class="nt">lat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<span class="w">  </span><span class="nt">lon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
+<span class="nt">compression</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">blosc:zstd:2</span>
+<span class="w">  </span><span class="nt">clevel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">packing</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">bits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+<span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">include</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temperature</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pressure</span>
+<span class="w">  </span><span class="nt">exclude</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">humidity</span>
+<span class="nt">attrs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YAML Config Demo</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="nt">time</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<span class="w">  </span><span class="nt">append_dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<span class="nt">retries_on_missing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">missing_check_vars</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h3>Usage:<a class="headerlink" href="#usage" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--config<span class="w"> </span>config.yaml
+</pre></div>
+</div>
+</section>
+<section id="json-example">
+<h3>JSON Example:<a class="headerlink" href="#json-example" title="Link to this heading">#</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;chunking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">125</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lon&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">110</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;compression&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;blosc:lz4:1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;clevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;packing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;bits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;global_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;global_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2023-12-31&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;attrs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JSON Config Demo&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>Usage:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span>--config<span class="w"> </span>config.json
+</pre></div>
+</div>
+</section>
+</section>
+<section id="compression-expectations">
+<h2>Compression Expectations<a class="headerlink" href="#compression-expectations" title="Link to this heading">#</a></h2>
+<p>When working with scientific datasets, it’s important to understand what to expect from compression:</p>
+<ul class="simple">
+<li><p>Compression ratios of 1.0-1.1x are normal for scientific datasets</p></li>
+<li><p>Speed improvements (20-40% faster) are often more valuable than size reductions</p></li>
+<li><p>The primary benefit of compression is reduced I/O time, not file size reduction</p></li>
+<li><p>For significant size reductions, consider using data packing in combination with compression</p></li>
+</ul>
+<p>For more detailed information about compression expectations, see the main documentation.</p>
+</section>
+<section id="analyze-command">
+<h2>Analyze Command<a class="headerlink" href="#analyze-command" title="Link to this heading">#</a></h2>
+<p>The <cite>analyze</cite> command analyzes NetCDF files and provides optimization recommendations.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>analyze<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>INPUT
+</pre></div>
+</div>
+<section id="id6">
+<h3>Options:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--target-chunk-size-mb</span> <span class="pre">INTEGER</span></code>: Target chunk size in MB for analysis (default: 50)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--test-performance</span></code>: Show theoretical performance benefits</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--run-tests</span></code>: Run actual performance tests to measure real-world benefits</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-i,</span> <span class="pre">--interactive</span></code>: Interactive mode to guide configuration setup</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v,</span> <span class="pre">--verbose</span></code>: Increase verbosity (use -v, -vv, or -vvv)</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>Examples:<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>Analyze a NetCDF file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>analyze<span class="w"> </span>input.nc
+</pre></div>
+</div>
+<p>Analyze with theoretical performance testing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>analyze<span class="w"> </span>input.nc<span class="w"> </span>--test-performance
+</pre></div>
+</div>
+<p>Analyze with actual performance testing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>analyze<span class="w"> </span>input.nc<span class="w"> </span>--run-tests
+</pre></div>
+</div>
+<p>Analyze with custom target chunk size:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>analyze<span class="w"> </span>input.nc<span class="w"> </span>--target-chunk-size-mb<span class="w"> </span><span class="m">100</span>
+</pre></div>
+</div>
+<p>Analyze with interactive configuration setup:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>analyze<span class="w"> </span>input.nc<span class="w"> </span>--interactive
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zarrio<span class="w"> </span>analyze<span class="w"> </span>input.nc<span class="w"> </span>--interactive
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="configuration.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Configuration Management</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chunking.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chunking Strategies</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-information">Version Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-command">Convert Command</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#options">Options:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#append-command">Append Command</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Options:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Examples:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-template-command">Create-Template Command</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Options:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Examples:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-processing-example">Parallel Processing Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-file-support">Configuration File Support</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yaml-example">YAML Example:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-example">JSON Example:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Usage:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-expectations">Compression Expectations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyze-command">Analyze Command</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Options:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Examples:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cli.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

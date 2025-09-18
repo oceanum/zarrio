@@ -1,0 +1,1191 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chunking Strategies &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chunking';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Packing" href="packing.html" />
+    <link rel="prev" title="Command-Line Interface" href="cli.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="datamesh.html">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Chunking Strategies</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chunking-strategies">
+<h1>Chunking Strategies<a class="headerlink" href="#chunking-strategies" title="Link to this heading">#</a></h1>
+<p>zarrio provides intelligent chunking analysis and recommendations to optimize performance for different access patterns. This document explains both the conceptual approach and detailed mathematical calculations used for each access pattern.</p>
+<section id="understanding-chunking">
+<h2>Understanding Chunking<a class="headerlink" href="#understanding-chunking" title="Link to this heading">#</a></h2>
+<p>Chunking is the process of dividing large datasets into smaller, more manageable pieces for efficient storage and retrieval. In Zarr format, chunks are the fundamental unit of storage and access.</p>
+<section id="why-chunking-matters">
+<h3>Why Chunking Matters:<a class="headerlink" href="#why-chunking-matters" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>I/O Performance</strong>: Chunks that align with your access patterns improve performance</p></li>
+<li><p><strong>Memory Usage</strong>: Smaller chunks reduce memory requirements</p></li>
+<li><p><strong>Compression</strong>: Larger chunks often compress better</p></li>
+<li><p><strong>Parallel Processing</strong>: Chunks are the unit of parallelization</p></li>
+<li><p><strong>Network Transfer</strong>: Appropriate chunk sizes optimize network I/O</p></li>
+</ol>
+</section>
+<section id="chunk-size-considerations">
+<h3>Chunk Size Considerations:<a class="headerlink" href="#chunk-size-considerations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Too Small</strong>: Increases metadata overhead and reduces compression efficiency</p></li>
+<li><p><strong>Too Large</strong>: Increases memory usage and reduces parallelization benefits</p></li>
+<li><p><strong>Just Right</strong>: Balances all factors for optimal performance</p></li>
+</ul>
+</section>
+<section id="recommended-chunk-sizes">
+<h3>Recommended Chunk Sizes:<a class="headerlink" href="#recommended-chunk-sizes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Minimum</strong>: 1 MB per chunk</p></li>
+<li><p><strong>Target</strong>: 10-100 MB per chunk</p></li>
+<li><p><strong>Maximum</strong>: 100 MB per chunk</p></li>
+</ul>
+</section>
+</section>
+<section id="configurable-target-chunk-size">
+<h2>Configurable Target Chunk Size<a class="headerlink" href="#configurable-target-chunk-size" title="Link to this heading">#</a></h2>
+<p>zarrio allows you to configure the target chunk size for different environments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.chunking</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_chunk_recommendation</span>
+
+<span class="c1"># Configure target chunk size (default is 50 MB)</span>
+<span class="n">recommendation</span> <span class="o">=</span> <span class="n">get_chunk_recommendation</span><span class="p">(</span>
+    <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">},</span>
+    <span class="n">dtype_size_bytes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">access_pattern</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
+    <span class="n">target_chunk_size_mb</span><span class="o">=</span><span class="mi">100</span>  <span class="c1"># 100 MB target chunks</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Environment-specific recommendations:
+- <strong>Local development</strong>: 10-25 MB chunks
+- <strong>Production servers</strong>: 50-100 MB chunks
+- <strong>Cloud environments</strong>: 100-200 MB chunks</p>
+<section id="configuration-methods">
+<h3>Configuration Methods:<a class="headerlink" href="#configuration-methods" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Function Arguments</strong>:
+<code class="docutils literal notranslate"><span class="pre">get_chunk_recommendation(...,</span> <span class="pre">target_chunk_size_mb=100)</span></code></p></li>
+<li><p><strong>Environment Variables</strong>:
+<code class="docutils literal notranslate"><span class="pre">ZARRIFY_TARGET_CHUNK_SIZE_MB=200</span></code></p></li>
+<li><p><strong>ZarrConverter Configuration</strong>:
+.. code-block:: python</p>
+<blockquote>
+<div><p>from zarrio.models import ZarrConverterConfig</p>
+<p>config = ZarrConverterConfig(target_chunk_size_mb=100)</p>
+</div></blockquote>
+</li>
+</ol>
+</section>
+</section>
+<section id="intelligent-chunking-analysis">
+<h2>Intelligent Chunking Analysis<a class="headerlink" href="#intelligent-chunking-analysis" title="Link to this heading">#</a></h2>
+<p>zarrio automatically analyzes your dataset and provides chunking recommendations based on expected access patterns. The system performs detailed mathematical calculations to optimize chunk sizes for your specific data characteristics.</p>
+<p>When creating templates for parallel processing with global start and end times, zarrio can perform intelligent chunking based on the full archive dimensions rather than just the template dataset. This ensures optimal chunking for the entire archive.</p>
+<p>The system analyzes:
+- Dataset dimensions and sizes
+- Data type and element size
+- Expected access patterns
+- Storage characteristics</p>
+<p>Detailed calculations for each access pattern are explained in the Access Pattern Optimization section below.</p>
+</section>
+<section id="access-pattern-optimization">
+<h2>Access Pattern Optimization<a class="headerlink" href="#access-pattern-optimization" title="Link to this heading">#</a></h2>
+<p>Different access patterns require different chunking strategies. The calculations for each pattern are detailed below:</p>
+<section id="temporal-analysis">
+<h3>Temporal Analysis<a class="headerlink" href="#temporal-analysis" title="Link to this heading">#</a></h3>
+<p>Optimized for time series extraction (specific locations over long time periods):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Temporal analysis optimized</span>
+<span class="n">temporal_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>   <span class="c1"># Large time chunks (e.g., 100 time steps)</span>
+        <span class="n">lat</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>     <span class="c1"># Smaller spatial chunks</span>
+        <span class="n">lon</span><span class="o">=</span><span class="mi">60</span>      <span class="c1"># Smaller spatial chunks</span>
+    <span class="p">),</span>
+    <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;access_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;temporal_analysis&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">temporal_config</span><span class="p">)</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;climate_data.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;temporal_archive.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Benefits:
+- Fewer I/O operations for long time series
+- Efficient access to temporal data
+- Good compression for time-aligned data</p>
+<p>How it works:
+- Calculates large time chunks (~10% of total time steps, capped at 100)
+- Distributes remaining space across spatial dimensions with a minimum of 10 elements per dimension
+- Optimizes for extracting long time series at specific locations</p>
+<p>Detailed Calculation:
+The temporal focus algorithm uses the following mathematical approach:</p>
+<ol class="arabic simple">
+<li><p><strong>Time Chunk Calculation</strong>:
+<code class="docutils literal notranslate"><span class="pre">time_chunk</span> <span class="pre">=</span> <span class="pre">min(100,</span> <span class="pre">max(10,</span> <span class="pre">time_dimension_size</span> <span class="pre">//</span> <span class="pre">10))</span></code></p></li>
+<li><p><strong>Spatial Chunk Calculation</strong>:
+<code class="docutils literal notranslate"><span class="pre">target_elements</span> <span class="pre">=</span> <span class="pre">(target_chunk_size_mb</span> <span class="pre">*</span> <span class="pre">1024²)</span> <span class="pre">/</span> <span class="pre">dtype_size_bytes</span></code>
+<code class="docutils literal notranslate"><span class="pre">spatial_elements_per_dim</span> <span class="pre">=</span> <span class="pre">target_elements</span> <span class="pre">/</span> <span class="pre">time_chunk</span></code>
+<code class="docutils literal notranslate"><span class="pre">spatial_chunk_per_dim</span> <span class="pre">=</span> <span class="pre">(spatial_elements_per_dim)^(1/num_spatial_dims)</span></code>
+<code class="docutils literal notranslate"><span class="pre">spatial_chunk</span> <span class="pre">=</span> <span class="pre">max(10,</span> <span class="pre">min(spatial_chunk_per_dim,</span> <span class="pre">spatial_dimension_size))</span></code></p></li>
+</ol>
+<p>Example:
+For a dataset with 1000 time steps, 180 lat points, 360 lon points:
+- time_chunk = min(100, max(10, 1000//10)) = 100
+- spatial_elements_per_dim = (50 * 1024² / 4) / 100 = 131,072
+- spatial_chunk_per_dim = √131,072 ≈ 362
+- lat_chunk = min(362, 180) = 180
+- lon_chunk = min(362, 360) = 360</p>
+<p>Result: time=100, lat=180, lon=360 chunks</p>
+</section>
+<section id="spatial-analysis">
+<h3>Spatial Analysis<a class="headerlink" href="#spatial-analysis" title="Link to this heading">#</a></h3>
+<p>Optimized for spatial analysis (maps at specific times):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Spatial analysis optimized</span>
+<span class="n">spatial_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>    <span class="c1"># Smaller time chunks</span>
+        <span class="n">lat</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>    <span class="c1"># Large spatial chunks</span>
+        <span class="n">lon</span><span class="o">=</span><span class="mi">100</span>     <span class="c1"># Large spatial chunks</span>
+    <span class="p">),</span>
+    <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;access_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;spatial_analysis&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">spatial_config</span><span class="p">)</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;climate_data.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;spatial_archive.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Benefits:
+- Efficient spatial subsetting
+- Better cache locality for spatial operations
+- Optimized for map generation</p>
+<p>How it works:
+- Calculates small time chunks (~2% of total time steps, capped at 20)
+- Distributes remaining space across spatial dimensions with a minimum of 50 elements per dimension
+- Optimizes for extracting spatial maps at specific time steps</p>
+<p>Detailed Calculation:
+The spatial focus algorithm uses the following mathematical approach:</p>
+<ol class="arabic simple">
+<li><p><strong>Time Chunk Calculation</strong>:
+<code class="docutils literal notranslate"><span class="pre">time_chunk</span> <span class="pre">=</span> <span class="pre">min(20,</span> <span class="pre">max(5,</span> <span class="pre">time_dimension_size</span> <span class="pre">//</span> <span class="pre">50))</span></code></p></li>
+<li><p><strong>Spatial Chunk Calculation</strong>:
+<code class="docutils literal notranslate"><span class="pre">target_elements</span> <span class="pre">=</span> <span class="pre">(target_chunk_size_mb</span> <span class="pre">*</span> <span class="pre">1024²)</span> <span class="pre">/</span> <span class="pre">dtype_size_bytes</span></code>
+<code class="docutils literal notranslate"><span class="pre">spatial_elements_per_dim</span> <span class="pre">=</span> <span class="pre">target_elements</span> <span class="pre">/</span> <span class="pre">time_chunk</span></code>
+<code class="docutils literal notranslate"><span class="pre">spatial_chunk_per_dim</span> <span class="pre">=</span> <span class="pre">(spatial_elements_per_dim)^(1/num_spatial_dims)</span></code>
+<code class="docutils literal notranslate"><span class="pre">spatial_chunk</span> <span class="pre">=</span> <span class="pre">max(50,</span> <span class="pre">min(spatial_chunk_per_dim,</span> <span class="pre">spatial_dimension_size))</span></code></p></li>
+</ol>
+<p>Example:
+For a dataset with 365 time steps, 720 lat points, 1440 lon points:
+- time_chunk = min(20, max(5, 365//50)) = min(20, 7) = 7
+- spatial_elements_per_dim = (50 * 1024² / 4) / 7 = 1,872,457
+- spatial_chunk_per_dim = √1,872,457 ≈ 1,368
+- lat_chunk = min(1,368, 720) = 720
+- lon_chunk = min(1,368, 1440) = 1,368</p>
+<p>Result: time=7, lat=720, lon=1368 chunks</p>
+</section>
+<section id="balanced-approach">
+<h3>Balanced Approach<a class="headerlink" href="#balanced-approach" title="Link to this heading">#</a></h3>
+<p>Good performance for mixed workloads:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Balanced approach</span>
+<span class="n">balanced_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>    <span class="c1"># Moderate time chunks</span>
+        <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>     <span class="c1"># Moderate spatial chunks</span>
+        <span class="n">lon</span><span class="o">=</span><span class="mi">50</span>      <span class="c1"># Moderate spatial chunks</span>
+    <span class="p">),</span>
+    <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;access_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;balanced&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">balanced_config</span><span class="p">)</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;climate_data.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;balanced_archive.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Benefits:
+- Reasonable performance for diverse access patterns
+- Good compromise between temporal and spatial access
+- Suitable for exploratory analysis</p>
+<p>How it works:
+- Calculates moderate time chunks (~5% of total time steps, capped at 50)
+- Distributes remaining space across spatial dimensions with a minimum of 30 elements per dimension
+- Provides a balanced approach for mixed access patterns</p>
+<p>Detailed Calculation:
+The balanced approach algorithm uses the following mathematical approach:</p>
+<ol class="arabic simple">
+<li><p><strong>Time Chunk Calculation</strong>:
+<code class="docutils literal notranslate"><span class="pre">time_chunk</span> <span class="pre">=</span> <span class="pre">min(50,</span> <span class="pre">max(10,</span> <span class="pre">time_dimension_size</span> <span class="pre">//</span> <span class="pre">20))</span></code></p></li>
+<li><p><strong>Spatial Chunk Calculation</strong>:
+<code class="docutils literal notranslate"><span class="pre">target_elements</span> <span class="pre">=</span> <span class="pre">(target_chunk_size_mb</span> <span class="pre">*</span> <span class="pre">1024²)</span> <span class="pre">/</span> <span class="pre">dtype_size_bytes</span></code>
+<code class="docutils literal notranslate"><span class="pre">spatial_elements_per_dim</span> <span class="pre">=</span> <span class="pre">target_elements</span> <span class="pre">/</span> <span class="pre">time_chunk</span></code>
+<code class="docutils literal notranslate"><span class="pre">spatial_chunk_per_dim</span> <span class="pre">=</span> <span class="pre">(spatial_elements_per_dim)^(1/num_spatial_dims)</span></code>
+<code class="docutils literal notranslate"><span class="pre">spatial_chunk</span> <span class="pre">=</span> <span class="pre">max(30,</span> <span class="pre">min(spatial_chunk_per_dim,</span> <span class="pre">spatial_dimension_size))</span></code></p></li>
+</ol>
+<p>Example:
+For a dataset with 1825 time steps, 360 lat points, 720 lon points:
+- time_chunk = min(50, max(10, 1825//20)) = min(50, 91) = 50
+- spatial_elements_per_dim = (50 * 1024² / 4) / 50 = 262,144
+- spatial_chunk_per_dim = √262,144 ≈ 512
+- lat_chunk = min(512, 360) = 360
+- lon_chunk = min(512, 720) = 512</p>
+<p>Result: time=50, lat=360, lon=512 chunks</p>
+</section>
+<section id="special-cases">
+<h3>Special Cases<a class="headerlink" href="#special-cases" title="Link to this heading">#</a></h3>
+<p>No Time Dimension:
+When no time dimension is detected, the system distributes chunks evenly across all dimensions:
+<code class="docutils literal notranslate"><span class="pre">elements_per_dim</span> <span class="pre">=</span> <span class="pre">(target_elements)^(1/num_dimensions)</span></code>
+<code class="docutils literal notranslate"><span class="pre">chunk_size</span> <span class="pre">=</span> <span class="pre">min(50,</span> <span class="pre">max(10,</span> <span class="pre">elements_per_dim))</span></code> for balanced/normal access
+<code class="docutils literal notranslate"><span class="pre">chunk_size</span> <span class="pre">=</span> <span class="pre">min(100,</span> <span class="pre">max(30,</span> <span class="pre">elements_per_dim))</span></code> for spatial focus</p>
+<p>Single Dimension:
+For single-dimensional datasets, the system creates chunks of approximately the target size:
+<code class="docutils literal notranslate"><span class="pre">chunk_size</span> <span class="pre">=</span> <span class="pre">min(target_elements,</span> <span class="pre">dimension_size)</span></code></p>
+</section>
+<section id="validation-rules">
+<h3>Validation Rules<a class="headerlink" href="#validation-rules" title="Link to this heading">#</a></h3>
+<p>The system validates all chunking recommendations and flags issues:</p>
+<ol class="arabic simple">
+<li><p><strong>Small Chunk Warning</strong>: Chunks &lt; 1 MB may cause metadata overhead</p></li>
+<li><p><strong>Large Chunk Warning</strong>: Chunks &gt; 100 MB may cause memory issues</p></li>
+<li><p><strong>Dimension Mismatch</strong>: Chunk sizes larger than dimensions are clipped</p></li>
+<li><p><strong>Inefficient Chunking</strong>: Very small chunks in large dimensions trigger recommendations</p></li>
+</ol>
+</section>
+<section id="configuration-options">
+<h3>Configuration Options<a class="headerlink" href="#configuration-options" title="Link to this heading">#</a></h3>
+<p>Target Chunk Size:
+You can configure the target chunk size in multiple ways:</p>
+<ol class="arabic">
+<li><p><strong>Function Parameter</strong>:
+<code class="docutils literal notranslate"><span class="pre">get_chunk_recommendation(...,</span> <span class="pre">target_chunk_size_mb=100)</span></code></p></li>
+<li><p><strong>Environment Variable</strong>:
+<code class="docutils literal notranslate"><span class="pre">ZARRIFY_TARGET_CHUNK_SIZE_MB=200</span></code></p></li>
+<li><p><strong>ZarrConverter Configuration</strong>:
+.. code-block:: python</p>
+<blockquote>
+<div><p>config = ZarrConverterConfig(target_chunk_size_mb=100)</p>
+</div></blockquote>
+</li>
+</ol>
+<p>Environment-Specific Recommendations:
+- <strong>Local development</strong>: 10-25 MB chunks
+- <strong>Production servers</strong>: 50-100 MB chunks
+- <strong>Cloud environments</strong>: 100-200 MB chunks</p>
+</section>
+</section>
+<section id="chunking-recommendations-by-resolution">
+<h2>Chunking Recommendations by Resolution<a class="headerlink" href="#chunking-recommendations-by-resolution" title="Link to this heading">#</a></h2>
+<section id="low-resolution-1-or-coarser">
+<h3>Low Resolution (1° or coarser)<a class="headerlink" href="#low-resolution-1-or-coarser" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For low-resolution global data (e.g., 1° global daily)</span>
+<span class="n">low_res_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>   <span class="c1"># Larger time chunks acceptable</span>
+        <span class="n">lat</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>     <span class="c1"># Latitude chunks (~1° per chunk)</span>
+        <span class="n">lon</span><span class="o">=</span><span class="mi">180</span>     <span class="c1"># Longitude chunks (~1° per chunk)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="medium-resolution-0-25-to-1">
+<h3>Medium Resolution (0.25° to 1°)<a class="headerlink" href="#medium-resolution-0-25-to-1" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For medium-resolution regional data (e.g., 0.25° regional daily)</span>
+<span class="n">med_res_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>   <span class="c1"># Moderate time chunks</span>
+        <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>     <span class="c1"># Latitude chunks (~1.8° per chunk)</span>
+        <span class="n">lon</span><span class="o">=</span><span class="mi">100</span>     <span class="c1"># Longitude chunks (~1.8° per chunk)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="high-resolution-0-1-or-finer">
+<h3>High Resolution (0.1° or finer)<a class="headerlink" href="#high-resolution-0-1-or-finer" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For high-resolution local data (e.g., 0.1° local hourly)</span>
+<span class="n">high_res_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>    <span class="c1"># Smaller time chunks to limit size</span>
+        <span class="n">lat</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>     <span class="c1"># Latitude chunks (~2.5° per chunk)</span>
+        <span class="n">lon</span><span class="o">=</span><span class="mi">50</span>      <span class="c1"># Longitude chunks (~5° per chunk)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="chunking-validation">
+<h2>Chunking Validation<a class="headerlink" href="#chunking-validation" title="Link to this heading">#</a></h2>
+<p>zarrio validates user-provided chunking and provides warnings for suboptimal configurations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Suboptimal chunking that will generate warnings</span>
+<span class="n">bad_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>  <span class="c1"># Too large</span>
+        <span class="n">lat</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>      <span class="c1"># Too small</span>
+        <span class="n">lon</span><span class="o">=</span><span class="mi">1</span>       <span class="c1"># Too small</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">bad_config</span><span class="p">)</span>
+<span class="c1"># Logs warnings about:</span>
+<span class="c1"># - Chunk size (3.8 MB) exceeds maximum recommended size (100 MB)</span>
+<span class="c1"># - Chunk size (0.0 MB) is below minimum recommended size (1 MB)</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Match Access Patterns</strong>: Align chunks with your typical data access</p></li>
+<li><p><strong>Consider Compression</strong>: Larger chunks often compress better</p></li>
+<li><p><strong>Balance Chunk Count</strong>: Too many chunks increase metadata overhead</p></li>
+<li><p><strong>Memory Constraints</strong>: Ensure chunks fit comfortably in memory</p></li>
+<li><p><strong>Storage Backend</strong>: Consider characteristics of your storage system</p></li>
+</ol>
+<section id="example-best-practices">
+<h3>Example Best Practices:<a class="headerlink" href="#example-best-practices" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Good chunking for climate data</span>
+<span class="n">climate_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>   <span class="c1"># About 3-4 months of daily data</span>
+        <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>     <span class="c1"># About 50° of latitude</span>
+        <span class="n">lon</span><span class="o">=</span><span class="mi">100</span>     <span class="c1"># About 100° of longitude</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Good chunking for high-resolution data</span>
+<span class="n">high_res_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span>    <span class="c1"># About 1 day of hourly data</span>
+        <span class="n">lat</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>     <span class="c1"># About 2.5° of latitude</span>
+        <span class="n">lon</span><span class="o">=</span><span class="mi">50</span>      <span class="c1"># About 5° of longitude</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Good chunking for very large dimensions</span>
+<span class="n">large_dim_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>    <span class="c1"># Balance I/O and memory</span>
+        <span class="n">lat</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>    <span class="c1"># Larger chunks for better compression</span>
+        <span class="n">lon</span><span class="o">=</span><span class="mi">100</span>     <span class="c1"># Larger chunks for better compression</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="chunking-with-parallel-processing">
+<h2>Chunking with Parallel Processing<a class="headerlink" href="#chunking-with-parallel-processing" title="Link to this heading">#</a></h2>
+<p>When using parallel processing, consider chunking that aligns with your parallelization strategy:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Template creation with chunking</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">ZarrConverterConfig</span><span class="p">(</span>
+        <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span>
+            <span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>   <span class="c1"># Large time chunks for temporal analysis</span>
+            <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>     <span class="c1"># Moderate spatial chunks</span>
+            <span class="n">lon</span><span class="o">=</span><span class="mi">100</span>     <span class="c1"># Moderate spatial chunks</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Create template for parallel writing</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">create_template</span><span class="p">(</span>
+    <span class="n">template_dataset</span><span class="o">=</span><span class="n">template_ds</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;parallel_archive.zarr&quot;</span><span class="p">,</span>
+    <span class="n">global_start</span><span class="o">=</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span>
+    <span class="n">global_end</span><span class="o">=</span><span class="s2">&quot;2023-12-31&quot;</span><span class="p">,</span>
+    <span class="n">compute</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="c1"># Each parallel process writes to different time regions</span>
+<span class="c1"># but with the same chunking strategy for consistency</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-file-example">
+<h2>Configuration File Example<a class="headerlink" href="#configuration-file-example" title="Link to this heading">#</a></h2>
+<p>YAML configuration with chunking recommendations:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml</span>
+<span class="nt">chunking</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span><span class="w">      </span><span class="c1"># About 5 months of daily data</span>
+<span class="w">  </span><span class="nt">lat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span><span class="w">        </span><span class="c1"># About 60° of latitude</span>
+<span class="w">  </span><span class="nt">lon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span><span class="w">       </span><span class="c1"># About 120° of longitude</span>
+<span class="nt">compression</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">blosc:zstd:2</span>
+<span class="w">  </span><span class="nt">clevel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">packing</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">bits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+<span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">include</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temperature</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pressure</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">humidity</span>
+<span class="w">  </span><span class="nt">exclude</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unused_var</span>
+<span class="nt">attrs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YAML Config with Chunking</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">  </span><span class="nt">access_pattern</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">balanced</span>
+<span class="nt">time</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<span class="w">  </span><span class="nt">append_dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<span class="w">  </span><span class="nt">global_start</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2020-01-01&quot;</span>
+<span class="w">  </span><span class="nt">global_end</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2023-12-31&quot;</span>
+<span class="w">  </span><span class="nt">freq</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1D&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="cli-usage">
+<h2>CLI Usage<a class="headerlink" href="#cli-usage" title="Link to this heading">#</a></h2>
+<p>Command-line interface with chunking:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert with chunking</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--chunking<span class="w"> </span><span class="s2">&quot;time:100,lat:50,lon:100&quot;</span>
+
+<span class="c1"># Convert with configuration file</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--config<span class="w"> </span>config.yaml
+
+<span class="c1"># Convert with automatic analysis</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>output.zarr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--access-pattern<span class="w"> </span>balanced
+</pre></div>
+</div>
+</section>
+<section id="performance-monitoring">
+<h2>Performance Monitoring<a class="headerlink" href="#performance-monitoring" title="Link to this heading">#</a></h2>
+<p>Monitor chunking performance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="c1"># Enable performance logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="si">%(name)s</span><span class="s2"> - </span><span class="si">%(levelname)s</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Convert with verbose logging</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">ZarrConverterConfig</span><span class="p">(</span>
+        <span class="n">chunking</span><span class="o">=</span><span class="n">ChunkingConfig</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;input.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;output.zarr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The logs will show:
+- Chunk size information
+- Compression ratios
+- I/O performance metrics
+- Memory usage statistics</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<p>Common chunking issues and solutions:</p>
+<ol class="arabic simple">
+<li><p><strong>Poor Performance</strong>: Check if chunks align with access patterns</p></li>
+<li><p><strong>Memory Issues</strong>: Reduce chunk sizes</p></li>
+<li><p><strong>Metadata Overhead</strong>: Increase chunk sizes</p></li>
+<li><p><strong>Compression Problems</strong>: Adjust chunk sizes for better ratios</p></li>
+</ol>
+<section id="example-troubleshooting">
+<h3>Example Troubleshooting:<a class="headerlink" href="#example-troubleshooting" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enable debug logging for chunking analysis</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="c1"># Convert with verbose chunking analysis</span>
+<span class="n">convert_to_zarr</span><span class="p">(</span>
+    <span class="s2">&quot;input.nc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;output.zarr&quot;</span><span class="p">,</span>
+    <span class="n">access_pattern</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This will provide detailed information about:
+- Chunk size calculations
+- Memory usage estimates
+- Compression effectiveness
+- Performance recommendations</p>
+</section>
+</section>
+<section id="practical-examples-by-resolution">
+<h2>Practical Examples by Resolution<a class="headerlink" href="#practical-examples-by-resolution" title="Link to this heading">#</a></h2>
+<p>The following examples show how the chunking calculations work with different data resolutions:</p>
+<section id="id1">
+<h3>Low Resolution (1° or coarser)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>For a global daily dataset with 10 years of data at 1° resolution:
+- Dimensions: time=3650, lat=180, lon=360
+- Temporal focus: time=365, lat=180, lon=360
+- Spatial focus: time=73, lat=180, lon=360
+- Balanced: time=183, lat=180, lon=360</p>
+</section>
+<section id="id2">
+<h3>Medium Resolution (0.25° to 1°)<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>For a regional daily dataset with 5 years of data at 0.25° resolution:
+- Dimensions: time=1825, lat=720, lon=1440
+- Temporal focus: time=182, lat=360, lon=720
+- Spatial focus: time=37, lat=720, lon=1440
+- Balanced: time=91, lat=540, lon=1080</p>
+</section>
+<section id="id3">
+<h3>High Resolution (0.1° or finer)<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>For a local hourly dataset with 1 year of data at 0.1° resolution:
+- Dimensions: time=8760, lat=1800, lon=3600
+- Temporal focus: time=100, lat=300, lon=600
+- Spatial focus: time=20, lat=900, lon=1800
+- Balanced: time=50, lat=600, lon=1200</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cli.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Command-Line Interface</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="packing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Packing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-chunking">Understanding Chunking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-chunking-matters">Why Chunking Matters:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chunk-size-considerations">Chunk Size Considerations:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-chunk-sizes">Recommended Chunk Sizes:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configurable-target-chunk-size">Configurable Target Chunk Size</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-methods">Configuration Methods:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intelligent-chunking-analysis">Intelligent Chunking Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#access-pattern-optimization">Access Pattern Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analysis">Temporal Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-analysis">Spatial Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balanced-approach">Balanced Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-cases">Special Cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-rules">Validation Rules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chunking-recommendations-by-resolution">Chunking Recommendations by Resolution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#low-resolution-1-or-coarser">Low Resolution (1° or coarser)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#medium-resolution-0-25-to-1">Medium Resolution (0.25° to 1°)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-resolution-0-1-or-finer">High Resolution (0.1° or finer)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chunking-validation">Chunking Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-best-practices">Example Best Practices:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chunking-with-parallel-processing">Chunking with Parallel Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-file-example">Configuration File Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-usage">CLI Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-monitoring">Performance Monitoring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-troubleshooting">Example Troubleshooting:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-examples-by-resolution">Practical Examples by Resolution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Low Resolution (1° or coarser)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Medium Resolution (0.25° to 1°)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">High Resolution (0.1° or finer)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/chunking.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

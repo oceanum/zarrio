@@ -1,0 +1,896 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Datamesh Integration &#8212; zarrio 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'datamesh';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing to zarrio" href="contributing.html" />
+    <link rel="prev" title="Parallel Processing" href="parallel.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">zarrio 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Usage Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="cli.html">
+    Command-Line Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="chunking.html">
+    Chunking Strategies
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="packing.html">
+    Data Packing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analysis.html">
+    Analysis Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="parallel.html">
+    Parallel Processing
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Datamesh Integration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing to zarrio
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="docker.html">
+    Docker Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Datamesh Integration</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="datamesh-integration">
+<h1>Datamesh Integration<a class="headerlink" href="#datamesh-integration" title="Link to this heading">#</a></h1>
+<p>The zarrio library supports integration with Oceanum’s Datamesh platform, allowing you to write Zarr data directly to Datamesh datasources.</p>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<p>To use Datamesh integration, you need to configure the <code class="docutils literal notranslate"><span class="pre">datamesh</span></code> section in your <code class="docutils literal notranslate"><span class="pre">ZarrConverterConfig</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverterConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">datamesh</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;datasource&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;my_datasource&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;My Data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;My dataset&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;zarrio&quot;</span><span class="p">,</span> <span class="s2">&quot;datamesh&quot;</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="s2">&quot;your_datamesh_token&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;https://datamesh-v1.oceanum.io&quot;</span>  <span class="c1"># Optional, defaults to this value</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="using-with-the-api">
+<h2>Using with the API<a class="headerlink" href="#using-with-the-api" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
+
+<span class="c1"># Create converter with datamesh configuration</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Convert data to datamesh (output_path is optional when using datamesh)</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;input.nc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="using-with-the-cli">
+<h2>Using with the CLI<a class="headerlink" href="#using-with-the-cli" title="Link to this heading">#</a></h2>
+<p>You can also use the CLI with datamesh:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert to datamesh datasource</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-datasource<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:&quot;my_datasource&quot;,&quot;name&quot;:&quot;My Data&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;longitude&quot;,&quot;y&quot;:&quot;latitude&quot;,&quot;t&quot;:&quot;time&quot;}}&#39;</span><span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span>
+
+<span class="c1"># Create template for parallel writing</span>
+zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-datasource<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:&quot;my_datasource&quot;,&quot;name&quot;:&quot;My Data&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;longitude&quot;,&quot;y&quot;:&quot;latitude&quot;,&quot;t&quot;:&quot;time&quot;}}&#39;</span><span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span><span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--global-start<span class="w"> </span><span class="m">2023</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31
+
+<span class="c1"># Write region to datamesh datasource</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data.nc<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-datasource<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:&quot;my_datasource&quot;,&quot;name&quot;:&quot;My Data&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;longitude&quot;,&quot;y&quot;:&quot;latitude&quot;,&quot;t&quot;:&quot;time&quot;}}&#39;</span><span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span>
+</pre></div>
+</div>
+</section>
+<section id="datamesh-datasource-configuration">
+<h2>Datamesh Datasource Configuration<a class="headerlink" href="#datamesh-datasource-configuration" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">DatameshDatasource</span></code> model supports the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (required): The unique identifier for the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: Human-readable name for the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Description of the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coordinates</span></code>: Coordinate mapping (e.g., <code class="docutils literal notranslate"><span class="pre">{&quot;x&quot;:</span> <span class="pre">&quot;longitude&quot;,</span> <span class="pre">&quot;y&quot;:</span> <span class="pre">&quot;latitude&quot;,</span> <span class="pre">&quot;t&quot;:</span> <span class="pre">&quot;time&quot;}</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">details</span></code>: URL with more details about the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags</span></code>: Tags associated with the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">driver</span></code>: Driver to use for datamesh datasource (defaults to “vzarr”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataschema</span></code>: Explicit schema for the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geometry</span></code>: Explicit geometry for the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tstart</span></code>: Explicit start time for the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tend</span></code>: Explicit end time for the datasource</p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>To use datamesh functionality, you need to install the optional datamesh dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>zarrio<span class="o">[</span>datamesh<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-usage">
+<h2>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Link to this heading">#</a></h2>
+<section id="configuration-file-support">
+<h3>Configuration File Support<a class="headerlink" href="#configuration-file-support" title="Link to this heading">#</a></h3>
+<p>You can also configure datamesh integration using YAML or JSON configuration files:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml</span>
+<span class="nt">chunking</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">  </span><span class="nt">lat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="w">  </span><span class="nt">lon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="nt">compression</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">blosc:zstd:3</span>
+<span class="nt">datamesh</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">datasource</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_climate_data</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">My Climate Data</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Climate data converted with zarrio</span>
+<span class="w">    </span><span class="nt">coordinates</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lon</span>
+<span class="w">      </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lat</span>
+<span class="w">      </span><span class="nt">t</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<span class="w">    </span><span class="nt">details</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://example.com</span>
+<span class="w">    </span><span class="nt">tags</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">climate</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zarrio</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">datamesh</span>
+<span class="w">  </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your_datamesh_token</span>
+<span class="w">  </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://datamesh-v1.oceanum.io</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load from YAML file</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="o">.</span><span class="n">from_config_file</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;input.nc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use with CLI</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>--config<span class="w"> </span>config.yaml
+</pre></div>
+</div>
+</section>
+<section id="metadata-management">
+<h3>Metadata Management<a class="headerlink" href="#metadata-management" title="Link to this heading">#</a></h3>
+<p>When writing to datamesh, zarrio automatically manages metadata:</p>
+<ul class="simple">
+<li><p><strong>Schema</strong>: Automatically generated from the dataset structure</p></li>
+<li><p><strong>Geometry</strong>: Calculated from coordinate variables</p></li>
+<li><p><strong>Time Range</strong>: Extracted from the time dimension</p></li>
+</ul>
+<p>You can override any of these by explicitly setting them in your configuration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">datamesh</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;datasource&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;my_datasource&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;My Data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;dataschema&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;custom&quot;</span><span class="p">:</span> <span class="s2">&quot;schema&quot;</span><span class="p">},</span>  <span class="c1"># Override auto-generated schema</span>
+            <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]},</span>  <span class="c1"># Override auto-generated geometry</span>
+            <span class="s2">&quot;tstart&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-01T00:00:00&quot;</span><span class="p">,</span>  <span class="c1"># Override auto-detected start time</span>
+            <span class="s2">&quot;tend&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-31T23:59:59&quot;</span>  <span class="c1"># Override auto-detected end time</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="s2">&quot;your_datamesh_token&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parallel-writing-with-datamesh">
+<h3>Parallel Writing with Datamesh<a class="headerlink" href="#parallel-writing-with-datamesh" title="Link to this heading">#</a></h3>
+<p>All parallel writing features work with datamesh:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
+
+<span class="c1"># Create converter with datamesh configuration</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span>
+    <span class="n">compression</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">},</span>
+    <span class="n">datamesh</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;datasource&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;my_parallel_data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Parallel Climate Data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;lon&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="s2">&quot;your_datamesh_token&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Create template covering full time range</span>
+<span class="n">template_ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;template.nc&quot;</span><span class="p">)</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">create_template</span><span class="p">(</span>
+    <span class="n">template_dataset</span><span class="o">=</span><span class="n">template_ds</span><span class="p">,</span>
+    <span class="n">global_start</span><span class="o">=</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span>
+    <span class="n">global_end</span><span class="o">=</span><span class="s2">&quot;2023-12-31&quot;</span><span class="p">,</span>
+    <span class="n">compute</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># Metadata only</span>
+<span class="p">)</span>
+
+<span class="c1"># Write regions in parallel processes</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data_2020.nc&quot;</span><span class="p">)</span>  <span class="c1"># Process 1</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data_2021.nc&quot;</span><span class="p">)</span>  <span class="c1"># Process 2</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data_2022.nc&quot;</span><span class="p">)</span>  <span class="c1"># Process 3</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="s2">&quot;data_2023.nc&quot;</span><span class="p">)</span>  <span class="c1"># Process 4</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># CLI equivalent</span>
+zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-datasource<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:&quot;my_parallel_data&quot;,&quot;name&quot;:&quot;Parallel Climate Data&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;lon&quot;,&quot;y&quot;:&quot;lat&quot;,&quot;t&quot;:&quot;time&quot;}}&#39;</span><span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span><span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--global-start<span class="w"> </span><span class="m">2020</span>-01-01<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31
+
+<span class="c1"># In parallel processes:</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2020.nc<span class="w"> </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span><span class="w">  </span><span class="c1"># Process 1</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2021.nc<span class="w"> </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span><span class="w">  </span><span class="c1"># Process 2</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2022.nc<span class="w"> </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span><span class="w">  </span><span class="c1"># Process 3</span>
+zarrio<span class="w"> </span>write-region<span class="w"> </span>data_2023.nc<span class="w"> </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span><span class="w">  </span><span class="c1"># Process 4</span>
+</pre></div>
+</div>
+</section>
+<section id="error-handling">
+<h3>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h3>
+<p>Datamesh integration includes proper error handling:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarrio.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConversionError</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;input.nc&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">ConversionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conversion failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Token Management</strong>: Store your datamesh token securely, preferably as an environment variable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">DATAMESH_TOKEN</span><span class="o">=</span><span class="s2">&quot;your_actual_token_here&quot;</span>
+zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span><span class="w"> </span>...
+</pre></div>
+</div>
+</li>
+<li><p><strong>Datasource IDs</strong>: Use descriptive, unique IDs for your datasources.</p></li>
+<li><p><strong>Coordinate Mapping</strong>: Ensure your coordinate mapping matches your dataset’s variable names.</p></li>
+<li><p><strong>Testing</strong>: Test your configuration with small datasets before processing large amounts of data.</p></li>
+<li><p><strong>Metadata</strong>: Provide meaningful names, descriptions, and tags to make your datasources discoverable.</p></li>
+</ol>
+</section>
+<section id="example-workflow">
+<h2>Example Workflow<a class="headerlink" href="#example-workflow" title="Link to this heading">#</a></h2>
+<p>Here’s a complete example workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zarrio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span><span class="p">,</span> <span class="n">ZarrConverterConfig</span>
+
+<span class="c1"># 1. Configure for datamesh</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span>
+    <span class="n">chunking</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span>
+    <span class="n">compression</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blosc:zstd:3&quot;</span><span class="p">},</span>
+    <span class="n">packing</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">},</span>
+    <span class="n">datamesh</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;datasource&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;climate_data_2023&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Climate Data 2023&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Global climate data for 2023&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/climate-data-2023&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;climate&quot;</span><span class="p">,</span> <span class="s2">&quot;2023&quot;</span><span class="p">,</span> <span class="s2">&quot;global&quot;</span><span class="p">,</span> <span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;pressure&quot;</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DATAMESH_TOKEN&quot;</span><span class="p">),</span>  <span class="c1"># Use environment variable</span>
+        <span class="s2">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;https://datamesh-v1.oceanum.io&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># 2. Create converter</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># 3. Convert data</span>
+<span class="n">converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;climate_data_2023.nc&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data successfully written to datamesh!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="parallel.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Parallel Processing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="contributing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Contributing to zarrio</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-with-the-api">Using with the API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-with-the-cli">Using with the CLI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datamesh-datasource-configuration">Datamesh Datasource Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-usage">Advanced Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-file-support">Configuration File Support</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-management">Metadata Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-writing-with-datamesh">Parallel Writing with Datamesh</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">Error Handling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-workflow">Example Workflow</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/datamesh.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Oceanum Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
