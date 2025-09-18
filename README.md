@@ -1,10 +1,10 @@
-# zarrify
+# zarrio
 
 A modern, clean library for converting scientific data formats to Zarr format.
 
 ## Overview
 
-zarrify is a complete rewrite of the original onzarr library with a focus on simplicity, performance, and maintainability. It leverages modern xarray and zarr capabilities to provide efficient conversion of NetCDF and other scientific data formats to Zarr format.
+zarrio is a complete rewrite of the original onzarr library with a focus on simplicity, performance, and maintainability. It leverages modern xarray and zarr capabilities to provide efficient conversion of NetCDF and other scientific data formats to Zarr format.
 
 ## Features
 
@@ -21,7 +21,7 @@ zarrify is a complete rewrite of the original onzarr library with a focus on sim
 ## Installation
 
 ```bash
-pip install zarrify
+pip install zarrio
 ```
 
 ## Usage
@@ -30,50 +30,50 @@ pip install zarrify
 
 ```bash
 # Convert NetCDF to Zarr
-zarrify convert input.nc output.zarr
+zarrio convert input.nc output.zarr
 
 # Convert with chunking
-zarrify convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
+zarrio convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
 
 # Convert with compression
-zarrify convert input.nc output.zarr --compression "blosc:zstd:3"
+zarrio convert input.nc output.zarr --compression "blosc:zstd:3"
 
 # Convert with data packing
-zarrify convert input.nc output.zarr --packing --packing-bits 16
+zarrio convert input.nc output.zarr --packing --packing-bits 16
 
 # Convert with manual packing ranges
-zarrify convert input.nc output.zarr --packing \
+zarrio convert input.nc output.zarr --packing \
     --packing-manual-ranges '{"temperature": {"min": -50, "max": 50}}'
 
 # Analyze NetCDF file for optimization recommendations
-zarrify analyze input.nc
+zarrio analyze input.nc
 
 # Analyze with theoretical performance testing
-zarrify analyze input.nc --test-performance
+zarrio analyze input.nc --test-performance
 
 # Analyze with actual performance testing
-zarrify analyze input.nc --run-tests
+zarrio analyze input.nc --run-tests
 
 # Analyze with interactive configuration setup
-zarrify analyze input.nc --interactive
+zarrio analyze input.nc --interactive
 
 # Create template for parallel writing
-zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31
+zarrio create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31
 
 # Create template with intelligent chunking
-zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31 --intelligent-chunking --access-pattern temporal
+zarrio create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31 --intelligent-chunking --access-pattern temporal
 
 # Write region to existing archive
-zarrify write-region data.nc archive.zarr
+zarrio write-region data.nc archive.zarr
 
 # Append to existing Zarr store
-zarrify append new_data.nc existing.zarr
+zarrio append new_data.nc existing.zarr
 ```
 
 ### Python API
 
 ```python
-from zarrify import convert_to_zarr, append_to_zarr, ZarrConverter
+from zarrio import convert_to_zarr, append_to_zarr, ZarrConverter
 
 # Simple conversion
 convert_to_zarr("input.nc", "output.zarr")
@@ -124,7 +124,7 @@ append_to_zarr("new_data.nc", "existing.zarr")
 
 ## Parallel Writing
 
-One of the key features of zarrify is support for parallel writing of large datasets:
+One of the key features of zarrio is support for parallel writing of large datasets:
 
 ```python
 # Step 1: Create template archive with intelligent chunking
@@ -179,7 +179,7 @@ drop_variables:
 Then use it with the CLI:
 
 ```bash
-zarrify convert input.nc output.zarr --config config.yaml
+zarrio convert input.nc output.zarr --config config.yaml
 ```
 
 ## Development
@@ -187,8 +187,8 @@ zarrify convert input.nc output.zarr --config config.yaml
 ### Installation
 
 ```bash
-git clone https://github.com/oceanum/zarrify.git
-cd zarrify
+git clone https://github.com/oceanum/zarrio.git
+cd zarrio
 pip install -e .
 ```
 
@@ -209,7 +209,7 @@ black .
 flake8
 
 # Type checking
-mypy zarrify
+mypy zarrio
 ```
 
 ## License

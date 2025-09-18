@@ -1,5 +1,5 @@
 """
-Example demonstrating intelligent chunking analysis in zarrify.
+Example demonstrating intelligent chunking analysis in zarrio.
 """
 
 import tempfile
@@ -8,8 +8,8 @@ import pandas as pd
 import xarray as xr
 import os
 
-from zarrify import ZarrConverter, convert_to_zarr, append_to_zarr
-from zarrify.models import ZarrConverterConfig, ChunkingConfig, PackingConfig
+from zarrio import ZarrConverter, convert_to_zarr, append_to_zarr
+from zarrio.models import ZarrConverterConfig, ChunkingConfig, PackingConfig
 
 
 def create_sample_climate_data(tmpdir: str) -> str:
@@ -41,7 +41,7 @@ def create_sample_climate_data(tmpdir: str) -> str:
     
     # Add metadata
     ds.attrs["title"] = "Sample Climate Dataset"
-    ds.attrs["institution"] = "zarrify Demonstration"
+    ds.attrs["institution"] = "zarrio Demonstration"
     ds["temperature"].attrs["units"] = "degC"
     ds["temperature"].attrs["long_name"] = "Air Temperature"
     ds["pressure"].attrs["units"] = "hPa"
@@ -60,7 +60,7 @@ def create_sample_climate_data(tmpdir: str) -> str:
 
 def demonstrate_chunking_analysis():
     """Demonstrate intelligent chunking analysis."""
-    print("=== zarrify Intelligent Chunking Analysis Demo ===\n")
+    print("=== zarrio Intelligent Chunking Analysis Demo ===\n")
     
     with tempfile.TemporaryDirectory() as tmpdir:
         # Create sample climate data
@@ -68,7 +68,7 @@ def demonstrate_chunking_analysis():
         
         # 1. Demonstrate automatic chunking analysis
         print("1. Automatic Chunking Analysis:")
-        print("   When no chunking is specified, zarrify analyzes the data")
+        print("   When no chunking is specified, zarrio analyzes the data")
         print("   and provides recommendations based on access patterns.")
         
         # Convert without specifying chunking (will trigger analysis)
@@ -127,7 +127,7 @@ def demonstrate_chunking_analysis():
         
         # 3. Demonstrate chunking validation
         print("\n3. Chunking Validation:")
-        print("   zarrify validates user-provided chunking and warns about issues.")
+        print("   zarrio validates user-provided chunking and warns about issues.")
         
         # Create config with problematic chunking (will generate warnings)
         bad_chunking_config = ZarrConverterConfig(

@@ -43,5 +43,5 @@ USER onzarr
 # EXPOSE 8000
 
 # Define the command to run the application
-ENTRYPOINT ["zarrify"]
+ENTRYPOINT ["zarrio"]
 CMD ["--help"]

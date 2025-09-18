@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Example demonstrating retry logic for handling missing data in zarrify.
+Example demonstrating retry logic for handling missing data in zarrio.
 """
 
 import tempfile
@@ -9,8 +9,8 @@ import pandas as pd
 import xarray as xr
 import os
 
-from zarrify import ZarrConverter, convert_to_zarr, append_to_zarr
-from zarrify.models import ZarrConverterConfig, MissingDataConfig
+from zarrio import ZarrConverter, convert_to_zarr, append_to_zarr
+from zarrio.models import ZarrConverterConfig, MissingDataConfig
 
 
 def create_sample_dataset(filename: str, t0: str = "2000-01-01", periods: int = 10) -> str:
@@ -47,7 +47,7 @@ def create_sample_dataset(filename: str, t0: str = "2000-01-01", periods: int = 
 
 def demonstrate_retry_logic():
     """Demonstrate retry logic for handling missing data."""
-    print("=== zarrify Retry Logic Demo ===\n")
+    print("=== zarrio Retry Logic Demo ===\n")
     
     with tempfile.TemporaryDirectory() as tmpdir:
         # 1. Create sample data

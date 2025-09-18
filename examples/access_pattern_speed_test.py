@@ -1,5 +1,5 @@
 """
-Example demonstrating access pattern speed testing with zarrify.
+Example demonstrating access pattern speed testing with zarrio.
 This example creates Zarr archives with different chunking strategies
 optimized for different access patterns and measures read performance.
 """
@@ -12,8 +12,8 @@ import os
 import time
 from pathlib import Path
 
-from zarrify import ZarrConverter, convert_to_zarr
-from zarrify.models import ZarrConverterConfig, ChunkingConfig
+from zarrio import ZarrConverter, convert_to_zarr
+from zarrio.models import ZarrConverterConfig, ChunkingConfig
 
 
 def create_sample_data(time_steps=365, lat_points=181, lon_points=361):
@@ -252,7 +252,7 @@ def main():
             # Store results
             results[pattern] = {
                 "time": duration,
-                "chunking": ds.zarrify_config.chunking if hasattr(ds, 'zarrify_config') else "default"
+                "chunking": ds.zarrio_config.chunking if hasattr(ds, 'zarrio_config') else "default"
             }
             
             # For demonstration purposes, we'll extract the actual chunking from the created zarr

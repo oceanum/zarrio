@@ -1,6 +1,6 @@
 # Zarrify Examples
 
-This directory contains examples demonstrating various features of the zarrify library.
+This directory contains examples demonstrating various features of the zarrio library.
 
 ## Available Examples
 
@@ -15,14 +15,14 @@ A complete example showing how to:
 ### 2. Datamesh Integration Demo (`datamesh_demo.py`)
 A complete example showing how to:
 - Create realistic sample climate data
-- Configure zarrify for datamesh integration
+- Configure zarrio for datamesh integration
 - Write data directly to a datamesh datasource
 - Handle configuration validation
 - Use both API and CLI interfaces
 
 ### 3. Intelligent Chunking Demo (`consolidated_chunking_demo.py`)
 A comprehensive example showing:
-- How zarrify's intelligent chunking works for different dataset sizes
+- How zarrio's intelligent chunking works for different dataset sizes
 - Performance differences between chunking strategies
 - How to achieve optimal chunk sizes for your data
 - Manual optimization techniques for small datasets

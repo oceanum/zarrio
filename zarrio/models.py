@@ -1,5 +1,5 @@
 """
-Pydantic models for zarrify configuration and data validation.
+Pydantic models for zarrio configuration and data validation.
 """
 
 from typing import Dict, Optional, List, Union, Any

@@ -55,7 +55,7 @@ def main():
     
     # Test the analyze command with performance testing
     print("\nTesting analyze command with performance testing...")
-    os.system(f"cd /home/tdurrant/source/onzarr/zarrify && python -m zarrify.cli analyze {nc_path} --test-performance")
+    os.system(f"cd /home/tdurrant/source/onzarr/zarrio && python -m zarrio.cli analyze {nc_path} --test-performance")
     
     # Clean up
     os.unlink(nc_path)

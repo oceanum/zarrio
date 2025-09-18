@@ -1,5 +1,5 @@
 """
-Simple example demonstrating access pattern speed testing with zarrify.
+Simple example demonstrating access pattern speed testing with zarrio.
 
 This example shows how different chunking strategies affect performance
 for different data access patterns.
@@ -12,8 +12,8 @@ import tempfile
 import os
 import time
 
-from zarrify import ZarrConverter
-from zarrify.models import ZarrConverterConfig, ChunkingConfig
+from zarrio import ZarrConverter
+from zarrio.models import ZarrConverterConfig, ChunkingConfig
 
 
 def create_sample_data():

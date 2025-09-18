@@ -1,5 +1,5 @@
 """
-Example demonstrating retry functionality in zarrify.
+Example demonstrating retry functionality in zarrio.
 """
 
 import tempfile
@@ -8,8 +8,8 @@ import pandas as pd
 import xarray as xr
 import os
 
-from zarrify import ZarrConverter, convert_to_zarr, append_to_zarr
-from zarrify.models import ZarrConverterConfig, MissingDataConfig
+from zarrio import ZarrConverter, convert_to_zarr, append_to_zarr
+from zarrio.models import ZarrConverterConfig, MissingDataConfig
 
 
 def create_test_dataset_with_missing_values(
@@ -67,7 +67,7 @@ def create_test_dataset_with_missing_values(
 
 def demonstrate_retry_logic():
     """Demonstrate retry logic for handling missing data."""
-    print("=== zarrify Retry Logic Demo ===\n")
+    print("=== zarrio Retry Logic Demo ===\n")
     
     with tempfile.TemporaryDirectory() as tmpdir:
         # 1. Create test data with missing values
@@ -188,7 +188,7 @@ def explain_retry_mechanism():
     """Explain how the retry mechanism works."""
     print("\n=== Retry Mechanism Explanation ===\n")
     
-    print("zarrify implements intelligent retry logic for handling missing data:")
+    print("zarrio implements intelligent retry logic for handling missing data:")
     
     print("\n1. **Detection**:")
     print("   - Automatically detects missing data in written Zarr stores")
@@ -210,8 +210,8 @@ def explain_retry_mechanism():
     
     print("\n   Python API:")
     print("   ```python")
-    print("   from zarrify import ZarrConverter")
-    print("   from zarrify.models import ZarrConverterConfig, MissingDataConfig")
+    print("   from zarrio import ZarrConverter")
+    print("   from zarrio.models import ZarrConverterConfig, MissingDataConfig")
     print("   ")
     print("   # Enable retry logic")
     print("   config = ZarrConverterConfig(")
@@ -228,16 +228,16 @@ def explain_retry_mechanism():
     print("\n   CLI:")
     print("   ```bash")
     print("   # Convert with retry logic")
-    print("   zarrify convert input.nc output.zarr --retries-on-missing 3")
+    print("   zarrio convert input.nc output.zarr --retries-on-missing 3")
     print("   ")
     print("   # Append with retry logic")
-    print("   zarrify append new_data.nc existing.zarr --retries-on-missing 2")
+    print("   zarrio append new_data.nc existing.zarr --retries-on-missing 2")
     print("   ")
     print("   # Create template with retry logic")
-    print("   zarrify create-template template.nc archive.zarr --retries-on-missing 1")
+    print("   zarrio create-template template.nc archive.zarr --retries-on-missing 1")
     print("   ")
     print("   # Write region with retry logic")
-    print("   zarrify write-region data.nc archive.zarr --retries-on-missing 2")
+    print("   zarrio write-region data.nc archive.zarr --retries-on-missing 2")
     print("   ```")
     
     print("\n5. **Benefits**:")

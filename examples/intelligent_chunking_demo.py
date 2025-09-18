@@ -1,14 +1,14 @@
 """
-Example demonstrating intelligent chunking analysis with zarrify.
+Example demonstrating intelligent chunking analysis with zarrio.
 
-This example shows how zarrify can automatically recommend optimal
+This example shows how zarrio can automatically recommend optimal
 chunking strategies based on your data dimensions and access patterns.
 """
 
 import numpy as np
 import pandas as pd
 import xarray as xr
-from zarrify.chunking import get_chunk_recommendation, validate_chunking
+from zarrio.chunking import get_chunk_recommendation, validate_chunking
 
 
 def main():

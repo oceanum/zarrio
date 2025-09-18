@@ -1,5 +1,5 @@
 """
-Time series handling for zarrify.
+Time series handling for zarrio.
 """
 
 import logging

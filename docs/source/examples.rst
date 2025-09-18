@@ -1,7 +1,7 @@
 Usage Examples
 ============
 
-This section provides practical examples of using zarrify for various scenarios.
+This section provides practical examples of using zarrio for various scenarios.
 
 Basic Conversion
 ------------------
@@ -10,7 +10,7 @@ Simple conversion of a NetCDF file to Zarr format:
 
 .. code-block:: python
 
-    from zarrify import convert_to_zarr
+    from zarrio import convert_to_zarr
 
     # Convert a single NetCDF file to Zarr
     convert_to_zarr("input.nc", "output.zarr")
@@ -32,15 +32,15 @@ For more control, use the class-based API:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
-    from zarrify.models import ZarrConverterConfig
+    from zarrio import ZarrConverter
+    from zarrio.models import ZarrConverterConfig
 
     # Create configuration
     config = ZarrConverterConfig(
         chunking=ChunkingConfig(time=100, lat=50, lon=100),
         compression=CompressionConfig(method="blosc:zstd:3"),
         packing=PackingConfig(enabled=True, bits=16),
-        attrs={"title": "Demo dataset", "source": "zarrify"}
+        attrs={"title": "Demo dataset", "source": "zarrio"}
     )
 
     # Create converter
@@ -52,35 +52,35 @@ For more control, use the class-based API:
 Command-Line Interface
 -----------------------
 
-zarrify provides a powerful command-line interface:
+zarrio provides a powerful command-line interface:
 
 .. code-block:: bash
 
     # Convert NetCDF to Zarr
-    zarrify convert input.nc output.zarr
+    zarrio convert input.nc output.zarr
 
     # Convert with chunking
-    zarrify convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
+    zarrio convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
 
     # Convert with compression
-    zarrify convert input.nc output.zarr --compression "blosc:zstd:3"
+    zarrio convert input.nc output.zarr --compression "blosc:zstd:3"
 
     # Convert with data packing
-    zarrify convert input.nc output.zarr --packing --packing-bits 16
+    zarrio convert input.nc output.zarr --packing --packing-bits 16
 
     # Convert with variable selection
-    zarrify convert input.nc output.zarr --variables "temperature,pressure"
+    zarrio convert input.nc output.zarr --variables "temperature,pressure"
 
     # Convert with variable exclusion
-    zarrify convert input.nc output.zarr --drop-variables "humidity"
+    zarrio convert input.nc output.zarr --drop-variables "humidity"
 
     # Convert with additional attributes
-    zarrify convert input.nc output.zarr --attrs '{"title": "Demo dataset", "source": "zarrify"}'
+    zarrio convert input.nc output.zarr --attrs '{"title": "Demo dataset", "source": "zarrio"}'
 
 Parallel Processing
 -------------------
 
-One of the key features of zarrify is parallel processing support:
+One of the key features of zarrio is parallel processing support:
 
 Template Creation
 ~~~~~~~~~~~~~~~~~~~
@@ -89,7 +89,7 @@ First, create a template Zarr archive covering the full time range:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     # Create converter
     converter = ZarrConverter(
@@ -134,15 +134,15 @@ You can also use the CLI for parallel processing:
 .. code-block:: bash
 
     # Create template for parallel writing
-    zarrify create-template template.nc archive.zarr \\
+    zarrio create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31
 
     # Write regions in parallel processes
-    zarrify write-region data1.nc archive.zarr  # Process 1
-    zarrify write-region data2.nc archive.zarr  # Process 2
-    zarrify write-region data3.nc archive.zarr  # Process 3
-    zarrify write-region data4.nc archive.zarr  # Process 4
+    zarrio write-region data1.nc archive.zarr  # Process 1
+    zarrio write-region data2.nc archive.zarr  # Process 2
+    zarrio write-region data3.nc archive.zarr  # Process 3
+    zarrio write-region data4.nc archive.zarr  # Process 4
 
 Data Appending
 -------------
@@ -151,7 +151,7 @@ Append new data to existing Zarr stores:
 
 .. code-block:: python
 
-    from zarrify import append_to_zarr
+    from zarrio import append_to_zarr
 
     # Append data to existing Zarr store
     append_to_zarr("new_data.nc", "existing.zarr")
@@ -170,7 +170,7 @@ Class-Based Appending
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     # Create converter
     converter = ZarrConverter(
@@ -186,10 +186,10 @@ CLI Appending
 .. code-block:: bash
 
     # Append data to existing Zarr store
-    zarrify append new_data.nc existing.zarr
+    zarrio append new_data.nc existing.zarr
 
     # Append with options
-    zarrify append new_data.nc existing.zarr \\
+    zarrio append new_data.nc existing.zarr \\
         --chunking "time:50,lat:25,lon:50" \\
         --variables "temperature,pressure" \\
         --drop-variables "humidity"
@@ -230,7 +230,7 @@ Usage:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     # Load from YAML file
     converter = ZarrConverter.from_config_file("config.yaml")
@@ -239,7 +239,7 @@ Usage:
 .. code-block:: bash
 
     # Use with CLI
-    zarrify convert input.nc output.zarr --config config.yaml
+    zarrio convert input.nc output.zarr --config config.yaml
 
 JSON Configuration
 ~~~~~~~~~~~~~~~~
@@ -275,7 +275,7 @@ Usage:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     # Load from JSON file
     converter = ZarrConverter.from_config_file("config.json")
@@ -284,16 +284,16 @@ Usage:
 .. code-block:: bash
 
     # Use with CLI
-    zarrify convert input.nc output.zarr --config config.json
+    zarrio convert input.nc output.zarr --config config.json
 
 Intelligent Chunking
 ------------------
 
-zarrify provides automatic chunking analysis:
+zarrio provides automatic chunking analysis:
 
 .. code-block:: python
 
-    from zarrify import convert_to_zarr
+    from zarrio import convert_to_zarr
 
     # No chunking specified - automatic analysis
     convert_to_zarr(
@@ -326,8 +326,8 @@ Handle transient issues with automatic retries:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
-    from zarrify.models import ZarrConverterConfig
+    from zarrio import ZarrConverter
+    from zarrio.models import ZarrConverterConfig
 
     # Configure retries for missing data
     config = ZarrConverterConfig(
@@ -345,8 +345,8 @@ Pack data with automatic validation and warnings:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
-    from zarrify.models import ZarrConverterConfig, PackingConfig
+    from zarrio import ZarrConverter
+    from zarrio.models import ZarrConverterConfig, PackingConfig
 
     # Enable data packing with validation
     config = ZarrConverterConfig(
@@ -376,8 +376,8 @@ Here's a complete example showing a typical workflow:
     import xarray as xr
     import numpy as np
     import pandas as pd
-    from zarrify import ZarrConverter
-    from zarrify.models import (
+    from zarrio import ZarrConverter
+    from zarrio.models import (
         ZarrConverterConfig,
         ChunkingConfig,
         PackingConfig,
@@ -413,7 +413,7 @@ Here's a complete example showing a typical workflow:
 
         # Add metadata
         ds.attrs["title"] = "Sample Climate Dataset"
-        ds.attrs["institution"] = "zarrify Demo"
+        ds.attrs["institution"] = "zarrio Demo"
         ds["temperature"].attrs["units"] = "degC"
         ds["pressure"].attrs["units"] = "hPa"
 
@@ -467,11 +467,11 @@ Here's a complete example showing a typical workflow:
 Error Handling
 ---------------
 
-zarrify provides comprehensive error handling:
+zarrio provides comprehensive error handling:
 
 .. code-block:: python
 
-    from zarrify.exceptions import ConversionError, PackingError, ConfigurationError
+    from zarrio.exceptions import ConversionError, PackingError, ConfigurationError
 
     try:
         convert_to_zarr("input.nc", "output.zarr")
@@ -533,7 +533,7 @@ Enable detailed logging for debugging:
 .. code-block:: bash
 
     # CLI with verbose logging
-    zarrify convert input.nc output.zarr -vvv
+    zarrio convert input.nc output.zarr -vvv
 
 The logs will show:
 - Processing steps
@@ -547,11 +547,11 @@ The logs will show:
 Datamesh Integration
 --------------------
 
-zarrify supports integration with Oceanum's Datamesh platform:
+zarrio supports integration with Oceanum's Datamesh platform:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter, ZarrConverterConfig
+    from zarrio import ZarrConverter, ZarrConverterConfig
 
     # Configure for datamesh
     config = ZarrConverterConfig(
@@ -559,10 +559,10 @@ zarrify supports integration with Oceanum's Datamesh platform:
             "datasource": {
                 "id": "my_climate_data",
                 "name": "My Climate Data",
-                "description": "Climate data converted with zarrify",
+                "description": "Climate data converted with zarrio",
                 "coordinates": {"x": "lon", "y": "lat", "t": "time"},
                 "details": "https://example.com",
-                "tags": ["climate", "zarrify", "datamesh"],
+                "tags": ["climate", "zarrio", "datamesh"],
             },
             "token": "your_datamesh_token",
             "service": "https://datamesh-v1.oceanum.io",
@@ -585,19 +585,19 @@ Use the CLI with datamesh:
 .. code-block:: bash
 
     # Convert to datamesh datasource
-    zarrify convert input.nc \
+    zarrio convert input.nc \
       --datamesh-datasource '{"id":"my_climate_data","name":"My Climate Data","coordinates":{"x":"lon","y":"lat","t":"time"}}' \
       --datamesh-token $DATAMESH_TOKEN
 
     # Create template for parallel writing
-    zarrify create-template template.nc \
+    zarrio create-template template.nc \
       --datamesh-datasource '{"id":"my_climate_data","name":"My Climate Data","coordinates":{"x":"lon","y":"lat","t":"time"}}' \
       --datamesh-token $DATAMESH_TOKEN \
       --global-start 2023-01-01 \
       --global-end 2023-12-31
 
     # Write region to datamesh datasource
-    zarrify write-region data.nc \
+    zarrio write-region data.nc \
       --datamesh-datasource '{"id":"my_climate_data","name":"My Climate Data","coordinates":{"x":"lon","y":"lat","t":"time"}}' \
       --datamesh-token $DATAMESH_TOKEN
 
@@ -619,7 +619,7 @@ Use YAML configuration with datamesh:
       datasource:
         id: my_climate_data
         name: My Climate Data
-        description: Climate data converted with zarrify
+        description: Climate data converted with zarrio
         coordinates:
           x: lon
           y: lat
@@ -627,7 +627,7 @@ Use YAML configuration with datamesh:
         details: https://example.com
         tags:
           - climate
-          - zarrify
+          - zarrio
           - datamesh
       token: your_datamesh_token
       service: https://datamesh-v1.oceanum.io
@@ -641,4 +641,4 @@ Use YAML configuration with datamesh:
 .. code-block:: bash
 
     # Use with CLI
-    zarrify convert input.nc --config config.yaml
+    zarrio convert input.nc --config config.yaml

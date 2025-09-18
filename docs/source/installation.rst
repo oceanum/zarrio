@@ -1,27 +1,27 @@
 Installation
 ============
 
-zarrify can be installed in several ways depending on your needs.
+zarrio can be installed in several ways depending on your needs.
 
 Using pip
 ---------
 
-The easiest way to install zarrify is using pip:
+The easiest way to install zarrio is using pip:
 
 .. code-block:: bash
 
-    pip install zarrify
+    pip install zarrio
 
 This will install the latest stable version from PyPI.
 
 Using conda
 -----------
 
-If you're using conda, you can install zarrify from conda-forge:
+If you're using conda, you can install zarrio from conda-forge:
 
 .. code-block:: bash
 
-    conda install -c conda-forge zarrify
+    conda install -c conda-forge zarrio
 
 Installing from source
 ----------------------
@@ -30,14 +30,14 @@ To install the latest development version from source:
 
 .. code-block:: bash
 
-    git clone https://github.com/oceanum/zarrify.git
-    cd zarrify
+    git clone https://github.com/oceanum/zarrio.git
+    cd zarrio
     pip install -e .
 
 Dependencies
 ------------
 
-zarrify requires the following dependencies:
+zarrio requires the following dependencies:
 
 Core dependencies:
 ~~~~~~~~~~~~~~~~~~
@@ -82,26 +82,26 @@ To install development dependencies:
 Verification
 ------------
 
-To verify that zarrify is installed correctly, you can run:
+To verify that zarrio is installed correctly, you can run:
 
 .. code-block:: bash
 
-    python -c "import zarrify; print(f'zarrify version: {zarrify.__version__}')"
+    python -c "import zarrio; print(f'zarrio version: {zarrio.__version__}')"
 
 Or using the CLI:
 
 .. code-block:: bash
 
-    zarrify --version
+    zarrio --version
 
 Docker Installation
 -------------------
 
-zarrify can also be used via Docker containers. See the :doc:`docker` documentation for details on building and running Docker images.
+zarrio can also be used via Docker containers. See the :doc:`docker` documentation for details on building and running Docker images.
 
 System requirements
 -------------------
 
-zarrify is designed to work on Linux, macOS, and Windows systems with Python 3.8 or higher.
+zarrio is designed to work on Linux, macOS, and Windows systems with Python 3.8 or higher.
 
 For large datasets, ensure you have sufficient disk space and memory. The library can handle datasets larger than available RAM through dask's chunked array operations.

@@ -1,5 +1,5 @@
 """
-Test to verify retry logic for handling missing data in zarrify.
+Test to verify retry logic for handling missing data in zarrio.
 """
 
 import pytest
@@ -9,8 +9,8 @@ import pandas as pd
 import xarray as xr
 import os
 
-from zarrify import ZarrConverter
-from zarrify.models import ZarrConverterConfig, MissingDataConfig
+from zarrio import ZarrConverter
+from zarrio.models import ZarrConverterConfig, MissingDataConfig
 
 
 def create_test_dataset_with_missing_data(

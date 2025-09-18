@@ -1,5 +1,5 @@
 """
-Simple test for retry functionality in zarrify.
+Simple test for retry functionality in zarrio.
 """
 
 import tempfile
@@ -8,8 +8,8 @@ import pandas as pd
 import xarray as xr
 import os
 
-from zarrify.core import ZarrConverter
-from zarrify.models import ZarrConverterConfig, ChunkingConfig
+from zarrio.core import ZarrConverter
+from zarrio.models import ZarrConverterConfig, ChunkingConfig
 
 
 def create_test_dataset(filename: str) -> str:

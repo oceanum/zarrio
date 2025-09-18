@@ -1,5 +1,5 @@
 """
-Tests for chunking analysis in zarrify.
+Tests for chunking analysis in zarrio.
 """
 
 import pytest
@@ -9,9 +9,9 @@ import pandas as pd
 import tempfile
 import os
 
-from zarrify.chunking import ChunkAnalyzer, get_chunk_recommendation, validate_chunking
-from zarrify.core import ZarrConverter
-from zarrify.models import ZarrConverterConfig
+from zarrio.chunking import ChunkAnalyzer, get_chunk_recommendation, validate_chunking
+from zarrio.core import ZarrConverter
+from zarrio.models import ZarrConverterConfig
 
 
 def test_chunk_analyzer_initialization():

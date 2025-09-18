@@ -1,7 +1,7 @@
-zarrify
+zarrio
 =======
 
 .. toctree::
    :maxdepth: 4
 
-   zarrify
+   zarrio

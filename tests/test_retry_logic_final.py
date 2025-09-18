@@ -9,8 +9,8 @@ import pandas as pd
 import xarray as xr
 import os
 
-from zarrify import ZarrConverter, convert_to_zarr, append_to_zarr
-from zarrify.models import ZarrConverterConfig, MissingDataConfig
+from zarrio import ZarrConverter, convert_to_zarr, append_to_zarr
+from zarrio.models import ZarrConverterConfig, MissingDataConfig
 
 
 def create_test_dataset(filename: str, output: str = "netcdf"):
@@ -228,7 +228,7 @@ def test_missing_data_detection():
         
         # Test missing data handler
         print("\n2. Testing missing data handler...")
-        from zarrify.missing import MissingDataHandler
+        from zarrio.missing import MissingDataHandler
         handler = MissingDataHandler(
             missing_check_vars="all",
             retries_on_missing=2

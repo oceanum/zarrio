@@ -1,12 +1,12 @@
 Configuration Management
 ========================
 
-zarrify provides flexible configuration management using Pydantic models for type safety and validation.
+zarrio provides flexible configuration management using Pydantic models for type safety and validation.
 
 Pydantic Models
 ----------------
 
-All configuration in zarrify is managed through Pydantic models, which provide:
+All configuration in zarrio is managed through Pydantic models, which provide:
 
 - Type safety with automatic validation
 - Clear error messages for invalid configurations
@@ -20,7 +20,7 @@ The main configuration class is `ZarrConverterConfig`:
 
 .. code-block:: python
 
-    from zarrify.models import ZarrConverterConfig
+    from zarrio.models import ZarrConverterConfig
 
     config = ZarrConverterConfig(
         chunking={"time": 100, "lat": 50, "lon": 100},
@@ -29,7 +29,7 @@ The main configuration class is `ZarrConverterConfig`:
         time={"dim": "time", "append_dim": "time"},
         variables={"include": ["temperature"], "exclude": ["humidity"]},
         target_chunk_size_mb=100,  # Configurable target chunk size
-        attrs={"title": "Demo dataset", "source": "zarrify"}
+        attrs={"title": "Demo dataset", "source": "zarrio"}
     )
 
 The ``ZarrConverterConfig`` supports the following fields:
@@ -54,7 +54,7 @@ Chunking can be configured through the `ChunkingConfig` model:
 
 .. code-block:: python
 
-    from zarrify.models import ChunkingConfig
+    from zarrio.models import ChunkingConfig
 
     chunking = ChunkingConfig(
         time=100,
@@ -69,7 +69,7 @@ Packing can be configured through the `PackingConfig` model:
 
 .. code-block:: python
 
-    from zarrify.models import PackingConfig
+    from zarrio.models import PackingConfig
 
     packing = PackingConfig(
         enabled=True,
@@ -93,7 +93,7 @@ Manual Range Specification:
 
     .. code-block:: python
 
-        from zarrify.models import PackingConfig
+        from zarrio.models import PackingConfig
 
         packing = PackingConfig(
             enabled=True,
@@ -109,7 +109,7 @@ Automatic Range Calculation with Buffer:
 
     .. code-block:: python
 
-        from zarrify.models import PackingConfig
+        from zarrio.models import PackingConfig
 
         packing = PackingConfig(
             enabled=True,
@@ -122,7 +122,7 @@ Range Exceeded Validation:
 
     .. code-block:: python
 
-        from zarrify.models import PackingConfig
+        from zarrio.models import PackingConfig
 
         packing = PackingConfig(
             enabled=True,
@@ -139,7 +139,7 @@ Compression can be configured through the `CompressionConfig` model:
 
 .. code-block:: python
 
-    from zarrify.models import CompressionConfig
+    from zarrio.models import CompressionConfig
 
     compression = CompressionConfig(
         method="blosc:zstd:3",
@@ -155,7 +155,7 @@ Time handling can be configured through the `TimeConfig` model:
 
 .. code-block:: python
 
-    from zarrify.models import TimeConfig
+    from zarrio.models import TimeConfig
 
     time_config = TimeConfig(
         dim="time",
@@ -178,7 +178,7 @@ Programmatic Configuration:
 
 .. code-block:: python
 
-    from zarrify.models import ZarrConverterConfig
+    from zarrio.models import ZarrConverterConfig
 
     config = ZarrConverterConfig(
         access_pattern="temporal"  # Optimize for time series analysis
@@ -212,7 +212,7 @@ Variable handling can be configured through the `VariableConfig` model:
 
 .. code-block:: python
 
-    from zarrify.models import VariableConfig
+    from zarrio.models import VariableConfig
 
     variables = VariableConfig(
         include=["temperature", "pressure"],
@@ -261,7 +261,7 @@ Loading:
 
 .. code-block:: python
 
-    from zarrify.models import ZarrConverterConfig
+    from zarrio.models import ZarrConverterConfig
 
     config = ZarrConverterConfig.from_yaml_file("config.yaml")
 
@@ -306,7 +306,7 @@ Loading:
 
 .. code-block:: python
 
-    from zarrify.models import ZarrConverterConfig
+    from zarrio.models import ZarrConverterConfig
 
     config = ZarrConverterConfig.from_json_file("config.json")
 
@@ -317,7 +317,7 @@ Configuration can also be created programmatically:
 
 .. code-block:: python
 
-    from zarrify.models import (
+    from zarrio.models import (
         ZarrConverterConfig,
         ChunkingConfig,
         PackingConfig,
@@ -332,7 +332,7 @@ Configuration can also be created programmatically:
         packing=PackingConfig(enabled=True, bits=16),
         time=TimeConfig(dim="time", append_dim="time"),
         variables=VariableConfig(include=["temperature"], exclude=["humidity"]),
-        attrs={"title": "Programmatic Config Demo", "source": "zarrify"}
+        attrs={"title": "Programmatic Config Demo", "source": "zarrio"}
     )
 
 Validation
@@ -342,7 +342,7 @@ Pydantic models automatically validate configurations:
 
 .. code-block:: python
 
-    from zarrify.models import ZarrConverterConfig
+    from zarrio.models import ZarrConverterConfig
 
     try:
         config = ZarrConverterConfig(
@@ -354,11 +354,11 @@ Pydantic models automatically validate configurations:
 Missing Data Handling Configuration
 -----------------------------------
 
-zarrify provides robust missing data handling through the ``MissingDataConfig`` model:
+zarrio provides robust missing data handling through the ``MissingDataConfig`` model:
 
 .. code-block:: python
 
-    from zarrify.models import ZarrConverterConfig, MissingDataConfig
+    from zarrio.models import ZarrConverterConfig, MissingDataConfig
 
     config = ZarrConverterConfig(
         missing_data=MissingDataConfig(
@@ -380,7 +380,7 @@ The missing data detection system automatically checks for missing data after wr
 Retry Logic
 ^^^^^^^^^^^
 
-When missing data is detected and retries are enabled, zarrify automatically retries the operation with exponential backoff:
+When missing data is detected and retries are enabled, zarrio automatically retries the operation with exponential backoff:
 
 1. First retry: 0.1 second delay
 2. Second retry: 0.2 second delay
@@ -449,16 +449,16 @@ Missing data handling options are available through the CLI:
 .. code-block:: bash
 
     # Convert with retry logic
-    zarrify convert input.nc output.zarr --retries-on-missing 3
+    zarrio convert input.nc output.zarr --retries-on-missing 3
 
     # Append with retry logic
-    zarrify append new_data.nc existing.zarr --retries-on-missing 2
+    zarrio append new_data.nc existing.zarr --retries-on-missing 2
 
     # Create template with retry logic
-    zarrify create-template template.nc archive.zarr --retries-on-missing 1
+    zarrio create-template template.nc archive.zarr --retries-on-missing 1
 
     # Write region with retry logic
-    zarrify write-region data.nc archive.zarr --retries-on-missing 2
+    zarrio write-region data.nc archive.zarr --retries-on-missing 2
 
 Access Pattern Configuration
 ----------------------------
@@ -475,7 +475,7 @@ Programmatic Configuration:
 
 .. code-block:: python
 
-    from zarrify.models import ZarrConverterConfig
+    from zarrio.models import ZarrConverterConfig
 
     config = ZarrConverterConfig(
         access_pattern="temporal"  # Optimize for time series analysis
@@ -510,21 +510,21 @@ CLI Usage:
 .. code-block:: bash
 
     # Create template with intelligent chunking for temporal analysis
-    zarrify create-template template.nc archive.zarr \\
+    zarrio create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31 \\
         --intelligent-chunking \\
         --access-pattern temporal
 
     # Create template with intelligent chunking for spatial analysis
-    zarrify create-template template.nc archive.zarr \\
+    zarrio create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31 \\
         --intelligent-chunking \\
         --access-pattern spatial
 
     # Create template with intelligent chunking for balanced access
-    zarrify create-template template.nc archive.zarr \\
+    zarrio create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31 \\
         --intelligent-chunking \\
@@ -546,8 +546,8 @@ Once you have a configuration, you can use it with ZarrConverter:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
-    from zarrify.models import ZarrConverterConfig
+    from zarrio import ZarrConverter
+    from zarrio.models import ZarrConverterConfig
 
     config = ZarrConverterConfig(
         chunking={"time": 100, "lat": 50, "lon": 100},
@@ -565,7 +565,7 @@ Configuration files can also be used with the CLI:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --config config.yaml
+    zarrio convert input.nc output.zarr --config config.yaml
 
 Environment Variables
 ----------------------
@@ -581,11 +581,11 @@ Some configuration can also be set through environment variables:
 Default Configuration
 ----------------------
 
-zarrify provides sensible defaults for all configuration options:
+zarrio provides sensible defaults for all configuration options:
 
 .. code-block:: python
 
-    from zarrify.models import ZarrConverterConfig
+    from zarrio.models import ZarrConverterConfig
 
     # Default config
     config = ZarrConverterConfig()
@@ -612,7 +612,7 @@ Example Configuration File with Comments:
 
 .. code-block:: yaml
 
-    # config.yaml - Production configuration for zarrify
+    # config.yaml - Production configuration for zarrio
     #
     # This configuration is optimized for:
     # - Large climate datasets (1° global daily data)
@@ -660,7 +660,7 @@ Example Configuration File with Comments:
     attrs:
       title: "Production Climate Dataset"
       institution: "Oceanum"
-      source: "zarrify"
+      source: "zarrio"
       processing_date: "2023-01-01"
       version: "1.0"
 

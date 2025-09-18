@@ -1,7 +1,7 @@
-Contributing to zarrify
+Contributing to zarrio
 ========================
 
-Thank you for considering contributing to zarrify! We welcome contributions from everyone.
+Thank you for considering contributing to zarrio! We welcome contributions from everyone.
 
 Types of Contributions
 ----------------------
@@ -47,8 +47,8 @@ Setting Up Development Environment
 
    .. code-block:: bash
 
-       git clone https://github.com/your-username/zarrify.git
-       cd zarrify
+       git clone https://github.com/your-username/zarrio.git
+       cd zarrio
 
 3. Create a virtual environment:
 
@@ -82,7 +82,7 @@ Run tests with coverage:
 
 .. code-block:: bash
 
-    pytest --cov=zarrify
+    pytest --cov=zarrio
 
 Code Style
 ^^^^^^^^^^
@@ -110,7 +110,7 @@ Run type checking:
 
 .. code-block:: bash
 
-    mypy zarrify
+    mypy zarrio
 
 Pull Request Process
 --------------------
@@ -145,7 +145,7 @@ Pull Request Process
 
    .. code-block:: bash
 
-       mypy zarrify
+       mypy zarrio
 
 8. Commit your changes:
 
@@ -349,4 +349,4 @@ If you encounter issues with the contribution process:
 Thank You!
 ----------
 
-Thank you for contributing to zarrify! Your contributions help make this project better for everyone.
+Thank you for contributing to zarrio! Your contributions help make this project better for everyone.

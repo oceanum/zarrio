@@ -1,7 +1,7 @@
 Analysis Tool
 =============
 
-The `analyze` command in zarrify provides comprehensive analysis of NetCDF files to help users optimize their Zarr conversion process. It examines the dataset and provides recommendations for chunking, packing, and compression options.
+The `analyze` command in zarrio provides comprehensive analysis of NetCDF files to help users optimize their Zarr conversion process. It examines the dataset and provides recommendations for chunking, packing, and compression options.
 
 Usage
 -----
@@ -10,25 +10,25 @@ Basic analysis:
 
 .. code-block:: bash
 
-    zarrify analyze input.nc
+    zarrio analyze input.nc
 
 Analysis with performance testing:
 
 .. code-block:: bash
 
-    zarrify analyze input.nc --test-performance
+    zarrio analyze input.nc --test-performance
 
 Analysis with custom target chunk size:
 
 .. code-block:: bash
 
-    zarrify analyze input.nc --target-chunk-size-mb 100
+    zarrio analyze input.nc --target-chunk-size-mb 100
 
 Interactive configuration setup:
 
 .. code-block:: bash
 
-    zarrify analyze input.nc --interactive
+    zarrio analyze input.nc --interactive
 
 Features
 --------
@@ -191,7 +191,7 @@ Example Output
 
 .. code-block:: text
 
-    zarrify Analysis Tool
+    zarrio Analysis Tool
     ==================================================
     Analyzing file: sample.nc
 

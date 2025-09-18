@@ -1,5 +1,5 @@
 """
-Example demonstrating CLI functionality of zarrify.
+Example demonstrating CLI functionality of zarrio.
 """
 
 import sys
@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-# Add the zarrify directory to the path
+# Add the zarrio directory to the path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '.'))
 
 
@@ -46,7 +46,7 @@ def test_cli_functionality():
         # Test help command
         print("\n1. Testing help command:")
         result = subprocess.run([
-            sys.executable, "-m", "zarrify.cli", "--help"
+            sys.executable, "-m", "zarrio.cli", "--help"
         ], capture_output=True, text=True)
         
         if result.returncode == 0:
@@ -59,7 +59,7 @@ def test_cli_functionality():
         print("\n2. Testing convert command:")
         zarrfile = os.path.join(tmpdir, "output.zarr")
         result = subprocess.run([
-            sys.executable, "-m", "zarrify.cli", "convert",
+            sys.executable, "-m", "zarrio.cli", "convert",
             ncfile, zarrfile
         ], capture_output=True, text=True)
         
@@ -78,7 +78,7 @@ def test_cli_functionality():
         print("\n3. Testing convert with chunking:")
         zarrfile2 = os.path.join(tmpdir, "output2.zarr")
         result = subprocess.run([
-            sys.executable, "-m", "zarrify.cli", "convert",
+            sys.executable, "-m", "zarrio.cli", "convert",
             ncfile, zarrfile2,
             "--chunking", "time:5,lat:3"
         ], capture_output=True, text=True)
@@ -97,7 +97,7 @@ def test_cli_functionality():
         # Test version command
         print("\n4. Testing version command:")
         result = subprocess.run([
-            sys.executable, "-m", "zarrify.cli", "--version"
+            sys.executable, "-m", "zarrio.cli", "--version"
         ], capture_output=True, text=True)
         
         if result.returncode == 0:
@@ -112,7 +112,7 @@ def test_cli_functionality():
 
 def main():
     """Run CLI tests."""
-    print("Testing zarrify CLI functionality...")
+    print("Testing zarrio CLI functionality...")
     
     success = test_cli_functionality()
     

@@ -1,4 +1,4 @@
-# Development requirements for zarrify
+# Development requirements for zarrio
 
 # Core dependencies
 xarray>=0.18.0

@@ -10,7 +10,7 @@ import xarray as xr
 import numpy as np
 import pandas as pd
 import uuid
-from zarrify import ZarrConverter, ZarrConverterConfig
+from zarrio import ZarrConverter, ZarrConverterConfig
 
 
 def create_sample_climate_data():
@@ -58,7 +58,7 @@ def create_sample_climate_data():
     
     # Add metadata
     ds.attrs["title"] = "Sample Climate Data for Datamesh Demo"
-    ds.attrs["source"] = "zarrify datamesh_demo.py"
+    ds.attrs["source"] = "zarrio datamesh_demo.py"
     ds.attrs["created"] = pd.Timestamp.now().isoformat()
     
     # Add coordinate attributes
@@ -116,7 +116,7 @@ def main():
             print("Demo will show configuration but won't actually write to datamesh")
         
         # Create a unique datasource ID to avoid conflicts
-        datasource_id = f"zarrify_demo_climate_data_{uuid.uuid4().hex[:8]}"
+        datasource_id = f"zarrio_demo_climate_data_{uuid.uuid4().hex[:8]}"
         
         # Configure for datamesh
         config = ZarrConverterConfig(
@@ -127,10 +127,10 @@ def main():
                 "datasource": {
                     "id": datasource_id,
                     "name": "Zarrify Demo Climate Data",
-                    "description": "Sample climate data created by zarrify datamesh demo",
+                    "description": "Sample climate data created by zarrio datamesh demo",
                     "coordinates": {"x": "lon", "y": "lat", "t": "time"},
-                    "details": "https://github.com/oceanum/zarrify",
-                    "tags": ["demo", "climate", "zarrify", "datamesh", "test"],
+                    "details": "https://github.com/oceanum/zarrio",
+                    "tags": ["demo", "climate", "zarrio", "datamesh", "test"],
                 },
                 "token": datamesh_token,
                 "service": "https://datamesh-v1.oceanum.io",
@@ -165,18 +165,18 @@ def main():
             print(f"\n--- Demo Mode (No Token) ---")
             print("Showing what would happen with a real token:")
             print("converter.convert(nc_file)")
-            print("# This would write the data to datamesh datasource 'zarrify_demo_climate_data'")
+            print("# This would write the data to datamesh datasource 'zarrio_demo_climate_data'")
             
         # Show CLI usage
         print(f"\n--- CLI Usage ---")
         print("You can also use the CLI:")
         if has_token:
-            print(f"zarrify convert data.nc \\")
+            print(f"zarrio convert data.nc \\")
             print(f"  --datamesh-datasource '{{\"id\":\"{datasource_id}\",\"name\":\"Demo Data\",\"coordinates\":{{\"x\":\"lon\",\"y\":\"lat\",\"t\":\"time\"}}}}' \\")
             print("  --datamesh-token $DATAMESH_TOKEN")
         else:
             print("export DATAMESH_TOKEN='your_actual_token_here'")
-            print(f"zarrify convert data.nc \\")
+            print(f"zarrio convert data.nc \\")
             print(f"  --datamesh-datasource '{{\"id\":\"{datasource_id}\",\"name\":\"Demo Data\",\"coordinates\":{{\"x\":\"lon\",\"y\":\"lat\",\"t\":\"time\"}}}}' \\")
             print("  --datamesh-token $DATAMESH_TOKEN")
             

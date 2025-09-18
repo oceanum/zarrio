@@ -1,7 +1,7 @@
 """
-Example demonstrating zarrify's intelligent chunking with access pattern optimization.
+Example demonstrating zarrio's intelligent chunking with access pattern optimization.
 
-This example shows how to use zarrify's built-in chunking analysis to automatically
+This example shows how to use zarrio's built-in chunking analysis to automatically
 recommend optimal chunking strategies based on your data dimensions and access patterns.
 """
 
@@ -12,9 +12,9 @@ import tempfile
 import os
 import time
 
-from zarrify import ZarrConverter
-from zarrify.models import ZarrConverterConfig
-from zarrify.chunking import get_chunk_recommendation
+from zarrio import ZarrConverter
+from zarrio.models import ZarrConverterConfig
+from zarrio.chunking import get_chunk_recommendation
 
 
 def create_sample_data():

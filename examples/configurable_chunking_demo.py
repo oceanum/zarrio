@@ -1,5 +1,5 @@
 """
-Example demonstrating configurable target chunk sizes in zarrify.
+Example demonstrating configurable target chunk sizes in zarrio.
 
 This example shows how to configure target chunk sizes for different environments:
 - Local development (smaller chunks)
@@ -8,7 +8,7 @@ This example shows how to configure target chunk sizes for different environment
 """
 
 import os
-from zarrify.chunking import get_chunk_recommendation
+from zarrio.chunking import get_chunk_recommendation
 
 
 def demonstrate_configurable_chunking():
@@ -87,8 +87,8 @@ def demonstrate_zarrconverter_config():
     
     print("You can also configure target chunk size in ZarrConverterConfig:")
     print("""
-from zarrify import ZarrConverter
-from zarrify.models import ZarrConverterConfig
+from zarrio import ZarrConverter
+from zarrio.models import ZarrConverterConfig
 
 # Configure target chunk size in the config
 config = ZarrConverterConfig(

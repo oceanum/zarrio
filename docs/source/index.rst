@@ -1,10 +1,10 @@
-Welcome to zarrify's documentation!
+Welcome to zarrio's documentation!
 ====================================
 
 Overview
 --------
 
-zarrify is a modern, clean library for converting scientific data formats (primarily NetCDF) to Zarr format. It was created as a complete rewrite of the original onzarr library to address maintainability issues while preserving all essential functionality and adding crucial parallel writing capabilities.
+zarrio is a modern, clean library for converting scientific data formats (primarily NetCDF) to Zarr format. It was created as a complete rewrite of the original onzarr library to address maintainability issues while preserving all essential functionality and adding crucial parallel writing capabilities.
 
 Key Features
 ------------
@@ -56,18 +56,18 @@ Getting Started
 Installation
 ^^^^^^^^^^^^
 
-Install zarrify using pip:
+Install zarrio using pip:
 
 .. code-block:: bash
 
-    pip install zarrify
+    pip install zarrio
 
 Or install from source:
 
 .. code-block:: bash
 
-    git clone https://github.com/oceanum/zarrify.git
-    cd zarrify
+    git clone https://github.com/oceanum/zarrio.git
+    cd zarrio
     pip install -e .
 
 Quick Start
@@ -77,7 +77,7 @@ Simple conversion:
 
 .. code-block:: python
 
-    from zarrify import convert_to_zarr
+    from zarrio import convert_to_zarr
 
     # Convert NetCDF to Zarr
     convert_to_zarr("input.nc", "output.zarr")
@@ -86,14 +86,14 @@ Advanced conversion with configuration:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
-    from zarrify.models import ZarrConverterConfig, ChunkingConfig, PackingConfig
+    from zarrio import ZarrConverter
+    from zarrio.models import ZarrConverterConfig, ChunkingConfig, PackingConfig
 
     # Create converter with configuration
     config = ZarrConverterConfig(
         chunking=ChunkingConfig(time=100, lat=50, lon=100),
         packing=PackingConfig(enabled=True, bits=16),
-        attrs={"title": "Demo dataset", "source": "zarrify"}
+        attrs={"title": "Demo dataset", "source": "zarrio"}
     )
 
     converter = ZarrConverter(config=config)
@@ -104,34 +104,34 @@ Command-line interface:
 .. code-block:: bash
 
     # Convert NetCDF to Zarr
-    zarrify convert input.nc output.zarr
+    zarrio convert input.nc output.zarr
 
     # Convert with chunking
-    zarrify convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
+    zarrio convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
 
     # Convert with data packing
-    zarrify convert input.nc output.zarr --packing --packing-bits 16
+    zarrio convert input.nc output.zarr --packing --packing-bits 16
 
 Parallel Processing
 -------------------
 
-One of the key features of zarrify is its support for parallel processing of large datasets through template creation and region writing.
+One of the key features of zarrio is its support for parallel processing of large datasets through template creation and region writing.
 
-**Intelligent Chunking**: When creating templates, zarrify can now perform intelligent chunking based on the full archive dimensions rather than just the template dataset. This ensures optimal chunking for the entire archive.
+**Intelligent Chunking**: When creating templates, zarrio can now perform intelligent chunking based on the full archive dimensions rather than just the template dataset. This ensures optimal chunking for the entire archive.
 
 For detailed information, see the :doc:`parallel` documentation.
 
 Pydantic Configuration
 ----------------------
 
-zarrify uses Pydantic for type-safe configuration management:
+zarrio uses Pydantic for type-safe configuration management:
 
 Programmatic Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
-    from zarrify.models import (
+    from zarrio.models import (
         ZarrConverterConfig,
         ChunkingConfig,
         PackingConfig,
@@ -143,7 +143,7 @@ Programmatic Configuration
         chunking=ChunkingConfig(time=100, lat=50, lon=100),
         compression=CompressionConfig(method="blosc:zstd:3"),
         packing=PackingConfig(enabled=True, bits=16),
-        attrs={"title": "Demo dataset", "source": "zarrify"}
+        attrs={"title": "Demo dataset", "source": "zarrio"}
     )
 
     converter = ZarrConverter(config=config)
@@ -183,12 +183,12 @@ Configuration File Support
 Intelligent Chunking Analysis
 -----------------------------
 
-zarrify provides intelligent chunking analysis:
+zarrio provides intelligent chunking analysis:
 
 Automatic Recommendations
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When no chunking is specified, zarrify automatically analyzes the dataset and provides recommendations:
+When no chunking is specified, zarrio automatically analyzes the dataset and provides recommendations:
 
 .. code-block:: python
 
@@ -226,7 +226,7 @@ Validates user-provided chunking and provides actionable feedback:
 Retry Logic for Missing Data
 ----------------------------
 
-zarrify implements intelligent retry logic for handling missing data:
+zarrio implements intelligent retry logic for handling missing data:
 
 Missing Data Detection
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -235,7 +235,7 @@ Automatically detect missing data after writing:
 
 .. code-block:: python
 
-    from zarrify.missing import MissingDataHandler
+    from zarrio.missing import MissingDataHandler
 
     handler = MissingDataHandler(
         missing_check_vars="all",  # Check all variables
@@ -267,16 +267,16 @@ CLI Support
 .. code-block:: bash
 
     # Convert with retry logic
-    zarrify convert input.nc output.zarr --retries-on-missing 3
+    zarrio convert input.nc output.zarr --retries-on-missing 3
 
     # Append with retry logic
-    zarrify append new_data.nc existing.zarr --retries-on-missing 2
+    zarrio append new_data.nc existing.zarr --retries-on-missing 2
 
     # Create template with retry logic
-    zarrify create-template template.nc archive.zarr --retries-on-missing 1
+    zarrio create-template template.nc archive.zarr --retries-on-missing 1
 
     # Write region with retry logic
-    zarrify write-region data.nc archive.zarr --retries-on-missing 2
+    zarrio write-region data.nc archive.zarr --retries-on-missing 2
 
 Configuration File Support
 ^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -1,85 +1,85 @@
-zarrify package
+zarrio package
 ===============
 
 Submodules
 ----------
 
-zarrify.api module
+zarrio.api module
 ------------------
 
-.. automodule:: zarrify.api
+.. automodule:: zarrio.api
    :members:
    :show-inheritance:
    :undoc-members:
 
-zarrify.chunking module
+zarrio.chunking module
 -----------------------
 
-.. automodule:: zarrify.chunking
+.. automodule:: zarrio.chunking
    :members:
    :show-inheritance:
    :undoc-members:
 
-zarrify.cli module
+zarrio.cli module
 ------------------
 
-.. automodule:: zarrify.cli
+.. automodule:: zarrio.cli
    :members:
    :show-inheritance:
    :undoc-members:
 
-zarrify.config module
+zarrio.config module
 ---------------------
 
-.. automodule:: zarrify.config
+.. automodule:: zarrio.config
    :members:
    :show-inheritance:
    :undoc-members:
 
-zarrify.core module
+zarrio.core module
 -------------------
 
-.. automodule:: zarrify.core
+.. automodule:: zarrio.core
    :members:
    :show-inheritance:
    :undoc-members:
 
-zarrify.exceptions module
+zarrio.exceptions module
 -------------------------
 
-.. automodule:: zarrify.exceptions
+.. automodule:: zarrio.exceptions
    :members:
    :show-inheritance:
    :undoc-members:
 
-zarrify.missing module
+zarrio.missing module
 ----------------------
 
-.. automodule:: zarrify.missing
+.. automodule:: zarrio.missing
    :members:
    :show-inheritance:
    :undoc-members:
 
-zarrify.models module
+zarrio.models module
 ---------------------
 
-.. automodule:: zarrify.models
+.. automodule:: zarrio.models
    :members:
    :show-inheritance:
    :undoc-members:
 
-zarrify.packing module
+zarrio.packing module
 ----------------------
 
-.. automodule:: zarrify.packing
+.. automodule:: zarrio.packing
    :members:
    :show-inheritance:
    :undoc-members:
 
-zarrify.time module
+zarrio.time module
 -------------------
 
-.. automodule:: zarrify.time
+.. automodule:: zarrio.time
    :members:
    :show-inheritance:
    :undoc-members:
@@ -87,7 +87,7 @@ zarrify.time module
 Module contents
 ---------------
 
-.. automodule:: zarrify
+.. automodule:: zarrio
    :members:
    :show-inheritance:
    :undoc-members:

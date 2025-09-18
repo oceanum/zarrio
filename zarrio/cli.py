@@ -1,5 +1,5 @@
 """
-Command-line interface for zarrify with Pydantic configuration support.
+Command-line interface for zarrio with Pydantic configuration support.
 """
 
 import argparse
@@ -320,7 +320,7 @@ def analyze_command(args: argparse.Namespace) -> None:
                              ZarrConverterConfig)
         from .packing import Packer
 
-        print("zarrify Analysis Tool")
+        print("zarrio Analysis Tool")
         print("=" * 50)
         print(f"Analyzing file: {args.input}")
         print()
@@ -842,56 +842,56 @@ def analyze_command(args: argparse.Namespace) -> None:
 def main() -> None:
     """Main entry point for CLI."""
     parser = argparse.ArgumentParser(
-        description="zarrify - Convert scientific data to Zarr format",
+        description="zarrio - Convert scientific data to Zarr format",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 examples:
   # Convert NetCDF to Zarr
-  zarrify convert input.nc output.zarr
+  zarrio convert input.nc output.zarr
 
   # Convert with chunking
-  zarrify convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
+  zarrio convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
 
   # Convert with compression
-  zarrify convert input.nc output.zarr --compression "blosc:zstd:3"
+  zarrio convert input.nc output.zarr --compression "blosc:zstd:3"
 
   # Convert with data packing
-  zarrify convert input.nc output.zarr --packing --packing-bits 16
+  zarrio convert input.nc output.zarr --packing --packing-bits 16
 
   # Convert with manual packing ranges
-  zarrify convert input.nc output.zarr --packing
+  zarrio convert input.nc output.zarr --packing
       --packing-manual-ranges '{"temperature": {"min": 0, "max": 100}}'
 
   # Analyze NetCDF file for optimization recommendations
-  zarrify analyze input.nc
+  zarrio analyze input.nc
 
   # Analyze with theoretical performance benefits
-  zarrify analyze input.nc --test-performance
+  zarrio analyze input.nc --test-performance
 
   # Analyze with actual performance tests
-  zarrify analyze input.nc --run-tests
+  zarrio analyze input.nc --run-tests
 
   # Analyze with interactive configuration setup
-  zarrify analyze input.nc --interactive
+  zarrio analyze input.nc --interactive
 
   # Create template for parallel writing
-  zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31
+  zarrio create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31
 
   # Create template with intelligent chunking
-  zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31 --intelligent-chunking --access-pattern temporal
+  zarrio create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-12-31 --intelligent-chunking --access-pattern temporal
 
   # Write region to existing archive
-  zarrify write-region data.nc archive.zarr
+  zarrio write-region data.nc archive.zarr
 
   # Append to existing Zarr store
-  zarrify append new_data.nc existing.zarr
+  zarrio append new_data.nc existing.zarr
 
   # Convert to datamesh datasource
-  zarrify convert input.nc --datamesh-datasource '{"id":"my_datasource","name":"My Data","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' --datamesh-token $DATAMESH_TOKEN
+  zarrio convert input.nc --datamesh-datasource '{"id":"my_datasource","name":"My Data","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' --datamesh-token $DATAMESH_TOKEN
         """,
     )
 
-    parser.add_argument("--version", action="version", version=f"zarrify {__version__}")
+    parser.add_argument("--version", action="version", version=f"zarrio {__version__}")
 
     parser.add_argument(
         "-v",

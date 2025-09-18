@@ -1,5 +1,5 @@
 """
-Example demonstrating the enhanced packing functionality in zarrify.
+Example demonstrating the enhanced packing functionality in zarrio.
 """
 
 import numpy as np
@@ -8,7 +8,7 @@ import pandas as pd
 import tempfile
 import os
 
-from zarrify.packing import Packer
+from zarrio.packing import Packer
 
 
 def create_sample_dataset():

@@ -1,5 +1,5 @@
 """
-Tests for retry functionality in zarrify.
+Tests for retry functionality in zarrio.
 """
 
 import pytest
@@ -9,9 +9,9 @@ import pandas as pd
 import xarray as xr
 import os
 
-from zarrify.core import ZarrConverter
-from zarrify.models import ZarrConverterConfig, ChunkingConfig
-from zarrify.exceptions import RetryLimitExceededError
+from zarrio.core import ZarrConverter
+from zarrio.models import ZarrConverterConfig, ChunkingConfig
+from zarrio.exceptions import RetryLimitExceededError
 
 
 def create_test_dataset_with_missing_data(

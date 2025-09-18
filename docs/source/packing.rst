@@ -1,7 +1,7 @@
 Data Packing
 ============
 
-zarrify provides advanced data packing functionality to reduce storage requirements and improve I/O performance by compressing floating-point data using fixed-scale offset encoding.
+zarrio provides advanced data packing functionality to reduce storage requirements and improve I/O performance by compressing floating-point data using fixed-scale offset encoding.
 
 Overview
 --------
@@ -21,7 +21,7 @@ Packing can be configured through the ``PackingConfig`` model:
 
 .. code-block:: python
 
-    from zarrify.models import PackingConfig
+    from zarrio.models import PackingConfig
 
     packing = PackingConfig(
         enabled=True,
@@ -40,7 +40,7 @@ The ``PackingConfig`` supports the following fields:
 Enhanced Packing Features
 -------------------------
 
-zarrify's enhanced packing functionality provides several improvements over basic packing:
+zarrio's enhanced packing functionality provides several improvements over basic packing:
 
 Priority-Based Range Determination
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,7 +58,7 @@ Users can explicitly specify min/max ranges for variables:
 
 .. code-block:: python
 
-    from zarrify.models import PackingConfig
+    from zarrio.models import PackingConfig
 
     packing = PackingConfig(
         enabled=True,
@@ -76,7 +76,7 @@ When no ranges are provided, the system automatically calculates them from the d
 
 .. code-block:: python
 
-    from zarrify.models import PackingConfig
+    from zarrio.models import PackingConfig
 
     packing = PackingConfig(
         enabled=True,
@@ -91,7 +91,7 @@ Optional checking to ensure data doesn't exceed specified ranges:
 
 .. code-block:: python
 
-    from zarrify.models import PackingConfig
+    from zarrio.models import PackingConfig
 
     packing = PackingConfig(
         enabled=True,
@@ -109,7 +109,7 @@ Functional API
 
 .. code-block:: python
 
-    from zarrify import convert_to_zarr
+    from zarrio import convert_to_zarr
 
     # Basic packing
     convert_to_zarr(
@@ -145,8 +145,8 @@ Class-Based API
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
-    from zarrify.models import PackingConfig
+    from zarrio import ZarrConverter
+    from zarrio.models import PackingConfig
 
     # Programmatic configuration
     packing_config = PackingConfig(
@@ -166,14 +166,14 @@ Command Line Interface
 .. code-block:: bash
 
     # Basic packing
-    zarrify convert input.nc output.zarr --packing --packing-bits 16
+    zarrio convert input.nc output.zarr --packing --packing-bits 16
 
     # Packing with manual ranges
-    zarrify convert input.nc output.zarr --packing \\
+    zarrio convert input.nc output.zarr --packing \\
         --packing-manual-ranges '{"temperature": {"min": -50, "max": 50}}'
 
     # Packing with automatic range calculation
-    zarrify convert input.nc output.zarr --packing \\
+    zarrio convert input.nc output.zarr --packing \\
         --packing-auto-buffer-factor 0.05
 
 Configuration Files

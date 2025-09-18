@@ -1,5 +1,5 @@
 """
-Tests for Pydantic models in zarrify.
+Tests for Pydantic models in zarrio.
 """
 
 import pytest
@@ -8,7 +8,7 @@ import json
 import yaml
 from pathlib import Path
 
-from zarrify.models import (
+from zarrio.models import (
     ZarrConverterConfig,
     ChunkingConfig,
     PackingConfig,

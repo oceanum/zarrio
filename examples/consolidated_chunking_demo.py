@@ -1,8 +1,8 @@
 """
-Consolidated example demonstrating zarrify's intelligent chunking and access pattern optimization.
+Consolidated example demonstrating zarrio's intelligent chunking and access pattern optimization.
 
 This example shows:
-1. How zarrify's intelligent chunking works for different dataset sizes
+1. How zarrio's intelligent chunking works for different dataset sizes
 2. Performance differences between chunking strategies
 3. How to achieve optimal chunk sizes for your data
 """
@@ -14,9 +14,9 @@ import tempfile
 import os
 import time
 
-from zarrify import ZarrConverter, convert_to_zarr
-from zarrify.models import ZarrConverterConfig
-from zarrify.chunking import get_chunk_recommendation
+from zarrio import ZarrConverter, convert_to_zarr
+from zarrio.models import ZarrConverterConfig
+from zarrio.chunking import get_chunk_recommendation
 
 
 def create_sample_data(time_steps=365, lat_points=181, lon_points=361):
@@ -330,7 +330,7 @@ def demonstrate_manual_optimization():
 
 
 def main():
-    """Main function to demonstrate zarrify's chunking capabilities."""
+    """Main function to demonstrate zarrio's chunking capabilities."""
     print("Zarrify Intelligent Chunking and Performance Optimization")
     print("=" * 55)
     

@@ -1,5 +1,5 @@
 """
-Public API for zarrify.
+Public API for zarrio.
 """
 
 from .core import (

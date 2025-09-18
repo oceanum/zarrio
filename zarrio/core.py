@@ -1,5 +1,5 @@
 """
-Enhanced core functionality for zarrify with retry logic for missing data and datamesh support.
+Enhanced core functionality for zarrio with retry logic for missing data and datamesh support.
 """
 
 import logging

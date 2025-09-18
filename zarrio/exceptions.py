@@ -1,9 +1,9 @@
 """
-Custom exceptions for zarrify.
+Custom exceptions for zarrio.
 """
 
 class OnzarrError(Exception):
-    """Base exception for zarrify."""
+    """Base exception for zarrio."""
     pass
 
 

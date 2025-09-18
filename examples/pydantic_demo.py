@@ -1,5 +1,5 @@
 """
-Example demonstrating Pydantic configuration in zarrify.
+Example demonstrating Pydantic configuration in zarrio.
 """
 
 import tempfile
@@ -11,7 +11,7 @@ import sys
 # Add the current directory to Python path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from zarrify.models import (
+from zarrio.models import (
     ZarrConverterConfig, 
     ChunkingConfig, 
     PackingConfig, 
@@ -23,7 +23,7 @@ from zarrify.models import (
 
 def demonstrate_pydantic_config():
     """Demonstrate Pydantic configuration usage."""
-    print("=== zarrify Pydantic Configuration Demo ===\n")
+    print("=== zarrio Pydantic Configuration Demo ===\n")
     
     # 1. Creating configuration programmatically
     print("1. Creating configuration programmatically:")
@@ -33,7 +33,7 @@ def demonstrate_pydantic_config():
         packing=PackingConfig(enabled=True, bits=16),
         time=TimeConfig(dim="time", append_dim="time"),
         variables=VariableConfig(include=["temperature", "pressure"], exclude=["humidity"]),
-        attrs={"title": "Demo dataset", "source": "zarrify"}
+        attrs={"title": "Demo dataset", "source": "zarrio"}
     )
     
     print(f"   Chunking: time={config.chunking.time}, lat={config.chunking.lat}, lon={config.chunking.lon}")

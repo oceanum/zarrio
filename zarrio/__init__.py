@@ -1,5 +1,5 @@
 """
-zarrify - A modern library for converting scientific data to Zarr format.
+zarrio - A modern library for converting scientific data to Zarr format.
 """
 
 __version__ = "0.1.0"

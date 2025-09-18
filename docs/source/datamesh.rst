@@ -1,7 +1,7 @@
 Datamesh Integration
 ====================
 
-The zarrify library supports integration with Oceanum's Datamesh platform, allowing you to write Zarr data directly to Datamesh datasources.
+The zarrio library supports integration with Oceanum's Datamesh platform, allowing you to write Zarr data directly to Datamesh datasources.
 
 Configuration
 -------------
@@ -10,7 +10,7 @@ To use Datamesh integration, you need to configure the ``datamesh`` section in y
 
 .. code-block:: python
 
-    from zarrify import ZarrConverterConfig
+    from zarrio import ZarrConverterConfig
 
     config = ZarrConverterConfig(
         datamesh={
@@ -20,7 +20,7 @@ To use Datamesh integration, you need to configure the ``datamesh`` section in y
                 "description": "My dataset",
                 "coordinates": {"x": "longitude", "y": "latitude", "t": "time"},
                 "details": "https://example.com",
-                "tags": ["zarrify", "datamesh"]
+                "tags": ["zarrio", "datamesh"]
             },
             "token": "your_datamesh_token",
             "service": "https://datamesh-v1.oceanum.io"  # Optional, defaults to this value
@@ -32,7 +32,7 @@ Using with the API
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     # Create converter with datamesh configuration
     converter = ZarrConverter(config=config)
@@ -48,19 +48,19 @@ You can also use the CLI with datamesh:
 .. code-block:: bash
 
     # Convert to datamesh datasource
-    zarrify convert input.nc \\
+    zarrio convert input.nc \\
       --datamesh-datasource '{"id":"my_datasource","name":"My Data","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' \\
       --datamesh-token $DATAMESH_TOKEN
 
     # Create template for parallel writing
-    zarrify create-template template.nc \\
+    zarrio create-template template.nc \\
       --datamesh-datasource '{"id":"my_datasource","name":"My Data","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' \\
       --datamesh-token $DATAMESH_TOKEN \\
       --global-start 2023-01-01 \\
       --global-end 2023-12-31
 
     # Write region to datamesh datasource
-    zarrify write-region data.nc \\
+    zarrio write-region data.nc \\
       --datamesh-datasource '{"id":"my_datasource","name":"My Data","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' \\
       --datamesh-token $DATAMESH_TOKEN
 
@@ -88,7 +88,7 @@ To use datamesh functionality, you need to install the optional datamesh depende
 
 .. code-block:: bash
 
-    pip install zarrify[datamesh]
+    pip install zarrio[datamesh]
 
 Advanced Usage
 --------------
@@ -111,7 +111,7 @@ You can also configure datamesh integration using YAML or JSON configuration fil
       datasource:
         id: my_climate_data
         name: My Climate Data
-        description: Climate data converted with zarrify
+        description: Climate data converted with zarrio
         coordinates:
           x: lon
           y: lat
@@ -119,7 +119,7 @@ You can also configure datamesh integration using YAML or JSON configuration fil
         details: https://example.com
         tags:
           - climate
-          - zarrify
+          - zarrio
           - datamesh
       token: your_datamesh_token
       service: https://datamesh-v1.oceanum.io
@@ -133,12 +133,12 @@ You can also configure datamesh integration using YAML or JSON configuration fil
 .. code-block:: bash
 
     # Use with CLI
-    zarrify convert input.nc --config config.yaml
+    zarrio convert input.nc --config config.yaml
 
 Metadata Management
 ^^^^^^^^^^^^^^^^^^^
 
-When writing to datamesh, zarrify automatically manages metadata:
+When writing to datamesh, zarrio automatically manages metadata:
 
 - **Schema**: Automatically generated from the dataset structure
 - **Geometry**: Calculated from coordinate variables
@@ -169,7 +169,7 @@ All parallel writing features work with datamesh:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     # Create converter with datamesh configuration
     converter = ZarrConverter(
@@ -203,17 +203,17 @@ All parallel writing features work with datamesh:
 .. code-block:: bash
 
     # CLI equivalent
-    zarrify create-template template.nc \\
+    zarrio create-template template.nc \\
       --datamesh-datasource '{"id":"my_parallel_data","name":"Parallel Climate Data","coordinates":{"x":"lon","y":"lat","t":"time"}}' \\
       --datamesh-token $DATAMESH_TOKEN \\
       --global-start 2020-01-01 \\
       --global-end 2023-12-31
 
     # In parallel processes:
-    zarrify write-region data_2020.nc --datamesh-token $DATAMESH_TOKEN  # Process 1
-    zarrify write-region data_2021.nc --datamesh-token $DATAMESH_TOKEN  # Process 2
-    zarrify write-region data_2022.nc --datamesh-token $DATAMESH_TOKEN  # Process 3
-    zarrify write-region data_2023.nc --datamesh-token $DATAMESH_TOKEN  # Process 4
+    zarrio write-region data_2020.nc --datamesh-token $DATAMESH_TOKEN  # Process 1
+    zarrio write-region data_2021.nc --datamesh-token $DATAMESH_TOKEN  # Process 2
+    zarrio write-region data_2022.nc --datamesh-token $DATAMESH_TOKEN  # Process 3
+    zarrio write-region data_2023.nc --datamesh-token $DATAMESH_TOKEN  # Process 4
 
 Error Handling
 ^^^^^^^^^^^^^^
@@ -222,7 +222,7 @@ Datamesh integration includes proper error handling:
 
 .. code-block:: python
 
-    from zarrify.exceptions import ConversionError
+    from zarrio.exceptions import ConversionError
 
     try:
         converter.convert("input.nc")
@@ -239,7 +239,7 @@ Best Practices
    .. code-block:: bash
 
        export DATAMESH_TOKEN="your_actual_token_here"
-       zarrify convert input.nc --datamesh-token $DATAMESH_TOKEN ...
+       zarrio convert input.nc --datamesh-token $DATAMESH_TOKEN ...
 
 2. **Datasource IDs**: Use descriptive, unique IDs for your datasources.
 
@@ -257,7 +257,7 @@ Here's a complete example workflow:
 .. code-block:: python
 
     import os
-    from zarrify import ZarrConverter, ZarrConverterConfig
+    from zarrio import ZarrConverter, ZarrConverterConfig
 
     # 1. Configure for datamesh
     config = ZarrConverterConfig(

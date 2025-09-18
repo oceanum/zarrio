@@ -1,5 +1,5 @@
 """
-Tests for missing data handling in zarrify.
+Tests for missing data handling in zarrio.
 """
 
 import pytest
@@ -9,7 +9,7 @@ import pandas as pd
 import xarray as xr
 import os
 
-from zarrify.missing import (
+from zarrio.missing import (
     MissingDataHandler,
     check_missing_data,
     handle_missing_with_retry

@@ -1,5 +1,5 @@
 """
-Data packing functionality for zarrify.
+Data packing functionality for zarrio.
 """
 
 import logging

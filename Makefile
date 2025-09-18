@@ -51,7 +51,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint: ## check style with flake8
-	flake8 zarrify tests
+	flake8 zarrio tests
 
 test: ## run tests quickly with the default Python
 	pytest
@@ -63,18 +63,18 @@ test-all: ## run tests on every Python version with tox
 	tox
 
 test-cov: ## run tests with coverage
-	pytest --cov=zarrify --cov-report=html
+	pytest --cov=zarrio --cov-report=html
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source zarrify -m pytest
+	coverage run --source zarrio -m pytest
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/source/zarrify.rst
+	rm -f docs/source/zarrio.rst
 	rm -f docs/source/modules.rst
-	sphinx-apidoc -o docs/source/ zarrify
+	sphinx-apidoc -o docs/source/ zarrio
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html
@@ -99,12 +99,12 @@ activate-hooks: ## install hooks for pre-commit and pre-merge hooks
 	pre-commit install
 
 format: ## format code with black
-	black zarrify tests examples
+	black zarrio tests examples
 
 check: ## run all checks
-	black --check zarrify tests examples
-	flake8 zarrify tests examples
-	mypy zarrify
+	black --check zarrio tests examples
+	flake8 zarrio tests examples
+	mypy zarrio
 
 publish-test: dist ## publish to test PyPI
 	twine upload --repository testpypi dist/*

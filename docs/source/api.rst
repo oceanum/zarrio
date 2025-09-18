@@ -4,7 +4,7 @@ API Reference
 Core Module
 -----------
 
-.. automodule:: zarrify.core
+.. automodule:: zarrio.core
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,7 +12,7 @@ Core Module
 Models Module
 -------------
 
-.. automodule:: zarrify.models
+.. automodule:: zarrio.models
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,7 +20,7 @@ Models Module
 Packing Module
 --------------
 
-.. automodule:: zarrify.packing
+.. automodule:: zarrio.packing
    :members:
    :undoc-members:
    :show-inheritance:
@@ -28,7 +28,7 @@ Packing Module
 Time Module
 -----------
 
-.. automodule:: zarrify.time
+.. automodule:: zarrio.time
    :members:
    :undoc-members:
    :show-inheritance:
@@ -36,7 +36,7 @@ Time Module
 Chunking Module
 ---------------
 
-.. automodule:: zarrify.chunking
+.. automodule:: zarrio.chunking
    :members:
    :undoc-members:
    :show-inheritance:
@@ -44,7 +44,7 @@ Chunking Module
 Missing Data Module
 -------------------
 
-.. automodule:: zarrify.missing
+.. automodule:: zarrio.missing
    :members:
    :undoc-members:
    :show-inheritance:
@@ -52,7 +52,7 @@ Missing Data Module
 CLI Module
 ----------
 
-.. automodule:: zarrify.cli
+.. automodule:: zarrio.cli
    :members:
    :undoc-members:
    :show-inheritance:
@@ -60,7 +60,7 @@ CLI Module
 Configuration Module
 --------------------
 
-.. automodule:: zarrify.config
+.. automodule:: zarrio.config
    :members:
    :undoc-members:
    :show-inheritance:
@@ -68,7 +68,7 @@ Configuration Module
 Exceptions Module
 -----------------
 
-.. automodule:: zarrify.exceptions
+.. automodule:: zarrio.exceptions
    :members:
    :undoc-members:
    :show-inheritance:

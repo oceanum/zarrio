@@ -1,5 +1,5 @@
 """
-Tests for zarrify time functionality.
+Tests for zarrio time functionality.
 """
 
 import pytest
@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-from zarrify.time import TimeManager
+from zarrio.time import TimeManager
 
 
 def test_time_manager_initialization():

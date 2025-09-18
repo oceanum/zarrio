@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  zarrify:
+  zarrio:
     build: .
-    image: zarrify:dev
+    image: zarrio:dev
     volumes:
       # Mount the current directory to /app for development
       - .:/app
@@ -14,20 +14,20 @@ services:
     # For production, use the default entrypoint
     # command: ["convert", "/data/input.nc", "/data/output.zarr"]
     
-  zarrify-prod:
+  zarrio-prod:
     build:
       context: .
       dockerfile: Dockerfile.prod
-    image: zarrify:latest
+    image: zarrio:latest
     volumes:
       # Mount data directory
       - ./data:/data
     # For production, use the default entrypoint
     # command: ["convert", "/data/input.nc", "/data/output.zarr"]
     
-  zarrify-dev:
+  zarrio-dev:
     build: .
-    image: zarrify:dev-full
+    image: zarrio:dev-full
     volumes:
       # Mount the current directory to /app for development
       - .:/app

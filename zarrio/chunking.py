@@ -1,5 +1,5 @@
 """
-Chunking analysis and validation for zarrify.
+Chunking analysis and validation for zarrio.
 
 This module provides intelligent chunking recommendations based on:
 - Dataset dimensions

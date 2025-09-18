@@ -1,4 +1,4 @@
-# zarrify Documentation
+# zarrio Documentation
 
 ## Table of Contents
 
@@ -13,13 +13,13 @@
 ## Installation
 
 ```bash
-pip install zarrify
+pip install zarrio
 ```
 
 ## Quick Start
 
 ```python
-from zarrify import convert_to_zarr
+from zarrio import convert_to_zarr
 
 # Convert a NetCDF file to Zarr
 convert_to_zarr("input.nc", "output.zarr")
@@ -33,7 +33,7 @@ The main class for converting data to Zarr format. It provides fine-grained cont
 
 ### Data Packing
 
-zarrify supports data packing using fixed-scale offset encoding to reduce storage requirements while maintaining data quality.
+zarrio supports data packing using fixed-scale offset encoding to reduce storage requirements while maintaining data quality.
 
 ### Chunking
 
@@ -50,7 +50,7 @@ Various compression algorithms are supported through the zarr library.
 Convert data to Zarr format using default settings.
 
 ```python
-from zarrify import convert_to_zarr
+from zarrio import convert_to_zarr
 
 convert_to_zarr(
     input_path="input.nc",
@@ -67,7 +67,7 @@ convert_to_zarr(
 Append data to an existing Zarr store.
 
 ```python
-from zarrify import append_to_zarr
+from zarrio import append_to_zarr
 
 append_to_zarr(
     input_path="new_data.nc",
@@ -78,7 +78,7 @@ append_to_zarr(
 ### ZarrConverter Class
 
 ```python
-from zarrify import ZarrConverter
+from zarrio import ZarrConverter
 
 converter = ZarrConverter(
     chunking={"time": 100, "lat": 50, "lon": 100},
@@ -107,30 +107,30 @@ packing_bits: 16
 Use with the CLI:
 
 ```bash
-zarrify convert input.nc output.zarr --config config.yaml
+zarrio convert input.nc output.zarr --config config.yaml
 ```
 
 ## CLI Usage
 
 ```bash
 # Convert NetCDF to Zarr
-zarrify convert input.nc output.zarr
+zarrio convert input.nc output.zarr
 
 # Convert with chunking
-zarrify convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
+zarrio convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
 
 # Convert with compression
-zarrify convert input.nc output.zarr --compression "blosc:zstd:3"
+zarrio convert input.nc output.zarr --compression "blosc:zstd:3"
 
 # Convert with data packing
-zarrify convert input.nc output.zarr --packing --packing-bits 16
+zarrio convert input.nc output.zarr --packing --packing-bits 16
 
 # Append to existing Zarr store
-zarrify append new_data.nc existing.zarr
+zarrio append new_data.nc existing.zarr
 
 # Get help
-zarrify --help
-zarrify convert --help
+zarrio --help
+zarrio convert --help
 ```
 
 ## Examples

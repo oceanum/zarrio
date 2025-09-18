@@ -1,5 +1,5 @@
 """
-Example demonstrating all key features of zarrify.
+Example demonstrating all key features of zarrio.
 """
 
 import tempfile
@@ -9,8 +9,8 @@ import xarray as xr
 import os
 import yaml
 
-from zarrify import ZarrConverter, convert_to_zarr, append_to_zarr
-from zarrify.models import (
+from zarrio import ZarrConverter, convert_to_zarr, append_to_zarr
+from zarrio.models import (
     ZarrConverterConfig, 
     ChunkingConfig, 
     PackingConfig, 
@@ -55,7 +55,7 @@ def create_sample_data_files(tmpdir: str, num_files: int = 4) -> list:
         
         # Add attributes
         ds.attrs["title"] = "Sample meteorological data"
-        ds.attrs["institution"] = "zarrify Demo"
+        ds.attrs["institution"] = "zarrio Demo"
         ds["temperature"].attrs["units"] = "degC"
         ds["pressure"].attrs["units"] = "hPa"
         ds["humidity"].attrs["units"] = "%"
@@ -70,8 +70,8 @@ def create_sample_data_files(tmpdir: str, num_files: int = 4) -> list:
 
 
 def demonstrate_all_features():
-    """Demonstrate all key features of zarrify."""
-    print("=== zarrify Feature Demonstration ===\n")
+    """Demonstrate all key features of zarrio."""
+    print("=== zarrio Feature Demonstration ===\n")
     
     with tempfile.TemporaryDirectory() as tmpdir:
         # Step 1: Create sample data files
@@ -96,7 +96,7 @@ def demonstrate_all_features():
             packing=PackingConfig(enabled=True, bits=16),
             time=TimeConfig(dim="time", append_dim="time"),
             variables=VariableConfig(include=["temperature", "pressure"]),  # Exclude humidity
-            attrs={"title": "Advanced conversion demo", "source": "zarrify"},
+            attrs={"title": "Advanced conversion demo", "source": "zarrio"},
             retries_on_missing=2,  # Enable retries
             missing_check_vars="all"
         )

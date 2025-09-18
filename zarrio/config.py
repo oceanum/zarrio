@@ -1,5 +1,5 @@
 """
-Configuration management for zarrify.
+Configuration management for zarrio.
 """
 
 from typing import Dict, Any, Optional

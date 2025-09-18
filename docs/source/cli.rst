@@ -1,7 +1,7 @@
 Command-Line Interface
 ======================
 
-zarrify provides a comprehensive command-line interface for converting data to Zarr format.
+zarrio provides a comprehensive command-line interface for converting data to Zarr format.
 
 Basic Usage
 -----------
@@ -10,7 +10,7 @@ The basic syntax for the CLI is:
 
 .. code-block:: bash
 
-    zarrify [OPTIONS] COMMAND [ARGS]...
+    zarrio [OPTIONS] COMMAND [ARGS]...
 
 Getting Help
 ------------
@@ -19,22 +19,22 @@ To get help on the available commands:
 
 .. code-block:: bash
 
-    zarrify --help
+    zarrio --help
 
 To get help on a specific command:
 
 .. code-block:: bash
 
-    zarrify COMMAND --help
+    zarrio COMMAND --help
 
 Version Information
 -------------------
 
-To check the version of zarrify:
+To check the version of zarrio:
 
 .. code-block:: bash
 
-    zarrify --version
+    zarrio --version
 
 Convert Command
 ---------------
@@ -43,7 +43,7 @@ The `convert` command converts data to Zarr format.
 
 .. code-block:: bash
 
-    zarrify convert [OPTIONS] INPUT OUTPUT
+    zarrio convert [OPTIONS] INPUT OUTPUT
 
 Options:
 ~~~~~~~~
@@ -112,49 +112,49 @@ Convert a single NetCDF file to Zarr:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr
+    zarrio convert input.nc output.zarr
 
 Convert with chunking:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
+    zarrio convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
 
 Convert with compression:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --compression "blosc:zstd:3"
+    zarrio convert input.nc output.zarr --compression "blosc:zstd:3"
 
 Convert with data packing:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --packing --packing-bits 16
+    zarrio convert input.nc output.zarr --packing --packing-bits 16
 
 Convert with variable selection:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --variables "temperature,pressure"
+    zarrio convert input.nc output.zarr --variables "temperature,pressure"
 
 Convert with variable exclusion:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --drop-variables "humidity"
+    zarrio convert input.nc output.zarr --drop-variables "humidity"
 
 Convert with additional attributes:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --attrs '{"title": "Demo dataset", "source": "zarrify"}'
+    zarrio convert input.nc output.zarr --attrs '{"title": "Demo dataset", "source": "zarrio"}'
 
 Convert with configuration file:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --config config.yaml
+    zarrio convert input.nc output.zarr --config config.yaml
 
 Append Command
 --------------
@@ -163,7 +163,7 @@ The `append` command appends data to an existing Zarr store.
 
 .. code-block:: bash
 
-    zarrify append [OPTIONS] INPUT ZARR
+    zarrio append [OPTIONS] INPUT ZARR
 
 Options:
 ~~~~~~~~
@@ -183,19 +183,19 @@ Append data to an existing Zarr store:
 
 .. code-block:: bash
 
-    zarrify append new_data.nc existing.zarr
+    zarrio append new_data.nc existing.zarr
 
 Append with variable selection:
 
 .. code-block:: bash
 
-    zarrify append new_data.nc existing.zarr --variables "temperature,pressure"
+    zarrio append new_data.nc existing.zarr --variables "temperature,pressure"
 
 Append with chunking:
 
 .. code-block:: bash
 
-    zarrify append new_data.nc existing.zarr --chunking "time:50,lat:25,lon:50"
+    zarrio append new_data.nc existing.zarr --chunking "time:50,lat:25,lon:50"
 
 Create-Template Command
 -----------------------
@@ -204,7 +204,7 @@ The `create-template` command creates a template Zarr archive for parallel writi
 
 .. code-block:: bash
 
-    zarrify create-template [OPTIONS] TEMPLATE OUTPUT
+    zarrio create-template [OPTIONS] TEMPLATE OUTPUT
 
 Options:
 ~~~~~~~~
@@ -234,7 +234,7 @@ Create template for parallel writing:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr \\
+    zarrio create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31
 
@@ -242,7 +242,7 @@ Create template with intelligent chunking:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr \\
+    zarrio create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31 \\
         --intelligent-chunking \\
@@ -252,7 +252,7 @@ Create template with chunking:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr \
+    zarrio create-template template.nc archive.zarr \
         --global-start 2020-01-01 \
         --global-end 2023-12-31 \
         --chunking "time:100,lat:50,lon:100"
@@ -261,7 +261,7 @@ Create template with compression:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr \
+    zarrio create-template template.nc archive.zarr \
         --global-start 2020-01-01 \
         --global-end 2023-12-31 \
         --compression "blosc:zstd:3"
@@ -270,7 +270,7 @@ Create template with data packing:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr \
+    zarrio create-template template.nc archive.zarr \
         --global-start 2020-01-01 \
         --global-end 2023-12-31 \
         --packing --packing-bits 16
@@ -279,7 +279,7 @@ Create template with manual packing ranges:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr \
+    zarrio create-template template.nc archive.zarr \
         --global-start 2020-01-01 \
         --global-end 2023-12-31 \
         --packing --packing-manual-ranges '{"temperature": {"min": -50, "max": 50}}'
@@ -288,11 +288,11 @@ Create template with automatic range calculation:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr\n        --global-start 2020-01-01\n        --global-end 2023-12-31\n        --packing --packing-auto-buffer-factor 0.05
+    zarrio create-template template.nc archive.zarr\n        --global-start 2020-01-01\n        --global-end 2023-12-31\n        --packing --packing-auto-buffer-factor 0.05
 
 .. code-block:: bash
 
-    zarrify analyze input.nc --interactive
+    zarrio analyze input.nc --interactive
 
 Parallel Processing Example
 ---------------------------
@@ -303,7 +303,7 @@ To process thousands of NetCDF files in parallel:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr \\
+    zarrio create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31
 
@@ -312,21 +312,21 @@ To process thousands of NetCDF files in parallel:
 .. code-block:: bash
 
     # Process 1
-    zarrify write-region data_2020.nc archive.zarr
+    zarrio write-region data_2020.nc archive.zarr
 
     # Process 2  
-    zarrify write-region data_2021.nc archive.zarr
+    zarrio write-region data_2021.nc archive.zarr
 
     # Process 3
-    zarrify write-region data_2022.nc archive.zarr
+    zarrio write-region data_2022.nc archive.zarr
 
     # Process 4
-    zarrify write-region data_2023.nc archive.zarr
+    zarrio write-region data_2023.nc archive.zarr
 
 Configuration File Support
 --------------------------
 
-zarrify supports configuration files in YAML or JSON format:
+zarrio supports configuration files in YAML or JSON format:
 
 YAML Example:
 ~~~~~~~~~~~~~
@@ -364,7 +364,7 @@ Usage:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --config config.yaml
+    zarrio convert input.nc output.zarr --config config.yaml
 
 JSON Example:
 ~~~~~~~~~~~~~
@@ -400,7 +400,7 @@ Usage:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --config config.json
+    zarrio convert input.nc output.zarr --config config.json
 
 Compression Expectations
 ------------------------
@@ -421,7 +421,7 @@ The `analyze` command analyzes NetCDF files and provides optimization recommenda
 
 .. code-block:: bash
 
-    zarrify analyze [OPTIONS] INPUT
+    zarrio analyze [OPTIONS] INPUT
 
 Options:
 ~~~~~~~~
@@ -439,32 +439,32 @@ Analyze a NetCDF file:
 
 .. code-block:: bash
 
-    zarrify analyze input.nc
+    zarrio analyze input.nc
 
 Analyze with theoretical performance testing:
 
 .. code-block:: bash
 
-    zarrify analyze input.nc --test-performance
+    zarrio analyze input.nc --test-performance
 
 Analyze with actual performance testing:
 
 .. code-block:: bash
 
-    zarrify analyze input.nc --run-tests
+    zarrio analyze input.nc --run-tests
 
 Analyze with custom target chunk size:
 
 .. code-block:: bash
 
-    zarrify analyze input.nc --target-chunk-size-mb 100
+    zarrio analyze input.nc --target-chunk-size-mb 100
 
 Analyze with interactive configuration setup:
 
 .. code-block:: bash
 
-    zarrify analyze input.nc --interactive
+    zarrio analyze input.nc --interactive
 
 .. code-block:: bash
 
-    zarrify analyze input.nc --interactive
+    zarrio analyze input.nc --interactive

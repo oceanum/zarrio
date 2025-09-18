@@ -1,5 +1,5 @@
 """
-Missing data detection and retry logic for zarrify.
+Missing data detection and retry logic for zarrio.
 """
 
 import logging

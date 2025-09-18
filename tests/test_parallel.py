@@ -1,5 +1,5 @@
 """
-Test for parallel writing functionality in zarrify.
+Test for parallel writing functionality in zarrio.
 """
 
 import pytest
@@ -9,8 +9,8 @@ import pandas as pd
 import xarray as xr
 import os
 
-from zarrify import ZarrConverter, convert_to_zarr, append_to_zarr
-from zarrify.models import ZarrConverterConfig, ChunkingConfig, PackingConfig
+from zarrio import ZarrConverter, convert_to_zarr, append_to_zarr
+from zarrio.models import ZarrConverterConfig, ChunkingConfig, PackingConfig
 
 
 def create_test_dataset(

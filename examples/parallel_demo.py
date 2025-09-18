@@ -1,5 +1,5 @@
 """
-Example demonstrating parallel writing functionality in zarrify.
+Example demonstrating parallel writing functionality in zarrio.
 """
 
 import sys
@@ -13,7 +13,7 @@ import tempfile
 import os
 from pathlib import Path
 
-from zarrify import ZarrConverter
+from zarrio import ZarrConverter
 
 
 def create_sample_data_files(tmpdir: str, num_files: int = 5) -> list:
@@ -56,7 +56,7 @@ def create_sample_data_files(tmpdir: str, num_files: int = 5) -> list:
 def demonstrate_parallel_writing():
     """Demonstrate parallel writing functionality."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        print("=== zarrify Parallel Writing Demo ===\n")
+        print("=== zarrio Parallel Writing Demo ===\n")
         
         # Step 1: Create sample data files
         print("1. Creating sample NetCDF files...")
@@ -124,10 +124,10 @@ def demonstrate_cli_parallel_writing():
         
         print("1. Creating template archive using CLI...")
         # In practice, you would run these commands in parallel processes:
-        # zarrify create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-01-15
-        # zarrify write-region data1.nc archive.zarr
-        # zarrify write-region data2.nc archive.zarr
-        # zarrify write-region data3.nc archive.zarr
+        # zarrio create-template template.nc archive.zarr --global-start 2023-01-01 --global-end 2023-01-15
+        # zarrio write-region data1.nc archive.zarr
+        # zarrio write-region data2.nc archive.zarr
+        # zarrio write-region data3.nc archive.zarr
         
         # Simulate the CLI operations
         template_ds = xr.open_dataset(template_file)

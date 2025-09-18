@@ -1,7 +1,7 @@
 Chunking Strategies
 ====================
 
-zarrify provides intelligent chunking analysis and recommendations to optimize performance for different access patterns. This document explains both the conceptual approach and detailed mathematical calculations used for each access pattern.
+zarrio provides intelligent chunking analysis and recommendations to optimize performance for different access patterns. This document explains both the conceptual approach and detailed mathematical calculations used for each access pattern.
 
 Understanding Chunking
 ------------------------
@@ -34,11 +34,11 @@ Recommended Chunk Sizes:
 Configurable Target Chunk Size
 -------------------------------
 
-zarrify allows you to configure the target chunk size for different environments:
+zarrio allows you to configure the target chunk size for different environments:
 
 .. code-block:: python
 
-    from zarrify.chunking import get_chunk_recommendation
+    from zarrio.chunking import get_chunk_recommendation
 
     # Configure target chunk size (default is 50 MB)
     recommendation = get_chunk_recommendation(
@@ -65,16 +65,16 @@ Configuration Methods:
 3. **ZarrConverter Configuration**:
    .. code-block:: python
    
-       from zarrify.models import ZarrConverterConfig
+       from zarrio.models import ZarrConverterConfig
        
        config = ZarrConverterConfig(target_chunk_size_mb=100)
 
 Intelligent Chunking Analysis
 -------------------------------
 
-zarrify automatically analyzes your dataset and provides chunking recommendations based on expected access patterns. The system performs detailed mathematical calculations to optimize chunk sizes for your specific data characteristics.
+zarrio automatically analyzes your dataset and provides chunking recommendations based on expected access patterns. The system performs detailed mathematical calculations to optimize chunk sizes for your specific data characteristics.
 
-When creating templates for parallel processing with global start and end times, zarrify can perform intelligent chunking based on the full archive dimensions rather than just the template dataset. This ensures optimal chunking for the entire archive.
+When creating templates for parallel processing with global start and end times, zarrio can perform intelligent chunking based on the full archive dimensions rather than just the template dataset. This ensures optimal chunking for the entire archive.
 
 The system analyzes:
 - Dataset dimensions and sizes
@@ -338,7 +338,7 @@ High Resolution (0.1° or finer)
 Chunking Validation
 ---------------------
 
-zarrify validates user-provided chunking and provides warnings for suboptimal configurations:
+zarrio validates user-provided chunking and provides warnings for suboptimal configurations:
 
 .. code-block:: python
 
@@ -471,15 +471,15 @@ Command-line interface with chunking:
 .. code-block:: bash
 
     # Convert with chunking
-    zarrify convert input.nc output.zarr \
+    zarrio convert input.nc output.zarr \
         --chunking "time:100,lat:50,lon:100"
 
     # Convert with configuration file
-    zarrify convert input.nc output.zarr \
+    zarrio convert input.nc output.zarr \
         --config config.yaml
 
     # Convert with automatic analysis
-    zarrify convert input.nc output.zarr \
+    zarrio convert input.nc output.zarr \
         --access-pattern balanced
 
 Performance Monitoring

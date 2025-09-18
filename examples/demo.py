@@ -1,5 +1,5 @@
 """
-Example usage of zarrify library.
+Example usage of zarrio library.
 """
 
 import numpy as np
@@ -8,7 +8,7 @@ import xarray as xr
 import tempfile
 import os
 
-from zarrify import convert_to_zarr, append_to_zarr, ZarrConverter
+from zarrio import convert_to_zarr, append_to_zarr, ZarrConverter
 
 
 def create_sample_data():
@@ -46,7 +46,7 @@ def create_sample_data():
 
 
 def main():
-    """Demonstrate zarrify usage."""
+    """Demonstrate zarrio usage."""
     with tempfile.TemporaryDirectory() as tmpdir:
         # Create sample data
         print("Creating sample data...")

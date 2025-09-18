@@ -1,12 +1,12 @@
 Parallel Processing
 ==================
 
-One of the key features of zarrify is its support for parallel processing of large datasets through template creation and region writing.
+One of the key features of zarrio is its support for parallel processing of large datasets through template creation and region writing.
 
 Overview
 --------
 
-When dealing with thousands of NetCDF files, it's often more efficient to process them in parallel rather than sequentially. zarrify provides a robust framework for this:
+When dealing with thousands of NetCDF files, it's often more efficient to process them in parallel rather than sequentially. zarrio provides a robust framework for this:
 
 1. **Template Creation**: Create a Zarr archive with full time range but no data (`compute=False`)
 2. **Region Writing**: Write data from individual NetCDF files to specific regions
@@ -21,7 +21,7 @@ The first step is to create a template Zarr archive that covers the full time ra
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     # Create converter
     converter = ZarrConverter(
@@ -71,7 +71,7 @@ Each process works independently on different files, writing to different region
 Automatic Region Determination
 ------------------------------
 
-zarrify can automatically determine the region for writing based on the time coordinates in the source file:
+zarrio can automatically determine the region for writing based on the time coordinates in the source file:
 
 .. code-block:: python
 
@@ -101,7 +101,7 @@ Template Creation:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr \\
+    zarrio create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31
 
@@ -109,7 +109,7 @@ Create template with intelligent chunking:
 
 .. code-block:: bash
 
-    zarrify create-template template.nc archive.zarr \\
+    zarrio create-template template.nc archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31 \\
         --intelligent-chunking \\
@@ -121,10 +121,10 @@ Region Writing:
 .. code-block:: bash
 
     # Write regions in parallel processes
-    zarrify write-region data_2020.nc archive.zarr  # Process 1
-    zarrify write-region data_2021.nc archive.zarr  # Process 2
-    zarrify write-region data_2022.nc archive.zarr  # Process 3
-    zarrify write-region data_2023.nc archive.zarr  # Process 4
+    zarrio write-region data_2020.nc archive.zarr  # Process 1
+    zarrio write-region data_2021.nc archive.zarr  # Process 2
+    zarrio write-region data_2022.nc archive.zarr  # Process 3
+    zarrio write-region data_2023.nc archive.zarr  # Process 4
 
 Complete Parallel Workflow
 ------------------------
@@ -135,7 +135,7 @@ Here's a complete example of processing thousands of NetCDF files in parallel:
 
     import multiprocessing
     import os
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     def process_file(args):
         """Process a single NetCDF file."""
@@ -186,15 +186,15 @@ For even easier deployment and management, you can also run parallel processing 
 .. code-block:: bash
 
     # Create template using Docker
-    docker run --rm -v $(pwd):/data zarrify:latest create-template /data/template.nc /data/archive.zarr \\
+    docker run --rm -v $(pwd):/data zarrio:latest create-template /data/template.nc /data/archive.zarr \\
         --global-start 2020-01-01 \\
         --global-end 2023-12-31
 
     # Process multiple files in parallel containers
-    docker run --rm -v $(pwd):/data zarrify:latest write-region /data/data_2020.nc /data/archive.zarr &
-    docker run --rm -v $(pwd):/data zarrify:latest write-region /data/data_2021.nc /data/archive.zarr &
-    docker run --rm -v $(pwd):/data zarrify:latest write-region /data/data_2022.nc /data/archive.zarr &
-    docker run --rm -v $(pwd):/data zarrify:latest write-region /data/data_2023.nc /data/archive.zarr &
+    docker run --rm -v $(pwd):/data zarrio:latest write-region /data/data_2020.nc /data/archive.zarr &
+    docker run --rm -v $(pwd):/data zarrio:latest write-region /data/data_2021.nc /data/archive.zarr &
+    docker run --rm -v $(pwd):/data zarrio:latest write-region /data/data_2022.nc /data/archive.zarr &
+    docker run --rm -v $(pwd):/data zarrio:latest write-region /data/data_2023.nc /data/archive.zarr &
 
     # Wait for all processes to complete
     wait
@@ -221,12 +221,12 @@ Benefits
 Error Handling
 --------------
 
-zarrify includes robust error handling for parallel processing:
+zarrio includes robust error handling for parallel processing:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
-    from zarrify.models import ZarrConverterConfig, ChunkingConfig, CompressionConfig, PackingConfig
+    from zarrio import ZarrConverter
+    from zarrio.models import ZarrConverterConfig, ChunkingConfig, CompressionConfig, PackingConfig
 
     def robust_process_file(args):
         """Process a single NetCDF file with error handling."""
@@ -259,7 +259,7 @@ zarrify includes robust error handling for parallel processing:
 Monitoring and Logging
 --------------------
 
-zarrify provides comprehensive logging for parallel processing:
+zarrio provides comprehensive logging for parallel processing:
 
 .. code-block:: python
 

@@ -1,11 +1,11 @@
 Docker Support
 ==============
 
-zarrify can be easily deployed and run using Docker containers. This is particularly useful for:
+zarrio can be easily deployed and run using Docker containers. This is particularly useful for:
 
 - Ensuring consistent environments across different systems
 - Simplifying deployment
-- Running zarrify in cloud environments
+- Running zarrio in cloud environments
 - Isolating dependencies
 - Parallel processing workflows
 
@@ -28,7 +28,7 @@ Development Image
 .. code-block:: bash
 
     # Build the development image
-    docker build -t zarrify:dev .
+    docker build -t zarrio:dev .
 
 Production Image
 ~~~~~~~~~~~~~~~~
@@ -36,7 +36,7 @@ Production Image
 .. code-block:: bash
 
     # Build the production image
-    docker build -f Dockerfile.prod -t zarrify:latest .
+    docker build -f Dockerfile.prod -t zarrio:latest .
 
 Using Docker Compose
 ~~~~~~~~~~~~~~~~~~~~
@@ -55,10 +55,10 @@ Basic Usage
 .. code-block:: bash
 
     # Run the container with default help command
-    docker run --rm zarrify:latest
+    docker run --rm zarrio:latest
 
     # Convert a NetCDF file to Zarr (assuming files are in the current directory)
-    docker run --rm -v $(pwd):/data zarrify:latest convert /data/input.nc /data/output.zarr
+    docker run --rm -v $(pwd):/data zarrio:latest convert /data/input.nc /data/output.zarr
 
 Development Container
 ~~~~~~~~~~~~~~~~~~~~~
@@ -66,10 +66,10 @@ Development Container
 .. code-block:: bash
 
     # Run a bash shell in the development container
-    docker run --rm -it -v $(pwd):/app zarrify:dev bash
+    docker run --rm -it -v $(pwd):/app zarrio:dev bash
 
     # Or using docker-compose
-    docker-compose run --rm zarrify-dev bash
+    docker-compose run --rm zarrio-dev bash
 
 Production Container
 ~~~~~~~~~~~~~~~~~~~~
@@ -77,10 +77,10 @@ Production Container
 .. code-block:: bash
 
     # Run the production container
-    docker run --rm -v $(pwd):/data zarrify:latest --help
+    docker run --rm -v $(pwd):/data zarrio:latest --help
 
     # Convert files using the production container
-    docker run --rm -v $(pwd):/data zarrify:latest convert /data/input.nc /data/output.zarr
+    docker run --rm -v $(pwd):/data zarrio:latest convert /data/input.nc /data/output.zarr
 
 Volume Mounting
 ---------------
@@ -90,13 +90,13 @@ To work with files on your host system, you need to mount volumes when running t
 .. code-block:: bash
 
     # Mount current directory as /data in the container
-    docker run --rm -v $(pwd):/data zarrify:latest convert /data/input.nc /data/output.zarr
+    docker run --rm -v $(pwd):/data zarrio:latest convert /data/input.nc /data/output.zarr
 
     # For Windows (PowerShell)
-    docker run --rm -v ${PWD}:/data zarrify:latest convert /data/input.nc /data/output.zarr
+    docker run --rm -v ${PWD}:/data zarrio:latest convert /data/input.nc /data/output.zarr
 
     # For Windows (Command Prompt)
-    docker run --rm -v %cd%:/data zarrify:latest convert /data/input.nc /data/output.zarr
+    docker run --rm -v %cd%:/data zarrio:latest convert /data/input.nc /data/output.zarr
 
 Create a ``data`` directory in your project root to store input/output files that will be accessible from the container.
 
@@ -108,15 +108,15 @@ Docker is particularly useful for parallel processing workflows:
 .. code-block:: bash
 
     # Create template
-    docker run --rm -v $(pwd):/data zarrify:latest create-template /data/template.nc /data/archive.zarr \
+    docker run --rm -v $(pwd):/data zarrio:latest create-template /data/template.nc /data/archive.zarr \
         --global-start 2020-01-01 \
         --global-end 2023-12-31
 
     # Process multiple files in parallel containers
-    docker run --rm -v $(pwd):/data zarrify:latest write-region /data/data_2020.nc /data/archive.zarr &
-    docker run --rm -v $(pwd):/data zarrify:latest write-region /data/data_2021.nc /data/archive.zarr &
-    docker run --rm -v $(pwd):/data zarrify:latest write-region /data/data_2022.nc /data/archive.zarr &
-    docker run --rm -v $(pwd):/data zarrify:latest write-region /data/data_2023.nc /data/archive.zarr &
+    docker run --rm -v $(pwd):/data zarrio:latest write-region /data/data_2020.nc /data/archive.zarr &
+    docker run --rm -v $(pwd):/data zarrio:latest write-region /data/data_2021.nc /data/archive.zarr &
+    docker run --rm -v $(pwd):/data zarrio:latest write-region /data/data_2022.nc /data/archive.zarr &
+    docker run --rm -v $(pwd):/data zarrio:latest write-region /data/data_2023.nc /data/archive.zarr &
 
     # Wait for all processes to complete
     wait
@@ -127,10 +127,10 @@ Docker Compose Usage
 .. code-block:: bash
 
     # Start a development shell
-    docker-compose run --rm zarrify-dev bash
+    docker-compose run --rm zarrio-dev bash
 
     # Run the application with specific arguments
-    docker-compose run --rm zarrify convert /data/input.nc /data/output.zarr
+    docker-compose run --rm zarrio convert /data/input.nc /data/output.zarr
 
     # Build all services
     docker-compose build
@@ -174,4 +174,4 @@ Example with Debugging:
 
 .. code-block:: bash
 
-    docker run --rm -v $(pwd):/data zarrify:latest convert /data/input.nc /data/output.zarr --log-level DEBUG
+    docker run --rm -v $(pwd):/data zarrio:latest convert /data/input.nc /data/output.zarr --log-level DEBUG

@@ -29,14 +29,14 @@ API Changes
 * **Simplified Interface**: Cleaner, more intuitive APIs
 * **Functional API**: ``convert_to_zarr``, ``append_to_zarr`` functions
 * **Class-Based API**: ``ZarrConverter`` class for advanced usage
-* **CLI Interface**: ``zarrify`` command with comprehensive options
+* **CLI Interface**: ``zarrio`` command with comprehensive options
 * **Configuration API**: Pydantic models for type-safe configuration
 
 Breaking Changes
 ^^^^^^^^^^^^^^^^
 
 * **Complete Rewrite**: No backward compatibility with onzarr 1.x
-* **New Package Name**: ``zarrify`` instead of ``onzarr``
+* **New Package Name**: ``zarrio`` instead of ``onzarr``
 * **New Module Structure**: Clean, modular organization
 * **New API**: Simplified, more intuitive interfaces
 * **New Configuration**: Pydantic-based configuration management
@@ -113,7 +113,7 @@ Documentation
 Initial Release Notes
 ---------------------
 
-zarrify represents a complete rewrite of the original onzarr library with a focus on:
+zarrio represents a complete rewrite of the original onzarr library with a focus on:
 
 1. **Clean Architecture**: Fresh start without legacy constraints
 2. **Modern Design**: Full type hints, proper error handling, clean APIs
@@ -141,7 +141,7 @@ Key Features in Initial Release:
 Migration from onzarr 1.x:
 
 * **Breaking Changes**: Complete rewrite with no backward compatibility
-* **New Package**: ``zarrify`` instead of ``onzarr``
+* **New Package**: ``zarrio`` instead of ``onzarr``
 * **New API**: Simplified, more intuitive interfaces
 * **New Configuration**: Pydantic-based configuration management
 * **Enhanced Features**: Parallel writing, intelligent chunking, retry logic

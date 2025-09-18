@@ -1,5 +1,5 @@
 """
-Tests for zarrify core functionality.
+Tests for zarrio core functionality.
 """
 
 import pytest
@@ -10,7 +10,7 @@ import xarray as xr
 import os
 from pathlib import Path
 
-from zarrify import (
+from zarrio import (
     ZarrConverter,
     convert_to_zarr,
     append_to_zarr,

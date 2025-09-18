@@ -55,7 +55,7 @@ def main():
     
     # Test the analyze command
     print("\nTesting analyze command...")
-    os.system(f"cd /home/tdurrant/source/onzarr/zarrify && python -m zarrify.cli analyze {nc_path}")
+    os.system(f"cd /home/tdurrant/source/onzarr/zarrio && python -m zarrio.cli analyze {nc_path}")
     
     # Clean up
     os.unlink(nc_path)

@@ -1,5 +1,5 @@
 """
-Tests for zarrify CLI functionality.
+Tests for zarrio CLI functionality.
 """
 
 import pytest
@@ -9,7 +9,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from zarrify.cli import parse_chunking
+from zarrio.cli import parse_chunking
 
 
 def test_parse_chunking():
@@ -66,7 +66,7 @@ def test_cli_convert():
         
         # Run convert command
         result = subprocess.run([
-            sys.executable, "-m", "zarrify.cli", "convert",
+            sys.executable, "-m", "zarrio.cli", "convert",
             ncfile, zarrfile
         ], capture_output=True, text=True)
         
@@ -87,7 +87,7 @@ def test_cli_convert_with_chunking():
         
         # Run convert command with chunking
         result = subprocess.run([
-            sys.executable, "-m", "zarrify.cli", "convert",
+            sys.executable, "-m", "zarrio.cli", "convert",
             ncfile, zarrfile,
             "--chunking", "time:3,lat:2"
         ], capture_output=True, text=True)
@@ -133,7 +133,7 @@ def test_cli_convert_with_packing():
         
         # Run convert command with packing
         result = subprocess.run([
-            sys.executable, "-m", "zarrify.cli", "convert",
+            sys.executable, "-m", "zarrio.cli", "convert",
             ncfile, zarrfile,
             "--packing", "--packing-bits", "16"
         ], capture_output=True, text=True)
@@ -149,14 +149,14 @@ def test_cli_help():
     """Test CLI help command."""
     # Run help command
     result = subprocess.run([
-        sys.executable, "-m", "zarrify.cli", "--help"
+        sys.executable, "-m", "zarrio.cli", "--help"
     ], capture_output=True, text=True)
     
     # Check that command succeeded
     assert result.returncode == 0
     
     # Check that help text contains expected content
-    assert "zarrify" in result.stdout
+    assert "zarrio" in result.stdout
     assert "convert" in result.stdout
     assert "append" in result.stdout
 
@@ -165,14 +165,14 @@ def test_cli_version():
     """Test CLI version command."""
     # Run version command
     result = subprocess.run([
-        sys.executable, "-m", "zarrify.cli", "--version"
+        sys.executable, "-m", "zarrio.cli", "--version"
     ], capture_output=True, text=True)
     
     # Check that command succeeded
     assert result.returncode == 0
     
     # Check that version is in output
-    assert "zarrify" in result.stdout
+    assert "zarrio" in result.stdout
 
 
 if __name__ == "__main__":

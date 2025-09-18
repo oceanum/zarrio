@@ -1,5 +1,5 @@
 """
-Tests for zarrify packing functionality.
+Tests for zarrio packing functionality.
 """
 
 import pytest
@@ -7,7 +7,7 @@ import numpy as np
 import xarray as xr
 import pandas as pd
 
-from zarrify.packing import Packer, FixedScaleOffset
+from zarrio.packing import Packer, FixedScaleOffset
 
 
 def test_packer_initialization():

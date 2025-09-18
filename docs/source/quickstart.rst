@@ -1,16 +1,16 @@
 Quickstart Guide
 ================
 
-This guide will help you get started with zarrify quickly.
+This guide will help you get started with zarrio quickly.
 
 Basic Usage
 -----------
 
-The simplest way to use zarrify is through its functional API:
+The simplest way to use zarrio is through its functional API:
 
 .. code-block:: python
 
-    from zarrify import convert_to_zarr
+    from zarrio import convert_to_zarr
 
     # Convert a single NetCDF file to Zarr
     convert_to_zarr("input.nc", "output.zarr")
@@ -24,7 +24,7 @@ For more control, you can use the class-based API:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     # Create converter with custom settings
     converter = ZarrConverter(
@@ -46,38 +46,38 @@ Environment-specific chunking:
 Command Line Interface
 ----------------------
 
-zarrify also provides a powerful command-line interface:
+zarrio also provides a powerful command-line interface:
 
 .. code-block:: bash
 
     # Convert NetCDF to Zarr
-    zarrify convert input.nc output.zarr
+    zarrio convert input.nc output.zarr
 
     # Convert with chunking
-    zarrify convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
+    zarrio convert input.nc output.zarr --chunking "time:100,lat:50,lon:100"
 
     # Convert with compression
-    zarrify convert input.nc output.zarr --compression "blosc:zstd:3"
+    zarrio convert input.nc output.zarr --compression "blosc:zstd:3"
 
     # Convert with data packing
-    zarrify convert input.nc output.zarr --packing --packing-bits 16
+    zarrio convert input.nc output.zarr --packing --packing-bits 16
 
     # Convert with manual packing ranges
-    zarrify convert input.nc output.zarr --packing \
+    zarrio convert input.nc output.zarr --packing \
         --packing-manual-ranges '{"temperature": {"min": -50, "max": 50}}'
 
     # Convert with automatic range calculation
-    zarrify convert input.nc output.zarr --packing \
+    zarrio convert input.nc output.zarr --packing \
         --packing-auto-buffer-factor 0.05
 
 Parallel Writing
 ----------------
 
-One of the key features of zarrify is parallel writing support:
+One of the key features of zarrio is parallel writing support:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     # 1. Create template covering full time range
     converter = ZarrConverter()
@@ -127,13 +127,13 @@ Then use it with the CLI:
 
 .. code-block:: bash
 
-    zarrify convert input.nc output.zarr --config config.yaml
+    zarrio convert input.nc output.zarr --config config.yaml
 
 Or programmatically:
 
 .. code-block:: python
 
-    from zarrify import ZarrConverter
+    from zarrio import ZarrConverter
 
     converter = ZarrConverter.from_config_file("config.yaml")
     converter.convert("input.nc", "output.zarr")
