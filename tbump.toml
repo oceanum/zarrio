@@ -1,0 +1,15 @@
+[version]
+current = "0.1.0"
+regex = "^(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(?:-(?P<extra>.+))?$"
+
+[git]
+message_template = "Bump version to {new_version}"
+tag_template = "v{new_version}"
+
+[[file]]
+src = "zarrio/__init__.py"
+search = '__version__ = "{current_version}"'
+
+[[after_push]]
+name = "Create GitHub release (with confirmation)"
+cmd = 'read -p "Create GitHub release for v{new_version}? [y/N] " yn; if [ "$yn" = "y" ] || [ "$yn" = "Y" ]; then gh release create v{new_version} --title "v{new_version}" --notes "Release v{new_version}"; else echo "Skipped GitHub release."; fi'

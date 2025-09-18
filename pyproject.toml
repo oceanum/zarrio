@@ -51,6 +51,7 @@ dev = [
     "flake8>=3.9.0",
     "mypy>=0.910",
     "pre-commit>=2.13.0",
+    "tbump",
 ]
 docs = [
     "sphinx>=4.0.0",
