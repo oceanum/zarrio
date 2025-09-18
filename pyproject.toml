@@ -60,7 +60,7 @@ docs = [
 
 [project.urls]
 homepage = "https://github.com/oceanum/zarrio"
-documentation = "https://github.com/oceanum/zarrio/blob/main/docs"
+documentation = "https://oceanum.github.io/zarrio"
 repository = "https://github.com/oceanum/zarrio"
 issues = "https://github.com/oceanum/zarrio/issues"
 
