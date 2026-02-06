@@ -600,7 +600,7 @@ class ZarrConverter:
 
             # Perform the actual write operation with retry logic
             self._write_region_with_retry(
-                input_path, store, region, variables, drop_variables
+                input_path, store, region, variables, drop_variables, group
             )
 
             # Close datamesh session if used
@@ -623,6 +623,7 @@ class ZarrConverter:
         region: Optional[Dict[str, slice]] = None,
         variables: Optional[list] = None,
         drop_variables: Optional[list] = None,
+        group: Optional[str] = None,
     ) -> None:
         """
         Write data to a specific region with retry logic for missing data.
@@ -633,6 +634,7 @@ class ZarrConverter:
             region: Dictionary specifying the region to write to
             variables: List of variables to include (None for all)
             drop_variables: List of variables to exclude
+            group: Optional datamesh group to write into
         """
         max_retries = self.config.missing_data.retries_on_missing
 
