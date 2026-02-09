@@ -35,12 +35,15 @@ dependencies = [
     "click>=8.0.0",
     "pyyaml>=5.4.0",
     "dask",
-    "pydantic>2",
-    "oceanum>=0.8.0"
+    "pydantic>2"
 ]
+
 dynamic = ["version"]
 
 [project.optional-dependencies]
+datamesh = [
+    "oceanum>=0.8.0",
+]
 dev = [
     "pytest>=6.2.0",
     "pytest-cov>=2.12.0",

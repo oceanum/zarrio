@@ -23,12 +23,21 @@ from .models import (
     TimeConfig,
     VariableConfig,
     MissingDataConfig,
+    DATAMESH_AVAILABLE,
 )
-from oceanum.datamesh.datasource import Datasource
-from oceanum.datamesh import Connector
-from oceanum.datamesh.zarr import ZarrClient
-from oceanum.datamesh.session import Session
-from oceanum.datamesh.exceptions import DatameshConnectError
+
+if DATAMESH_AVAILABLE:
+    from oceanum.datamesh.datasource import Datasource
+    from oceanum.datamesh import Connector
+    from oceanum.datamesh.zarr import ZarrClient
+    from oceanum.datamesh.session import Session
+    from oceanum.datamesh.exceptions import DatameshConnectError
+else:
+    Datasource = None
+    Connector = None
+    ZarrClient = None
+    Session = None
+    DatameshConnectError = Exception
 
 logger = logging.getLogger(__name__)
 
@@ -135,7 +144,9 @@ class ZarrConverter:
             and self.config.datamesh.use_zarr_client
         )
 
-    def _get_store(self, cycle: Optional[Any] = None) -> Union[str, Path, Any]:
+    def _get_store(
+        self, cycle: Optional[Any] = None, group: Optional[str] = None
+    ) -> Union[str, Path, Any]:
         """Get the store path or datamesh zarr client."""
         if self.use_datamesh_zarr_client and self.config.datamesh:
             logger.info(
@@ -145,6 +156,9 @@ class ZarrConverter:
             if cycle is not None:
                 logger.info(f"Writing to cycle group {cycle}")
                 self._cycle = cycle
+            # Persist the group for potential metadata updates
+            if group is not None:
+                self._group = group
             # Avoid opening a new session if already open
             if self._session is not None:
                 return self._store
@@ -305,6 +319,7 @@ class ZarrConverter:
         freq: Optional[str] = None,
         compute: bool = False,
         cycle: Optional[Any] = None,
+        group: Optional[str] = None,
         intelligent_chunking: bool = False,
         access_pattern: str = "balanced",
     ) -> None:
@@ -406,11 +421,15 @@ class ZarrConverter:
 
             # Get store (could be file path or datamesh client)
             store = (
-                self._get_store(cycle) if self.use_datamesh_zarr_client else output_path
+                self._get_store(cycle, group=group)
+                if self.use_datamesh_zarr_client
+                else output_path
             )
 
             # Write template (compute=False means metadata only)
-            archive_ds.to_zarr(store, mode="w", encoding=encoding, compute=compute)
+            archive_ds.to_zarr(
+                store, mode="w", encoding=encoding, compute=compute, group=group
+            )
 
             logger.info(f"Created template Zarr archive at {output_path}")
 
@@ -542,6 +561,7 @@ class ZarrConverter:
         variables: Optional[list] = None,
         drop_variables: Optional[list] = None,
         cycle: Optional[Any] = None,
+        group: Optional[str] = None,
     ) -> None:
         """
         Write data to a specific region of an existing Zarr store with retry logic.
@@ -553,6 +573,7 @@ class ZarrConverter:
             variables: List of variables to include (None for all)
             drop_variables: List of variables to exclude
             cycle: Cycle information for datamesh
+            group: Optional datamesh group to write into
         """
         try:
             # Reset retry counter for new operation
@@ -560,12 +581,14 @@ class ZarrConverter:
 
             # Get store (could be file path or datamesh client)
             store = (
-                self._get_store(cycle) if self.use_datamesh_zarr_client else zarr_path
+                self._get_store(cycle, group=group)
+                if self.use_datamesh_zarr_client
+                else zarr_path
             )
 
             # Perform the actual write operation with retry logic
             self._write_region_with_retry(
-                input_path, store, region, variables, drop_variables
+                input_path, store, region, variables, drop_variables, group
             )
 
             # Close datamesh session if used
@@ -588,6 +611,7 @@ class ZarrConverter:
         region: Optional[Dict[str, slice]] = None,
         variables: Optional[list] = None,
         drop_variables: Optional[list] = None,
+        group: Optional[str] = None,
     ) -> None:
         """
         Write data to a specific region with retry logic for missing data.
@@ -598,6 +622,7 @@ class ZarrConverter:
             region: Dictionary specifying the region to write to
             variables: List of variables to include (None for all)
             drop_variables: List of variables to exclude
+            group: Optional datamesh group to write into
         """
         max_retries = self.config.missing_data.retries_on_missing
 
@@ -629,7 +654,11 @@ class ZarrConverter:
 
                 # Write to region
                 ds.to_zarr(
-                    zarr_path, region=region, encoding=encoding, safe_chunks=False
+                    zarr_path,
+                    region=region,
+                    encoding=encoding,
+                    safe_chunks=False,
+                    group=group,
                 )
 
                 logger.info(
@@ -780,6 +809,7 @@ class ZarrConverter:
         drop_variables: Optional[list] = None,
         attrs: Optional[Dict[str, Any]] = None,
         cycle: Optional[Any] = None,
+        group: Optional[str] = None,
     ) -> None:
         """
         Convert input data to Zarr format with retry logic.
@@ -791,6 +821,7 @@ class ZarrConverter:
             drop_variables: List of variables to exclude
             attrs: Additional global attributes to add
             cycle: Cycle information for datamesh
+            group: Optional datamesh group to write into
         """
         try:
             # Reset retry counter for new operation
@@ -798,12 +829,14 @@ class ZarrConverter:
 
             # Get store (could be file path or datamesh client)
             store = (
-                self._get_store(cycle) if self.use_datamesh_zarr_client else output_path
+                self._get_store(cycle, group=group)
+                if self.use_datamesh_zarr_client
+                else output_path
             )
 
             # Perform conversion with retry logic
             self._convert_with_retry(
-                input_path, store, variables, drop_variables, attrs
+                input_path, store, variables, drop_variables, attrs, group
             )
 
             # Close datamesh session if used
@@ -826,6 +859,7 @@ class ZarrConverter:
         variables: Optional[list] = None,
         drop_variables: Optional[list] = None,
         attrs: Optional[Dict[str, Any]] = None,
+        group: Optional[str] = None,
     ) -> None:
         """
         Convert input data to Zarr format with retry logic.
@@ -836,6 +870,7 @@ class ZarrConverter:
             variables: List of variables to include (None for all)
             drop_variables: List of variables to exclude
             attrs: Additional global attributes to add
+            group: Optional datamesh group to write into
         """
         max_retries = self.config.missing_data.retries_on_missing
 
@@ -859,7 +894,7 @@ class ZarrConverter:
                     ds = ds.chunk(chunking_dict)
 
                 # Write to Zarr
-                ds.to_zarr(store, mode="w", encoding=encoding)
+                ds.to_zarr(store, mode="w", encoding=encoding, group=group)
 
                 logger.info(f"Successfully converted {input_path} to store")
 
@@ -910,6 +945,7 @@ class ZarrConverter:
         zarr_path: Union[str, Path],
         variables: Optional[list] = None,
         drop_variables: Optional[list] = None,
+        group: Optional[str] = None,
     ) -> None:
         """
         Append data to an existing Zarr store with retry logic.
@@ -919,13 +955,16 @@ class ZarrConverter:
             zarr_path: Path to existing Zarr store
             variables: List of variables to include (None for all)
             drop_variables: List of variables to exclude
+            group: Optional datamesh group to write into
         """
         try:
             # Reset retry counter for new operation
             self.retried_on_missing = 0
 
             # Perform append with retry logic
-            self._append_with_retry(input_path, zarr_path, variables, drop_variables)
+            self._append_with_retry(
+                input_path, zarr_path, variables, drop_variables, group
+            )
 
             # Close datamesh session if used
             self._close_session()
@@ -948,6 +987,7 @@ class ZarrConverter:
         zarr_path: Union[str, Path],
         variables: Optional[list] = None,
         drop_variables: Optional[list] = None,
+        group: Optional[str] = None,
     ) -> None:
         """
         Append data to an existing Zarr store with retry logic.
@@ -957,6 +997,7 @@ class ZarrConverter:
             zarr_path: Path to existing Zarr store
             variables: List of variables to include (None for all)
             drop_variables: List of variables to exclude
+            group: Optional datamesh group to write into
         """
         max_retries = self.config.missing_data.retries_on_missing
 
@@ -985,7 +1026,10 @@ class ZarrConverter:
 
                 # Append to Zarr
                 new_ds.to_zarr(
-                    zarr_path, append_dim=self.config.time.append_dim, encoding=encoding
+                    zarr_path,
+                    append_dim=self.config.time.append_dim,
+                    encoding=encoding,
+                    group=group,
                 )
 
                 logger.info(f"Successfully appended {input_path} to {zarr_path}")

@@ -9,7 +9,15 @@ import json
 from datetime import datetime
 
 from pydantic import BaseModel, Field, field_validator, ConfigDict
-from oceanum.datamesh.datasource import Datasource, Coordinates
+
+# Try to import Datasource from oceanum, but make it optional
+try:
+    from oceanum.datamesh.datasource import Datasource, Coordinates
+    DATAMESH_AVAILABLE = True
+except ImportError:
+    DATAMESH_AVAILABLE = False
+    Datasource = None
+    Coordinates = None
 
 
 class ChunkingConfig(BaseModel):
