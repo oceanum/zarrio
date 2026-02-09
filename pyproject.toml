@@ -34,16 +34,13 @@ dependencies = [
     "pandas>=1.3.0",
     "click>=8.0.0",
     "pyyaml>=5.4.0",
-    "pyyaml>=5.4.0",
     "dask",
-    "pydantic>2"
+    "pydantic>2",
+    "oceanum>=0.8.0"
 ]
 dynamic = ["version"]
 
 [project.optional-dependencies]
-oceanum = [
-    "oceanum",
-]
 dev = [
     "pytest>=6.2.0",
     "pytest-cov>=2.12.0",
