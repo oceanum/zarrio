@@ -570,15 +570,15 @@
             <span class="n">args</span><span class="o">.</span><span class="n">packing_manual_ranges</span>
         <span class="p">)</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_auto_buffer_factor</span><span class="p">:</span>
-        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span>
-            <span class="s2">&quot;auto_buffer_factor&quot;</span>
-        <span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_auto_buffer_factor</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;auto_buffer_factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">packing_auto_buffer_factor</span>
+        <span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_check_range_exceeded</span><span class="p">:</span>
         <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;check_range_exceeded&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_range_exceeded_action</span><span class="p">:</span>
-        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span>
-            <span class="s2">&quot;range_exceeded_action&quot;</span>
-        <span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_range_exceeded_action</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;range_exceeded_action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">packing_range_exceeded_action</span>
+        <span class="p">)</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span><span class="p">:</span>
         <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span><span class="p">:</span>
@@ -609,6 +609,7 @@
         <span class="n">output_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
         <span class="n">variables</span><span class="o">=</span><span class="n">variables</span><span class="p">,</span>
         <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">group</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Conversion completed successfully&quot;</span><span class="p">)</span></div>
@@ -702,15 +703,15 @@
             <span class="n">args</span><span class="o">.</span><span class="n">packing_manual_ranges</span>
         <span class="p">)</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_auto_buffer_factor</span><span class="p">:</span>
-        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span>
-            <span class="s2">&quot;auto_buffer_factor&quot;</span>
-        <span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_auto_buffer_factor</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;auto_buffer_factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">packing_auto_buffer_factor</span>
+        <span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_check_range_exceeded</span><span class="p">:</span>
         <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;check_range_exceeded&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_range_exceeded_action</span><span class="p">:</span>
-        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span>
-            <span class="s2">&quot;range_exceeded_action&quot;</span>
-        <span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">packing_range_exceeded_action</span>
+        <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;packing&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;range_exceeded_action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">packing_range_exceeded_action</span>
+        <span class="p">)</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span><span class="p">:</span>
         <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span><span class="p">:</span>
@@ -741,7 +742,7 @@
         <span class="n">freq</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span>
         <span class="n">compute</span><span class="o">=</span><span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">metadata_only</span><span class="p">,</span>
         <span class="n">intelligent_chunking</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">intelligent_chunking</span><span class="p">,</span>
-        <span class="n">access_pattern</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">access_pattern</span>
+        <span class="n">access_pattern</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">access_pattern</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Template creation completed successfully&quot;</span><span class="p">)</span></div>
@@ -826,8 +827,7 @@
 
         <span class="kn">from</span><span class="w"> </span><span class="nn">.chunking</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_chunk_recommendation</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">CompressionConfig</span><span class="p">,</span> <span class="n">PackingConfig</span><span class="p">,</span>
-                             <span class="n">ZarrConverterConfig</span><span class="p">)</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompressionConfig</span><span class="p">,</span> <span class="n">PackingConfig</span><span class="p">,</span> <span class="n">ZarrConverterConfig</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">.packing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Packer</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zarrio Analysis Tool&quot;</span><span class="p">)</span>
@@ -1482,6 +1482,10 @@
         <span class="s2">&quot;--datamesh-service&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="s2">&quot;https://datamesh-v1.oceanum.io&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh service URL&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--group&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh group to write into (e.g., cycle/20240101T000000)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--target-chunk-size-mb&quot;</span><span class="p">,</span>

@@ -513,6 +513,7 @@
             <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;My Data&quot;</span><span class="p">,</span>
             <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;My dataset&quot;</span><span class="p">,</span>
             <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="s2">&quot;vzarr&quot;</span><span class="p">,</span>
             <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com&quot;</span><span class="p">,</span>
             <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;zarrio&quot;</span><span class="p">,</span> <span class="s2">&quot;datamesh&quot;</span><span class="p">]</span>
         <span class="p">},</span>
@@ -540,46 +541,43 @@
 <p>You can also use the CLI with datamesh:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert to datamesh datasource</span>
 zarrio<span class="w"> </span>convert<span class="w"> </span>input.nc<span class="w"> </span><span class="se">\\</span>
-<span class="w">  </span>--datamesh-datasource<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:&quot;my_datasource&quot;,&quot;name&quot;:&quot;My Data&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;longitude&quot;,&quot;y&quot;:&quot;latitude&quot;,&quot;t&quot;:&quot;time&quot;}}&#39;</span><span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-datasource<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:&quot;my_datasource&quot;,&quot;name&quot;:&quot;My Data&quot;,&quot;driver&quot;:&quot;vzarr&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;longitude&quot;,&quot;y&quot;:&quot;latitude&quot;,&quot;t&quot;:&quot;time&quot;}}&#39;</span><span class="w"> </span><span class="se">\\</span>
 <span class="w">  </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span>
 
 <span class="c1"># Create template for parallel writing</span>
 zarrio<span class="w"> </span>create-template<span class="w"> </span>template.nc<span class="w"> </span><span class="se">\\</span>
-<span class="w">  </span>--datamesh-datasource<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:&quot;my_datasource&quot;,&quot;name&quot;:&quot;My Data&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;longitude&quot;,&quot;y&quot;:&quot;latitude&quot;,&quot;t&quot;:&quot;time&quot;}}&#39;</span><span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-datasource<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:&quot;my_datasource&quot;,&quot;name&quot;:&quot;My Data&quot;,&quot;driver&quot;:&quot;vzarr&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;longitude&quot;,&quot;y&quot;:&quot;latitude&quot;,&quot;t&quot;:&quot;time&quot;}}&#39;</span><span class="w"> </span><span class="se">\\</span>
 <span class="w">  </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span><span class="w"> </span><span class="se">\\</span>
 <span class="w">  </span>--global-start<span class="w"> </span><span class="m">2023</span>-01-01<span class="w"> </span><span class="se">\\</span>
 <span class="w">  </span>--global-end<span class="w"> </span><span class="m">2023</span>-12-31
 
 <span class="c1"># Write region to datamesh datasource</span>
 zarrio<span class="w"> </span>write-region<span class="w"> </span>data.nc<span class="w"> </span><span class="se">\\</span>
-<span class="w">  </span>--datamesh-datasource<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:&quot;my_datasource&quot;,&quot;name&quot;:&quot;My Data&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;longitude&quot;,&quot;y&quot;:&quot;latitude&quot;,&quot;t&quot;:&quot;time&quot;}}&#39;</span><span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--datamesh-datasource<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:&quot;my_datasource&quot;,&quot;name&quot;:&quot;My Data&quot;,&quot;driver&quot;:&quot;vzarr&quot;,&quot;coordinates&quot;:{&quot;x&quot;:&quot;longitude&quot;,&quot;y&quot;:&quot;latitude&quot;,&quot;t&quot;:&quot;time&quot;}}&#39;</span><span class="w"> </span><span class="se">\\</span>
 <span class="w">  </span>--datamesh-token<span class="w"> </span><span class="nv">$DATAMESH_TOKEN</span>
 </pre></div>
 </div>
 </section>
 <section id="datamesh-datasource-configuration">
 <h2>Datamesh Datasource Configuration<a class="headerlink" href="#datamesh-datasource-configuration" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">DatameshDatasource</span></code> model supports the following fields:</p>
+<p>Zarrio uses the <code class="docutils literal notranslate"><span class="pre">Datasource</span></code> model from <code class="docutils literal notranslate"><span class="pre">oceanum-python</span></code> for datamesh integration. This provides a rich, well-designed schema with the following key fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (required): The unique identifier for the datasource</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: Human-readable name for the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (required): Human-readable name for the datasource</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Description of the datasource</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">coordinates</span></code>: Coordinate mapping (e.g., <code class="docutils literal notranslate"><span class="pre">{&quot;x&quot;:</span> <span class="pre">&quot;longitude&quot;,</span> <span class="pre">&quot;y&quot;:</span> <span class="pre">&quot;latitude&quot;,</span> <span class="pre">&quot;t&quot;:</span> <span class="pre">&quot;time&quot;}</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">details</span></code>: URL with more details about the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coordinates</span></code>: Coordinate mapping with standard keys (e.g., <code class="docutils literal notranslate"><span class="pre">{&quot;x&quot;:</span> <span class="pre">&quot;longitude&quot;,</span> <span class="pre">&quot;y&quot;:</span> <span class="pre">&quot;latitude&quot;,</span> <span class="pre">&quot;t&quot;:</span> <span class="pre">&quot;time&quot;}</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geom</span></code>: Geometry describing the spatial extent</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tags</span></code>: Tags associated with the datasource</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">driver</span></code>: Driver to use for datamesh datasource (defaults to “vzarr”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">driver</span></code>: Driver to use for datamesh datasource</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dataschema</span></code>: Explicit schema for the datasource</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">geometry</span></code>: Explicit geometry for the datasource</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tstart</span></code>: Explicit start time for the datasource</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tend</span></code>: Explicit end time for the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tstart</span></code>: Start time for the datasource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tend</span></code>: End time for the datasource</p></li>
 </ul>
+<p>For the complete list of fields, see the <a class="reference external" href="https://oceanum-python.readthedocs.io/">oceanum-python Datasource documentation</a>.</p>
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
-<p>To use datamesh functionality, you need to install the optional datamesh dependencies:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>zarrio<span class="o">[</span>datamesh<span class="o">]</span>
-</pre></div>
-</div>
+<p>Oceanum is now a required dependency and is installed automatically with zarrio:</p>
 </section>
 <section id="advanced-usage">
 <h2>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Link to this heading">#</a></h2>
