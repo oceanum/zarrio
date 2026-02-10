@@ -19,6 +19,7 @@ To use Datamesh integration, you need to configure the ``datamesh`` section in y
                 "name": "My Data",
                 "description": "My dataset",
                 "coordinates": {"x": "longitude", "y": "latitude", "t": "time"},
+                "driver": "vzarr",
                 "details": "https://example.com",
                 "tags": ["zarrio", "datamesh"]
             },
@@ -49,46 +50,43 @@ You can also use the CLI with datamesh:
 
     # Convert to datamesh datasource
     zarrio convert input.nc \\
-      --datamesh-datasource '{"id":"my_datasource","name":"My Data","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' \\
+      --datamesh-datasource '{"id":"my_datasource","name":"My Data","driver":"vzarr","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' \\
       --datamesh-token $DATAMESH_TOKEN
 
     # Create template for parallel writing
     zarrio create-template template.nc \\
-      --datamesh-datasource '{"id":"my_datasource","name":"My Data","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' \\
+      --datamesh-datasource '{"id":"my_datasource","name":"My Data","driver":"vzarr","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' \\
       --datamesh-token $DATAMESH_TOKEN \\
       --global-start 2023-01-01 \\
       --global-end 2023-12-31
 
     # Write region to datamesh datasource
     zarrio write-region data.nc \\
-      --datamesh-datasource '{"id":"my_datasource","name":"My Data","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' \\
+      --datamesh-datasource '{"id":"my_datasource","name":"My Data","driver":"vzarr","coordinates":{"x":"longitude","y":"latitude","t":"time"}}' \\
       --datamesh-token $DATAMESH_TOKEN
 
 Datamesh Datasource Configuration
 ---------------------------------
 
-The ``DatameshDatasource`` model supports the following fields:
+Zarrio uses the ``Datasource`` model from ``oceanum-python`` for datamesh integration. This provides a rich, well-designed schema with the following key fields:
 
 - ``id`` (required): The unique identifier for the datasource
-- ``name``: Human-readable name for the datasource
+- ``name`` (required): Human-readable name for the datasource
 - ``description``: Description of the datasource
-- ``coordinates``: Coordinate mapping (e.g., ``{"x": "longitude", "y": "latitude", "t": "time"}``)
-- ``details``: URL with more details about the datasource
+- ``coordinates``: Coordinate mapping with standard keys (e.g., ``{"x": "longitude", "y": "latitude", "t": "time"}``)
+- ``geom``: Geometry describing the spatial extent
 - ``tags``: Tags associated with the datasource
-- ``driver``: Driver to use for datamesh datasource (defaults to "vzarr")
+- ``driver``: Driver to use for datamesh datasource
 - ``dataschema``: Explicit schema for the datasource
-- ``geometry``: Explicit geometry for the datasource
-- ``tstart``: Explicit start time for the datasource
-- ``tend``: Explicit end time for the datasource
+- ``tstart``: Start time for the datasource
+- ``tend``: End time for the datasource
+
+For the complete list of fields, see the `oceanum-python Datasource documentation <https://oceanum-python.readthedocs.io/>`_.
 
 Installation
 ------------
 
-To use datamesh functionality, you need to install the optional datamesh dependencies:
-
-.. code-block:: bash
-
-    pip install zarrio[datamesh]
+Oceanum is now a required dependency and is installed automatically with zarrio:
 
 Advanced Usage
 --------------

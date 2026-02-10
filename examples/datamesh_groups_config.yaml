@@ -1,0 +1,41 @@
+# Example YAML configuration for writing to datamesh with groups
+# Usage: zarrio convert input.nc --config datamesh_config.yaml --group cycle/20240101T000000
+
+# Option 1: Manual chunking (explicit control)
+chunking:
+  time: 24
+  lat: 90
+  lon: 180
+
+# Option 2: Intelligent chunking (automatic calculation)
+# Uncomment below and remove manual chunking above:
+# target_chunk_size_mb: 50
+# access_pattern: temporal  # Options: temporal, spatial, balanced
+
+compression:
+  method: blosc:zstd:1
+
+packing:
+  enabled: true
+  bits: 16
+  exclude:
+    - lat
+    - lon
+
+datamesh:
+  datasource:
+    id: forecast-data
+    name: Forecast Data
+    driver: vzarr
+    description: Sample forecast data with hierarchical groups
+    coordinates:
+      x: lon
+      y: lat
+      t: time
+    tags:
+      - forecast
+      - climate
+      - groups
+  token: ${DATAMESH_TOKEN}
+  service: https://datamesh-v1.oceanum.io
+  use_zarr_client: true
