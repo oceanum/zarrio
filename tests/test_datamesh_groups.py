@@ -1,45 +1,48 @@
 import json
 import pytest
-from unittest.mock import Mock, patch
+from unittest.mock import Mock, patch, MagicMock
 import sys
 import tempfile
 from pathlib import Path
 
 # Ensure project root is on PYTHONPATH for imports like 'import zarrio'
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 import xarray as xr
 import zarr
 
-# Mock datamesh-related modules at import time to avoid real connections
-sys.modules["oceanum"] = Mock()
-sys.modules["oceanum.datamesh"] = Mock()
+# Create proper mock structure for oceanum modules
+# This must be done BEFORE importing zarrio
+oceanum_mock = Mock()
+oceanum_datamesh_mock = Mock()
+oceanum_datamesh_datasource_mock = Mock()
+
+
+# Create a mock Datasource class
+class MockDatasource:
+    def __init__(self, id=None, name=None, driver=None, **kwargs):
+        self.id = id
+        self.name = name
+        self.driver = driver
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+
+
+oceanum_datamesh_datasource_mock.Datasource = MockDatasource
+
+# Set up the module hierarchy properly
+sys.modules["oceanum"] = oceanum_mock
+sys.modules["oceanum.datamesh"] = oceanum_datamesh_mock
+sys.modules["oceanum.datamesh.datasource"] = oceanum_datamesh_datasource_mock
 sys.modules["oceanum.datamesh.zarr"] = Mock()
 sys.modules["oceanum.datamesh.session"] = Mock()
 sys.modules["oceanum.datamesh.exceptions"] = Mock()
 
-# Attempt to import the package, fallback to loading from file paths if not on PYTHONPATH
-try:
-    from zarrio.core import ZarrConverter
-    from zarrio.models import ZarrConverterConfig, DatameshConfig
-    from oceanum.datamesh.datasource import Datasource
-except ModuleNotFoundError:
-    import importlib.util
-
-    ROOT = Path(__file__).resolve().parents[2]
-    core_path = ROOT / "zarrio" / "core.py"
-    spec = importlib.util.spec_from_file_location("zarrio.core", str(core_path))
-    core = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(core)
-    ZarrConverter = core.ZarrConverter
-
-    models_path = ROOT / "zarrio" / "models.py"
-    spec2 = importlib.util.spec_from_file_location("zarrio.models", str(models_path))
-    mod2 = importlib.util.module_from_spec(spec2)
-    spec2.loader.exec_module(mod2)
-    ZarrConverterConfig = mod2.ZarrConverterConfig
-    DatameshConfig = mod2.DatameshConfig
+# Import zarrio after mocking
+from zarrio.core import ZarrConverter
+from zarrio.models import ZarrConverterConfig, DatameshConfig
+from oceanum.datamesh.datasource import Datasource
 
 
 @pytest.fixture
