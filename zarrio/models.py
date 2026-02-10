@@ -150,8 +150,10 @@ class MissingDataConfig(BaseModel):
 class DatameshConfig(BaseModel):
     """Configuration for datamesh integration."""
 
-    datasource: Optional[Union[Datasource, Dict[str, Any]]] = Field(
-        None, description="Datamesh datasource configuration"
+    # Use Any for datasource type when oceanum is not available
+    datasource: Optional[Any] = Field(
+        None,
+        description="Datamesh datasource configuration (Datasource object or dict)",
     )
     token: Optional[str] = Field(None, description="Datamesh token for authentication")
     service: str = Field(
