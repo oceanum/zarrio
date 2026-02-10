@@ -2,11 +2,7 @@
 Public API for zarrio.
 """
 
-from .core import (
-    ZarrConverter,
-    convert_to_zarr,
-    append_to_zarr
-)
+from .core import ZarrConverter, convert_to_zarr, append_to_zarr
 from .packing import Packer
 from .time import TimeManager
 from .config import Config
@@ -17,14 +13,15 @@ from .models import (
     CompressionConfig,
     TimeConfig,
     VariableConfig,
-    MissingDataConfig
+    MissingDataConfig,
+    RemoteFileConfig,
 )
 from .exceptions import (
     OnzarrError,
     ConversionError,
     PackingError,
     TimeAlignmentError,
-    ConfigurationError
+    ConfigurationError,
 )
 from .__init__ import __version__, __author__, __email__
 
@@ -34,7 +31,6 @@ __all__ = [
     "Packer",
     "TimeManager",
     "Config",
-    
     # Configuration classes
     "ZarrConverterConfig",
     "ChunkingConfig",
@@ -43,18 +39,16 @@ __all__ = [
     "TimeConfig",
     "VariableConfig",
     "MissingDataConfig",
-    
+    "RemoteFileConfig",
     # Core functions
     "convert_to_zarr",
     "append_to_zarr",
-    
     # Exceptions
     "OnzarrError",
     "ConversionError",
     "PackingError",
     "TimeAlignmentError",
     "ConfigurationError",
-    
     # Metadata
     "__version__",
     "__author__",
