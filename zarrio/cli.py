@@ -72,15 +72,15 @@ def convert_command(args: argparse.Namespace) -> None:
             args.packing_manual_ranges
         )
     if args.packing_auto_buffer_factor:
-        config_dict.setdefault("packing", {})[
-            "auto_buffer_factor"
-        ] = args.packing_auto_buffer_factor
+        config_dict.setdefault("packing", {})["auto_buffer_factor"] = (
+            args.packing_auto_buffer_factor
+        )
     if not args.packing_check_range_exceeded:
         config_dict.setdefault("packing", {})["check_range_exceeded"] = False
     if args.packing_range_exceeded_action:
-        config_dict.setdefault("packing", {})[
-            "range_exceeded_action"
-        ] = args.packing_range_exceeded_action
+        config_dict.setdefault("packing", {})["range_exceeded_action"] = (
+            args.packing_range_exceeded_action
+        )
     if args.time_dim:
         config_dict.setdefault("time", {})["dim"] = args.time_dim
     if args.target_chunk_size_mb:
@@ -111,6 +111,7 @@ def convert_command(args: argparse.Namespace) -> None:
         output_path=args.output,
         variables=variables,
         drop_variables=drop_variables,
+        group=args.group,
     )
 
     logger.info("Conversion completed successfully")
@@ -198,15 +199,15 @@ def create_template_command(args: argparse.Namespace) -> None:
             args.packing_manual_ranges
         )
     if args.packing_auto_buffer_factor:
-        config_dict.setdefault("packing", {})[
-            "auto_buffer_factor"
-        ] = args.packing_auto_buffer_factor
+        config_dict.setdefault("packing", {})["auto_buffer_factor"] = (
+            args.packing_auto_buffer_factor
+        )
     if not args.packing_check_range_exceeded:
         config_dict.setdefault("packing", {})["check_range_exceeded"] = False
     if args.packing_range_exceeded_action:
-        config_dict.setdefault("packing", {})[
-            "range_exceeded_action"
-        ] = args.packing_range_exceeded_action
+        config_dict.setdefault("packing", {})["range_exceeded_action"] = (
+            args.packing_range_exceeded_action
+        )
     if args.time_dim:
         config_dict.setdefault("time", {})["dim"] = args.time_dim
     if args.target_chunk_size_mb:
@@ -237,7 +238,7 @@ def create_template_command(args: argparse.Namespace) -> None:
         freq=args.freq,
         compute=not args.metadata_only,
         intelligent_chunking=args.intelligent_chunking,
-        access_pattern=args.access_pattern
+        access_pattern=args.access_pattern,
     )
 
     logger.info("Template creation completed successfully")
@@ -316,8 +317,7 @@ def analyze_command(args: argparse.Namespace) -> None:
 
         from .chunking import get_chunk_recommendation
         from .core import ZarrConverter
-        from .models import (CompressionConfig, PackingConfig,
-                             ZarrConverterConfig)
+        from .models import CompressionConfig, PackingConfig, ZarrConverterConfig
         from .packing import Packer
 
         print("zarrio Analysis Tool")
@@ -969,6 +969,10 @@ examples:
         "--datamesh-service",
         default="https://datamesh-v1.oceanum.io",
         help="Datamesh service URL",
+    )
+    convert_parser.add_argument(
+        "--group",
+        help="Datamesh group to write into (e.g., cycle/20240101T000000)",
     )
     convert_parser.add_argument(
         "--target-chunk-size-mb",

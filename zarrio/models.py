@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field, field_validator, ConfigDict
 # Try to import Datasource from oceanum, but make it optional
 try:
     from oceanum.datamesh.datasource import Datasource, Coordinates
+
     DATAMESH_AVAILABLE = True
 except ImportError:
     DATAMESH_AVAILABLE = False
@@ -50,6 +51,9 @@ class PackingConfig(BaseModel):
     )
     range_exceeded_action: str = Field(
         "warn", description="Action when data exceeds range ('warn', 'error', 'ignore')"
+    )
+    exclude: Optional[List[str]] = Field(
+        None, description="Variables to exclude from packing (e.g., ['lat', 'lon'])"
     )
 
     @field_validator("bits")

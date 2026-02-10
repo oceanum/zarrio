@@ -1121,10 +1121,17 @@ class ZarrConverter:
             for var in ds.data_vars:
                 encoding[var] = {"compressor": compressor}
 
-        # Setup packing
         if self.config.packing.enabled and self.packer:
+            exclude_vars = self.config.packing.exclude or []
+            variables_to_pack = [
+                var
+                for var in ds.data_vars
+                if np.issubdtype(ds[var].dtype, np.number) and var not in exclude_vars
+            ]
+
             packing_encoding = self.packer.setup_encoding(
                 ds,
+                variables=variables_to_pack,
                 manual_ranges=self.config.packing.manual_ranges,
                 auto_buffer_factor=self.config.packing.auto_buffer_factor,
                 check_range_exceeded=self.config.packing.check_range_exceeded,
