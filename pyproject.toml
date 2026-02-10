@@ -42,7 +42,7 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 datamesh = [
-    "oceanum>=0.8.0",
+    "oceanum @ git+https://github.com/oceanum-io/oceanum-python.git@groups",
 ]
 dev = [
     "pytest>=6.2.0",
