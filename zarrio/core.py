@@ -23,8 +23,17 @@ from .models import (
     TimeConfig,
     VariableConfig,
     MissingDataConfig,
+    RemoteFileConfig,
     DATAMESH_AVAILABLE,
 )
+
+# Try to import fsspec for remote file support
+try:
+    import fsspec
+
+    FSSPEC_AVAILABLE = True
+except ImportError:
+    FSSPEC_AVAILABLE = False
 
 if DATAMESH_AVAILABLE:
     from oceanum.datamesh.datasource import Datasource
@@ -1069,16 +1078,62 @@ class ZarrConverter:
                         f"Append failed after {self.retried_on_missing} retries: {e}"
                     ) from e
 
-    def _open_dataset(self, path: Union[str, Path]) -> xr.Dataset:
-        """Open dataset from file."""
-        path = str(path)
-        if path.endswith(".nc") or path.endswith(".nc4"):
-            return xr.open_dataset(path)
-        elif path.endswith(".zarr"):
-            return xr.open_zarr(path)
+    def _is_remote_url(self, path: str) -> bool:
+        """Check if path is a remote URL (e.g., gs://, s3://, https://)."""
+        return "://" in path and not path.startswith("file://")
+
+    def _open_remote_dataset(self, url: str) -> xr.Dataset:
+        """Open remote dataset via fsspec.
+
+        Args:
+            url: Remote URL (e.g., gs://bucket/file.nc)
+
+        Returns:
+            xarray Dataset
+
+        Raises:
+            ImportError: If fsspec is not installed
+            ValueError: If the file format is not supported
+        """
+        if not FSSPEC_AVAILABLE:
+            raise ImportError(
+                "Remote file support requires fsspec. "
+                "Install with: pip install zarrio[remote]"
+            )
+
+        engine = self.config.remote_files.engine
+
+        if url.endswith(".nc") or url.endswith(".nc4"):
+            if engine == "h5netcdf":
+                try:
+                    import h5netcdf
+                except ImportError:
+                    raise ImportError(
+                        "Remote NetCDF files require h5netcdf. "
+                        "Install with: pip install zarrio[remote]"
+                    )
+            return xr.open_dataset(url, engine=engine)
+        elif url.endswith(".zarr"):
+            return xr.open_zarr(url)
         else:
-            # Try to infer from file content
-            return xr.open_dataset(path)
+            return xr.open_dataset(url, engine=engine)
+
+    def _open_dataset(self, path: Union[str, Path]) -> xr.Dataset:
+        """Open dataset from file or remote URL."""
+        path_str = str(path)
+
+        # Check if this is a remote URL
+        if self._is_remote_url(path_str):
+            logger.info(f"Opening remote dataset: {path_str}")
+            return self._open_remote_dataset(path_str)
+
+        # Local file handling
+        if path_str.endswith(".nc") or path_str.endswith(".nc4"):
+            return xr.open_dataset(path_str)
+        elif path_str.endswith(".zarr"):
+            return xr.open_zarr(path_str)
+        else:
+            return xr.open_dataset(path_str)
 
     def _process_dataset(
         self,

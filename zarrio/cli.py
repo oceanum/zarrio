@@ -226,8 +226,8 @@ def create_template_command(args: argparse.Namespace) -> None:
     converter_config = ZarrConverterConfig(**config_dict)
     converter = ZarrConverter(config=converter_config)
 
-    # Open template dataset
-    template_ds = xr.open_dataset(args.template)
+    # Open template dataset (supports remote URLs)
+    template_ds = converter._open_dataset(args.template)
 
     # Create template
     converter.create_template(
@@ -325,9 +325,11 @@ def analyze_command(args: argparse.Namespace) -> None:
         print(f"Analyzing file: {args.input}")
         print()
 
-        # Open dataset
+        # Open dataset (supports remote URLs)
         print("Loading dataset...")
-        ds = xr.open_dataset(args.input)
+        from .core import ZarrConverter
+
+        ds = ZarrConverter(config=ZarrConverterConfig())._open_dataset(args.input)
         print("Dataset loaded successfully!")
         print()
 
