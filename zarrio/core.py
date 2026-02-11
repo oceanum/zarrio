@@ -4,6 +4,7 @@ Enhanced core functionality for zarrio with retry logic for missing data and dat
 
 import logging
 import time
+import os
 from typing import Dict, Optional, Union, Any, List
 from pathlib import Path
 from functools import cached_property
@@ -11,6 +12,8 @@ from functools import cached_property
 import xarray as xr
 import numpy as np
 import dask.array as da
+import zarr
+import requests
 
 from .packing import Packer
 from .time import TimeManager
@@ -23,8 +26,17 @@ from .models import (
     TimeConfig,
     VariableConfig,
     MissingDataConfig,
+    RemoteFileConfig,
     DATAMESH_AVAILABLE,
 )
+
+# Try to import fsspec for remote file support
+try:
+    import fsspec
+
+    FSSPEC_AVAILABLE = True
+except ImportError:
+    FSSPEC_AVAILABLE = False
 
 if DATAMESH_AVAILABLE:
     from oceanum.datamesh.datasource import Datasource
@@ -198,38 +210,46 @@ class ZarrConverter:
             if isinstance(datasource, dict):
                 datasource = Datasource(**datasource)
 
-            # Update the metadata explicitly set
-            metadata = datasource.model_dump(exclude_unset=True)
-            datasource_id = metadata.pop("id")
+            datasource_id = datasource.id
+            token = self.config.datamesh.token or os.getenv("DATAMESH_TOKEN")
+            service = self.config.datamesh.service or "https://datamesh-v1.oceanum.io"
+
+            # Build update payload
+            updates = {}
 
             # Add schema if not explicitly set
-            if "dataschema" not in metadata:
-                metadata["dataschema"] = self._get_schema(dset)
-
-            logger.info(f"Updating metadata {metadata} in datamesh for {datasource_id}")
-            self.conn.update_metadata(datasource_id=datasource_id, **metadata)
+            updates["dataschema"] = self._get_schema(dset)
 
             # Update geometry from the dataset if not explicitly set
-            if "geom" not in metadata:
-                geom = self._get_geom(dset, datasource)
-                if geom:
-                    logger.debug(
-                        f"Updating geometry {geom} in datamesh for {datasource_id}"
-                    )
-                    self.conn.update_metadata(datasource_id=datasource_id, geom=geom)
+            geom = self._get_geom(dset, datasource)
+            if geom:
+                updates["geom"] = geom
 
             # Update time range from the dataset if not explicitly set
             tstart, tend = self._get_time_range(dset, datasource)
-            if "tstart" not in metadata and tstart:
-                logger.debug(
-                    f"Updating start time {tstart} in datamesh for {datasource_id}"
+            if tstart:
+                updates["tstart"] = tstart
+            if tend:
+                updates["tend"] = tend
+
+            if updates:
+                logger.info(
+                    f"Updating metadata {list(updates.keys())} in datamesh for {datasource_id}"
                 )
-                self.conn.update_metadata(datasource_id=datasource_id, tstart=tstart)
-            if "tend" not in metadata and tend:
-                logger.debug(
-                    f"Updating end time {tend} in datamesh for {datasource_id}"
+                ret = requests.patch(
+                    f"{service}/datasource/{datasource_id}/",
+                    json=updates,
+                    headers={
+                        "Authorization": f"Token {token}",
+                        "content-type": "application/json",
+                    },
                 )
-                self.conn.update_metadata(datasource_id=datasource_id, tend=tend)
+                if ret.status_code != 200:
+                    logger.warning(f"Failed to update datamesh metadata: {ret.text}")
+                else:
+                    logger.info(
+                        f"Successfully updated datamesh metadata for {datasource_id}"
+                    )
 
         except Exception as e:
             logger.warning(f"Failed to update datamesh datasource metadata: {e}")
@@ -296,7 +316,7 @@ class ZarrConverter:
             return None
 
     def _get_time_range(self, dset: xr.Dataset, datasource: Datasource) -> tuple:
-        """Get time range from dataset."""
+        """Get time range from dataset as ISO format strings."""
         try:
             coords = datasource.coordinates or {}
             t_coord = coords.get("t")
@@ -305,7 +325,9 @@ class ZarrConverter:
                 return None, None
 
             times = dset[t_coord].to_index().to_pydatetime()
-            return min(times), max(times)
+            tstart = min(times).strftime("%Y-%m-%dT%H:%M:%S")
+            tend = max(times).strftime("%Y-%m-%dT%H:%M:%S")
+            return tstart, tend
         except Exception as e:
             logger.warning(f"Failed to get time range: {e}")
             return None, None
@@ -827,6 +849,16 @@ class ZarrConverter:
             # Reset retry counter for new operation
             self.retried_on_missing = 0
 
+            # Check zarr version compatibility with datamesh
+            if self.use_datamesh_zarr_client:
+                zarr_version = tuple(map(int, zarr.__version__.split(".")[:2]))
+                if zarr_version >= (3, 0):
+                    raise ConversionError(
+                        "Datamesh integration requires zarr < 3.0. "
+                        f"Current zarr version is {zarr.__version__}. "
+                        "Please downgrade: pip install 'zarr<3'"
+                    )
+
             # Get store (could be file path or datamesh client)
             store = (
                 self._get_store(cycle, group=group)
@@ -1069,16 +1101,62 @@ class ZarrConverter:
                         f"Append failed after {self.retried_on_missing} retries: {e}"
                     ) from e
 
-    def _open_dataset(self, path: Union[str, Path]) -> xr.Dataset:
-        """Open dataset from file."""
-        path = str(path)
-        if path.endswith(".nc") or path.endswith(".nc4"):
-            return xr.open_dataset(path)
-        elif path.endswith(".zarr"):
-            return xr.open_zarr(path)
+    def _is_remote_url(self, path: str) -> bool:
+        """Check if path is a remote URL (e.g., gs://, s3://, https://)."""
+        return "://" in path and not path.startswith("file://")
+
+    def _open_remote_dataset(self, url: str) -> xr.Dataset:
+        """Open remote dataset via fsspec.
+
+        Args:
+            url: Remote URL (e.g., gs://bucket/file.nc)
+
+        Returns:
+            xarray Dataset
+
+        Raises:
+            ImportError: If fsspec is not installed
+            ValueError: If the file format is not supported
+        """
+        if not FSSPEC_AVAILABLE:
+            raise ImportError(
+                "Remote file support requires fsspec. "
+                "Install with: pip install zarrio[remote]"
+            )
+
+        engine = self.config.remote_files.engine
+
+        if url.endswith(".nc") or url.endswith(".nc4"):
+            if engine == "h5netcdf":
+                try:
+                    import h5netcdf
+                except ImportError:
+                    raise ImportError(
+                        "Remote NetCDF files require h5netcdf. "
+                        "Install with: pip install zarrio[remote]"
+                    )
+            return xr.open_dataset(url, engine=engine)
+        elif url.endswith(".zarr"):
+            return xr.open_zarr(url)
         else:
-            # Try to infer from file content
-            return xr.open_dataset(path)
+            return xr.open_dataset(url, engine=engine)
+
+    def _open_dataset(self, path: Union[str, Path]) -> xr.Dataset:
+        """Open dataset from file or remote URL."""
+        path_str = str(path)
+
+        # Check if this is a remote URL
+        if self._is_remote_url(path_str):
+            logger.info(f"Opening remote dataset: {path_str}")
+            return self._open_remote_dataset(path_str)
+
+        # Local file handling
+        if path_str.endswith(".nc") or path_str.endswith(".nc4"):
+            return xr.open_dataset(path_str)
+        elif path_str.endswith(".zarr"):
+            return xr.open_zarr(path_str)
+        else:
+            return xr.open_dataset(path_str)
 
     def _process_dataset(
         self,

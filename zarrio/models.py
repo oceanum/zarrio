@@ -164,6 +164,30 @@ class DatameshConfig(BaseModel):
     )
 
 
+class RemoteFileConfig(BaseModel):
+    """Configuration for remote file handling."""
+
+    engine: str = Field(
+        "h5netcdf",
+        description="Engine to use for reading remote NetCDF files ('h5netcdf' or 'netcdf4')",
+    )
+    cache_local: bool = Field(
+        False,
+        description="Whether to download remote files locally before processing",
+    )
+    cache_dir: Optional[str] = Field(
+        None,
+        description="Directory for caching remote files (uses temp dir if not set)",
+    )
+
+    @field_validator("engine")
+    @classmethod
+    def validate_engine(cls, v: str) -> str:
+        if v not in ["h5netcdf", "netcdf4"]:
+            raise ValueError("engine must be 'h5netcdf' or 'netcdf4'")
+        return v
+
+
 class ZarrConverterConfig(BaseModel):
     """Main configuration for ZarrConverter."""
 
@@ -187,6 +211,10 @@ class ZarrConverterConfig(BaseModel):
     )
     datamesh: Optional[DatameshConfig] = Field(
         None, description="Datamesh integration configuration"
+    )
+    remote_files: RemoteFileConfig = Field(
+        default_factory=RemoteFileConfig,
+        description="Remote file handling configuration",
     )
     attrs: Dict[str, Any] = Field(
         default_factory=dict, description="Additional global attributes"
