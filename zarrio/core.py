@@ -316,7 +316,7 @@ class ZarrConverter:
             return None
 
     def _get_time_range(self, dset: xr.Dataset, datasource: Datasource) -> tuple:
-        """Get time range from dataset."""
+        """Get time range from dataset as ISO format strings."""
         try:
             coords = datasource.coordinates or {}
             t_coord = coords.get("t")
@@ -325,7 +325,9 @@ class ZarrConverter:
                 return None, None
 
             times = dset[t_coord].to_index().to_pydatetime()
-            return min(times), max(times)
+            tstart = min(times).strftime("%Y-%m-%dT%H:%M:%S")
+            tend = max(times).strftime("%Y-%m-%dT%H:%M:%S")
+            return tstart, tend
         except Exception as e:
             logger.warning(f"Failed to get time range: {e}")
             return None, None
