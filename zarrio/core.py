@@ -11,6 +11,7 @@ from functools import cached_property
 import xarray as xr
 import numpy as np
 import dask.array as da
+import zarr
 
 from .packing import Packer
 from .time import TimeManager
@@ -835,6 +836,16 @@ class ZarrConverter:
         try:
             # Reset retry counter for new operation
             self.retried_on_missing = 0
+
+            # Check zarr version compatibility with datamesh
+            if self.use_datamesh_zarr_client:
+                zarr_version = tuple(map(int, zarr.__version__.split(".")[:2]))
+                if zarr_version >= (3, 0):
+                    raise ConversionError(
+                        "Datamesh integration requires zarr < 3.0. "
+                        f"Current zarr version is {zarr.__version__}. "
+                        "Please downgrade: pip install 'zarr<3'"
+                    )
 
             # Get store (could be file path or datamesh client)
             store = (
