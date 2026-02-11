@@ -36,7 +36,8 @@ dependencies = [
     "click>=8.0.0",
     "pyyaml>=5.4.0",
     "dask",
-    "pydantic>2"
+    "pydantic>2",
+    "requests>=2.25.0"
 ]
 
 dynamic = ["version"]

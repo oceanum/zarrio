@@ -4,6 +4,7 @@ Enhanced core functionality for zarrio with retry logic for missing data and dat
 
 import logging
 import time
+import os
 from typing import Dict, Optional, Union, Any, List
 from pathlib import Path
 from functools import cached_property
@@ -12,6 +13,7 @@ import xarray as xr
 import numpy as np
 import dask.array as da
 import zarr
+import requests
 
 from .packing import Packer
 from .time import TimeManager
@@ -208,38 +210,46 @@ class ZarrConverter:
             if isinstance(datasource, dict):
                 datasource = Datasource(**datasource)
 
-            # Update the metadata explicitly set
-            metadata = datasource.model_dump(exclude_unset=True)
-            datasource_id = metadata.pop("id")
+            datasource_id = datasource.id
+            token = self.config.datamesh.token or os.getenv("DATAMESH_TOKEN")
+            service = self.config.datamesh.service or "https://datamesh-v1.oceanum.io"
+
+            # Build update payload
+            updates = {}
 
             # Add schema if not explicitly set
-            if "dataschema" not in metadata:
-                metadata["dataschema"] = self._get_schema(dset)
-
-            logger.info(f"Updating metadata {metadata} in datamesh for {datasource_id}")
-            self.conn.update_metadata(datasource_id=datasource_id, **metadata)
+            updates["dataschema"] = self._get_schema(dset)
 
             # Update geometry from the dataset if not explicitly set
-            if "geom" not in metadata:
-                geom = self._get_geom(dset, datasource)
-                if geom:
-                    logger.debug(
-                        f"Updating geometry {geom} in datamesh for {datasource_id}"
-                    )
-                    self.conn.update_metadata(datasource_id=datasource_id, geom=geom)
+            geom = self._get_geom(dset, datasource)
+            if geom:
+                updates["geom"] = geom
 
             # Update time range from the dataset if not explicitly set
             tstart, tend = self._get_time_range(dset, datasource)
-            if "tstart" not in metadata and tstart:
-                logger.debug(
-                    f"Updating start time {tstart} in datamesh for {datasource_id}"
+            if tstart:
+                updates["tstart"] = tstart
+            if tend:
+                updates["tend"] = tend
+
+            if updates:
+                logger.info(
+                    f"Updating metadata {list(updates.keys())} in datamesh for {datasource_id}"
                 )
-                self.conn.update_metadata(datasource_id=datasource_id, tstart=tstart)
-            if "tend" not in metadata and tend:
-                logger.debug(
-                    f"Updating end time {tend} in datamesh for {datasource_id}"
+                ret = requests.patch(
+                    f"{service}/datasource/{datasource_id}/",
+                    json=updates,
+                    headers={
+                        "Authorization": f"Token {token}",
+                        "content-type": "application/json",
+                    },
                 )
-                self.conn.update_metadata(datasource_id=datasource_id, tend=tend)
+                if ret.status_code != 200:
+                    logger.warning(f"Failed to update datamesh metadata: {ret.text}")
+                else:
+                    logger.info(
+                        f"Successfully updated datamesh metadata for {datasource_id}"
+                    )
 
         except Exception as e:
             logger.warning(f"Failed to update datamesh datasource metadata: {e}")
