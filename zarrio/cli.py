@@ -85,8 +85,6 @@ def convert_command(args: argparse.Namespace) -> None:
         config_dict.setdefault("time", {})["dim"] = args.time_dim
     if args.target_chunk_size_mb:
         config_dict["target_chunk_size_mb"] = args.target_chunk_size_mb
-    if args.attrs:
-        config_dict["attrs"] = json.loads(args.attrs)
 
     # Add datamesh config if provided
     if args.datamesh_datasource:
@@ -117,6 +115,8 @@ def convert_command(args: argparse.Namespace) -> None:
         variables=variables,
         drop_variables=drop_variables,
         group=args.group,
+        intelligent_chunking=args.intelligent_chunking,
+        access_pattern=args.access_pattern,
     )
 
     logger.info("Conversion completed successfully")
@@ -143,8 +143,6 @@ def append_command(args: argparse.Namespace) -> None:
         config_dict.setdefault("time", {})["append_dim"] = args.append_dim
     if args.time_dim:
         config_dict.setdefault("time", {})["dim"] = args.time_dim
-    if args.target_chunk_size_mb:
-        config_dict["target_chunk_size_mb"] = args.target_chunk_size_mb
 
     # Add datamesh config if provided
     if args.datamesh_datasource:
@@ -268,8 +266,6 @@ def write_region_command(args: argparse.Namespace) -> None:
         config_dict.setdefault("chunking", {}).update(chunking)
     if args.time_dim:
         config_dict.setdefault("time", {})["dim"] = args.time_dim
-    if args.target_chunk_size_mb:
-        config_dict["target_chunk_size_mb"] = args.target_chunk_size_mb
 
     # Add datamesh config if provided
     if args.datamesh_datasource:
@@ -869,6 +865,12 @@ examples:
   zarrio convert input.nc output.zarr --packing
       --packing-manual-ranges '{"temperature": {"min": 0, "max": 100}}'
 
+  # Convert with intelligent chunking
+  zarrio convert input.nc output.zarr --intelligent-chunking --access-pattern temporal
+
+  # Convert with intelligent chunking and custom target chunk size
+  zarrio convert input.nc output.zarr --intelligent-chunking --access-pattern spatial --target-chunk-size-mb 100
+
   # Analyze NetCDF file for optimization recommendations
   zarrio analyze input.nc
 
@@ -922,7 +924,9 @@ examples:
         help="Output Zarr store path (optional if using datamesh)",
     )
     convert_parser.add_argument(
-        "--chunking", help="Chunking specification (e.g., 'time:100,lat:50,lon:100')"
+        "--chunking",
+        help="Manual chunking specification (e.g., 'time:100,lat:50,lon:100'). "
+        "Can be combined with --intelligent-chunking (manual values take precedence).",
     )
     convert_parser.add_argument(
         "--compression", help="Compression specification (e.g., 'blosc:zstd:3')"
@@ -987,6 +991,17 @@ examples:
         help="Datamesh group to write into (e.g., cycle/20240101T000000)",
     )
     convert_parser.add_argument(
+        "--intelligent-chunking",
+        action="store_true",
+        help="Enable intelligent chunking based on dataset dimensions and access pattern",
+    )
+    convert_parser.add_argument(
+        "--access-pattern",
+        choices=["temporal", "spatial", "balanced"],
+        default="balanced",
+        help="Access pattern for intelligent chunking optimization (default: balanced)",
+    )
+    convert_parser.add_argument(
         "--target-chunk-size-mb",
         type=int,
         help="Target chunk size in MB for intelligent chunking (default: 50)",
@@ -1025,11 +1040,6 @@ examples:
         "--datamesh-service",
         default="https://datamesh-v1.oceanum.io",
         help="Datamesh service URL",
-    )
-    append_parser.add_argument(
-        "--target-chunk-size-mb",
-        type=int,
-        help="Target chunk size in MB for intelligent chunking (default: 50)",
     )
     append_parser.add_argument("--config", help="Configuration file (YAML or JSON)")
     append_parser.set_defaults(func=append_command)
@@ -1156,11 +1166,6 @@ examples:
         "--datamesh-service",
         default="https://datamesh-v1.oceanum.io",
         help="Datamesh service URL",
-    )
-    region_parser.add_argument(
-        "--target-chunk-size-mb",
-        type=int,
-        help="Target chunk size in MB for intelligent chunking (default: 50)",
     )
     region_parser.add_argument("--config", help="Configuration file (YAML or JSON)")
     region_parser.set_defaults(func=write_region_command)

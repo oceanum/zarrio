@@ -832,6 +832,8 @@ class ZarrConverter:
         attrs: Optional[Dict[str, Any]] = None,
         cycle: Optional[Any] = None,
         group: Optional[str] = None,
+        intelligent_chunking: bool = False,
+        access_pattern: Optional[str] = None,
     ) -> None:
         """
         Convert input data to Zarr format with retry logic.
@@ -844,6 +846,8 @@ class ZarrConverter:
             attrs: Additional global attributes to add
             cycle: Cycle information for datamesh
             group: Optional datamesh group to write into
+            intelligent_chunking: Whether to use intelligent chunking based on dataset dimensions
+            access_pattern: Access pattern for intelligent chunking ("temporal", "spatial", "balanced")
         """
         try:
             # Reset retry counter for new operation
@@ -868,7 +872,14 @@ class ZarrConverter:
 
             # Perform conversion with retry logic
             self._convert_with_retry(
-                input_path, store, variables, drop_variables, attrs, group
+                input_path,
+                store,
+                variables,
+                drop_variables,
+                attrs,
+                group,
+                intelligent_chunking=intelligent_chunking,
+                access_pattern=access_pattern or self.config.access_pattern,
             )
 
             # Close datamesh session if used
@@ -892,6 +903,8 @@ class ZarrConverter:
         drop_variables: Optional[list] = None,
         attrs: Optional[Dict[str, Any]] = None,
         group: Optional[str] = None,
+        intelligent_chunking: bool = False,
+        access_pattern: str = "balanced",
     ) -> None:
         """
         Convert input data to Zarr format with retry logic.
@@ -903,6 +916,8 @@ class ZarrConverter:
             drop_variables: List of variables to exclude
             attrs: Additional global attributes to add
             group: Optional datamesh group to write into
+            intelligent_chunking: Whether to use intelligent chunking based on dataset dimensions
+            access_pattern: Access pattern for intelligent chunking ("temporal", "spatial", "balanced")
         """
         max_retries = self.config.missing_data.retries_on_missing
 
@@ -922,6 +937,50 @@ class ZarrConverter:
 
                 # Apply chunking
                 chunking_dict = self._chunking_config_to_dict()
+
+                # If intelligent chunking is requested, calculate optimal chunking
+                if intelligent_chunking:
+                    logger.info(
+                        f"Performing intelligent chunking with access pattern: {access_pattern}"
+                    )
+
+                    # Get dimensions from dataset
+                    dimensions = dict(ds.sizes)
+
+                    # Get data type size (assume float32 if not specified)
+                    dtype_size_bytes = 4
+                    if ds.data_vars:
+                        first_var = next(iter(ds.data_vars.values()))
+                        dtype_size_bytes = first_var.dtype.itemsize
+
+                    # Get target chunk size from config or default
+                    target_chunk_size_mb = self.config.target_chunk_size_mb or 50
+
+                    # Perform chunking analysis
+                    from .chunking import get_chunk_recommendation
+
+                    recommendation = get_chunk_recommendation(
+                        dimensions=dimensions,
+                        dtype_size_bytes=dtype_size_bytes,
+                        access_pattern=access_pattern,
+                        target_chunk_size_mb=target_chunk_size_mb,
+                    )
+
+                    # Merge with any user-specified chunking (user takes precedence)
+                    chunking_dict = recommendation.chunks.copy()
+                    manual_chunks = self._chunking_config_to_dict()
+                    if manual_chunks:
+                        chunking_dict.update(manual_chunks)
+
+                    logger.info(f"Applied intelligent chunking: {chunking_dict}")
+                    logger.info(
+                        f"Estimated chunk size: {recommendation.estimated_chunk_size_mb:.2f} MB"
+                    )
+
+                    if recommendation.warnings:
+                        for warning in recommendation.warnings:
+                            logger.warning(warning)
+
                 if chunking_dict:
                     ds = ds.chunk(chunking_dict)
 
