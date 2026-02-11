@@ -687,6 +687,36 @@
 
 
 
+<div class="viewcode-block" id="RemoteFileConfig">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.models.RemoteFileConfig">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RemoteFileConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for remote file handling.&quot;&quot;&quot;</span>
+
+    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="s2">&quot;h5netcdf&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Engine to use for reading remote NetCDF files (&#39;h5netcdf&#39; or &#39;netcdf4&#39;)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">cache_local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">False</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Whether to download remote files locally before processing&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">cache_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for caching remote files (uses temp dir if not set)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="RemoteFileConfig.validate_engine">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.models.RemoteFileConfig.validate_engine">[docs]</a>
+    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;engine&quot;</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_engine</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;h5netcdf&quot;</span><span class="p">,</span> <span class="s2">&quot;netcdf4&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;engine must be &#39;h5netcdf&#39; or &#39;netcdf4&#39;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span></div>
+</div>
+
+
+
 <div class="viewcode-block" id="ZarrConverterConfig">
 <a class="viewcode-back" href="../../zarrify.html#zarrio.models.ZarrConverterConfig">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ZarrConverterConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -712,6 +742,10 @@
     <span class="p">)</span>
     <span class="n">datamesh</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DatameshConfig</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Datamesh integration configuration&quot;</span>
+    <span class="p">)</span>
+    <span class="n">remote_files</span><span class="p">:</span> <span class="n">RemoteFileConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="n">RemoteFileConfig</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Remote file handling configuration&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">attrs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Additional global attributes&quot;</span>

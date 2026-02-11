@@ -494,6 +494,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cached_property</span>
@@ -501,6 +502,8 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">dask.array</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">da</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zarr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.packing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Packer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.time</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeManager</span>
@@ -513,8 +516,17 @@
     <span class="n">TimeConfig</span><span class="p">,</span>
     <span class="n">VariableConfig</span><span class="p">,</span>
     <span class="n">MissingDataConfig</span><span class="p">,</span>
+    <span class="n">RemoteFileConfig</span><span class="p">,</span>
     <span class="n">DATAMESH_AVAILABLE</span><span class="p">,</span>
 <span class="p">)</span>
+
+<span class="c1"># Try to import fsspec for remote file support</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">fsspec</span>
+
+    <span class="n">FSSPEC_AVAILABLE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">FSSPEC_AVAILABLE</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="k">if</span> <span class="n">DATAMESH_AVAILABLE</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">oceanum.datamesh.datasource</span><span class="w"> </span><span class="kn">import</span> <span class="n">Datasource</span>
@@ -696,38 +708,46 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">datasource</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                 <span class="n">datasource</span> <span class="o">=</span> <span class="n">Datasource</span><span class="p">(</span><span class="o">**</span><span class="n">datasource</span><span class="p">)</span>
 
-            <span class="c1"># Update the metadata explicitly set</span>
-            <span class="n">metadata</span> <span class="o">=</span> <span class="n">datasource</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">exclude_unset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">datasource_id</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+            <span class="n">datasource_id</span> <span class="o">=</span> <span class="n">datasource</span><span class="o">.</span><span class="n">id</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">datamesh</span><span class="o">.</span><span class="n">token</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DATAMESH_TOKEN&quot;</span><span class="p">)</span>
+            <span class="n">service</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">datamesh</span><span class="o">.</span><span class="n">service</span> <span class="ow">or</span> <span class="s2">&quot;https://datamesh-v1.oceanum.io&quot;</span>
+
+            <span class="c1"># Build update payload</span>
+            <span class="n">updates</span> <span class="o">=</span> <span class="p">{}</span>
 
             <span class="c1"># Add schema if not explicitly set</span>
-            <span class="k">if</span> <span class="s2">&quot;dataschema&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
-                <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;dataschema&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_schema</span><span class="p">(</span><span class="n">dset</span><span class="p">)</span>
-
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Updating metadata </span><span class="si">{</span><span class="n">metadata</span><span class="si">}</span><span class="s2"> in datamesh for </span><span class="si">{</span><span class="n">datasource_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">update_metadata</span><span class="p">(</span><span class="n">datasource_id</span><span class="o">=</span><span class="n">datasource_id</span><span class="p">,</span> <span class="o">**</span><span class="n">metadata</span><span class="p">)</span>
+            <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;dataschema&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_schema</span><span class="p">(</span><span class="n">dset</span><span class="p">)</span>
 
             <span class="c1"># Update geometry from the dataset if not explicitly set</span>
-            <span class="k">if</span> <span class="s2">&quot;geom&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
-                <span class="n">geom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_geom</span><span class="p">(</span><span class="n">dset</span><span class="p">,</span> <span class="n">datasource</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">geom</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s2">&quot;Updating geometry </span><span class="si">{</span><span class="n">geom</span><span class="si">}</span><span class="s2"> in datamesh for </span><span class="si">{</span><span class="n">datasource_id</span><span class="si">}</span><span class="s2">&quot;</span>
-                    <span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">update_metadata</span><span class="p">(</span><span class="n">datasource_id</span><span class="o">=</span><span class="n">datasource_id</span><span class="p">,</span> <span class="n">geom</span><span class="o">=</span><span class="n">geom</span><span class="p">)</span>
+            <span class="n">geom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_geom</span><span class="p">(</span><span class="n">dset</span><span class="p">,</span> <span class="n">datasource</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">geom</span><span class="p">:</span>
+                <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;geom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geom</span>
 
             <span class="c1"># Update time range from the dataset if not explicitly set</span>
             <span class="n">tstart</span><span class="p">,</span> <span class="n">tend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_time_range</span><span class="p">(</span><span class="n">dset</span><span class="p">,</span> <span class="n">datasource</span><span class="p">)</span>
-            <span class="k">if</span> <span class="s2">&quot;tstart&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">metadata</span> <span class="ow">and</span> <span class="n">tstart</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Updating start time </span><span class="si">{</span><span class="n">tstart</span><span class="si">}</span><span class="s2"> in datamesh for </span><span class="si">{</span><span class="n">datasource_id</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">tstart</span><span class="p">:</span>
+                <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;tstart&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tstart</span>
+            <span class="k">if</span> <span class="n">tend</span><span class="p">:</span>
+                <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;tend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tend</span>
+
+            <span class="k">if</span> <span class="n">updates</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Updating metadata </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">updates</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2"> in datamesh for </span><span class="si">{</span><span class="n">datasource_id</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">update_metadata</span><span class="p">(</span><span class="n">datasource_id</span><span class="o">=</span><span class="n">datasource_id</span><span class="p">,</span> <span class="n">tstart</span><span class="o">=</span><span class="n">tstart</span><span class="p">)</span>
-            <span class="k">if</span> <span class="s2">&quot;tend&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">metadata</span> <span class="ow">and</span> <span class="n">tend</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Updating end time </span><span class="si">{</span><span class="n">tend</span><span class="si">}</span><span class="s2"> in datamesh for </span><span class="si">{</span><span class="n">datasource_id</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">service</span><span class="si">}</span><span class="s2">/datasource/</span><span class="si">{</span><span class="n">datasource_id</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">,</span>
+                    <span class="n">json</span><span class="o">=</span><span class="n">updates</span><span class="p">,</span>
+                    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Token </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
                 <span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">update_metadata</span><span class="p">(</span><span class="n">datasource_id</span><span class="o">=</span><span class="n">datasource_id</span><span class="p">,</span> <span class="n">tend</span><span class="o">=</span><span class="n">tend</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">ret</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to update datamesh metadata: </span><span class="si">{</span><span class="n">ret</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Successfully updated datamesh metadata for </span><span class="si">{</span><span class="n">datasource_id</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to update datamesh datasource metadata: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -794,7 +814,7 @@
             <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_get_time_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dset</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">datasource</span><span class="p">:</span> <span class="n">Datasource</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get time range from dataset.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get time range from dataset as ISO format strings.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="n">datasource</span><span class="o">.</span><span class="n">coordinates</span> <span class="ow">or</span> <span class="p">{}</span>
             <span class="n">t_coord</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
@@ -803,7 +823,9 @@
                 <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
             <span class="n">times</span> <span class="o">=</span> <span class="n">dset</span><span class="p">[</span><span class="n">t_coord</span><span class="p">]</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span>
-            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">times</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+            <span class="n">tstart</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">times</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">)</span>
+            <span class="n">tend</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">times</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">tstart</span><span class="p">,</span> <span class="n">tend</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to get time range: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
@@ -1333,6 +1355,16 @@
             <span class="c1"># Reset retry counter for new operation</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">retried_on_missing</span> <span class="o">=</span> <span class="mi">0</span>
 
+            <span class="c1"># Check zarr version compatibility with datamesh</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_datamesh_zarr_client</span><span class="p">:</span>
+                <span class="n">zarr_version</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">zarr</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]))</span>
+                <span class="k">if</span> <span class="n">zarr_version</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="n">ConversionError</span><span class="p">(</span>
+                        <span class="s2">&quot;Datamesh integration requires zarr &lt; 3.0. &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;Current zarr version is </span><span class="si">{</span><span class="n">zarr</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">. &quot;</span>
+                        <span class="s2">&quot;Please downgrade: pip install &#39;zarr&lt;3&#39;&quot;</span>
+                    <span class="p">)</span>
+
             <span class="c1"># Get store (could be file path or datamesh client)</span>
             <span class="n">store</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_get_store</span><span class="p">(</span><span class="n">cycle</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
@@ -1579,16 +1611,62 @@
                         <span class="sa">f</span><span class="s2">&quot;Append failed after </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">retried_on_missing</span><span class="si">}</span><span class="s2"> retries: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
                     <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_open_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Open dataset from file.&quot;&quot;&quot;</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc4&quot;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.zarr&quot;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_remote_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if path is a remote URL (e.g., gs://, s3://, https://).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;://&quot;</span> <span class="ow">in</span> <span class="n">path</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;file://&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_open_remote_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Open remote dataset via fsspec.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url: Remote URL (e.g., gs://bucket/file.nc)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            xarray Dataset</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ImportError: If fsspec is not installed</span>
+<span class="sd">            ValueError: If the file format is not supported</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">FSSPEC_AVAILABLE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+                <span class="s2">&quot;Remote file support requires fsspec. &quot;</span>
+                <span class="s2">&quot;Install with: pip install zarrio[remote]&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">remote_files</span><span class="o">.</span><span class="n">engine</span>
+
+        <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc4&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;h5netcdf&quot;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="kn">import</span><span class="w"> </span><span class="nn">h5netcdf</span>
+                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+                        <span class="s2">&quot;Remote NetCDF files require h5netcdf. &quot;</span>
+                        <span class="s2">&quot;Install with: pip install zarrio[remote]&quot;</span>
+                    <span class="p">)</span>
+            <span class="k">return</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.zarr&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Try to infer from file content</span>
-            <span class="k">return</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_open_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Open dataset from file or remote URL.&quot;&quot;&quot;</span>
+        <span class="n">path_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="c1"># Check if this is a remote URL</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_remote_url</span><span class="p">(</span><span class="n">path_str</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Opening remote dataset: </span><span class="si">{</span><span class="n">path_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open_remote_dataset</span><span class="p">(</span><span class="n">path_str</span><span class="p">)</span>
+
+        <span class="c1"># Local file handling</span>
+        <span class="k">if</span> <span class="n">path_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">path_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc4&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">path_str</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">path_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.zarr&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">path_str</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">path_str</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_process_dataset</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>

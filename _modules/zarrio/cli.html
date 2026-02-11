@@ -595,6 +595,11 @@
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_service</span><span class="p">:</span>
             <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;datamesh&quot;</span><span class="p">][</span><span class="s2">&quot;service&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_service</span>
 
+    <span class="c1"># Validate that either output is provided or datamesh is configured</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">config_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;datamesh&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error: output is required when not using datamesh&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
     <span class="c1"># Create converter with config</span>
     <span class="n">converter_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span><span class="o">**</span><span class="n">config_dict</span><span class="p">)</span>
     <span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">converter_config</span><span class="p">)</span>
@@ -730,8 +735,8 @@
     <span class="n">converter_config</span> <span class="o">=</span> <span class="n">ZarrConverterConfig</span><span class="p">(</span><span class="o">**</span><span class="n">config_dict</span><span class="p">)</span>
     <span class="n">converter</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">converter_config</span><span class="p">)</span>
 
-    <span class="c1"># Open template dataset</span>
-    <span class="n">template_ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
+    <span class="c1"># Open template dataset (supports remote URLs)</span>
+    <span class="n">template_ds</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">_open_dataset</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
 
     <span class="c1"># Create template</span>
     <span class="n">converter</span><span class="o">.</span><span class="n">create_template</span><span class="p">(</span>
@@ -835,9 +840,11 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analyzing file: </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">()</span>
 
-        <span class="c1"># Open dataset</span>
+        <span class="c1"># Open dataset (supports remote URLs)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading dataset...&quot;</span><span class="p">)</span>
-        <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZarrConverter</span>
+
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">ZarrConverter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">ZarrConverterConfig</span><span class="p">())</span><span class="o">.</span><span class="n">_open_dataset</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dataset loaded successfully!&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">()</span>
 
@@ -1421,7 +1428,12 @@
         <span class="s2">&quot;convert&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Convert data to Zarr format&quot;</span>
     <span class="p">)</span>
     <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input file path&quot;</span><span class="p">)</span>
-    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output Zarr store path&quot;</span><span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;output&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output Zarr store path (optional if using datamesh)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--chunking&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Chunking specification (e.g., &#39;time:100,lat:50,lon:100&#39;)&quot;</span>
     <span class="p">)</span>
