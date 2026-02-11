@@ -97,6 +97,11 @@ def convert_command(args: argparse.Namespace) -> None:
         if args.datamesh_service:
             config_dict["datamesh"]["service"] = args.datamesh_service
 
+    # Validate that either output is provided or datamesh is configured
+    if not args.output and not config_dict.get("datamesh"):
+        print("error: output is required when not using datamesh", file=sys.stderr)
+        sys.exit(2)
+
     # Create converter with config
     converter_config = ZarrConverterConfig(**config_dict)
     converter = ZarrConverter(config=converter_config)
@@ -910,7 +915,12 @@ examples:
         "convert", help="Convert data to Zarr format"
     )
     convert_parser.add_argument("input", help="Input file path")
-    convert_parser.add_argument("output", help="Output Zarr store path")
+    convert_parser.add_argument(
+        "output",
+        nargs="?",
+        default=None,
+        help="Output Zarr store path (optional if using datamesh)",
+    )
     convert_parser.add_argument(
         "--chunking", help="Chunking specification (e.g., 'time:100,lat:50,lon:100')"
     )
