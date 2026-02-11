@@ -1338,6 +1338,8 @@
         <span class="n">attrs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">cycle</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">group</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">intelligent_chunking</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">access_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert input data to Zarr format with retry logic.</span>
@@ -1350,6 +1352,8 @@
 <span class="sd">            attrs: Additional global attributes to add</span>
 <span class="sd">            cycle: Cycle information for datamesh</span>
 <span class="sd">            group: Optional datamesh group to write into</span>
+<span class="sd">            intelligent_chunking: Whether to use intelligent chunking based on dataset dimensions</span>
+<span class="sd">            access_pattern: Access pattern for intelligent chunking (&quot;temporal&quot;, &quot;spatial&quot;, &quot;balanced&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># Reset retry counter for new operation</span>
@@ -1374,7 +1378,14 @@
 
             <span class="c1"># Perform conversion with retry logic</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_convert_with_retry</span><span class="p">(</span>
-                <span class="n">input_path</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">drop_variables</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">group</span>
+                <span class="n">input_path</span><span class="p">,</span>
+                <span class="n">store</span><span class="p">,</span>
+                <span class="n">variables</span><span class="p">,</span>
+                <span class="n">drop_variables</span><span class="p">,</span>
+                <span class="n">attrs</span><span class="p">,</span>
+                <span class="n">group</span><span class="p">,</span>
+                <span class="n">intelligent_chunking</span><span class="o">=</span><span class="n">intelligent_chunking</span><span class="p">,</span>
+                <span class="n">access_pattern</span><span class="o">=</span><span class="n">access_pattern</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">access_pattern</span><span class="p">,</span>
             <span class="p">)</span>
 
             <span class="c1"># Close datamesh session if used</span>
@@ -1399,6 +1410,8 @@
         <span class="n">drop_variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">attrs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">group</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">intelligent_chunking</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">access_pattern</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert input data to Zarr format with retry logic.</span>
@@ -1410,6 +1423,8 @@
 <span class="sd">            drop_variables: List of variables to exclude</span>
 <span class="sd">            attrs: Additional global attributes to add</span>
 <span class="sd">            group: Optional datamesh group to write into</span>
+<span class="sd">            intelligent_chunking: Whether to use intelligent chunking based on dataset dimensions</span>
+<span class="sd">            access_pattern: Access pattern for intelligent chunking (&quot;temporal&quot;, &quot;spatial&quot;, &quot;balanced&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">max_retries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">missing_data</span><span class="o">.</span><span class="n">retries_on_missing</span>
 
@@ -1429,6 +1444,50 @@
 
                 <span class="c1"># Apply chunking</span>
                 <span class="n">chunking_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chunking_config_to_dict</span><span class="p">()</span>
+
+                <span class="c1"># If intelligent chunking is requested, calculate optimal chunking</span>
+                <span class="k">if</span> <span class="n">intelligent_chunking</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Performing intelligent chunking with access pattern: </span><span class="si">{</span><span class="n">access_pattern</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+
+                    <span class="c1"># Get dimensions from dataset</span>
+                    <span class="n">dimensions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+
+                    <span class="c1"># Get data type size (assume float32 if not specified)</span>
+                    <span class="n">dtype_size_bytes</span> <span class="o">=</span> <span class="mi">4</span>
+                    <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">:</span>
+                        <span class="n">first_var</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+                        <span class="n">dtype_size_bytes</span> <span class="o">=</span> <span class="n">first_var</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">itemsize</span>
+
+                    <span class="c1"># Get target chunk size from config or default</span>
+                    <span class="n">target_chunk_size_mb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">target_chunk_size_mb</span> <span class="ow">or</span> <span class="mi">50</span>
+
+                    <span class="c1"># Perform chunking analysis</span>
+                    <span class="kn">from</span><span class="w"> </span><span class="nn">.chunking</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_chunk_recommendation</span>
+
+                    <span class="n">recommendation</span> <span class="o">=</span> <span class="n">get_chunk_recommendation</span><span class="p">(</span>
+                        <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                        <span class="n">dtype_size_bytes</span><span class="o">=</span><span class="n">dtype_size_bytes</span><span class="p">,</span>
+                        <span class="n">access_pattern</span><span class="o">=</span><span class="n">access_pattern</span><span class="p">,</span>
+                        <span class="n">target_chunk_size_mb</span><span class="o">=</span><span class="n">target_chunk_size_mb</span><span class="p">,</span>
+                    <span class="p">)</span>
+
+                    <span class="c1"># Merge with any user-specified chunking (user takes precedence)</span>
+                    <span class="n">chunking_dict</span> <span class="o">=</span> <span class="n">recommendation</span><span class="o">.</span><span class="n">chunks</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                    <span class="n">manual_chunks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chunking_config_to_dict</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">manual_chunks</span><span class="p">:</span>
+                        <span class="n">chunking_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">manual_chunks</span><span class="p">)</span>
+
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Applied intelligent chunking: </span><span class="si">{</span><span class="n">chunking_dict</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Estimated chunk size: </span><span class="si">{</span><span class="n">recommendation</span><span class="o">.</span><span class="n">estimated_chunk_size_mb</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span>
+                    <span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">recommendation</span><span class="o">.</span><span class="n">warnings</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">warning</span> <span class="ow">in</span> <span class="n">recommendation</span><span class="o">.</span><span class="n">warnings</span><span class="p">:</span>
+                            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">warning</span><span class="p">)</span>
+
                 <span class="k">if</span> <span class="n">chunking_dict</span><span class="p">:</span>
                     <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="n">chunking_dict</span><span class="p">)</span>
 

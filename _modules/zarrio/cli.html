@@ -583,8 +583,6 @@
         <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span><span class="p">:</span>
         <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;target_chunk_size_mb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span>
-    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
-        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 
     <span class="c1"># Add datamesh config if provided</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">:</span>
@@ -615,6 +613,8 @@
         <span class="n">variables</span><span class="o">=</span><span class="n">variables</span><span class="p">,</span>
         <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
         <span class="n">group</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">group</span><span class="p">,</span>
+        <span class="n">intelligent_chunking</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">intelligent_chunking</span><span class="p">,</span>
+        <span class="n">access_pattern</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">access_pattern</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Conversion completed successfully&quot;</span><span class="p">)</span></div>
@@ -644,8 +644,6 @@
         <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;append_dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">append_dim</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span><span class="p">:</span>
         <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span>
-    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span><span class="p">:</span>
-        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;target_chunk_size_mb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span>
 
     <span class="c1"># Add datamesh config if provided</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">:</span>
@@ -775,8 +773,6 @@
         <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;chunking&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunking</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span><span class="p">:</span>
         <span class="n">config_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">&quot;dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">time_dim</span>
-    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span><span class="p">:</span>
-        <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;target_chunk_size_mb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_chunk_size_mb</span>
 
     <span class="c1"># Add datamesh config if provided</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">datamesh_datasource</span><span class="p">:</span>
@@ -1382,6 +1378,12 @@
 <span class="s2">  zarrio convert input.nc output.zarr --packing</span>
 <span class="s2">      --packing-manual-ranges &#39;{&quot;temperature&quot;: {&quot;min&quot;: 0, &quot;max&quot;: 100}}&#39;</span>
 
+<span class="s2">  # Convert with intelligent chunking</span>
+<span class="s2">  zarrio convert input.nc output.zarr --intelligent-chunking --access-pattern temporal</span>
+
+<span class="s2">  # Convert with intelligent chunking and custom target chunk size</span>
+<span class="s2">  zarrio convert input.nc output.zarr --intelligent-chunking --access-pattern spatial --target-chunk-size-mb 100</span>
+
 <span class="s2">  # Analyze NetCDF file for optimization recommendations</span>
 <span class="s2">  zarrio analyze input.nc</span>
 
@@ -1435,7 +1437,9 @@
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output Zarr store path (optional if using datamesh)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;--chunking&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Chunking specification (e.g., &#39;time:100,lat:50,lon:100&#39;)&quot;</span>
+        <span class="s2">&quot;--chunking&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Manual chunking specification (e.g., &#39;time:100,lat:50,lon:100&#39;). &quot;</span>
+        <span class="s2">&quot;Can be combined with --intelligent-chunking (manual values take precedence).&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--compression&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Compression specification (e.g., &#39;blosc:zstd:3&#39;)&quot;</span>
@@ -1500,6 +1504,17 @@
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh group to write into (e.g., cycle/20240101T000000)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--intelligent-chunking&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Enable intelligent chunking based on dataset dimensions and access pattern&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--access-pattern&quot;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;temporal&quot;</span><span class="p">,</span> <span class="s2">&quot;spatial&quot;</span><span class="p">,</span> <span class="s2">&quot;balanced&quot;</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Access pattern for intelligent chunking optimization (default: balanced)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">convert_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--target-chunk-size-mb&quot;</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Target chunk size in MB for intelligent chunking (default: 50)&quot;</span><span class="p">,</span>
@@ -1538,11 +1553,6 @@
         <span class="s2">&quot;--datamesh-service&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="s2">&quot;https://datamesh-v1.oceanum.io&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh service URL&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;--target-chunk-size-mb&quot;</span><span class="p">,</span>
-        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Target chunk size in MB for intelligent chunking (default: 50)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">append_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--config&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Configuration file (YAML or JSON)&quot;</span><span class="p">)</span>
     <span class="n">append_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">append_command</span><span class="p">)</span>
@@ -1669,11 +1679,6 @@
         <span class="s2">&quot;--datamesh-service&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="s2">&quot;https://datamesh-v1.oceanum.io&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Datamesh service URL&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;--target-chunk-size-mb&quot;</span><span class="p">,</span>
-        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Target chunk size in MB for intelligent chunking (default: 50)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">region_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--config&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Configuration file (YAML or JSON)&quot;</span><span class="p">)</span>
     <span class="n">region_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">write_region_command</span><span class="p">)</span>
