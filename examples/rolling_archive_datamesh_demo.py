@@ -28,8 +28,57 @@ import numpy as np
 from datetime import datetime, timedelta
 from pathlib import Path
 
+import argparse
 from zarrio import ZarrConverter
 from zarrio.models import ZarrConverterConfig
+
+
+def parse_args():
+    """Parse command-line arguments for the rolling archive datamesh demo."""
+    parser = argparse.ArgumentParser(description="Rolling Archive Datamesh Demo")
+    parser.add_argument(
+        "--delete-existing",
+        action="store_true",
+        help="Delete the datasource if it already exists before running demo",
+    )
+    return parser.parse_args()
+
+
+def delete_existing_datasource(converter, datasource_id):
+    """Delete datasource if it exists.
+
+    This function attempts to delete the given datasource using the Oceanum datamesh
+    API if available. It is best-effort and will not fail the demo if deletion cannot
+    be performed (e.g., token not set or API unavailable).
+    """
+    # Confirm action to the user
+    print(
+        f"CONFIRMATION: This will permanently delete datasource '{datasource_id}' and all its data. Proceeding..."
+    )
+
+    token = os.environ.get("DATAMESH_TOKEN")
+    if not token:
+        print("Warning: DATAMESH_TOKEN not set. Skipping deletion attempt.")
+        return
+
+    try:
+        # Try to use Oceanum datamesh if available
+        from oceanum.datamesh import Connector  # type: ignore
+
+        conn = Connector(token=token)
+        if hasattr(conn, "delete_datasource"):
+            print(f"Deleting datasource '{datasource_id}' via Oceanum datamesh API...")
+            conn.delete_datasource(datasource_id)
+            print(f"✓ Datasource '{datasource_id}' deleted")
+        else:
+            print(
+                "Datamesh connector found but no delete_datasource() method. Skipping actual deletion."
+            )
+    except Exception as e:
+        # Non-fatal: the demo can still proceed
+        print(
+            f"Warning: Could not delete datasource via datamesh API ({type(e).__name__}: {e}). This may be due to configuration limits."
+        )
 
 
 def create_forecast_data(cycle_time: datetime):
@@ -392,6 +441,22 @@ def show_cli_usage():
     print()
 
 
-if __name__ == "__main__":
+def main():
+    args = parse_args()
+    datasource_id = "zarrio-rolling-test"
+
+    if args.delete_existing:
+        # Inform user and attempt deletion before starting the demo
+        delete_existing_datasource(None, datasource_id)
+    else:
+        print(
+            f"Note: Data will be appended to existing '{datasource_id}' datasource.\nUse --delete-existing to start with a clean slate."
+        )
+
+    # Run the actual demo
     demo_datamesh_rolling_archive()
     show_cli_usage()
+
+
+if __name__ == "__main__":
+    main()
