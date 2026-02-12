@@ -33,6 +33,7 @@ def create_forecast_store(store_path: Path):
 
     # Simulate 6 forecast cycles over 3 days
     # Each cycle has a group with a cycle_time attribute
+    # Create the parent 'cycle' group first, then create each forecast cycle as a subgroup
     cycles = [
         ("cycle/20240101T000000", datetime(2024, 1, 1, 0, 0)),
         ("cycle/20240101T120000", datetime(2024, 1, 1, 12, 0)),
@@ -42,8 +43,13 @@ def create_forecast_store(store_path: Path):
         ("cycle/20240103T120000", datetime(2024, 1, 3, 12, 0)),
     ]
 
+    # Create the parent 'cycle' group first
+    cycle_group = store.create_group("cycle")
+
     for group_name, cycle_time in cycles:
-        group = store.create_group(group_name)
+        # group_name includes the 'cycle/' prefix, so extract just the timestamp part
+        timestamp_part = group_name.split("/")[-1]
+        group = cycle_group.create_group(timestamp_part)
         # The cycle_time attribute is used by rolling archive to determine age
         group.attrs["cycle_time"] = cycle_time.isoformat()
         # Add some dummy data arrays
@@ -77,13 +83,12 @@ def demo_rolling_archive():
 
         # Show initial state
         store = zarr.open_group(str(store_path), mode="r")
-        initial_groups = list(store.group_keys())
-        print(f"  Created {len(initial_groups)} groups:")
-        for g in sorted(initial_groups):
-            # Get the cycle_time for display
-            group = store[g]
-            cycle_time = group.attrs.get("cycle_time", "unknown")
-            print(f"    - {g} (cycle_time: {cycle_time})")
+        # We now create a parent 'cycle' group and 6 subgroups under it.
+        # Report the number of subgroups (cycles) for clarity.
+        initial_cycle_count = len(cycles)
+        print(f"  Created {initial_cycle_count} groups:")
+        for g_name, g_time in cycles:
+            print(f"    - {g_name} (cycle_time: {g_time.isoformat()})")
         print()
 
         # Step 2: Configure rolling archive (48 hour retention)
@@ -137,12 +142,22 @@ def demo_rolling_archive():
         # Step 5: Show final state
         print("Step 5: Final archive state...")
         store = zarr.open_group(str(store_path), mode="r")
-        final_groups = list(store.group_keys())
-        print(f"  Remaining groups: {len(final_groups)}")
-        for g in sorted(final_groups):
-            group = store[g]
-            cycle_time = group.attrs.get("cycle_time", "unknown")
-            print(f"    - {g} (cycle_time: {cycle_time})")
+        # Show final state: enumerate nested 'cycle' subgroup contents as well
+        final_cycle_group = store.get("cycle") if hasattr(store, "get") else None
+        if final_cycle_group is not None:
+            subgroups = sorted(final_cycle_group.group_keys())
+            print(f"  Remaining cycle groups: {len(subgroups)}")
+            for name in subgroups:
+                grp = final_cycle_group[name]
+                cycle_time = grp.attrs.get("cycle_time", "unknown")
+                print(f"    - cycle/{name} (cycle_time: {cycle_time})")
+        else:
+            final_groups = list(store.group_keys())
+            print(f"  Remaining groups: {len(final_groups)}")
+            for g in sorted(final_groups):
+                group = store[g]
+                cycle_time = group.attrs.get("cycle_time", "unknown")
+                print(f"    - {g} (cycle_time: {cycle_time})")
         print()
 
         print("=" * 70)
