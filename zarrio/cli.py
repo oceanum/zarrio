@@ -83,8 +83,24 @@ def convert_command(args: argparse.Namespace) -> None:
         )
     if args.time_dim:
         config_dict.setdefault("time", {})["dim"] = args.time_dim
+    if getattr(args, "rolling_archive_hours", None) is not None:
+        from datetime import timedelta
+
+        config_dict.setdefault("rolling_archive", {})
+        config_dict["rolling_archive"]["enabled"] = True
+        config_dict["rolling_archive"]["retention_window"] = timedelta(
+            hours=args.rolling_archive_hours
+        )
     if args.target_chunk_size_mb:
         config_dict["target_chunk_size_mb"] = args.target_chunk_size_mb
+    if getattr(args, "rolling_archive_hours", None) is not None:
+        from datetime import timedelta
+
+        config_dict.setdefault("rolling_archive", {})
+        config_dict["rolling_archive"]["enabled"] = True
+        config_dict["rolling_archive"]["retention_window"] = timedelta(
+            hours=args.rolling_archive_hours
+        )
 
     # Add datamesh config if provided
     if args.datamesh_datasource:
@@ -266,6 +282,14 @@ def write_region_command(args: argparse.Namespace) -> None:
         config_dict.setdefault("chunking", {}).update(chunking)
     if args.time_dim:
         config_dict.setdefault("time", {})["dim"] = args.time_dim
+    if getattr(args, "rolling_archive_hours", None) is not None:
+        from datetime import timedelta
+
+        config_dict.setdefault("rolling_archive", {})
+        config_dict["rolling_archive"]["enabled"] = True
+        config_dict["rolling_archive"]["retention_window"] = timedelta(
+            hours=args.rolling_archive_hours
+        )
 
     # Add datamesh config if provided
     if args.datamesh_datasource:
@@ -1005,6 +1029,12 @@ examples:
         "--target-chunk-size-mb",
         type=int,
         help="Target chunk size in MB for intelligent chunking (default: 50)",
+    )
+    convert_parser.add_argument(
+        "--rolling-archive-hours",
+        type=int,
+        default=None,
+        help="Enable rolling archive with retention window in hours (e.g., 24 for 1 day)",
     )
     convert_parser.add_argument("--config", help="Configuration file (YAML or JSON)")
     convert_parser.set_defaults(func=convert_command)
