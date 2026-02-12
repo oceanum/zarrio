@@ -199,6 +199,145 @@ class ZarrConverter:
         else:
             logger.info("No datamesh session to close")
 
+    def _get_rolling_archive_backend(
+        self,
+        output_path: Union[str, Path, Any],
+        group: Optional[str] = None,
+    ) -> Optional[Any]:
+        """Get appropriate backend for rolling archive operations.
+
+        Args:
+            output_path: Path to output Zarr store or datamesh client
+            group: Optional group name for datamesh
+
+        Returns:
+            RollingArchiveBackend instance or None if rolling archive disabled
+        """
+        if not self.config.rolling_archive.enabled:
+            return None
+
+        # Import here to avoid circular imports
+        from .rolling_archive import (
+            DatameshRollingArchiveBackend,
+            FileRollingArchiveBackend,
+        )
+
+        if self.use_datamesh_zarr_client:
+            # Get ZarrClient from existing session
+            zarr_client = self._get_store(cycle=self._cycle, group=group)
+            return DatameshRollingArchiveBackend(zarr_client)
+        else:
+            return FileRollingArchiveBackend(output_path)
+
+    def cleanup_archive(
+        self, output_path: Union[str, Path, Any], dry_run: bool = False
+    ) -> Dict[str, Any]:
+        """Clean up expired groups from archive.
+
+        Args:
+            output_path: Path to Zarr store or datamesh client
+            dry_run: If True, simulate cleanup without deleting
+
+        Returns:
+            Dict with 'deleted', 'kept', 'skipped', 'failed' lists
+        """
+        backend = self._get_rolling_archive_backend(output_path)
+        if not backend:
+            logger.debug("Rolling archive not enabled")
+            return {"deleted": [], "kept": [], "skipped": [], "failed": []}
+
+        # Get all groups
+        groups = backend.enumerate_groups()
+        if not groups:
+            logger.debug("No groups found in archive")
+            return {"deleted": [], "kept": [], "skipped": [], "failed": []}
+
+        # Calculate cutoff time
+        from datetime import datetime, timedelta
+
+        retention = self.config.rolling_archive.retention_window
+        cutoff = datetime.now() - retention
+
+        # Categorize groups
+        expired = []
+        kept = []
+        skipped = []
+
+        time_attr = self.config.rolling_archive.time_reference_attr
+
+        for group in groups:
+            timestamp = backend.get_group_timestamp(group, time_attr)
+            if timestamp is None:
+                logger.warning(f"Could not parse timestamp for group {group}, skipping")
+                skipped.append(group)
+            elif timestamp < cutoff:
+                expired.append((group, timestamp))
+            else:
+                kept.append(group)
+
+        # Apply min_groups_to_keep safeguard
+        min_keep = self.config.rolling_archive.min_groups_to_keep
+        total_groups = len(groups)
+        while total_groups - len(expired) < min_keep and expired:
+            # Move oldest expired group back to kept
+            # expired list contains (group, timestamp) tuples
+            oldest = min(expired, key=lambda x: x[1])
+            expired.remove(oldest)
+            kept.append(oldest[0])
+            logger.info(
+                f"Keeping group {oldest[0]} to maintain minimum of {min_keep} groups"
+            )
+
+        # Extract just group names for deletion
+        expired_groups = [group for group, _ in expired]
+
+        # Delete expired groups
+        if expired_groups:
+            logger.info(
+                f"Deleting {len(expired_groups)} expired groups (cutoff: {cutoff})"
+            )
+            result = backend.delete_groups(expired_groups, dry_run=dry_run)
+            deleted = result.get("deleted", [])
+            failed = result.get("failed", [])
+        else:
+            logger.debug("No expired groups to delete")
+            deleted = []
+            failed = []
+
+        return {"deleted": deleted, "kept": kept, "skipped": skipped, "failed": failed}
+
+    def _cleanup_if_enabled(
+        self, output_path: Union[str, Path, Any], skip_cleanup: bool = False
+    ) -> None:
+        """Trigger cleanup if rolling archive is enabled.
+
+        Args:
+            output_path: Path to Zarr store or datamesh client
+            skip_cleanup: If True, skip cleanup even if enabled
+        """
+        if skip_cleanup:
+            return
+
+        if not (
+            self.config.rolling_archive.enabled
+            and self.config.rolling_archive.auto_cleanup
+        ):
+            return
+
+        try:
+            result = self.cleanup_archive(output_path, dry_run=False)
+            logger.info(
+                f"Rolling archive cleanup: deleted={len(result['deleted'])}, "
+                f"kept={len(result['kept'])}, skipped={len(result['skipped'])}"
+            )
+            if result["failed"]:
+                logger.warning(
+                    f"Failed to delete {len(result['failed'])} groups: {result['failed']}"
+                )
+        except Exception as e:
+            logger.warning(f"Rolling archive cleanup failed: {e}")
+            # Don't fail the primary operation
+
     def _update_datamesh_datasource(self, dset: xr.Dataset) -> None:
         """Update metadata in datamesh that is different."""
         if not self.config.datamesh or not self.config.datamesh.datasource:
@@ -584,6 +723,7 @@ class ZarrConverter:
         drop_variables: Optional[list] = None,
         cycle: Optional[Any] = None,
         group: Optional[str] = None,
+        skip_cleanup: bool = False,
     ) -> None:
         """
         Write data to a specific region of an existing Zarr store with retry logic.
@@ -596,6 +736,7 @@ class ZarrConverter:
             drop_variables: List of variables to exclude
             cycle: Cycle information for datamesh
             group: Optional datamesh group to write into
+            skip_cleanup: Skip rolling archive cleanup even if enabled
         """
         try:
             # Reset retry counter for new operation
@@ -612,6 +753,8 @@ class ZarrConverter:
             self._write_region_with_retry(
                 input_path, store, region, variables, drop_variables, group
             )
+
+            self._cleanup_if_enabled(zarr_path, skip_cleanup=skip_cleanup)
 
             # Close datamesh session if used
             self._close_session()
@@ -834,6 +977,7 @@ class ZarrConverter:
         group: Optional[str] = None,
         intelligent_chunking: bool = False,
         access_pattern: Optional[str] = None,
+        skip_cleanup: bool = False,
     ) -> None:
         """
         Convert input data to Zarr format with retry logic.
@@ -848,6 +992,7 @@ class ZarrConverter:
             group: Optional datamesh group to write into
             intelligent_chunking: Whether to use intelligent chunking based on dataset dimensions
             access_pattern: Access pattern for intelligent chunking ("temporal", "spatial", "balanced")
+            skip_cleanup: Skip rolling archive cleanup even if enabled
         """
         try:
             # Reset retry counter for new operation
@@ -881,6 +1026,8 @@ class ZarrConverter:
                 intelligent_chunking=intelligent_chunking,
                 access_pattern=access_pattern or self.config.access_pattern,
             )
+
+            self._cleanup_if_enabled(output_path or store, skip_cleanup=skip_cleanup)
 
             # Close datamesh session if used
             self._close_session()
@@ -1037,6 +1184,7 @@ class ZarrConverter:
         variables: Optional[list] = None,
         drop_variables: Optional[list] = None,
         group: Optional[str] = None,
+        skip_cleanup: bool = False,
     ) -> None:
         """
         Append data to an existing Zarr store with retry logic.
@@ -1047,6 +1195,7 @@ class ZarrConverter:
             variables: List of variables to include (None for all)
             drop_variables: List of variables to exclude
             group: Optional datamesh group to write into
+            skip_cleanup: Skip rolling archive cleanup even if enabled
         """
         try:
             # Reset retry counter for new operation
@@ -1056,6 +1205,8 @@ class ZarrConverter:
             self._append_with_retry(
                 input_path, zarr_path, variables, drop_variables, group
             )
+
+            self._cleanup_if_enabled(zarr_path, skip_cleanup=skip_cleanup)
 
             # Close datamesh session if used
             self._close_session()
