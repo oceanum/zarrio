@@ -1,8 +1,12 @@
 from __future__ import annotations
 
+import logging
 from abc import ABC, abstractmethod
 from datetime import datetime
-from typing import List, Dict, Optional
+from pathlib import Path
+from typing import List, Dict, Optional, Union
+
+import zarr
 
 
 class RollingArchiveBackend(ABC):
@@ -75,3 +79,213 @@ class RollingArchiveBackend(ABC):
     def backend_type(self) -> str:
         """Return a human-readable identifier for the backend type."""
         raise NotImplementedError
+
+
+class FileRollingArchiveBackend(RollingArchiveBackend):
+    """Rolling archive backend for file-based Zarr stores."""
+
+    def __init__(self, zarr_path: Union[str, Path]):
+        """
+        Initialize with path to Zarr store.
+
+        Args:
+            zarr_path: Path to Zarr store directory
+        """
+        self.zarr_path = Path(zarr_path)
+        self.logger = logging.getLogger(__name__)
+
+    def enumerate_groups(self) -> List[str]:
+        """List all groups in the Zarr store."""
+        self.logger.debug(f"Enumerating groups in {self.zarr_path}")
+
+        if not self.zarr_path.exists():
+            return []
+
+        try:
+            store = zarr.open_group(self.zarr_path, mode="r")
+            # Get all groups recursively
+            groups = []
+            self._collect_groups(store, "", groups)
+            return groups
+        except Exception as e:
+            self.logger.error(f"Failed to enumerate groups: {e}")
+            return []
+
+    def _collect_groups(self, group, prefix: str, result: List[str]):
+        """Recursively collect all group paths."""
+        for name in group.group_keys():
+            full_path = f"{prefix}/{name}" if prefix else name
+            result.append(full_path)
+            # Recurse into subgroups
+            subgroup = group[name]
+            self._collect_groups(subgroup, full_path, result)
+
+    def get_group_timestamp(
+        self, group: str, time_reference_attr: str = "cycle_time"
+    ) -> Optional[datetime]:
+        """
+        Get timestamp for a file-based group.
+
+        Strategy:
+        1. Try to parse from group name (last segment)
+        2. Open group and read attribute
+        3. Parse attribute as datetime
+        """
+        # First try parsing from group name
+        from .time_parsing import extract_timestamp_from_group_name
+
+        timestamp = extract_timestamp_from_group_name(group)
+        if timestamp:
+            return timestamp
+
+        # Fall back to reading from group attributes
+        try:
+            store = zarr.open_group(self.zarr_path, mode="r")
+            subgroup = store[group]
+            attrs = dict(subgroup.attrs)
+
+            if time_reference_attr in attrs:
+                timestamp_str = attrs[time_reference_attr]
+                # Parse timestamp string
+                from .time_parsing import parse_timestamp_from_string
+
+                return parse_timestamp_from_string(timestamp_str)
+        except Exception as e:
+            self.logger.warning(f"Could not read timestamp for group {group}: {e}")
+
+        return None
+
+    def delete_groups(
+        self, groups: List[str], dry_run: bool = False
+    ) -> Dict[str, List[str]]:
+        """
+        Delete groups from filesystem.
+
+        Args:
+            groups: List of group paths to delete
+            dry_run: If True, don't actually delete
+
+        Returns:
+            Dict with 'deleted', 'failed' lists
+        """
+        result = {"deleted": [], "failed": []}
+
+        if not self.zarr_path.exists():
+            self.logger.warning(f"Zarr store does not exist: {self.zarr_path}")
+            return result
+
+        try:
+            store = zarr.open_group(self.zarr_path, mode="a")
+        except Exception as e:
+            self.logger.error(f"Failed to open Zarr store: {e}")
+            return {"deleted": [], "failed": groups}
+
+        for group in groups:
+            if dry_run:
+                self.logger.info(f"[DRY RUN] Would delete group: {group}")
+                result["deleted"].append(group)
+                continue
+
+            try:
+                self.logger.info(f"Deleting group: {group}")
+                if group in store:
+                    del store[group]
+                    result["deleted"].append(group)
+                else:
+                    self.logger.warning(f"Group not found: {group}")
+                    result["failed"].append(group)
+            except Exception as e:
+                self.logger.error(f"Failed to delete group {group}: {e}")
+                result["failed"].append(group)
+
+        return result
+
+    @property
+    def backend_type(self) -> str:
+        return "file"
+
+
+class DatameshRollingArchiveBackend(RollingArchiveBackend):
+    """Rolling archive backend for Oceanum datamesh using ZarrClient."""
+
+    def __init__(self, zarr_client):
+        """
+        Initialize with existing ZarrClient instance.
+
+        Args:
+            zarr_client: ZarrClient from _get_store() or existing session
+        """
+        self.zarr_client = zarr_client
+        self.logger = logging.getLogger(__name__)
+
+    def enumerate_groups(self) -> List[str]:
+        """List all groups using ZarrClient iteration."""
+        self.logger.debug("Enumerating groups via ZarrClient")
+        return list(self.zarr_client)
+
+    def get_group_timestamp(
+        self, group: str, time_reference_attr: str = "cycle_time"
+    ) -> Optional[datetime]:
+        """
+        Get timestamp for a datamesh group.
+
+        Strategy:
+        1. Try to parse from group name (last segment)
+        2. Open group via ZarrClient and read attribute
+        3. Parse attribute as datetime
+        """
+        # First try parsing from group name
+        from .time_parsing import extract_timestamp_from_group_name
+
+        timestamp = extract_timestamp_from_group_name(group)
+        if timestamp:
+            return timestamp
+
+        # Fall back to reading from group attributes
+        try:
+            # Read group data via ZarrClient
+            group_data = self.zarr_client[group]
+            # Note: ZarrClient returns raw bytes, need to parse attrs differently
+            # For now, return None if name parsing failed
+            self.logger.debug(
+                f"Group data retrieved but attribute parsing not implemented for {group}"
+            )
+            return None
+        except Exception as e:
+            self.logger.warning(f"Could not read timestamp for group {group}: {e}")
+            return None
+
+    def delete_groups(
+        self, groups: List[str], dry_run: bool = False
+    ) -> Dict[str, List[str]]:
+        """
+        Delete groups from datamesh.
+
+        Args:
+            groups: List of group paths to delete
+            dry_run: If True, don't actually delete
+
+        Returns:
+            Dict with 'deleted', 'failed' lists
+        """
+        result = {"deleted": [], "failed": []}
+
+        for group in groups:
+            if dry_run:
+                self.logger.info(f"[DRY RUN] Would delete group: {group}")
+                result["deleted"].append(group)
+                continue
+
+            try:
+                self.logger.info(f"Deleting group: {group}")
+                del self.zarr_client[group]
+                result["deleted"].append(group)
+            except Exception as e:
+                self.logger.error(f"Failed to delete group {group}: {e}")
+                result["failed"].append(group)
+
+        return result
+
+    @property
+    def backend_type(self) -> str:
+        return "datamesh"
