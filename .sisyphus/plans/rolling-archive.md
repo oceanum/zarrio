@@ -100,12 +100,12 @@ Add automatic rolling archive management to zarrio that removes old datamesh gro
 8. Documentation and examples
 
 ### Definition of Done
-- [ ] All TODOs complete with passing tests
-- [ ] `pytest tests/test_rolling_archive*.py` passes
-- [ ] Datamesh integration tested (or properly mocked)
-- [ ] CLI integration tested end-to-end
-- [ ] Documentation complete with examples
-- [ ] No breaking changes to existing API
+- [x] All TODOs complete with passing tests
+- [x] `pytest tests/test_rolling_archive*.py` passes
+- [x] Datamesh integration tested (or properly mocked)
+- [x] CLI integration tested end-to-end
+- [x] Documentation complete with examples
+- [x] No breaking changes to existing API
 
 ### Must Have
 - ✅ **Datamesh primary support** via Oceanum API
@@ -493,7 +493,7 @@ DEFAULT_TIMESTAMP_FORMATS = [
 - [x] All parsing functions implemented
 - [x] Handles all common ISO8601 formats
 - [x] Gracefully handles unparseable strings (returns None)
-- [ ] Unit tests for all parsing scenarios
+- [x] Unit tests for all parsing scenarios
 
 **Commit**: YES
 - Message: `feat(time): Add timestamp parsing utilities for rolling archive`
@@ -502,7 +502,9 @@ DEFAULT_TIMESTAMP_FORMATS = [
 
 ---
 
-### Task 4: Datamesh Backend (PRIMARY)
+### Task 4: Datamesh Backend (PRIMARY) ✅
+
+**Status**: COMPLETED
 
 **What to do**:
 Implement `DatameshRollingArchiveBackend` in `zarrio/rolling_archive.py`.
@@ -605,11 +607,11 @@ class DatameshRollingArchiveBackend(RollingArchiveBackend):
 
 **Acceptance Criteria**:
 
-- [ ] `DatameshRollingArchiveBackend` implements all abstract methods
-- [ ] Uses existing datamesh connection/session
-- [ ] Implements retry logic for network failures
-- [ ] Handles API errors gracefully
-- [ ] Logs all operations
+- [x] `DatameshRollingArchiveBackend` implements all abstract methods
+- [x] Uses existing datamesh connection/session
+- [x] Implements retry logic for network failures
+- [x] Handles API errors gracefully
+- [x] Logs all operations
 
 **Agent-Executed QA Scenarios**:
 
@@ -649,7 +651,9 @@ Scenario: ZarrClient retry logic handles network failures
 
 ---
 
-### Task 5: File Backend (SECONDARY)
+### Task 5: File Backend (SECONDARY) ✅
+
+**Status**: COMPLETED
 
 **What to do**:
 Implement `FileRollingArchiveBackend` in `zarrio/rolling_archive.py`.
@@ -731,9 +735,9 @@ class FileRollingArchiveBackend(RollingArchiveBackend):
 
 **Acceptance Criteria**:
 
-- [ ] `FileRollingArchiveBackend` implements all abstract methods
-- [ ] Uses zarr API for all operations
-- [ ] Handles errors gracefully
+- [x] `FileRollingArchiveBackend` implements all abstract methods
+- [x] Uses zarr API for all operations
+- [x] Handles errors gracefully
 
 **Commit**: YES
 - Message: `feat(rolling): Add FileRollingArchiveBackend for file-based Zarr`
@@ -742,7 +746,9 @@ class FileRollingArchiveBackend(RollingArchiveBackend):
 
 ---
 
-### Task 6: Core Integration and Auto-Detection
+### Task 6: Core Integration and Auto-Detection ✅
+
+**Status**: COMPLETED
 
 **What to do**:
 Integrate rolling archive into `ZarrConverter` with backend auto-detection.
@@ -841,11 +847,11 @@ Modify `convert()`, `append()`, `write_region()` to:
 
 **Acceptance Criteria**:
 
-- [ ] Auto-detection works for datamesh and file outputs
-- [ ] `cleanup_archive()` uses correct backend
-- [ ] `_cleanup_if_enabled()` called after writes
-- [ ] `skip_cleanup` parameter respected
-- [ ] Cleanup failures don't fail primary operation
+- [x] Auto-detection works for datamesh and file outputs
+- [x] `cleanup_archive()` uses correct backend
+- [x] `_cleanup_if_enabled()` called after writes
+- [x] `skip_cleanup` parameter respected
+- [x] Cleanup failures don't fail primary operation
 
 **Commit**: YES
 - Message: `feat(core): Integrate rolling archive with auto-backend detection`
@@ -854,7 +860,9 @@ Modify `convert()`, `append()`, `write_region()` to:
 
 ---
 
-### Task 7: CLI Integration
+### Task 7: CLI Integration ✅
+
+**Status**: COMPLETED
 
 **What to do**:
 Add CLI support for rolling archive configuration.
@@ -897,9 +905,9 @@ if args.rolling_archive_hours:
 
 **Acceptance Criteria**:
 
-- [ ] `--rolling-archive-hours` flag added
-- [ ] Flag correctly propagates to config
-- [ ] Works with both CLI and --config file
+- [x] `--rolling-archive-hours` flag added
+- [x] Flag correctly propagates to config
+- [x] Works with both CLI and --config file
 
 **Commit**: YES
 - Message: `feat(cli): Add --rolling-archive-hours flag`
@@ -962,9 +970,9 @@ class TestCoreIntegration:
 
 **Acceptance Criteria**:
 
-- [ ] All components have unit tests
-- [ ] 90%+ code coverage
-- [ ] All tests pass
+- [x] All components have unit tests
+- [x] 90%+ code coverage
+- [x] All tests pass
 
 **Commit**: YES
 - Message: `test(rolling): Add comprehensive unit tests`
@@ -1000,9 +1008,9 @@ Tests use mocked datamesh API responses (can't require live service).
 
 **Acceptance Criteria**:
 
-- [ ] Datamesh backend integration tested
-- [ ] API mocking comprehensive
-- [ ] Error scenarios covered
+- [x] Datamesh backend integration tested
+- [x] API mocking comprehensive
+- [x] Error scenarios covered
 
 **Commit**: YES
 - Message: `test(rolling): Add datamesh integration tests`
@@ -1037,9 +1045,9 @@ Tests use real Zarr stores on filesystem.
 
 **Acceptance Criteria**:
 
-- [ ] File backend integration tested
-- [ ] Real Zarr stores used
-- [ ] Cleanup behavior verified
+- [x] File backend integration tested
+- [x] Real Zarr stores used
+- [x] Cleanup behavior verified
 
 **Commit**: YES
 - Message: `test(rolling): Add file-based integration tests`
@@ -1086,10 +1094,10 @@ Add comprehensive documentation and examples.
 
 **Acceptance Criteria**:
 
-- [ ] All public methods documented
-- [ ] Example script runs without errors
-- [ ] README section added
-- [ ] CLI help text clear
+- [x] All public methods documented
+- [x] Example script runs without errors
+- [x] README section added
+- [x] CLI help text clear
 
 **Commit**: YES
 - Message: `docs(rolling): Add documentation and examples`
@@ -1134,15 +1142,15 @@ zarrio convert --help | grep rolling
 ```
 
 ### Final Checklist
-- [ ] All 11 TODOs complete with passing tests
-- [ ] 90%+ code coverage for new code
-- [ ] All code quality checks pass
-- [ ] Documentation complete
-- [ ] Datamesh backend fully functional (primary target)
-- [ ] File backend functional (secondary)
-- [ ] No breaking changes to existing API
-- [ ] CLI integration tested
-- [ ] Configuration file loading tested
+- [x] All 11 TODOs complete with passing tests
+- [x] 90%+ code coverage for new code
+- [x] All code quality checks pass
+- [x] Documentation complete
+- [x] Datamesh backend fully functional (primary target)
+- [x] File backend functional (secondary)
+- [x] No breaking changes to existing API
+- [x] CLI integration tested
+- [x] Configuration file loading tested
 
 ### Key Design Principles
 
