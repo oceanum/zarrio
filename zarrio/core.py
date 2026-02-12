@@ -275,18 +275,38 @@ class ZarrConverter:
             else:
                 kept.append(group)
 
-        # Apply min_groups_to_keep safeguard
         min_keep = self.config.rolling_archive.min_groups_to_keep
-        total_groups = len(groups)
-        while total_groups - len(expired) < min_keep and expired:
-            # Move oldest expired group back to kept
-            # expired list contains (group, timestamp) tuples
-            oldest = min(expired, key=lambda x: x[1])
-            expired.remove(oldest)
-            kept.append(oldest[0])
-            logger.info(
-                f"Keeping group {oldest[0]} to maintain minimum of {min_keep} groups"
-            )
+
+        kept_with_timestamps = [
+            (g, backend.get_group_timestamp(g, time_attr)) for g in kept
+        ]
+        all_with_timestamps = expired + kept_with_timestamps
+        all_with_timestamps.sort(key=lambda x: x[1], reverse=True)
+
+        if len(all_with_timestamps) > min_keep:
+            newest_groups = all_with_timestamps[:min_keep]
+            groups_to_keep = set(g for g, _ in newest_groups)
+
+            new_expired = []
+            new_kept = []
+
+            for g, ts in all_with_timestamps:
+                if g in groups_to_keep:
+                    new_kept.append(g)
+                else:
+                    new_expired.append((g, ts))
+
+            for g in new_kept:
+                if g not in kept:
+                    logger.info(
+                        f"Keeping group {g} to maintain minimum of {min_keep} groups"
+                    )
+
+            expired = new_expired
+            kept = new_kept
+        else:
+            kept = [g for g, _ in all_with_timestamps]
+            expired = []
 
         # Extract just group names for deletion
         expired_groups = [group for group, _ in expired]
