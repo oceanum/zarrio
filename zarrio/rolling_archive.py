@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import json
 import logging
 from abc import ABC, abstractmethod
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Optional, Union
+from typing import Any, Dict, List, MutableMapping, Optional, Set, Union
 
 import zarr
 
@@ -111,7 +112,7 @@ class FileRollingArchiveBackend(RollingArchiveBackend):
             self.logger.error(f"Failed to enumerate groups: {e}")
             return []
 
-    def _collect_groups(self, group, prefix: str, result: List[str]):
+    def _collect_groups(self, group: Any, prefix: str, result: List[str]) -> None:
         """Recursively collect all group paths."""
         for name in group.group_keys():
             full_path = f"{prefix}/{name}" if prefix else name
@@ -208,7 +209,7 @@ class FileRollingArchiveBackend(RollingArchiveBackend):
 class DatameshRollingArchiveBackend(RollingArchiveBackend):
     """Rolling archive backend for Oceanum datamesh using ZarrClient."""
 
-    def __init__(self, zarr_client):
+    def __init__(self, zarr_client: MutableMapping[str, bytes]):
         """
         Initialize with existing ZarrClient instance.
 
@@ -219,9 +220,54 @@ class DatameshRollingArchiveBackend(RollingArchiveBackend):
         self.logger = logging.getLogger(__name__)
 
     def enumerate_groups(self) -> List[str]:
-        """List all groups using ZarrClient iteration."""
-        self.logger.debug("Enumerating groups via ZarrClient")
-        return list(self.zarr_client)
+        self.logger.info("Enumerating groups via ZarrClient")
+
+        groups: Set[str] = set()
+        directory_candidates: Set[str] = set()
+        zattrs_candidates: Set[str] = set()
+
+        for key in self.zarr_client:
+            if not key:
+                continue
+
+            if key.endswith("/"):
+                candidate = key.rstrip("/")
+                if candidate and not candidate.startswith("."):
+                    directory_candidates.add(candidate)
+                continue
+
+            if key == ".zgroup":
+                continue
+
+            if key.endswith("/.zgroup"):
+                group_path = key[: -len("/.zgroup")].strip("/")
+                if group_path:
+                    groups.add(group_path)
+                continue
+
+            if key.endswith("/.zattrs"):
+                path = key[: -len("/.zattrs")].strip("/")
+                if path:
+                    zattrs_candidates.add(path)
+
+        if groups:
+            group_list = sorted(groups)
+            self.logger.info("Found %d groups", len(group_list))
+            return group_list
+
+        if zattrs_candidates:
+            group_list = sorted(zattrs_candidates)
+            self.logger.info(
+                "Found %d group candidates via .zattrs (no .zgroup markers)",
+                len(group_list),
+            )
+            return group_list
+
+        group_list = sorted(directory_candidates)
+        self.logger.info(
+            "Found %d group candidates via directory entries", len(group_list)
+        )
+        return group_list
 
     def get_group_timestamp(
         self, group: str, time_reference_attr: str = "cycle_time"
@@ -234,26 +280,55 @@ class DatameshRollingArchiveBackend(RollingArchiveBackend):
         2. Open group via ZarrClient and read attribute
         3. Parse attribute as datetime
         """
+        self.logger.info("Getting timestamp for group: %s", group)
+
         # First try parsing from group name
         from .time_parsing import extract_timestamp_from_group_name
 
-        timestamp = extract_timestamp_from_group_name(group)
+        group_path = group.strip("/")
+        timestamp = extract_timestamp_from_group_name(group_path)
         if timestamp:
             return timestamp
 
         # Fall back to reading from group attributes
+        from .time_parsing import parse_timestamp_from_string
+
+        zattrs_key = f"{group_path}/.zattrs" if group_path else ".zattrs"
+        self.logger.info(
+            "Falling back to reading %s from %s", time_reference_attr, zattrs_key
+        )
+
         try:
-            # Read group data via ZarrClient
-            group_data = self.zarr_client[group]
-            # Note: ZarrClient returns raw bytes, need to parse attrs differently
-            # For now, return None if name parsing failed
-            self.logger.debug(
-                f"Group data retrieved but attribute parsing not implemented for {group}"
+            raw = self.zarr_client[zattrs_key]
+        except KeyError:
+            self.logger.info("No .zattrs found for group: %s", group_path)
+            return None
+
+        try:
+            attrs = json.loads(raw.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as e:
+            self.logger.warning(
+                "Failed to parse .zattrs JSON for group %s: %s", group_path, e
             )
             return None
-        except Exception as e:
-            self.logger.warning(f"Could not read timestamp for group {group}: {e}")
+
+        value = attrs.get(time_reference_attr)
+        if value is None:
+            self.logger.info(
+                "Attribute %s not present for group %s", time_reference_attr, group_path
+            )
             return None
+
+        if not isinstance(value, str):
+            self.logger.info(
+                "Attribute %s for group %s is not a string (%s)",
+                time_reference_attr,
+                group_path,
+                type(value).__name__,
+            )
+            return None
+
+        return parse_timestamp_from_string(value)
 
     def delete_groups(
         self, groups: List[str], dry_run: bool = False
@@ -271,18 +346,21 @@ class DatameshRollingArchiveBackend(RollingArchiveBackend):
         result = {"deleted": [], "failed": []}
 
         for group in groups:
+            group_path = group.strip("/")
+
             if dry_run:
-                self.logger.info(f"[DRY RUN] Would delete group: {group}")
-                result["deleted"].append(group)
+                self.logger.info("[DRY RUN] Would delete group: %s", group_path)
+                result["deleted"].append(group_path)
                 continue
 
-            try:
-                self.logger.info(f"Deleting group: {group}")
-                del self.zarr_client[group]
-                result["deleted"].append(group)
-            except Exception as e:
-                self.logger.error(f"Failed to delete group {group}: {e}")
-                result["failed"].append(group)
+            if group_path and group_path not in self.zarr_client:
+                self.logger.info("Group not found (skipping delete): %s", group_path)
+                result["failed"].append(group_path)
+                continue
+
+            self.logger.info("Deleting group: %s", group_path)
+            del self.zarr_client[group_path]
+            result["deleted"].append(group_path)
 
         return result
 
