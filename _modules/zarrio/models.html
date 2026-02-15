@@ -496,7 +496,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">field_validator</span><span class="p">,</span> <span class="n">ConfigDict</span>
 
@@ -717,6 +717,47 @@
 
 
 
+<div class="viewcode-block" id="RollingArchiveConfig">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.models.RollingArchiveConfig">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RollingArchiveConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for rolling archive management.&quot;&quot;&quot;</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">extra</span><span class="o">=</span><span class="s2">&quot;allow&quot;</span><span class="p">)</span>
+
+    <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">False</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Enable automatic rolling archive cleanup&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">retention_window</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Retention window (e.g., timedelta(hours=24))&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">time_reference_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="s2">&quot;cycle_time&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Attribute or metadata field containing timestamp&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">auto_cleanup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">True</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Automatically cleanup on write operations&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">min_groups_to_keep</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum number of groups to preserve&quot;</span><span class="p">,</span>
+        <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="RollingArchiveConfig.validate_retention_window">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.models.RollingArchiveConfig.validate_retention_window">[docs]</a>
+    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;retention_window&quot;</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_retention_window</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">3600</span><span class="p">:</span>  <span class="c1"># Minimum 1 hour</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;retention_window must be at least 1 hour&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span></div>
+</div>
+
+
+
 <div class="viewcode-block" id="ZarrConverterConfig">
 <a class="viewcode-back" href="../../zarrify.html#zarrio.models.ZarrConverterConfig">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ZarrConverterConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -756,6 +797,11 @@
     <span class="n">access_pattern</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Access pattern for chunking optimization (&#39;temporal&#39;, &#39;spatial&#39;, &#39;balanced&#39;)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">rolling_archive</span><span class="p">:</span> <span class="n">RollingArchiveConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="n">RollingArchiveConfig</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rolling archive configuration&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># Backward compatibility fields</span>

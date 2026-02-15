@@ -697,6 +697,168 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;No datamesh session to close&quot;</span><span class="p">)</span>
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_rolling_archive_backend</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">output_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+        <span class="n">group</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get appropriate backend for rolling archive operations.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            output_path: Path to output Zarr store or datamesh client</span>
+<span class="sd">            group: Optional group name for datamesh</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            RollingArchiveBackend instance or None if rolling archive disabled</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rolling_archive</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Import here to avoid circular imports</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.rolling_archive</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+            <span class="n">DatameshRollingArchiveBackend</span><span class="p">,</span>
+            <span class="n">FileRollingArchiveBackend</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_datamesh_zarr_client</span><span class="p">:</span>
+            <span class="c1"># Get ZarrClient from existing session</span>
+            <span class="n">zarr_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_store</span><span class="p">(</span><span class="n">cycle</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cycle</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">DatameshRollingArchiveBackend</span><span class="p">(</span><span class="n">zarr_client</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">FileRollingArchiveBackend</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ZarrConverter.cleanup_archive">
+<a class="viewcode-back" href="../../zarrify.html#zarrio.core.ZarrConverter.cleanup_archive">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_archive</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">dry_run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clean up expired groups from archive.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            output_path: Path to Zarr store or datamesh client</span>
+<span class="sd">            dry_run: If True, simulate cleanup without deleting</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict with &#39;deleted&#39;, &#39;kept&#39;, &#39;skipped&#39;, &#39;failed&#39; lists</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_rolling_archive_backend</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">backend</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Rolling archive not enabled&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;kept&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;skipped&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;failed&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+
+        <span class="c1"># Get all groups</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">enumerate_groups</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">groups</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;No groups found in archive&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;kept&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;skipped&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;failed&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+
+        <span class="c1"># Calculate cutoff time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+        <span class="n">retention</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rolling_archive</span><span class="o">.</span><span class="n">retention_window</span>
+        <span class="n">cutoff</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">retention</span>
+
+        <span class="c1"># Categorize groups</span>
+        <span class="n">expired</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">kept</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">skipped</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">time_attr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rolling_archive</span><span class="o">.</span><span class="n">time_reference_attr</span>
+
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">get_group_timestamp</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">time_attr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">timestamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not parse timestamp for group </span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">, skipping&quot;</span><span class="p">)</span>
+                <span class="n">skipped</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">timestamp</span> <span class="o">&lt;</span> <span class="n">cutoff</span><span class="p">:</span>
+                <span class="n">expired</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">group</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">kept</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+
+        <span class="n">min_keep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rolling_archive</span><span class="o">.</span><span class="n">min_groups_to_keep</span>
+
+        <span class="n">kept_with_timestamps</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">backend</span><span class="o">.</span><span class="n">get_group_timestamp</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">time_attr</span><span class="p">))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">kept</span>
+        <span class="p">]</span>
+        <span class="n">all_with_timestamps</span> <span class="o">=</span> <span class="n">expired</span> <span class="o">+</span> <span class="n">kept_with_timestamps</span>
+        <span class="n">all_with_timestamps</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_with_timestamps</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">min_keep</span><span class="p">:</span>
+            <span class="n">newest_groups</span> <span class="o">=</span> <span class="n">all_with_timestamps</span><span class="p">[:</span><span class="n">min_keep</span><span class="p">]</span>
+            <span class="n">groups_to_keep</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">newest_groups</span><span class="p">)</span>
+
+            <span class="n">new_expired</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">new_kept</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">all_with_timestamps</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups_to_keep</span><span class="p">:</span>
+                    <span class="n">new_kept</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_expired</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">g</span><span class="p">,</span> <span class="n">ts</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">new_kept</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">g</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kept</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Keeping group </span><span class="si">{</span><span class="n">g</span><span class="si">}</span><span class="s2"> to maintain minimum of </span><span class="si">{</span><span class="n">min_keep</span><span class="si">}</span><span class="s2"> groups&quot;</span>
+                    <span class="p">)</span>
+
+            <span class="n">expired</span> <span class="o">=</span> <span class="n">new_expired</span>
+            <span class="n">kept</span> <span class="o">=</span> <span class="n">new_kept</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">kept</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">all_with_timestamps</span><span class="p">]</span>
+            <span class="n">expired</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Extract just group names for deletion</span>
+        <span class="n">expired_groups</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span> <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">expired</span><span class="p">]</span>
+
+        <span class="c1"># Delete expired groups</span>
+        <span class="k">if</span> <span class="n">expired_groups</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Deleting </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">expired_groups</span><span class="p">)</span><span class="si">}</span><span class="s2"> expired groups (cutoff: </span><span class="si">{</span><span class="n">cutoff</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">delete_groups</span><span class="p">(</span><span class="n">expired_groups</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="n">dry_run</span><span class="p">)</span>
+            <span class="n">deleted</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;deleted&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">failed</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;failed&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;No expired groups to delete&quot;</span><span class="p">)</span>
+            <span class="n">deleted</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">failed</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">deleted</span><span class="p">,</span> <span class="s2">&quot;kept&quot;</span><span class="p">:</span> <span class="n">kept</span><span class="p">,</span> <span class="s2">&quot;skipped&quot;</span><span class="p">:</span> <span class="n">skipped</span><span class="p">,</span> <span class="s2">&quot;failed&quot;</span><span class="p">:</span> <span class="n">failed</span><span class="p">}</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_cleanup_if_enabled</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">skip_cleanup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Trigger cleanup if rolling archive is enabled.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            output_path: Path to Zarr store or datamesh client</span>
+<span class="sd">            skip_cleanup: If True, skip cleanup even if enabled</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">skip_cleanup</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rolling_archive</span><span class="o">.</span><span class="n">enabled</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rolling_archive</span><span class="o">.</span><span class="n">auto_cleanup</span>
+        <span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_archive</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Rolling archive cleanup: deleted=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;deleted&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;kept=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;kept&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">, skipped=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;skipped&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;failed&quot;</span><span class="p">]:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Failed to delete </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;failed&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> groups: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;failed&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rolling archive cleanup failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># Don&#39;t fail the primary operation</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">_update_datamesh_datasource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dset</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Update metadata in datamesh that is different.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">datamesh</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">datamesh</span><span class="o">.</span><span class="n">datasource</span><span class="p">:</span>
@@ -1087,6 +1249,7 @@
         <span class="n">drop_variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">cycle</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">group</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_cleanup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Write data to a specific region of an existing Zarr store with retry logic.</span>
@@ -1099,6 +1262,7 @@
 <span class="sd">            drop_variables: List of variables to exclude</span>
 <span class="sd">            cycle: Cycle information for datamesh</span>
 <span class="sd">            group: Optional datamesh group to write into</span>
+<span class="sd">            skip_cleanup: Skip rolling archive cleanup even if enabled</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># Reset retry counter for new operation</span>
@@ -1115,6 +1279,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_write_region_with_retry</span><span class="p">(</span>
                 <span class="n">input_path</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">drop_variables</span><span class="p">,</span> <span class="n">group</span>
             <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_if_enabled</span><span class="p">(</span><span class="n">zarr_path</span><span class="p">,</span> <span class="n">skip_cleanup</span><span class="o">=</span><span class="n">skip_cleanup</span><span class="p">)</span>
 
             <span class="c1"># Close datamesh session if used</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_close_session</span><span class="p">()</span>
@@ -1340,6 +1506,7 @@
         <span class="n">group</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">intelligent_chunking</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">access_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_cleanup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert input data to Zarr format with retry logic.</span>
@@ -1354,6 +1521,7 @@
 <span class="sd">            group: Optional datamesh group to write into</span>
 <span class="sd">            intelligent_chunking: Whether to use intelligent chunking based on dataset dimensions</span>
 <span class="sd">            access_pattern: Access pattern for intelligent chunking (&quot;temporal&quot;, &quot;spatial&quot;, &quot;balanced&quot;)</span>
+<span class="sd">            skip_cleanup: Skip rolling archive cleanup even if enabled</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># Reset retry counter for new operation</span>
@@ -1387,6 +1555,8 @@
                 <span class="n">intelligent_chunking</span><span class="o">=</span><span class="n">intelligent_chunking</span><span class="p">,</span>
                 <span class="n">access_pattern</span><span class="o">=</span><span class="n">access_pattern</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">access_pattern</span><span class="p">,</span>
             <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_if_enabled</span><span class="p">(</span><span class="n">output_path</span> <span class="ow">or</span> <span class="n">store</span><span class="p">,</span> <span class="n">skip_cleanup</span><span class="o">=</span><span class="n">skip_cleanup</span><span class="p">)</span>
 
             <span class="c1"># Close datamesh session if used</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_close_session</span><span class="p">()</span>
@@ -1546,6 +1716,7 @@
         <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">drop_variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">group</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_cleanup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Append data to an existing Zarr store with retry logic.</span>
@@ -1556,6 +1727,7 @@
 <span class="sd">            variables: List of variables to include (None for all)</span>
 <span class="sd">            drop_variables: List of variables to exclude</span>
 <span class="sd">            group: Optional datamesh group to write into</span>
+<span class="sd">            skip_cleanup: Skip rolling archive cleanup even if enabled</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># Reset retry counter for new operation</span>
@@ -1565,6 +1737,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_append_with_retry</span><span class="p">(</span>
                 <span class="n">input_path</span><span class="p">,</span> <span class="n">zarr_path</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">drop_variables</span><span class="p">,</span> <span class="n">group</span>
             <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_if_enabled</span><span class="p">(</span><span class="n">zarr_path</span><span class="p">,</span> <span class="n">skip_cleanup</span><span class="o">=</span><span class="n">skip_cleanup</span><span class="p">)</span>
 
             <span class="c1"># Close datamesh session if used</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_close_session</span><span class="p">()</span>
