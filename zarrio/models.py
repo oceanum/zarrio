@@ -6,7 +6,7 @@ from typing import Dict, Optional, List, Union, Any
 from pathlib import Path
 import yaml
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from pydantic import BaseModel, Field, field_validator, ConfigDict
 
@@ -188,6 +188,41 @@ class RemoteFileConfig(BaseModel):
         return v
 
 
+class RollingArchiveConfig(BaseModel):
+    """Configuration for rolling archive management."""
+
+    model_config = ConfigDict(extra="allow")
+
+    enabled: bool = Field(
+        False,
+        description="Enable automatic rolling archive cleanup",
+    )
+    retention_window: Optional[timedelta] = Field(
+        None,
+        description="Retention window (e.g., timedelta(hours=24))",
+    )
+    time_reference_attr: str = Field(
+        "cycle_time",
+        description="Attribute or metadata field containing timestamp",
+    )
+    auto_cleanup: bool = Field(
+        True,
+        description="Automatically cleanup on write operations",
+    )
+    min_groups_to_keep: int = Field(
+        1,
+        description="Minimum number of groups to preserve",
+        ge=0,
+    )
+
+    @field_validator("retention_window")
+    @classmethod
+    def validate_retention_window(cls, v: Optional[timedelta]) -> Optional[timedelta]:
+        if v is not None and v.total_seconds() < 3600:  # Minimum 1 hour
+            raise ValueError("retention_window must be at least 1 hour")
+        return v
+
+
 class ZarrConverterConfig(BaseModel):
     """Main configuration for ZarrConverter."""
 
@@ -225,6 +260,11 @@ class ZarrConverterConfig(BaseModel):
     access_pattern: str = Field(
         "balanced",
         description="Access pattern for chunking optimization ('temporal', 'spatial', 'balanced')",
+    )
+
+    rolling_archive: RollingArchiveConfig = Field(
+        default_factory=RollingArchiveConfig,
+        description="Rolling archive configuration",
     )
 
     # Backward compatibility fields

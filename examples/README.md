@@ -46,6 +46,23 @@ Shows how to:
 - Configure retry limits and strategies
 - Validate data quality after writing
 
+### 7. Rolling Archive Demo (`rolling_archive_demo.py`)
+Demonstrates rolling archive with file-based storage:
+- Creating forecast archives with multiple cycles
+- Configuring time-based retention windows
+- Running cleanup with dry_run preview
+- Automatic cleanup after each write
+- Managing disk space for forecast workflows
+
+### 8. Rolling Archive Datamesh Demo (`rolling_archive_datamesh_demo.py`)
+Demonstrates rolling archive with datamesh integration:
+- Writing forecast cycles to datamesh datasource
+- Using hierarchical groups for cycle organization
+- Time-based retention (48-hour window)
+- Dry run preview before actual cleanup
+- Automatic old data cleanup to manage storage costs
+- Graceful handling when datamesh token is unavailable
+
 ## Notes
 
 1. **Token Management**: Datamesh examples use `DATAMESH_TOKEN` environment variable for security

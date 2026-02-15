@@ -150,6 +150,88 @@ converter.create_template(
 
 This approach is ideal for converting large numbers of NetCDF files to a single Zarr archive in parallel. The intelligent chunking feature ensures optimal chunking based on the full archive dimensions rather than just the template dataset.
 
+## Rolling Archive
+
+Manage forecast cycle archives with automatic cleanup of old data based on time-based retention windows.
+
+### What is Rolling Archive?
+
+Rolling archive automatically removes old forecast cycles from your Zarr store based on a configurable retention window. This is useful when:
+
+- You run forecasts multiple times per day
+- You want to keep only the last N hours/days of data
+- You need to manage disk space or datamesh storage
+
+### Python API
+
+```python
+from zarrio import ZarrConverter
+from datetime import timedelta
+
+# Configure rolling archive
+converter = ZarrConverter(
+    rolling_archive={
+        "enabled": True,
+        "retention_window": timedelta(hours=24),  # Keep last 24 hours
+        "min_groups_to_keep": 4,  # Always keep at least 4 cycles
+        "auto_cleanup": True,  # Cleanup after each write
+    }
+)
+
+# Write data - cleanup happens automatically after each write
+converter.convert("forecast.nc", "archive.zarr", group="cycle/20240101T000000")
+```
+
+### Manual Cleanup
+
+You can also trigger cleanup manually:
+
+```python
+# Dry run - see what would be deleted without making changes
+result = converter.cleanup_archive("archive.zarr", dry_run=True)
+print(f"Would delete: {len(result['deleted'])} groups")
+for g in result['deleted']:
+    print(f"  - {g}")
+print(f"Would keep: {len(result['kept'])} groups")
+
+# Actual cleanup
+result = converter.cleanup_archive("archive.zarr")
+print(f"Deleted: {len(result['deleted'])} groups")
+print(f"Kept: {len(result['kept'])} groups")
+if result['skipped']:
+    print(f"Skipped: {len(result['skipped'])} groups (unparseable timestamp)")
+```
+
+### CLI Usage
+
+Enable rolling archive via command line:
+
+```bash
+# Convert with 24-hour retention
+zarrio convert forecast.nc archive.zarr --rolling-archive-hours 24
+
+# This enables automatic cleanup after each write
+```
+
+### Configuration Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `enabled` | bool | `False` | Enable automatic rolling archive cleanup |
+| `retention_window` | timedelta | `None` | How long to keep data (minimum 1 hour) |
+| `time_reference_attr` | str | `'cycle_time'` | Attribute name containing timestamp |
+| `auto_cleanup` | bool | `True` | Cleanup automatically after each write |
+| `min_groups_to_keep` | int | `1` | Minimum number of groups to always preserve |
+
+### Best Practices
+
+1. **Use dry_run first** to verify what will be deleted before actual cleanup
+2. **Set min_groups_to_keep** to prevent accidental total deletion
+3. **Use time-based retention** (not cycle count) for predictable behavior
+4. **Monitor cleanup logs** to ensure it's working as expected
+
+See `examples/rolling_archive_demo.py` for a complete working example.
+
 ## Configuration
 
 You can also use configuration files (YAML or JSON):
