@@ -13,7 +13,6 @@ import xarray as xr
 import numpy as np
 import dask.array as da
 import zarr
-import requests
 
 from .packing import Packer
 from .time import TimeManager
@@ -358,139 +357,6 @@ class ZarrConverter:
             logger.warning(f"Rolling archive cleanup failed: {e}")
             # Don't fail the primary operation
 
-    def _update_datamesh_datasource(self, dset: xr.Dataset) -> None:
-        """Update metadata in datamesh that is different."""
-        if not self.config.datamesh or not self.config.datamesh.datasource:
-            return
-
-        try:
-            # Get the datasource
-            datasource = self.config.datamesh.datasource
-            if isinstance(datasource, dict):
-                datasource = Datasource(**datasource)
-
-            datasource_id = datasource.id
-            token = self.config.datamesh.token or os.getenv("DATAMESH_TOKEN")
-            service = self.config.datamesh.service or "https://datamesh-v1.oceanum.io"
-
-            # Build update payload
-            updates = {}
-
-            # Add schema if not explicitly set
-            updates["dataschema"] = self._get_schema(dset)
-
-            # Update geometry from the dataset if not explicitly set
-            geom = self._get_geom(dset, datasource)
-            if geom:
-                updates["geom"] = geom
-
-            # Update time range from the dataset if not explicitly set
-            tstart, tend = self._get_time_range(dset, datasource)
-            if tstart:
-                updates["tstart"] = tstart
-            if tend:
-                updates["tend"] = tend
-
-            if updates:
-                logger.info(
-                    f"Updating metadata {list(updates.keys())} in datamesh for {datasource_id}"
-                )
-                ret = requests.patch(
-                    f"{service}/datasource/{datasource_id}/",
-                    json=updates,
-                    headers={
-                        "Authorization": f"Token {token}",
-                        "content-type": "application/json",
-                    },
-                )
-                if ret.status_code != 200:
-                    logger.warning(f"Failed to update datamesh metadata: {ret.text}")
-                else:
-                    logger.info(
-                        f"Successfully updated datamesh metadata for {datasource_id}"
-                    )
-
-        except Exception as e:
-            logger.warning(f"Failed to update datamesh datasource metadata: {e}")
-
-    def _get_schema(self, dset: xr.Dataset) -> Dict[str, Any]:
-        """Get schema of datamesh datasource."""
-        return dset.to_dict(data=False)
-
-    def _get_geom(
-        self, dset: xr.Dataset, datasource: Datasource
-    ) -> Optional[Dict[str, Any]]:
-        """Get geometry of datamesh datasource as a bbox around the coordinates."""
-        try:
-            coords = datasource.coordinates or {}
-            x_coord = coords.get("x")
-            y_coord = coords.get("y")
-
-            if not x_coord or not y_coord:
-                logger.warning(
-                    "Coordinates not properly defined for geometry calculation"
-                )
-                return None
-
-            if x_coord not in dset.coords or y_coord not in dset.coords:
-                logger.warning(
-                    f"Coordinates {x_coord} or {y_coord} not found in dataset"
-                )
-                return None
-
-            x_data = dset[x_coord]
-            y_data = dset[y_coord]
-
-            if x_data.size == 1 and y_data.size == 1:
-                return {"type": "Point", "coordinates": [float(x_data), float(y_data)]}
-            else:
-                xmin = float(x_data.min())
-                xmax = float(x_data.max())
-                ymin = float(y_data.min())
-                ymax = float(y_data.max())
-                dx = float(x_data[1] - x_data[0]) if x_data.size > 1 else 0
-                dy = float(y_data[1] - y_data[0]) if y_data.size > 1 else 0
-                buffer = 0.0001
-
-                if dx < buffer and dy < buffer:
-                    return {"type": "Point", "coordinates": [xmin, ymin]}
-                if (xmin + 360 - xmax - buffer) <= dx:
-                    xmax += dx
-
-                geom = {
-                    "type": "Polygon",
-                    "coordinates": [
-                        [
-                            [xmin, ymin],
-                            [xmax, ymin],
-                            [xmax, ymax],
-                            [xmin, ymax],
-                            [xmin, ymin],
-                        ]
-                    ],
-                }
-                return geom
-        except Exception as e:
-            logger.warning(f"Failed to calculate geometry: {e}")
-            return None
-
-    def _get_time_range(self, dset: xr.Dataset, datasource: Datasource) -> tuple:
-        """Get time range from dataset as ISO format strings."""
-        try:
-            coords = datasource.coordinates or {}
-            t_coord = coords.get("t")
-
-            if not t_coord or t_coord not in dset.coords:
-                return None, None
-
-            times = dset[t_coord].to_index().to_pydatetime()
-            tstart = min(times).strftime("%Y-%m-%dT%H:%M:%S")
-            tend = max(times).strftime("%Y-%m-%dT%H:%M:%S")
-            return tstart, tend
-        except Exception as e:
-            logger.warning(f"Failed to get time range: {e}")
-            return None, None
-
     def create_template(
         self,
         template_dataset: xr.Dataset,
@@ -616,10 +482,6 @@ class ZarrConverter:
 
             # Close datamesh session if used
             self._close_session()
-
-            # Update datamesh datasource metadata if used
-            if self.use_datamesh_zarr_client:
-                self._update_datamesh_datasource(archive_ds)
 
         except Exception as e:
             logger.error(f"Template creation failed: {e}")
@@ -778,10 +640,6 @@ class ZarrConverter:
 
             # Close datamesh session if used
             self._close_session()
-
-            # Update datamesh datasource metadata if used
-            if self.use_datamesh_zarr_client and self._current_dataset is not None:
-                self._update_datamesh_datasource(self._current_dataset)
 
         except Exception as e:
             logger.error(f"Region writing failed: {e}")
@@ -1052,10 +910,6 @@ class ZarrConverter:
             # Close datamesh session if used
             self._close_session()
 
-            # Update datamesh datasource metadata if used
-            if self.use_datamesh_zarr_client and self._current_dataset is not None:
-                self._update_datamesh_datasource(self._current_dataset)
-
         except Exception as e:
             logger.error(f"Conversion failed: {e}")
             # Close datamesh session if used
@@ -1230,10 +1084,6 @@ class ZarrConverter:
 
             # Close datamesh session if used
             self._close_session()
-
-            # Update datamesh datasource metadata if used
-            if self.use_datamesh_zarr_client and self._current_dataset is not None:
-                self._update_datamesh_datasource(self._current_dataset)
 
         except Exception as e:
             logger.error(f"Append failed: {e}")
