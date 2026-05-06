@@ -44,7 +44,7 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 datamesh = [
-    "oceanum @ git+https://github.com/oceanum-io/oceanum-python.git@groups",
+    "oceanum>=1.1.0",
 ]
 remote = [
     "fsspec>=2023.1.0",

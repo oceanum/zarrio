@@ -26,9 +26,35 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Validate release tag matches package version
+        run: |
+          python - <<'PY'
+          import pathlib
+          import re
+          import sys
+
+          tag = "${{ github.event.release.tag_name }}"
+          init_py = pathlib.Path("zarrio/__init__.py").read_text()
+          match = re.search(r'__version__\s*=\s*"([^"]+)"', init_py)
+
+          if not match:
+              print("Could not find package version in zarrio/__init__.py", file=sys.stderr)
+              sys.exit(1)
+
+          version = match.group(1)
+          expected_tag = f"v{version}"
+
+          if tag != expected_tag:
+              print(
+                  f"Release tag {tag} does not match package version {version} "
+                  f"(expected {expected_tag})",
+                  file=sys.stderr,
+              )
+              sys.exit(1)
+          PY
+
       - name: Build release distributions
         run: |
-          # NOTE: put your own distribution build steps here.
           python -m pip install build
           python -m build
 
