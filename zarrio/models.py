@@ -309,6 +309,11 @@ class ZarrConverterConfig(BaseModel):
     @classmethod
     def validate_datamesh(cls, v: Optional[DatameshConfig]) -> Optional[DatameshConfig]:
         if v is not None and isinstance(v.datasource, dict):
+            if not DATAMESH_AVAILABLE:
+                raise ImportError(
+                    "The oceanum.datamesh package is required for datamesh integration. "
+                    "Install it with: pip install oceanum-datamesh"
+                )
             v.datasource = Datasource(**v.datasource)
         return v
 

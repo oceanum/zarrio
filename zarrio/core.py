@@ -198,6 +198,73 @@ class ZarrConverter:
         else:
             logger.info("No datamesh session to close")
 
+    def _update_datamesh_metadata(self) -> None:
+        """Update the datasource metadata on the datamesh server after writing data.
+
+        The zarr data is written via the ZarrClient, but the datasource metadata
+        (coordinates, schema, geometry, time range) is never sent to the server.
+        This method fills that gap by fetching the existing datasource,
+        updating its properties from the written dataset, and persisting them.
+        """
+        if not self.use_datamesh_zarr_client or not self.conn:
+            return
+
+        ds_config = self.config.datamesh.datasource
+        if ds_config is None:
+            return
+
+        try:
+            # Get the existing datasource from the server
+            ds = self.conn.get_datasource(ds_config.id)
+
+            # Update coordinates from config (these were set on the config object
+            # but never persisted to the server)
+            if ds_config.coordinates:
+                ds.coordinates = ds_config.coordinates
+
+            # Set the schema from the written dataset
+            if self._current_dataset is not None:
+                ds.dataschema = self._current_dataset.to_dict(data=False)
+
+            # Guess geometry and time range from the written data.
+            # Clear timerange/geom first because the server may return default
+            # values (e.g. Unix epoch for tstart) which would make
+            # _guess_props's "if not self.tstart" check fail.
+            ds.tstart = None
+            ds.tend = None
+            ds.geom = None
+            if self._current_dataset is not None:
+                ds._guess_props(self._current_dataset)
+
+            # Copy over other config properties
+            if ds_config.name:
+                ds.name = ds_config.name
+            if ds_config.description:
+                ds.description = ds_config.description
+            if ds_config.tags:
+                ds.tags = ds_config.tags
+            if ds_config.labels:
+                ds.labels = ds_config.labels
+            if ds_config.info:
+                ds.info = ds_config.info
+            if ds_config.details:
+                ds.details = ds_config.details
+            if ds_config.geom:
+                ds.geom = ds_config.geom
+            if ds_config.tstart:
+                ds.tstart = ds_config.tstart
+            if ds_config.tend:
+                ds.tend = ds_config.tend
+
+            # Write the metadata back to the server
+            self.conn._metadata_write(ds)
+            logger.info(
+                f"Updated datasource {ds_config.id} metadata on datamesh"
+            )
+
+        except Exception as e:
+            logger.warning(f"Failed to update datasource metadata: {e}")
+
     def _get_rolling_archive_backend(
         self,
         output_path: Union[str, Path, Any],
@@ -638,6 +705,9 @@ class ZarrConverter:
 
             self._cleanup_if_enabled(zarr_path, skip_cleanup=skip_cleanup)
 
+            # Update datasource metadata on datamesh if applicable
+            self._update_datamesh_metadata()
+
             # Close datamesh session if used
             self._close_session()
 
@@ -906,6 +976,9 @@ class ZarrConverter:
             )
 
             self._cleanup_if_enabled(output_path or store, skip_cleanup=skip_cleanup)
+
+            # Update datasource metadata on datamesh if applicable
+            self._update_datamesh_metadata()
 
             # Close datamesh session if used
             self._close_session()
